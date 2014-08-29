@@ -1,0 +1,47 @@
+[
+	{ "image": "page_01.jpg",
+		"page_num": 1
+	},
+	{ "image": "page_02.jpg",
+		"page_num": 2
+	},
+	{ "image": "page_03.jpg",
+		"page_num": 3
+	},
+	{ "image": "page_04.jpg",
+		"page_num": 4
+	},
+	{ "image": "page_05.jpg",
+		"page_num": 5
+	},
+	{ "image": "page_06.jpg",
+		"page_num": 6
+	},
+	{ "image": "page_07.jpg",
+		"page_num": 7
+	},
+	{ "image": "page_08.jpg",
+		"page_num": 8
+	},
+	{ "image": "page_09.jpg",
+		"page_num": 9
+	},
+	{ "image": "page_10.jpg",
+		"page_num": 10
+	},
+	{ "image": "page_11.jpg",
+		"page_num": 11
+	},
+	{ "image": "page_12.jpg",
+		"page_num": 12
+	},
+	{ "image": "page_13.jpg",
+		"page_num": 13
+	},
+	{ "image": "page_14.jpg",
+		"page_num": 14
+	},
+	{ "image": "page_15.jpg",
+		"page_num": 15
+	}
+]
