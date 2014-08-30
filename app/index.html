@@ -19,7 +19,7 @@
       width: 50px;
     }
     .big-pic {
-      width= 30%;
+      width:100%;
     }
 
   </style>
@@ -44,7 +44,7 @@
       <div class="footer" >
         <div class="container">
           <ul class="pagination">
-            <li ng-repeat="page in pages | limitTo:limitVal">
+            <li ng-repeat="page in pages | filterThumbs:showSmallSet">
             <a   class="thumbnail" href="#/page{{activePage}}" ng-click="clickThumb(page.page_num)">
             <img ng-src="img/{{page.image}}"/>
             </a> 
