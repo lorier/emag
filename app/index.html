@@ -21,7 +21,6 @@
     .big-pic {
       width:100%;
     }
-
   </style>
 
 
@@ -29,27 +28,49 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body ng-controller="ThumbnailCtrl as pages" >
-<!--   <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul> -->
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+    <div ng-view class="view-frame"></div>
+<!--   
   <div class="container">
     <img  ng-src="img/{{path}}" class="big-pic"/>
+ -->
+
+<!-- I want to figure out how to integrate the setup below to take advantage of  ng-repeat animations
+ --><!-- <div class="phone-images">
+  <img ng-src="{{img}}"
+       class="phone"
+       ng-repeat="img in phone.images"
+       ng-class="{active: mainImageUrl==img}">
+</div>
+
+<h1>{{phone.name}}</h1>
+
+<p>{{phone.description}}</p>
+
+<ul class="phone-thumbs">
+  <li ng-repeat="img in phone.images">
+    <img ng-src="{{img}}" ng-click="setImage(img)">
+  </li>
+</ul>
+ -->
+
+
   </div>
    <div>
       <div class="footer" >
         <div class="container">
+        <div class="prev"><a ng-click="clickPrev()" >Prev</a></div>
           <ul class="pagination">
-            <li ng-repeat="page in pages | filterThumbs:showSmallSet">
-            <a   class="thumbnail" href="#/page{{activePage}}" ng-click="clickThumb(page.page_num)">
+            <li ng-repeat="page in pages">
+            <a class="thumbnail" href="#/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
             <img ng-src="img/{{page.image}}"/>
             </a> 
             </li>
           </ul>
+          <div class="next">Next</div>
         </div>
     </div>
 
@@ -59,6 +80,7 @@
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script> <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="js/app.js"></script>
  <!--  <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>

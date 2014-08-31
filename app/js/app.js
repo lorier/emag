@@ -4,19 +4,23 @@
 // Declare app level module which depends on filters, and services
 var myEmag = angular.module('myEmag', [
   'ngRoute',
-  'emagControllers',
-  'emagFilters'
+  'ngAnimate',
+  'emagControllers'
 ]);
 
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-  		when('/view', {
-  			templateUrl:'partials/page.html', 
-  			controller: 'ThumbnailCtrl'
+      // when('/prev', {
+      //   templateUrl:'partials/page2.html', 
+      // }).
+  		when('/', {
+  		  templateUrl:'partials/page1.html' ,
   		}).
-  		when('/view/:pageNum', {
-
+      //something's fucky with this function. It was breaking routprovider when I listed the prev button route after it. 
+  		when('/:pageNum', {
+        templateUrl: function(params){ return 'partials/page' + params.pageNum + '.html'; },
   		}).
+     
  	otherwise({redirectTo: '/view'});
 }]);
 
@@ -24,60 +28,67 @@ myEmag.config(['$routeProvider', function($routeProvider) {
 
 var emagControllers = angular.module ('emagControllers', []);
 
-emagControllers.controller('ThumbnailCtrl', ['$scope', '$http', function($scope, $http){
-	$http.get('json/magazine.json').success(function(data) {
+emagControllers.controller('ThumbnailCtrl', ['$scope', '$http', '$location',function($scope, $http, $location){
+	//get the json data
+  $http.get('json/magazine.json').success(function(data) {
       $scope.pages = data;
     });
-    $scope.limitVal = 5;
-    // I want the number of thumbs shown to include 2 before and 2 after the one clicked, so a total of 5
-    // The thumbails shown will update as soon as the user clicks on one.
-    // The array math:
-    // pages objects = 12.
-    // if the user click xvalue, resultArray =  pages.splice(xvalue-2, 5)
-    // how do I bookend for the end of the array?
 
-    $scope.path = 'page_01.jpg';
+    $scope.activePage = 1;
+    // get the page_num value through the click event.
     $scope.clickThumb = function(value) {
+      //assign the page_num to the var activePage;
      	$scope.activePage = value;
-      $scope.path = $scope.pages[value].image.toString();
-            // console.log($scope.path);
-    };
-    // function updatePageRange($scope){
-    //   var clickedPage = $scope.activePage;
-    //   var }
 
-    // $scope.bigPage = function () {
-    //   angular.forEach(pages, function(value, key) {
-    //     console.log('for each called');
-    //   });
+//attempting to code for prev and next
+      };
+      $scope.clickPrev = function(){
+
+      var prevPage = $scope.activePage-1;
+      $scope.activePage = prevPage;
+
+      var loc = '/' + prevPage.toString();
+      console.log( $location.path(loc));
+      $location.path(loc);
+
+      };
+
+     
 }]);
+
+//Attempting to provide a variable to the templateURL in myEmag.config based on the active page.
+// !! need to somehow access the scope of the emagController.not sure this is the solution 
+// var emagProviders = angular.module ('emagProviders', []);
+// emagProviders.provider('URLConfig', function() {
+//     return 'partials/page1.html';
+// });   
+
 
 
 //Filters 
-
-var emagFilters = angular.module('emagFilters',[]);
-
-emagFilters.filter('filterThumbs', function()
-{
-  return function (items, showSmallSet)
-  {
-        var range = 4;
-        var filtered = [];
-        for (var i = 0; i < items.length ; i++) 
-        {
-            var item = items[i];
-            for(var j = 0; j < range; j++)
-            {
-                if(item.page_num == j )
-                {
-                   filtered.push(item);
-                }
-            }
-        }
-            console.log(filtered);
-     return filtered;
-  };
-});
+//attempted to limit the number of pagination tiles via filter, but this altered the model
+// var emagFilters = angular.module('emagFilters',[]);
+// emagFilters.filter('filterThumbs', function()
+// {
+//   return function (items, showSmallSet)
+//   {
+//         var range = 4;
+//         var filtered = [];
+//         for (var i = 0; i < items.length ; i++) 
+//         {
+//             var item = items[i];
+//             for(var j = 0; j < range; j++)
+//             {
+//                 if(item.page_num == j )
+//                 {
+//                    filtered.push(item);
+//                 }
+//             }
+//         }
+//             console.log(filtered);
+//      return filtered;
+//   };
+// });
 
 
 /*!
