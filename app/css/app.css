@@ -12,17 +12,17 @@
   right: 0; }
 
 .view-frame.ng-enter {
-  -webkit-animation: 0.5s fade-in;
-  -moz-animation: 0.5s fade-in;
-  -o-animation: 0.5s fade-in;
-  animation: 0.5s fade-in;
+  -webkit-animation: 0.15s fade-in;
+  -moz-animation: 0.15s fade-in;
+  -o-animation: 0.15s fade-in;
+  animation: 0.15s fade-in;
   z-index: 100; }
 
 .view-frame.ng-leave {
-  -webkit-animation: 0.5s fade-out;
-  -moz-animation: 0.5s fade-out;
-  -o-animation: 0.5s fade-out;
-  animation: 0.5s fade-out;
+  -webkit-animation: 0.15s fade-out;
+  -moz-animation: 0.15s fade-out;
+  -o-animation: 0.15s fade-out;
+  animation: 0.15s fade-out;
   z-index: 99; }
 
 @keyframes fade-in {
@@ -78,7 +78,9 @@ body {
   margin-bottom: 60px; }
 
 .footer {
+  padding-top: 30px;
   position: absolute;
+  text-align: center;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
@@ -88,10 +90,42 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
+.thumbnail img {
+  width: 50px; }
+
 .container {
   width: auto;
-  max-width: 680px;
-  padding: 0 15px; }
+  max-height: 400px;
+  padding: 0 15px;
+  text-align: center; }
+
+.container img {
+  max-height: 100%; }
 
 .container .text-muted {
   margin: 20px 0; }
+
+.button-row {
+  display: block; }
+
+.page-indicator {
+  width: 120px;
+  display: inline-block;
+  color: gray; }
+
+.pagination > li {
+  display: inline-block; }
+
+.pagination > li > a {
+  margin: 2px; }
+
+.apply-border {
+  border: 1px solid red !important; }
+
+/* 
+  Allow angular.js to be loaded in body, hiding cloaked elements until 
+  templates compile.  The !important is important given that there may be 
+  other selectors that are more specific or come later and might alter display.  
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important; }
