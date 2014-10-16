@@ -32,16 +32,18 @@
     <div class="footer" >
       <div class="button-row">
         <button class="prev btn btn-default" ng-click="advanceSinglePage('prev')">&lt; Prev </button>
-        <div ng-cloak class="page-indicator">Page {{activePage}}</div>
+        <div ng-cloak class="page-indicator">Page {{activePage()}}</div>
         <button class="next btn btn-default" ng-click="advanceSinglePage('next')">Next &gt;</button>
       </div>  
-      <ul class="pagination"> 
-        <li ng-repeat="page in pages">
-          <a ng-class="{'apply-border': applyBorder(page.page_num)}" class="thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-            <img ng-src="img/{{page.image}}"/>
-          </a> 
-        </li>
-      </ul>
+      <div class="pagination-container" >
+        <ul class="pagination"> 
+          <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
+            <a ng-class="{'apply-border': applyBorder(page.page_num)}" class="thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
+              <img ng-src="img/{{page.image}}"/>
+            </a> 
+          </li>
+        </ul>
+      </div>
     </div> 
   </div>
 

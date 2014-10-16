@@ -1,7 +1,7 @@
 /* Animations from Phonecat Demo
 -------------------------------------------------- */
 /* cross fading between routes with ngView */
-.view-container {
+.view-container, .pagination {
   position: relative; }
 
 .view-frame.ng-enter, .view-frame.ng-leave {
