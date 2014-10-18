@@ -32,7 +32,7 @@ emagFactories.factory('StateService', function(){
     };
     
   });
-
+//This should be refactored when I figure out how to do it
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
   		when('/view/', {
@@ -42,15 +42,45 @@ myEmag.config(['$routeProvider', function($routeProvider) {
       templateUrl:'partials/page2.html' ,
       }).
       when('/view/3', {
+      templateUrl:'partials/page3.html' ,
+      }).
+      when('/view/4', {
+      templateUrl:'partials/page4.html' ,
+      }).
+      when('/view/5', {
+      templateUrl:'partials/page5.html' ,
+      }).
+      when('/view/6', {
+      templateUrl:'partials/page6.html' ,
+      }).
+      when('/view/7', {
+      templateUrl:'partials/page7.html' ,
+      }).
+      when('/view/8', {
+      templateUrl:'partials/page8.html' ,
+      }).
+      when('/view/9', {
+      templateUrl:'partials/page9.html' ,
+      }).
+      when('/view/10', {
+      templateUrl:'partials/page10.html' ,
+      }).
+      when('/view/11', {
+      templateUrl:'partials/page11.html' ,
+      }).
+      when('/view/12', {
+      templateUrl:'partials/page12.html' ,
+      }).
+      when('/view/13', {
       templateUrl:'partials/page13.html' ,
       }).
-      //something's fucky with this function. It was breaking routprovider when I listed the prev button route after it.
-      //only alternative I know of is a verbose listing of each html page
-  		// when('/view/:pageNum', {
-    //     templateUrl: function(params){ return 'partials/page' + params.pageNum + '.html';} 
-  		// }).
-     
- 	otherwise({redirectTo: '/view'});
+      when('/view/14', {
+      templateUrl:'partials/page14.html' ,
+      }).
+      when('/view/15', {
+      templateUrl:'partials/page15.html' ,
+      }).
+     	otherwise({redirectTo: '/view'});
 }]);
 
 //Controllers
@@ -58,14 +88,20 @@ myEmag.config(['$routeProvider', function($routeProvider) {
 var emagControllers = angular.module ('emagControllers', []);
 
 emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', function($scope, StateService, $http, $location, $route, $routeParams){
+   
    //initialize variables
   $scope.pages = {};
-
+  $scope.activePage = StateService.getActivePage;
+  $scope.isFirstPage= function(){
+    return $scope.activePage()===1;
+  };
+  $scope.isLastPage= function(){
+    return $scope.activePage()===$scope.pages.length;
+  };
   //get the json data
   $http.get('json/magazine.json').success(function(data) {
       $scope.pages = data;
     });
-  $scope.activePage = StateService.getActivePage;
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
@@ -75,18 +111,19 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       return 'true';
     }
   };
+  //
   $scope.showThumb = function(value){
     if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
       return true;
     }
   };
-  //Logic for page buttons
+
+  //update page based on which thumbnail is clicked
   $scope.clickThumb = function(value) {
-    //assign the page_num to the var activePage;
-    //****This is the state****//
-   	//$scope.activePage = value;
-    //*************************//
     $scope.updateActivePage(value);
+    if(value !== 1 && value < $scope.pages.length){
+      $scope.changeLoc($scope.activePage());   
+    }
   };
 
   //Logic for prev/next buttons. Could use some refactoring
@@ -95,23 +132,26 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       var prevPage = $scope.activePage()-1;
       if (prevPage > 0 ){
         $scope.updateActivePage(prevPage);
+        $scope.changeLoc(prevPage);
       }
     }else if(direction == 'next'){
       var nextPage = $scope.activePage()+1;
       if (nextPage <= $scope.pages.length ){
         $scope.updateActivePage(nextPage);
+        $scope.changeLoc(nextPage);
       }
     }
-    //concat the new url provided by the function logic
-    //and feed it into the $location service. This updates the route.
-    var loc = '/view/' + $scope.activePage().toString();
-    console.log(loc);
+  //concat the new url provided by the function logic
+  //and feed it into the $location service. This updates the route.
+  //$routeProvider in .config will not work without this.
+  };
+  $scope.changeLoc = function(location){
+    var loc = '/view/' + location;
+
     $location.path(loc);
-  };    
+   };
+
 }]);
-
-
-
 
 /*!
  * IE10 viewport hack for Surface/desktop Windows 8 bug

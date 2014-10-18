@@ -13,38 +13,56 @@
   <!-- HTML5 Boilerplate is packaged with angular-seed but I'm using boostrap styles 
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css"> -->
+  <link href='http://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic|Amatic+SC:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <style>
-   
-  </style>
-
-
   <link rel="stylesheet" href="css/app.css"/>
+
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body ng-controller="ThumbnailCtrl as pages" >
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-    <div ng-view class="view-frame"></div>  
-   <div>
-    <div class="footer" >
-      <div class="button-row">
-        <button class="prev btn btn-default" ng-click="advanceSinglePage('prev')">&lt; Prev </button>
-        <div ng-cloak class="page-indicator">Page {{activePage()}}</div>
-        <button class="next btn btn-default" ng-click="advanceSinglePage('next')">Next &gt;</button>
-      </div>  
-      <div class="pagination-container" >
-        <ul class="pagination"> 
-          <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
-            <a ng-class="{'apply-border': applyBorder(page.page_num)}" class="thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-              <img ng-src="img/{{page.image}}"/>
-            </a> 
-          </li>
-        </ul>
-      </div>
-    </div> 
+   <div class="wrapper">
+    <section class="top-bar">
+        <!--logoo and links go here-->
+    </section>
+
+    <section class="slides">
+          <div class="overlay-buttons">
+            <button type="button" class="btn btn-default button-left" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
+            <button type="button" class="btn btn-default button-right" ng-click="advanceSinglePage('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
+          </div> 
+
+        <!--view is injected here-->
+        <div ng-view class="view-frame"></div> 
+    </section>
+
+    <nav class="page-turner">
+      <ul>
+        <li>
+          <button class="prev btn btn-default" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+        </li>
+        <li>
+            <ul class="pagination"> 
+              <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
+                <a ng-class="{'apply-border': applyBorder(page.page_num)}" class="thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
+                  <img ng-src="img/{{page.image}}"/>
+                </a> 
+              </li>
+            </ul>
+        </li>
+        <li>
+          <button class="next btn btn-default" ng-click="advanceSinglePage('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
+        </li>
+      </ul>
+    </nav> 
+    
+    <footer>
+      <div ng-cloak class="page-number">{{activePage()}} of {{pages.length}}</div>
+    </footer>
+  
   </div>
 
   <!-- In production use:
