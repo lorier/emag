@@ -92,21 +92,39 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
    //initialize variables
   $scope.pages = {};
   $scope.activePage = StateService.getActivePage;
+  $scope.thumbsPosition = '';
+  $scope.isThumbsVisible = false;
+  $scope.setThumbsPosition = function(){
+    console.log($scope.thumbsPosition);
+    if($scope.isThumbsVisible){
+      $scope.thumbsPosition = "small";
+    }else{
+      $scope.thumbsPosition = "big";
+    }
+  };
+  
+  $scope.toggleThumbs = function() {
+    $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
+    $scope.setThumbsPosition();
+  };
+  
   $scope.isFirstPage= function(){
     return $scope.activePage()===1;
   };
+  
   $scope.isLastPage= function(){
     return $scope.activePage()===$scope.pages.length;
   };
+  
   //get the json data
   $http.get('json/magazine.json').success(function(data) {
       $scope.pages = data;
-    });
+  });
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
   };
-  $scope.applyBorder = function(value){
+  $scope.activeThumb = function(value){
     if(value == $scope.activePage()){
       return 'true';
     }

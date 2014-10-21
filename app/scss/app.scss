@@ -79,51 +79,128 @@ body {
 }
 */
 
+@import 'colors';
 
+/* Reset button styles
+=============================*/
+button { background: none; border: none; margin: 0; padding: 0; font-size: 0; line-height: 0; width: auto; overflow: visible; }
+
+.btn {
+  display: inline-block;
+  padding: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: none;  
+  border-radius: 0px;
+}
 /* Custom page CSS
 -------------------------------------------------- */
-.view-frame{
+
+
+body {
+  font-family: "Cantarell", Arial, sans-serif;
+  background-color: #EAEAEA;
   width: 100%;
-  }
- .thumbnail img {
-      width: 50px;
-    }
-    .big-pic {
-      width: 100%;
-    }
-
-.wrapper{
-
+  height: 100%
 }
-.slides {
-  position: absolute;
-  height: auto;
-  width: 100%;
-  padding: 0 0px;
-  text-align: center;
-  background: url('../img/ajax-loader.gif') no-repeat center center;
+.wrapper{
+  max-width: 1210px;
+  // min-height: 800px;
+  margin: 0 auto;
+  padding: 0px 20px 10px 20px;
+  background-color: white;
+  position: relative;
 }
 .wrapper img {
   max-height: 100%
 }
+.glyphicon {
+  color: $chevron-gray;
+}
+.top-bar {
+  padding-top: 5px;
+  text-align: center;
+
+  >div {
+     display: inline-block;
+
+  }
+  .link-out{
+    padding-top: 3px;
+    float: left;
+      color: $aegis-blue;
+    a {
+       color: $aegis-blue;
+      text-decoration: underline;
+    }
+  }
+  .social-buttons {
+    margin: 0 auto;
+    li {
+      border-right: 1px solid #000;
+    }
+    li:last-child{
+      border: none;
+    }
+    a {
+      padding: 0 10px; 
+      
+      img {
+      height: 25px;
+      width: auto;
+      }
+    }
+  }
+  .logo {
+    clear: right;
+    float: right;
+    img {
+      height: 30px;
+      width: auto;
+    }
+  }
+  li {
+    display: inline-block;
+    list-style-type: none;
+    a {
+      height: 35px;
+    }
+  }
+  img {
+    height: 100%;
+  }
+}
+.view-frame{
+  width: 100%;
+  }
+ 
+    .big-pic {
+      width: 100%;
+    }
+
+
+.slides {
+  position: relative;
+  text-align: center;
+  background: url('../img/ajax-loader.gif') no-repeat center center;
+}
+
 .container .text-muted {
   margin: 20px 0;
 }
 
-nav.page-turner {
-  left:50%;
-  position: absolute;
-  bottom:0;
-  padding-top: 30px;
-  text-align: center; 
-  width: auto;
-  /* Set the fixed height of the footer here */
-  height: 200px;
-  background-color: rgba(255, 255, 255, 0.5);
-  ul li {
-    display: inline-block;
-  }
-}
+
 .overlay-buttons {
   width: 100%;
   position:absolute;
@@ -156,20 +233,81 @@ nav.page-turner {
 .button-row {
   display: block;
 }
+.page-turner-container{
+  width: 100%;
+  display:block;
+  position:absolute;
+  bottom: 0;
+}
+nav.page-turner {
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  bottom: 0px;
+  text-align: center;
+  margin: 0 auto; 
+  /* Set the fixed height of the footer here */
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 490px;
+  .nav-down span{
+    display:inline;
+     vertical-align: middle;
+     position: static;
+  }
+  ul.thumb-viewer {
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.5);
+      display: inline-block;
+      padding: 4px;
+    }
+    ul {
+      padding: 0;
+    }
+    li {
+      display: inline-block;
+      padding: 0 2px;
+  }
+
+}
+//These styles toggle-set by Angular. 
+//There's probably a smarter way to position this.
+nav.page-turner.small .nav-down {
+  height: 50px;
+}
+// nav.page-turner.small.nav-down{
+//   bottom: 0;
+// }
+.page-thumbnail {
+  display: block;
+  margin: 5px;
+  line-height: 1.42857143;
+  background-color: #555;
+  -webkit-transition: all .01s ease-in-out;
+  -o-transition: all .01s ease-in-out;
+  transition: all .011s ease-in-out;
+    img {
+    opacity: .55;
+    width: 130px;
+  }
+}
+.active-thumb img {
+  opacity: 1;
+}
+.page-thumbnail img:hover {
+   -webkit-transition: all .01s ease-in-out;
+  -o-transition: all .01s ease-in-out;
+    transition: all .01s ease-in-out;
+    opacity: 1;
+
+}
+footer {
+    text-align: right;
+}
 .page-number {
   width: 120px;
   display: inline-block;
   color: gray;
 }
-.pagination > li {
-  display: inline-block;
-}
-.pagination > li > a {
-  margin: 2px;
-}
-.apply-border {
-  border: 1px solid red !important;
-}
+
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
@@ -177,4 +315,14 @@ nav.page-turner {
  */
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
+}
+//hide the bottom navigation from phones
+
+@media only screen and (max-width: 600px) {
+  nav.page-turner {
+    display: none;
+  }
+  .top-bar .social-buttons, .top-bar.link-out {
+    display:none;
+  }
 }

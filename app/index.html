@@ -9,7 +9,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>My AngularJS App</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width">
   <!-- HTML5 Boilerplate is packaged with angular-seed but I'm using boostrap styles 
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css"> -->
@@ -19,6 +19,13 @@
   <link rel="stylesheet" href="css/app.css"/>
 
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script>$(document).ready(function(){
+      console.log("I'm ready");
+
+    });
+
+    </script>
 </head>
 <body ng-controller="ThumbnailCtrl as pages" >
   <!--[if lt IE 7]>
@@ -26,7 +33,24 @@
   <![endif]-->
    <div class="wrapper">
     <section class="top-bar">
-        <!--logoo and links go here-->
+        <!--logo and links go here-->
+        <div class="link-out"><a href="#link">Find a community</a> near you.</div>
+        <div class="social-buttons">
+          <ul>
+            <li>
+              <a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a>
+            </li>
+            <li><a href="#link"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
+            <li><a href="#link">
+              <img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img>
+            </a></li>
+            <li><a href="#link">
+              <img src="img/resize.png" height="70" width="72"></img>
+            </a></li>
+            <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
+          </ul>
+        </div>
+        <div class="logo"><img src="img/aegis_logo.png"  height="49" width="240" alt="Aegis Living"></div>
     </section>
 
     <section class="slides">
@@ -38,27 +62,28 @@
         <!--view is injected here-->
         <div ng-view class="view-frame"></div> 
     </section>
-
-    <nav class="page-turner">
-      <ul>
-        <li>
-          <button class="prev btn btn-default" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span> </button>
-        </li>
-        <li>
-            <ul class="pagination"> 
-              <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
-                <a ng-class="{'apply-border': applyBorder(page.page_num)}" class="thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-                  <img ng-src="img/{{page.image}}"/>
-                </a> 
-              </li>
-            </ul>
-        </li>
-        <li>
-          <button class="next btn btn-default" ng-click="advanceSinglePage('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
-        </li>
-      </ul>
-    </nav> 
-    
+    <section class="page-turner-container">
+      <nav class="page-turner" ng-class="thumbsPosition">
+        <div class="nav-down"><span ng-click="toggleThumbs()" class="glyphicon glyphicon-chevron-down"></span></div>
+        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
+          <li>
+            <button class="prev btn" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+          </li>
+          <li>
+              <ul> 
+                <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
+                  <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
+                    <img ng-src="img/{{page.image}}"/>
+                  </a> 
+                </li>
+              </ul>
+          </li>
+          <li>
+            <button class="next btn" ng-click="advanceSinglePage('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+          </li>
+        </ul>
+      </nav> 
+    </section>
     <footer>
       <div ng-cloak class="page-number">{{activePage()}} of {{pages.length}}</div>
     </footer>
