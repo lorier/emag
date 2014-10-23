@@ -191,6 +191,9 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
     $location.path(loc);
    };
+   $scope.$on('$viewContentLoaded', function() {
+      runJQuery();
+});
 
 }]);
 

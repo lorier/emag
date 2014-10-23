@@ -104,6 +104,9 @@ button {
 
 /* Custom page CSS
 -------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: "Amatic SC", cursive; }
+
 body {
   font-family: "Cantarell", Arial, sans-serif;
   background-color: #EAEAEA;
@@ -298,22 +301,81 @@ footer {
   .page-container {
     height: 639.6px !important; } }
 
-/*adjust text based on viewport size*/
-.view-container {
-  overflow: hidden; }
-  .view-container h1, .view-container h2, .view-container h3, .view-container h4, .view-container li, .view-container ol, .view-container a p {
-    font-size: 30px;
-    padding: 0;
-    margin: 0; }
+/* colors 
+	text blue: #007197
+	text orange: #F7A700
+*/
+/*----------------------------------------------
+/* These are classes to include in the HTML
+not terribly semantic, but fast production-wise */
+.blue {
+  color: #007197; }
 
-/* page1 */
+.light-orange {
+  color: #F7A700; }
+
+/* fonts */
+.amatic {
+  font-family: "Amatic SC", sans-serif !important; }
+
+.cantarell {
+  font-family: "Cantarell", Arial, sans-serif !important; }
+
+/*----------------------------------------------*/
+/* --- page1 ------ */
 .page1 {
   background: url('../img/page_01.jpg') no-repeat center center;
   background-size: 100%;
   opacity: 0; }
+  .page1 span.cantarell {
+    font-size: 40px;
+    line-height: 100%;
+    text-align: left;
+    margin-left: -40px;
+    display: block; }
+  .page1 span.amatic {
+    font-size: 120px;
+    display: block; }
+  .page1 .logo {
+    position: absolute;
+    left: 5%;
+    bottom: 20%;
+    opacity: 0;
+    width: 366px; }
+  .page1 .headline {
+    position: absolute;
+    bottom: 50%;
+    left: 0;
+    opacity: 0; }
+  .page1 .polaroids {
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0; }
 
-.headline {
-  position: absolute;
-  bottom: 50%;
-  left: 0;
+@media only screen and (max-width: 1024px) {
+  .page1 span.cantarell {
+    font-size: 25px; }
+  .page1 span.amatic {
+    font-size: 100px; }
+  .page1 .logo {
+    width: 300px; }
+  .page1 .polaroids img {
+    height: 639.6px; } }
+
+/* --- page2 ------ */
+.page2 {
+  background: url('../img/page_02.jpg') no-repeat center center;
+  background-size: 100%;
   opacity: 0; }
+  .page2 span.cantarell {
+    font-size: 40px;
+    line-height: 100%;
+    text-align: left;
+    margin-left: -40px;
+    display: block; }
+  .page2 span.amatic {
+    font-size: 120px;
+    display: block; }
+
+@media only screen and (max-width: 1024px) { }

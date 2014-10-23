@@ -103,6 +103,9 @@ button { background: none; border: none; margin: 0; padding: 0; font-size: 0; li
 
 /* Custom page CSS
 -------------------------------------------------- */
+h1, h2, h3, h4 {
+  font-family: "Amatic SC", cursive;
+}
 
 
 body {
@@ -112,6 +115,9 @@ body {
   height: 100%
 }
 
+img {
+  // height: 100%;
+}
 .wrapper img {
   max-height: 100%
 }
@@ -361,7 +367,7 @@ footer {
     //subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height
     // height: (1024px - 40px)*.65 !important;
-    height: set-page-bg-height(1024px) !important;
+    height: set-proportional-height(1024px) !important;
   }
 }
 //hide the bottom navigation from phones

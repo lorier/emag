@@ -1,25 +1,116 @@
-/*adjust text based on viewport size*/
-.view-container {
-	overflow: hidden;
-h1, h2, h3, h4, li, ol, a p {
-	font-size: 30px;
-	padding: 0;
-	margin: 0;
-	}
+
+/* colors 
+	text blue: #007197
+	text orange: #F7A700
+*/
+/*----------------------------------------------
+/* These are classes to include in the HTML
+not terribly semantic, but fast production-wise */
+
+.blue { color: #007197 }
+.light-orange { color: #F7A700;}
+
+
+/* fonts */
+.amatic { 
+	font-family: "Amatic SC", sans-serif !important;
+}
+.cantarell {
+    font-family: "Cantarell", Arial, sans-serif !important;
 }
 
-/* page1 */
+/*----------------------------------------------*/
+
+
+/* --- page1 ------ */
 
 .page1 {
 	//
 	background: url('../img/page_01.jpg') no-repeat center center;
 	background-size: 100%;
 	opacity: 0;
+
+	span.cantarell {
+		font-size: 40px;
+		line-height:100%;
+		text-align: left;
+		margin-left: -40px;
+		display: block;
+	}
+	span.amatic {
+		font-size: 120px;
+		display: block;
+	}
+	
+
+	.logo {
+		position: absolute;
+		left: 5%;
+		bottom: 20%;
+		opacity: 0;
+		width: 366px
+	}
+	.headline {	
+		position: absolute;
+		bottom: 50%;
+		left: 0;
+		opacity: 0;
+	}
+	.polaroids {
+		position: absolute;
+		right:0;
+		top:0;
+		opacity: 0;
+	}
+
+}
+@media only screen and (max-width: 1024px) {
+	.page1 {
+		span.cantarell{
+			font-size: 25px;
+		}
+		span.amatic {
+			font-size: 100px;
+		}
+		.logo {
+			width: 300px;
+		}
+		.polaroids img {
+			height: set-proportional-height(1024px);
+		}
+	}
 }
 
-.headline {	
-	position: absolute;
-	bottom: 50%;
-	left: 0;
+/* --- page2 ------ */
+.page2 {
+	//
+	background: url('../img/page_02.jpg') no-repeat center center;
+	background-size: 100%;
 	opacity: 0;
+
+	span.cantarell {
+		font-size: 40px;
+		line-height:100%;
+		text-align: left;
+		margin-left: -40px;
+		display: block;
+	}
+	span.amatic {
+		font-size: 120px;
+		display: block;
+	}
+
+
+}
+@media only screen and (max-width: 1024px) {
+	.page1 {
+		span.cantarell{
+		}
+		span.amatic {
+		}
+		.logo {
+		}
+		.polaroids img {
+		}
+	}
 }

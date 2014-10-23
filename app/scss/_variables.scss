@@ -1,11 +1,11 @@
 $thumbnail-height: 80px;
 
-@function set-page-bg-height($breakpoint){
+@function set-proportional-height($breakpoint){
 	//subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height
 	@return ($breakpoint - 40px)*.65
 }
 @mixin set-wrapper-width-height($breakpoint){
 	width: $breakpoint;
-	height: set-page-bg-height($breakpoint)+40px+25px+10px;
+	height: set-proportional-height($breakpoint)+40px+25px+10px;
 }

@@ -1,23 +1,30 @@
 <!--partial-->
 <script type="text/javascript">
-$(document).ready(function(){
-      	$('.page1').fadeTo('slow', 1, function(){
-
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		console.log("im ready!");
+      	$('.page1').fadeTo('medium', 1, function(){
       		$(".headline").animate({
-				opacity: 0.25,
-			    left: "30%"
-	      	}, 5000);
+				opacity: 1,
+			    left: "10%"
+	      	}, 100, function(){
+	      		$(".polaroids").fadeTo('slow', 1, function(){
+	      			$(".logo").animate({
+	      				opacity: 1,
+	      				left: "8%"
+	      			}, 100)
+	      		})
+	      	});
       	});
-      		
-		console.log("tada!");
-});
+};
 </script>
 <div class="page1 page-container">
 
 	<div class="headline">
-		<h1>It’s the beginning of<span class="big-headline">a beautiful day</h1>
+		<h1><span class="cantarell blue">It’s the beginning of</span><span class="amatic light-orange">A Beautiful Day</span></h1>
 
 	</div>
-	<div class="logo"><img src="img/aegis_logo.png" alt="Aegis Living"></div>
+	<img class="logo" src="img/page_01_logo.png" alt="Aegis Living">
+	<div class="polaroids"><img src="img/page_01_polaroids.png" alt="Aegis Living"></div>
 </div>
 
