@@ -94,6 +94,13 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.activePage = StateService.getActivePage;
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
+
+  $scope.$on('$viewContentLoaded', function(){
+    //Here your view content is fully loaded !!
+    console.log("$viewContentLoaded");
+
+  });
+
   $scope.setThumbsPosition = function(){
     console.log($scope.thumbsPosition);
     if($scope.isThumbsVisible){
@@ -108,6 +115,13 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     $scope.setThumbsPosition();
   };
   
+  $scope.setPrevNextVisibility = function(value){
+    if($scope.activePage() === value){
+      return "hide-arrow";
+    }else {
+      return "visible";
+    }
+  }
   $scope.isFirstPage= function(){
     return $scope.activePage()===1;
   };
@@ -131,6 +145,15 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   };
   //
   $scope.showThumb = function(value){
+    if($scope.activePage() <= 2){
+      if (value <= 3){
+         return true;
+      }
+    }else if($scope.activePage() >= $scope.pages.length - 1){
+      if (value >= $scope.pages.length - 2){
+         return true;
+      }
+    }else
     if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
       return true;
     }

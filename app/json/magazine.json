@@ -1,47 +1,62 @@
 [
-	{ "image": "page_01.jpg",
+	{ 	"image": "page_01.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 1
 	},
-	{ "image": "page_02.jpg",
+	{ 	"image": "page_02.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 2
 	},
-	{ "image": "page_03.jpg",
+	{ 	"image": "page_03.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 3
 	},
-	{ "image": "page_04.jpg",
+	{ 	"image": "page_04.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 4
 	},
-	{ "image": "page_05.jpg",
+	{ 	"image": "page_05.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 5
 	},
-	{ "image": "page_06.jpg",
+	{ 	"image": "page_06.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 6
 	},
-	{ "image": "page_07.jpg",
+	{ 	"image": "page_07.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 7
 	},
-	{ "image": "page_08.jpg",
+	{ 	"image": "page_08.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 8
 	},
-	{ "image": "page_09.jpg",
+	{ 	"image": "page_09.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 9
 	},
-	{ "image": "page_10.jpg",
+	{ 	"image": "page_10.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 10
 	},
-	{ "image": "page_11.jpg",
+	{ 	"image": "page_11.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 11
 	},
-	{ "image": "page_12.jpg",
+	{ 	"image": "page_12.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 12
 	},
-	{ "image": "page_13.jpg",
+	{ 	"image": "page_13.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 13
 	},
-	{ "image": "page_14.jpg",
+	{ 	"image": "page_14.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 14
 	},
-	{ "image": "page_15.jpg",
+	{ 	"image": "page_15.jpg",
+		"thumb":"page_01_thumb.jpg",
 		"page_num": 15
 	}
 ]

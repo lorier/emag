@@ -1,0 +1,25 @@
+/*adjust text based on viewport size*/
+.view-container {
+	overflow: hidden;
+h1, h2, h3, h4, li, ol, a p {
+	font-size: 30px;
+	padding: 0;
+	margin: 0;
+	}
+}
+
+/* page1 */
+
+.page1 {
+	//
+	background: url('../img/page_01.jpg') no-repeat center center;
+	background-size: 100%;
+	opacity: 0;
+}
+
+.headline {	
+	position: absolute;
+	bottom: 50%;
+	left: 0;
+	opacity: 0;
+}

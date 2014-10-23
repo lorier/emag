@@ -20,10 +20,7 @@
 
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script>$(document).ready(function(){
-      console.log("I'm ready");
-
-    });
+  <script>
 
     </script>
 </head>
@@ -60,26 +57,26 @@
           </div> 
 
         <!--view is injected here-->
-        <div ng-view class="view-frame"></div> 
+        <div ng-view class="view-container"></div> 
     </section>
     <section class="page-turner-container">
       <nav class="page-turner" ng-class="thumbsPosition">
         <div class="nav-down"><span ng-click="toggleThumbs()" class="glyphicon glyphicon-chevron-down"></span></div>
         <ul class="thumb-viewer" ng-hide="isThumbsVisible">
           <li>
-            <button class="prev btn" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+            <button class="prev btn" ng-click="advanceSinglePage('prev')" ng-class="setPrevNextVisibility(1)"><span class="glyphicon glyphicon-chevron-left"></span> </button>
           </li>
           <li>
               <ul> 
                 <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-                    <img ng-src="img/{{page.image}}"/>
+                    <img ng-src="img/{{page.thumb}}"/>
                   </a> 
                 </li>
               </ul>
           </li>
           <li>
-            <button class="next btn" ng-click="advanceSinglePage('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+            <button class="next btn" ng-click="advanceSinglePage('next')" ng-class="setPrevNextVisibility(pages.length)"><span class="glyphicon glyphicon-chevron-right"></span></button>
           </li>
         </ul>
       </nav> 

@@ -1,5 +1,23 @@
 <!--partial-->
-<div>
-	<img  ng-src="img/page_01.jpg" class="big-pic"/>
+<script type="text/javascript">
+$(document).ready(function(){
+      	$('.page1').fadeTo('slow', 1, function(){
+
+      		$(".headline").animate({
+				opacity: 0.25,
+			    left: "30%"
+	      	}, 5000);
+      	});
+      		
+		console.log("tada!");
+});
+</script>
+<div class="page1 page-container">
+
+	<div class="headline">
+		<h1>It’s the beginning of<span class="big-headline">a beautiful day</h1>
+
+	</div>
+	<div class="logo"><img src="img/aegis_logo.png" alt="Aegis Living"></div>
 </div>
 
