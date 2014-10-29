@@ -253,13 +253,22 @@ nav.page-turner {
   margin: 0 auto; 
   background-color: rgba(255, 255, 255, 0.5);
   width: 460px;
-  .nav-down span{
+  .hide-nav span{
     display: inline-block;
     width: 100%;
+    -webkit-transition: all .01s ease-in-out;
+    -o-transition: all .01s ease-in-out;
+    transition: all .01s ease-in-out;
      vertical-align: middle;
      position: static;
   }
+}
+nav.page-turner.small .hide-nav {
+  
+}
   ul.thumb-viewer {
+    -webkit-transition:all linear 0.5s;
+    transition:all linear 0.5s;
       width: 100%;
       background-color: rgba(255, 255, 255, 0.5);
       display: inline-block;
@@ -272,12 +281,13 @@ nav.page-turner {
       display: inline-block;
   }
 
-}
+  ul.thumb-viewer.ng-hide{
+    opacity: 0;
+  }
+
+
 //These styles toggle-set by Angular. 
 
-nav.page-turner.small .nav-down {
-  height: 50px;
-}
 .prev.btn, .next.btn {
   height: $thumbnail-height;
 }
@@ -288,7 +298,7 @@ nav.page-turner.small .nav-down {
   background-color: #555;
   -webkit-transition: all .01s ease-in-out;
   -o-transition: all .01s ease-in-out;
-  transition: all .011s ease-in-out;
+  transition: all .01s ease-in-out;
     img {
     opacity: .3;
     height: $thumbnail-height;
@@ -298,15 +308,15 @@ nav.page-turner.small .nav-down {
   opacity: 1;
 }
 .page-thumbnail img:hover {
-   -webkit-transition: all .01s ease-in-out;
-  -o-transition: all .01s ease-in-out;
-    transition: all .01s ease-in-out;
+   -webkit-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    transition: all .1Cs ease-in-out;
     opacity: 1;
-
 }
 footer {
     text-align: right;
-    height: 15px;
+    height: 20px;
+    padding-top: 5px;
 }
 .page-number {
   width: 120px;
@@ -366,7 +376,6 @@ footer {
   { 
     //subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height
-    // height: (1024px - 40px)*.65 !important;
     height: set-proportional-height(1024px) !important;
   }
 }
