@@ -216,23 +216,31 @@ nav.page-turner {
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.5);
   width: 460px; }
-  nav.page-turner .nav-down span {
+  nav.page-turner .hide-nav span {
     display: inline-block;
     width: 100%;
+    -webkit-transition: all 0.01s ease-in-out;
+    -o-transition: all 0.01s ease-in-out;
+    transition: all 0.01s ease-in-out;
     vertical-align: middle;
     position: static; }
-  nav.page-turner ul.thumb-viewer {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
-    display: inline-block;
-    padding: 4px; }
-  nav.page-turner ul {
-    padding: 0; }
-  nav.page-turner li {
-    display: inline-block; }
 
-nav.page-turner.small .nav-down {
-  height: 50px; }
+ul.thumb-viewer {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  padding: 4px; }
+
+ul {
+  padding: 0; }
+
+li {
+  display: inline-block; }
+
+ul.thumb-viewer.ng-hide {
+  opacity: 0; }
 
 .prev.btn, .next.btn {
   height: 80px; }
@@ -244,7 +252,7 @@ nav.page-turner.small .nav-down {
   background-color: #555;
   -webkit-transition: all 0.01s ease-in-out;
   -o-transition: all 0.01s ease-in-out;
-  transition: all 0.011s ease-in-out; }
+  transition: all 0.01s ease-in-out; }
   .page-thumbnail img {
     opacity: 0.3;
     height: 80px; }
@@ -253,14 +261,15 @@ nav.page-turner.small .nav-down {
   opacity: 1; }
 
 .page-thumbnail img:hover {
-  -webkit-transition: all 0.01s ease-in-out;
-  -o-transition: all 0.01s ease-in-out;
-  transition: all 0.01s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1Cs ease-in-out;
   opacity: 1; }
 
 footer {
   text-align: right;
-  height: 15px; }
+  height: 20px;
+  padding-top: 5px; }
 
 .page-number {
   width: 120px;
