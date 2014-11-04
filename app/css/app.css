@@ -307,8 +307,10 @@ footer {
   .wrapper {
     width: 1024px;
     height: 714.6px; }
+
   .page-container {
-    height: 639.6px !important; } }
+    height: 639.6px !important; }
+ }
 
 /* colors 
 	text blue: #007197
@@ -370,7 +372,8 @@ not terribly semantic, but fast production-wise */
   .page1 .logo {
     width: 300px; }
   .page1 .polaroids img {
-    height: 639.6px; } }
+    height: 639.6px; }
+ }
 
 /* --- page2 ------ */
 .page2 {
@@ -387,4 +390,3 @@ not terribly semantic, but fast production-wise */
     font-size: 120px;
     display: block; }
 
-@media only screen and (max-width: 1024px) { }
