@@ -3,65 +3,70 @@
 cross fading between routes with ngView 
 
 TODO - this is causing the overlying UI to disappear and reappear.
-// .view-container{
-//   // position: relative;
-// }
-
-// .view-container.ng-enter,
-// .view-container.ng-leave
-// // .pagination .ng-hide-add,
-// // .pagination .ng-hide-remove {
-//   {background: white;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-// }
-
-// .view-container.ng-enter
-// // .pagination .ng-hide-add  {
-//  { -webkit-animation: 0.15s fade-in;
-//   -moz-animation: 0.15s fade-in;
-//   -o-animation: 0.15s fade-in;
-//   animation: 0.15s fade-in;
-//   z-index: 100;
-// }
-
-// .view-container.ng-leave,
-// // .pagination .ng-hide-remove {
-// {  -webkit-animation: 0.15s fade-out;
-//   -moz-animation: 0.15s fade-out;
-//   -o-animation: 0.15s fade-out;
-//   animation: 0.15s fade-out;
-//   z-index: 99;
-// }
-
-// @keyframes fade-in {
-//   from { opacity: 0; }
-//   to { opacity: 1; }
-// }
-// @-moz-keyframes fade-in {
-//   from { opacity: 0; }
-//   to { opacity: 1; }
-// }
-// @-webkit-keyframes fade-in {
-//   from { opacity: 0; }
-//   to { opacity: 1; }
-// }
-
-// @keyframes fade-out {
-//   from { opacity: 1; }
-//   to { opacity: 0; }
-// }
-// @-moz-keyframes fade-out {
-//   from { opacity: 1; }
-//   to { opacity: 0; }
-// }
-// @-webkit-keyframes fade-out {
-//   from { opacity: 1; }
-//   to { opacity: 0; }
-// }
 */
+.view-container.ng-enter, .view-container.ng-leave {
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; }
+
+.view-container.ng-enter {
+  -webkit-animation: 0.15s fade-in;
+  -moz-animation: 0.15s fade-in;
+  -o-animation: 0.15s fade-in;
+  animation: 0.15s fade-in;
+  z-index: 100; }
+
+.view-container.ng-leave {
+  -webkit-animation: 0.15s fade-out;
+  -moz-animation: 0.15s fade-out;
+  -o-animation: 0.15s fade-out;
+  animation: 0.15s fade-out;
+  z-index: 99; }
+
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fade-in {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@keyframes fade-out {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@-moz-keyframes fade-out {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
+@-webkit-keyframes fade-out {
+  from {
+    opacity: 1; }
+
+  to {
+    opacity: 0; } }
+
 /*** importing 'views' at the bottom for testing overrides */
 /* Reset button styles and disable select highlighting
 ===============================================================*/
@@ -157,11 +162,15 @@ body {
   .top-bar img {
     height: 100%; }
 
+.view-container {
+  overflow: hidden; }
+
 .big-pic {
   width: 100%; }
 
-.slides {
-  height: auto;
+.slides, .peek-next, .peek-prev {
+  height: 760px;
+  width: 1170px;
   position: relative;
   text-align: center;
   background: url('../img/ajax-loader.gif') no-repeat center center; }
@@ -280,6 +289,11 @@ footer {
   visibility: hidden !important;
   display: inline-block; }
 
+/* Styles for the next and previous pages that "peek" in */
+.peek-next {
+  position: relative;
+  left: 100%; }
+
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
@@ -300,6 +314,7 @@ footer {
   position: relative; }
 
 .page-container {
+  position: relative;
   height: 760px; }
 
 /* Media Queries */
@@ -307,8 +322,9 @@ footer {
   .wrapper {
     width: 1024px;
     height: 714.6px; }
-  .page-container {
-    height: 639.6px !important; } }
+  .page-container, .slides, .peek-next, .peek-prev {
+    height: 639.6px !important;
+    width: 984px !important; } }
 
 /* colors 
 	text blue: #007197
@@ -335,7 +351,7 @@ not terribly semantic, but fast production-wise */
 .page1 {
   background: url('../img/page_01.jpg') no-repeat center center;
   background-size: 100%;
-  opacity: 0; }
+  opacity: 1; }
   .page1 span.cantarell {
     font-size: 40px;
     line-height: 100%;
@@ -376,7 +392,7 @@ not terribly semantic, but fast production-wise */
 .page2 {
   background: url('../img/page_02.jpg') no-repeat center center;
   background-size: 100%;
-  opacity: 0; }
+  opacity: 1; }
   .page2 span.cantarell {
     font-size: 40px;
     line-height: 100%;
