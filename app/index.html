@@ -23,6 +23,16 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
   <script type="text/javascript">
+    $(document).ready(function(){
+        $(".button-right").mouseenter(function(){
+          $(".page-container").stop().animate({left: "-20px"}, 200)
+        })
+        .mouseleave(function(){
+          $(".page-container").stop().animate({left: "0px"}, 200)
+       })
+    });
+
+    //ok I'm testing another commit
   </script>
  
 ></head>
