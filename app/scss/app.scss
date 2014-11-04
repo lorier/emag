@@ -179,15 +179,16 @@ img {
   }
 }
 .view-container{
-  }
- 
+    overflow: hidden;
+  } 
     .big-pic {
       width: 100%;
     }
 
 
-.slides {
-  height: auto;
+.slides, .peek-next, .peek-prev {
+  height: 760px;
+  width: 1170px;
   position: relative;
   text-align: center;
   background: url('../img/ajax-loader.gif') no-repeat center center;
@@ -327,6 +328,13 @@ footer {
   visibility: hidden !important;
   display:inline-block;
 }
+/* Styles for the next and previous pages that "peek" in */
+.peek-next {
+  position: relative;
+  left: 100%;
+}
+
+
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
@@ -362,6 +370,7 @@ footer {
   position: relative;
 }
 .page-container {
+  position: relative;
   height: 760px;
 }
 
@@ -372,11 +381,12 @@ footer {
   .wrapper{
     @include set-wrapper-width-height(1024px)
   }
-  .page-container
+  .page-container, .slides, .peek-next, .peek-prev
   { 
     //subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height
     height: set-proportional-height(1024px) !important;
+    width: set-proportional-width(1024px) !important;
   }
 }
 //hide the bottom navigation from phones

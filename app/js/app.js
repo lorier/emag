@@ -29,8 +29,7 @@ emagFactories.factory('StateService', function(){
   return {
       getActivePage: getActivePage,
       setActivePage: setActivePage
-    };
-    
+    };   
   });
 //This should be refactored when I figure out how to do it
 myEmag.config(['$routeProvider', function($routeProvider) {
@@ -191,10 +190,18 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
     $location.path(loc);
    };
-   $scope.$on('$viewContentLoaded', function() {
-      runJQuery();
-});
-
+    $scope.$on('$viewContentLoaded', function() {
+      runJQuery(StateService.getActivePage());
+   });
+    $scope.peekNext = function() {
+      var current = StateService.getActivePage();
+      var next = current + 1;
+      if( current <= $scope.pages.length){ 
+        return "partials/page" + next + ".html";
+      }else {
+        return "partials/page" + StateService.getActivePage() + ".html";
+      }
+    };
 }]);
 
 /*!

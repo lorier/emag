@@ -1,8 +1,8 @@
 <!--partial-->
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
-function runJQuery(){
-		console.log("im ready!");
+function runJQuery(page){
+		console.log("Active page: " + page);
       	$('.page1').fadeTo('medium', 1, function(){
       		$(".headline").animate({
 				opacity: 1,
@@ -26,5 +26,6 @@ function runJQuery(){
 	</div>
 	<img class="logo" src="img/page_01_logo.png" alt="Aegis Living">
 	<div class="polaroids"><img src="img/page_01_polaroids.png" alt="Aegis Living"></div>
+	<ng-include src="peekNext()"class="peek-next"></ng-include>
 </div>
 
