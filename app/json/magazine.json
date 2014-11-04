@@ -12,51 +12,51 @@
 		"page_num": 3
 	},
 	{ 	"image": "page_04.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_04_thumb.jpg",
 		"page_num": 4
 	},
 	{ 	"image": "page_05.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_05_thumb.jpg",
 		"page_num": 5
 	},
 	{ 	"image": "page_06.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_06_thumb.jpg",
 		"page_num": 6
 	},
 	{ 	"image": "page_07.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_07_thumb.jpg",
 		"page_num": 7
 	},
 	{ 	"image": "page_08.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_08_thumb.jpg",
 		"page_num": 8
 	},
 	{ 	"image": "page_09.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_09_thumb.jpg",
 		"page_num": 9
 	},
 	{ 	"image": "page_10.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_10_thumb.jpg",
 		"page_num": 10
 	},
 	{ 	"image": "page_11.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_11_thumb.jpg",
 		"page_num": 11
 	},
 	{ 	"image": "page_12.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_12_thumb.jpg",
 		"page_num": 12
 	},
 	{ 	"image": "page_13.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_13_thumb.jpg",
 		"page_num": 13
 	},
 	{ 	"image": "page_14.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_14_thumb.jpg",
 		"page_num": 14
 	},
 	{ 	"image": "page_15.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_15_thumb.jpg",
 		"page_num": 15
 	}
 ]
