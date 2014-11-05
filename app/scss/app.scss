@@ -190,7 +190,7 @@ img {
 .slides, .peek-next, .peek-prev {
   height: 760px;
   width: 1170px;
-
+  overflow: hidden;
   position: relative;
   text-align: center;
   background: url('../img/ajax-loader.gif') no-repeat center center;
@@ -371,7 +371,7 @@ footer {
   background-color: white;
   position: relative;
 }
-.page-container {
+.page-container, .page-wrapper {
   position: relative;
   height: 760px;
 }
@@ -383,7 +383,7 @@ footer {
   .wrapper{
     @include set-wrapper-width-height(1024px)
   }
-  .page-container, .slides, .peek-next, .peek-prev
+  .page-container, .slides, .peek-next, .peek-prev, .page-wrapper
   { 
     //subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height

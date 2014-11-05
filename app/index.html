@@ -23,14 +23,21 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
+    function runPeekOnMouseover(){
         $(".button-right").mouseenter(function(){
-          $(".page-container").stop().animate({left: "-20px"}, 200)
+          $(".page-wrapper").stop().animate({left: "-20px"}, 200)
         })
         .mouseleave(function(){
-          $(".page-container").stop().animate({left: "0px"}, 200)
+          $(".page-wrapper").stop().animate({left: "0px"}, 200)
        })
-    });
+
+       $(".button-left").mouseenter(function(){
+          $(".page-wrapper").stop().animate({left: "+20px"}, 200)
+        })
+        .mouseleave(function(){
+          $(".page-wrapper").stop().animate({left: "0px"}, 200)
+       }) 
+    };
 
     //here is a comment at 1:36pm
       </script>
@@ -68,8 +75,16 @@
             <button type="button" class="btn btn-default button-right" ng-click="advanceSinglePage('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
           </div> 
 
-        <!--view is injected here-->
-        <div ng-view class="view-container"></div> 
+        <div class="page-wrapper">
+          <ng-include src="peekPrev()" class="peek-next"></ng-include>        
+                  <!--view is injected here-->
+
+          <div ng-view class="view-container">
+
+          </div>
+
+            <ng-include src="peekNext()" class="peek-next"></ng-include>
+        </div> 
 
     </section>
     <section class="page-turner-container">

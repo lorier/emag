@@ -93,11 +93,14 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.activePage = StateService.getActivePage;
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
+  
+  //count number of objects in the json object
+  //might need a polyfill for older browsers
+  $scope.pageCount = Object.keys($scope.pages).length;
 
-  $scope.$on('$viewContentLoaded', function(){
-    //Here your view content is fully loaded !!
-    console.log("$viewContentLoaded");
-
+  //get the json data
+  $http.get('json/magazine.json').success(function(data) {
+      $scope.pages = data;
   });
 
   $scope.setThumbsPosition = function(){
@@ -120,19 +123,14 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     }else {
       return "visible";
     }
-  }
-  $scope.isFirstPage= function(){
-    return $scope.activePage()===1;
   };
+  // $scope.isFirstPage= function(){
+  //   return $scope.activePage()===1;
+  // };
   
-  $scope.isLastPage= function(){
-    return $scope.activePage()===$scope.pages.length;
-  };
-  
-  //get the json data
-  $http.get('json/magazine.json').success(function(data) {
-      $scope.pages = data;
-  });
+  // $scope.isLastPage= function(){
+  //   return $scope.activePage()===$scope.pages.length;
+  // };
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
@@ -181,26 +179,40 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
         $scope.changeLoc(nextPage);
       }
     }
-  //concat the new url provided by the function logic
-  //and feed it into the $location service. This updates the route.
-  //$routeProvider in .config will not work without this.
-  };
-  $scope.changeLoc = function(location){
-    var loc = '/view/' + location;
+      //concat the new url provided by the function logic
+      //and feed it into the $location service. This updates the route.
+      //$routeProvider in .config will not work without this.
+      };
+      $scope.changeLoc = function(location){
+        var loc = '/view/' + location;
 
-    $location.path(loc);
-   };
-    $scope.$on('$viewContentLoaded', function() {
-      runJQuery(StateService.getActivePage());
-   });
-    $scope.peekNext = function() {
-      var current = StateService.getActivePage();
-      var next = current + 1;
-      if( current <= $scope.pages.length){ 
-        return "partials/page" + next + ".html";
-      }else {
-        return "partials/page" + StateService.getActivePage() + ".html";
+        $location.path(loc);
+       };
+        $scope.$on('$viewContentLoaded', function() {
+          runJQuery(StateService.getActivePage());
+          runPeekOnMouseover();
+       });
+      
+      $scope.peekPrev = function() {
+          var current = StateService.getActivePage();
+          var prev =  current - 1;
+         console.log("scope.activePage minus one:" +  $scope.activePage - 1);
+          if( current > 1 ){ 
+            return "partials/page" + prev + ".html";
+          } else {
+            console.log("You can't go before page1");
+            // return "partials/page" + StateService.getActivePage() + ".html";
       }
+     
+     $scope.peekNext = function() {
+            var next = current + 1;
+            if( current < $scope.pageCount ){ 
+              return "partials/page" + next + ".html";
+            } else {
+              console.log("you've reached the last page");
+              // return "partials/page" + StateService.getActivePage() + ".html";
+            }
+      };
     };
 }]);
 
