@@ -90,18 +90,21 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
    
    //initialize variables
   $scope.pages = {};
+  $scope.pageCount = 0;
   $scope.activePage = StateService.getActivePage;
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
   
   //count number of objects in the json object
   //might need a polyfill for older browsers
-  $scope.pageCount = Object.keys($scope.pages).length;
+  
 
   //get the json data
   $http.get('json/magazine.json').success(function(data) {
       $scope.pages = data;
+      $scope.pageCount = Object.keys($scope.pages).length;
   });
+
 
   $scope.setThumbsPosition = function(){
     console.log($scope.thumbsPosition);
@@ -124,13 +127,13 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       return "visible";
     }
   };
-  // $scope.isFirstPage= function(){
-  //   return $scope.activePage()===1;
-  // };
+  $scope.isFirstPage= function(){
+    return $scope.activePage()===1;
+  };
   
-  // $scope.isLastPage= function(){
-  //   return $scope.activePage()===$scope.pages.length;
-  // };
+  $scope.isLastPage= function(){
+    return $scope.activePage()===$scope.pages.length;
+  };
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
@@ -194,22 +197,29 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
        });
       
       $scope.peekPrev = function() {
-          var current = StateService.getActivePage();
+          var current = $scope.activePage();
           var prev =  current - 1;
-         console.log("scope.activePage minus one:" +  $scope.activePage - 1);
+        
+          console.log("peekPrev: prev value is: " + prev);
+
           if( current > 1 ){ 
             return "partials/page" + prev + ".html";
           } else {
-            console.log("You can't go before page1");
+            //console.log("You can't go before page1");
             // return "partials/page" + StateService.getActivePage() + ".html";
       }
      
      $scope.peekNext = function() {
+            var current = $scope.activePage();
             var next = current + 1;
+               console.log("peekNext: next value is: " + next);
+               console.log($scope.pageCount);
             if( current < $scope.pageCount ){ 
+              console.log("peekNext: current page (" + current + ") is less than: " + $scope.pageCount);
+
               return "partials/page" + next + ".html";
             } else {
-              console.log("you've reached the last page");
+              //console.log("you've reached the last page");
               // return "partials/page" + StateService.getActivePage() + ".html";
             }
       };
