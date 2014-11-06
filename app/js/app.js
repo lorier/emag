@@ -24,7 +24,7 @@ emagFactories.factory('StateService', function(){
   };
   var setActivePage = function(pg){
     activePage = pg;
-    console.log(activePage);
+    //console.log(activePage);
   };
   return {
       getActivePage: getActivePage,
@@ -107,7 +107,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
 
   $scope.setThumbsPosition = function(){
-    console.log($scope.thumbsPosition);
+    //console.log($scope.thumbsPosition);
     if($scope.isThumbsVisible){
       $scope.thumbsPosition = "small";
     }else{
@@ -193,14 +193,14 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
        };
         $scope.$on('$viewContentLoaded', function() {
           runJQuery(StateService.getActivePage());
-          runPeekOnMouseover();
+          runPeekOnMouseover($scope.activePage(),$scope.pageCount);
        });
       
       $scope.peekPrev = function() {
           var current = $scope.activePage();
           var prev =  current - 1;
         
-          console.log("peekPrev: prev value is: " + prev);
+          // console.log("peekPrev: prev value is: " + prev);
 
           if( current > 1 ){ 
             return "partials/page" + prev + ".html";
@@ -212,10 +212,10 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
      $scope.peekNext = function() {
             var current = $scope.activePage();
             var next = current + 1;
-               console.log("peekNext: next value is: " + next);
-               console.log($scope.pageCount);
+               //console.log("peekNext: next value is: " + next);
+               // console.log($scope.pageCount);
             if( current < $scope.pageCount ){ 
-              console.log("peekNext: current page (" + current + ") is less than: " + $scope.pageCount);
+              // console.log("peekNext: current page (" + current + ") is less than: " + $scope.pageCount);
 
               return "partials/page" + next + ".html";
             } else {

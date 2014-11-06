@@ -107,6 +107,18 @@ button {
   -moz-box-shadow: none !important;
   box-shadow: none !important; }
 
+.page2 {
+  background: tan url('../img/page_02.jpg') no-repeat center center; }
+
+.page3 {
+  background: blue url('../img/page_03.jpg') no-repeat center center; }
+
+.page4 {
+  background: red url('../img/page_04.jpg') no-repeat center center; }
+
+.page5 {
+  background: gray url('../img/page_05.jpg') no-repeat center center; }
+
 /* Custom page CSS
 -------------------------------------------------- */
 h1, h2, h3, h4 {
@@ -162,20 +174,6 @@ body {
   .top-bar img {
     height: 100%; }
 
-.view-container {
-  overflow: hidden; }
-
-.big-pic {
-  width: 100%; }
-
-.slides, .peek-next, .peek-prev {
-  height: 760px;
-  width: 1170px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  background: url('../img/ajax-loader.gif') no-repeat center center; }
-
 .container .text-muted {
   margin: 20px 0; }
 
@@ -183,7 +181,7 @@ body {
   width: 100%;
   position: absolute;
   top: 43%;
-  z-index: 10; }
+  z-index: 200; }
   .overlay-buttons > button {
     border-radius: 8px;
     cursor: pointer;
@@ -218,7 +216,8 @@ body {
   display: block;
   position: absolute;
   bottom: 0;
-  left: 0; }
+  left: 0;
+  z-index: 201; }
 
 nav.page-turner {
   border-radius: 5px 5px 0 0;
@@ -290,11 +289,6 @@ footer {
   visibility: hidden !important;
   display: inline-block; }
 
-/* Styles for the next and previous pages that "peek" in */
-.peek-next {
-  position: relative;
-  left: 100%; }
-
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
@@ -314,8 +308,34 @@ footer {
   background-color: white;
   position: relative; }
 
-.page-container, .page-wrapper {
+/*--Styles for slides!--*/
+.slides {
+  height: 760px;
+  width: 1170px;
+  overflow: hidden;
   position: relative;
+  text-align: center;
+  background: url('../img/ajax-loader.gif') no-repeat center center; }
+
+.page-wrapper {
+  position: relative;
+  width: 3510px;
+  left: 0; }
+
+.view-container {
+  position: absolute;
+  overflow: hidden; }
+
+.page-container {
+  position: relative;
+  width: 1170px;
+  height: 760px; }
+
+/* Styles for the next and previous pages that "peek" in */
+.peek-next, .peek-prev, .center {
+  position: relative;
+  float: left;
+  width: 1170px;
   height: 760px; }
 
 /* Media Queries */

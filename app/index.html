@@ -23,24 +23,160 @@
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
   <script type="text/javascript">
-    function runPeekOnMouseover(){
-        $(".button-right").mouseenter(function(){
-          $(".page-wrapper").stop().animate({left: "-20px"}, 200)
-        })
-        .mouseleave(function(){
-          $(".page-wrapper").stop().animate({left: "0px"}, 200)
-       })
+  
+  $(document).ready(function(){
+    getButtonSizes();
+  });
 
-       $(".button-left").mouseenter(function(){
-          $(".page-wrapper").stop().animate({left: "+20px"}, 200)
-        })
-        .mouseleave(function(){
-          $(".page-wrapper").stop().animate({left: "0px"}, 200)
-       }) 
-    };
+  //darn global variables get off my lawn
+  var currentPage;
+  var totalPages;
+  var slideDivTop;
+  var slideDivBottom;
+  var slideDivRight;
+  var slideDiveLeft;
+  var slideHeight;
+  var slideWidth;
 
-    //here is a comment at 1:36pm
-      </script>
+  //this function is called by angular when the view is changed
+  function runPeekOnMouseover(page, total){
+    currentPage = page;
+    totalPages = total;
+    console.log("total pages: " + totalPages );
+      
+      if (currentPage > 1 && currentPage < totalPages){
+        $(".page-wrapper").css({"left": "-100%"});
+        origPosition = "-100%";
+      }
+      if (currentPage === 1){
+        $(".page-wrapper").css({"left": "0"});      
+      }
+    
+      //find position and dimension of slide container
+      init();
+
+      $(window).resize(function(){
+        //recalculate .slides div size if the page scales
+        init();
+      })
+
+      //track mouse position
+      $(".slides").mousemove(getMousePosition);
+  };
+    
+
+  //create mouseover peek based on coordinates
+  //----------------------------------------------------
+  // based on https://www.cloudtec.ch/blog/web/change-image-with-jquery-mouse-position.html
+   
+  var isMouseOverLeftButton = isMouseOverRightButton = false;
+
+  // get the initial button measurements as the page loads
+  // we use the right button since the left is hidden by ng-hide on page 1
+  // This should not update unless index.html reloads
+  var buttonHeight;
+  var buttonWidth;
+
+  function getButtonSizes(){
+    buttonHeight = $(".button-right").height();
+    buttonWidth = $(".button-right").width();
+  };
+  
+  //TODO this may need to be refactored for the viewport resizing?
+  function getMousePosition(event){
+    mouseY = event.pageY;
+    mouseX = event.pageX;
+
+    //test for mouse inside left button
+    if( (mouseX > slideDivLeft)  &&  
+        (mouseX < slideDivLeft + buttonWidth) && 
+        (mouseY < slideDivBottom - slideHeight/2 + buttonHeight/2) && 
+        (mouseY > slideDivTop + slideHeight/2 - buttonHeight/2)   )
+        {
+          //if over left button, return true
+          if (!isMouseOverLeftButton){
+              isMouseOverLeftButton = true;
+              updateLeftAnimation();
+            }
+    //if mouse not it left button, return false 
+    }else if (isMouseOverLeftButton){
+              isMouseOverLeftButton = false;
+              updateLeftAnimation();
+          
+    //test for mouse inside Right button
+    }
+    if( 
+        (mouseX < slideDivRight)  &&  
+        (mouseX > slideDivRight - buttonWidth) && 
+        (mouseY < slideDivBottom - slideHeight/2 + buttonHeight/2) && 
+        (mouseY > slideDivTop + slideHeight/2 - buttonHeight/2)   )
+        {
+        if (!isMouseOverRightButton){
+              isMouseOverRightButton = true;
+              updateRightAnimation();
+            }
+    } else if (isMouseOverRightButton){
+              isMouseOverRightButton = false;
+              updateRightAnimation();
+    }
+  }
+
+  function updateLeftAnimation(){
+    console.log("Value of isMouseOverLeftButton: " + isMouseOverLeftButton );
+   
+    //don't animate if this is the first page
+    if (currentPage !== 1){
+      if(isMouseOverLeftButton){
+         $(".page-wrapper").stop().animate({"left": "+=10px"}, {queue:false,duration:200})
+           console.log("inside button");
+      }else if(!isMouseOverLeftButton){
+        $(".page-wrapper").stop().animate({"left": "-100%"}, {queue:false,duration:200})
+            //console.log("outside button");
+      }
+    }
+  };
+
+  function updateRightAnimation(){
+    //don't animate if this is the last page
+    if (currentPage != totalPages){        
+      //find the .slider position before we start
+      var origWrapperPosition = getWrapperPosition();
+      if(isMouseOverRightButton){
+         $(".page-wrapper").stop().animate({"left": "-=10px"}, {queue:false,duration:200})
+           console.log("inside button");
+      }else if(!isMouseOverRightButton){
+        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:200})
+      }
+    }
+  };
+
+  function getWrapperPosition(){
+    var wrapperPosition;
+    if(currentPage === 1)
+        { wrapperPosition = "0";
+      }else if(currentPage === totalPages.length){
+        wrapperPosition = "-200%";
+      }else{
+        wrapperPosition = "-100%";
+      };
+    return wrapperPosition
+  };
+      
+  function init(){
+      //is this reset necessary?
+      // mouseX = 0;
+      // mouseY = 0;
+
+      slideWidth = $(".slides").width();
+      slideHeight = $(".slides").height();
+
+      slideDivTop = $(".slides").offset().top;
+      slideDivBottom = slideDivTop + slideHeight;
+      slideDivLeft = $(".slides").offset().left;
+      slideDivRight = slideDivLeft + slideWidth;
+      };
+
+</script>
  
 </head>
 <body ng-controller="ThumbnailCtrl as pages" >
@@ -78,9 +214,10 @@
         <div class="page-wrapper">
           <ng-include src="peekPrev()" class="peek-prev"></ng-include>        
                   <!--view is injected here-->
-
-          <div ng-view class="view-container">
-
+          
+          <div class="center">          
+            <div ng-view class="view-container">
+            </div>
           </div>
 
             <ng-include src="peekNext()" class="peek-next"></ng-include>
