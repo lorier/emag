@@ -171,6 +171,7 @@ body {
 .slides, .peek-next, .peek-prev {
   height: 760px;
   width: 1170px;
+  overflow: hidden;
   position: relative;
   text-align: center;
   background: url('../img/ajax-loader.gif') no-repeat center center; }
@@ -313,7 +314,7 @@ footer {
   background-color: white;
   position: relative; }
 
-.page-container {
+.page-container, .page-wrapper {
   position: relative;
   height: 760px; }
 
@@ -322,7 +323,7 @@ footer {
   .wrapper {
     width: 1024px;
     height: 714.6px; }
-  .page-container, .slides, .peek-next, .peek-prev {
+  .page-container, .slides, .peek-next, .peek-prev, .page-wrapper {
     height: 639.6px !important;
     width: 984px !important; } }
 
