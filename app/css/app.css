@@ -339,13 +339,16 @@ nav.page-turner {
     position: static; }
 
 li.thumb-scroll-window {
-  width: 396px;
+  width: 384px;
   height: 100px;
   overflow: hidden;
   position: relative; }
   li.thumb-scroll-window .holder {
-    width: 3000px;
-    height: 100px; }
+    width: 2244px;
+    height: 88px;
+    text-align: center;
+    padding: 0 124px;
+    position: absolute; }
 
 ul.thumb-viewer {
   -webkit-transition: all linear 0.5s;

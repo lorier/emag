@@ -454,15 +454,18 @@ nav.page-turner.small .hide-nav {
   
 }
 li.thumb-scroll-window {
-  width: 396px;
+  width: ($thumbnail-width + $thumbnail-margin) * 3;
   height: 100px;
   overflow: hidden;
   position:relative;
   
   .holder {
 //    padding: 0 143px; //add a blank 'thumbnail' on each end
-    width: 3000px;
-    height: 100px;
+    width: ($thumbnail-width + $thumbnail-margin*2) * 17; //15 plus padding on ends
+    height: $thumbnail-height + $thumbnail-margin*2;
+    text-align: center;
+    padding: 0 $thumbnail-width;
+    position: absolute;
   }
 }
   ul.thumb-viewer {
@@ -496,7 +499,7 @@ li.thumb-scroll-window {
 }
 .page-thumbnail {
   display: block;
-  margin: 4px;
+  margin: $thumbnail-margin;
   line-height: 1.42857143;
   background-color: #555;
   -webkit-transition: all .01s ease-in-out;

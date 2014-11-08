@@ -190,36 +190,50 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
         $scope.changeLoc(nextPage);
       }
     }
+  };
   $scope.advanceThumbnails = function(direction){
-
-  }
+    //  if(direction == 'prev'){
+    //   $scope.pageTransition  = "back";
+    //   var prevPage = $scope.activePage()-1;
+    //   if (prevPage > 0 ){
+    //     $scope.updateActivePage(prevPage);
+    //     $scope.changeLoc(prevPage);
+    //   }
+    // }else if(direction == 'next'){
+    //   $scope.pageTransition  = "forward";
+    //   var nextPage = $scope.activePage()+1;
+    //   if (nextPage <= $scope.pages.length ){
+    //     $scope.updateActivePage(nextPage);
+    //     $scope.changeLoc(nextPage);
+    //   }
+    // } 
+  };
       //concat the new url provided by the function logic
       //and feed it into the $location service. This updates the route.
       //$routeProvider in .config will not work without this.
-      };
-      $scope.changeLoc = function(location){
-        var loc = '/view/' + location;
+  $scope.changeLoc = function(location){
+    var loc = '/view/' + location;
 
-        $location.path(loc);
-       };
-        $scope.$on('$viewContentLoaded', function() {
-          runJQuery(StateService.getActivePage());
-          runPeekOnMouseover($scope.activePage(),$scope.pageCount);
-       });
+    $location.path(loc);
+   };
+    $scope.$on('$viewContentLoaded', function() {
+      runJQuery(StateService.getActivePage());
+      runPeekOnMouseover($scope.activePage(),$scope.pageCount);
+   });
       
-      $scope.peekPrev = function() {
-          var current = $scope.activePage();
-          var prev =  current - 1;
-        
-          // console.log("peekPrev: prev value is: " + prev);
+  $scope.peekPrev = function() {
+      var current = $scope.activePage();
+      var prev =  current - 1;
+    
+      // console.log("peekPrev: prev value is: " + prev);
 
-          if( current > 1 ){ 
-            return "partials/page" + prev + ".html";
-          } else {
-            //console.log("You can't go before page1");
-            // return "partials/page" + StateService.getActivePage() + ".html";
-      }
-     
+      if( current > 1 ){ 
+        return "partials/page" + prev + ".html";
+      } else {
+        //console.log("You can't go before page1");
+        // return "partials/page" + StateService.getActivePage() + ".html";
+  }
+ 
      $scope.peekNext = function() {
             var current = $scope.activePage();
             var next = current + 1;
