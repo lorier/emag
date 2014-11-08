@@ -94,6 +94,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.activePage = StateService.getActivePage;
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
+  $scope.pageTransition = '';
+  $scope.thumbTransition = '';
   
   //count number of objects in the json object
   //might need a polyfill for older browsers
@@ -105,6 +107,9 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       $scope.pageCount = Object.keys($scope.pages).length;
   });
 
+  $scope.addSVG = function(){
+    return "partials/target.svg";
+  };
 
   $scope.setThumbsPosition = function(){
     //console.log($scope.thumbsPosition);
@@ -143,7 +148,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       return 'true';
     }
   };
-  //
+  
   $scope.showThumb = function(value){
     if($scope.activePage() <= 2){
       if (value <= 3){
@@ -162,26 +167,32 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   //update page based on which thumbnail is clicked
   $scope.clickThumb = function(value) {
     $scope.updateActivePage(value);
+    $scope.pageTransition = 'opacity';
     if(value !== 1 && value < $scope.pages.length){
       $scope.changeLoc($scope.activePage());   
     }
   };
 
   //Logic for prev/next buttons. Could use some refactoring
-  $scope.advanceSinglePage = function(direction){
+  $scope.advancePage = function(direction){
     if(direction == 'prev'){
+      $scope.pageTransition  = "back";
       var prevPage = $scope.activePage()-1;
       if (prevPage > 0 ){
         $scope.updateActivePage(prevPage);
         $scope.changeLoc(prevPage);
       }
     }else if(direction == 'next'){
+      $scope.pageTransition  = "forward";
       var nextPage = $scope.activePage()+1;
       if (nextPage <= $scope.pages.length ){
         $scope.updateActivePage(nextPage);
         $scope.changeLoc(nextPage);
       }
     }
+  $scope.advanceThumbnails = function(direction){
+
+  }
       //concat the new url provided by the function logic
       //and feed it into the $location service. This updates the route.
       //$routeProvider in .config will not work without this.

@@ -2,8 +2,14 @@
 -------------------------------------------------- 
 cross fading between routes with ngView 
 
-TODO - this is causing the overlying UI to disappear and reappear.
 */
+/*-------------------------------------------------- 
+//Thumnailes: When click  button
+-
+------------------------------------------------- */
+/*-------------------------------------------------- 
+//SLIDE ANIMATIONS
+-------------------------------------------------- */
 .view-container.ng-enter, .view-container.ng-leave {
   background: white;
   position: absolute;
@@ -11,19 +17,117 @@ TODO - this is causing the overlying UI to disappear and reappear.
   left: 0;
   right: 0; }
 
-.view-container.ng-enter {
-  -webkit-animation: 0.15s fade-in;
-  -moz-animation: 0.15s fade-in;
-  -o-animation: 0.15s fade-in;
-  animation: 0.15s fade-in;
+.view-container.ng-enter, .view-container.ng-leave {
+  position: absolute;
+  float: left; }
+
+/*-------------------------------------------------- 
+//Slides: When click PREVIOUS button
+-------------------------------------------------- */
+.view-container.ng-enter.back {
+  -webkit-animation: 0.5s fade-in-right;
+  -moz-animation: 0.5s fade-in-right;
+  -o-animation: 0.5s fade-in-right;
+  animation: 0.5s fade-in-right;
+  z-index: 99; }
+
+.view-container.ng-leave.back {
+  -webkit-animation: 0.5s fade-out-right;
+  -moz-animation: 0.5s fade-out-right;
+  -o-animation: 0.5s fade-out-right;
+  animation: 0.5s fade-out-right;
   z-index: 100; }
 
-.view-container.ng-leave {
-  -webkit-animation: 0.15s fade-out;
-  -moz-animation: 0.15s fade-out;
-  -o-animation: 0.15s fade-out;
-  animation: 0.15s fade-out;
+@keyframes fade-in-right {
+  from {
+    margin-left: -100%; }
+
+  to {
+    margin-left: 0%; } }
+
+@-moz-keyframes fade-in-right {
+  from {
+    margin-left: -100%; }
+
+  to {
+    margin-left: 0%; } }
+
+@-webkit-keyframes fade-in-right {
+  from {
+    margin-left: -100%; }
+
+  to {
+    margin-left: 0%; } }
+
+@keyframes fade-out-right {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: 100%; } }
+
+@-moz-keyframes fade-out-right {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: 100%; } }
+
+@-webkit-keyframes fade-out-right {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: 100%; } }
+
+/*-------------------------------------------------- 
+//Slides: When click NEXT button
+-------------------------------------------------- */
+.view-container.ng-enter.forward {
+  -webkit-animation: 0.5s fade-in-left;
+  -moz-animation: 0.5s fade-in-left;
+  -o-animation: 0.5s fade-in-left;
+  animation: 0.5s fade-in-left;
+  z-index: 100; }
+
+.view-container.ng-leave.forward {
+  -webkit-animation: 0.5s fade-out-left;
+  -moz-animation: 0.5s fade-out-left;
+  -o-animation: 0.5s fade-out-left;
+  animation: 0.5s fade-out-left;
   z-index: 99; }
+
+@-webkit-keyframes fade-in-left {
+  from {
+    margin-left: 100%; }
+
+  to {
+    margin-left: 0%; } }
+
+@-webkit-keyframes fade-out-left {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -100%; } }
+
+/*-------------------------------------------------- 
+//When click THUMBNAIL 
+//Changes behavior to opacity
+-------------------------------------------------- */
+.view-container.ng-enter.opacity {
+  -webkit-animation: 0.5s fade-in;
+  -moz-animation: 0.5s fade-in;
+  -o-animation: 0.5s fade-in;
+  animation: 0.5s fade-in;
+  z-index: 99; }
+
+.view-container.ng-leave.opacity {
+  -webkit-animation: 0.5s fade-out;
+  -moz-animation: 0.5s fade-out;
+  -o-animation: 0.5s fade-out;
+  animation: 0.5s fade-out;
+  z-index: 100; }
 
 @keyframes fade-in {
   from {
@@ -234,6 +338,15 @@ nav.page-turner {
     vertical-align: middle;
     position: static; }
 
+li.thumb-scroll-window {
+  width: 396px;
+  height: 100px;
+  overflow: hidden;
+  position: relative; }
+  li.thumb-scroll-window .holder {
+    width: 3000px;
+    height: 100px; }
+
 ul.thumb-viewer {
   -webkit-transition: all linear 0.5s;
   transition: all linear 0.5s;
@@ -246,7 +359,8 @@ ul {
   padding: 0; }
 
 li {
-  display: inline-block; }
+  display: inline-block;
+  float: left; }
 
 ul.thumb-viewer.ng-hide {
   opacity: 0; }
