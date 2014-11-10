@@ -30,7 +30,6 @@
     $('.page-turner .btn').on('click', function(e){
       advanceThumbnails(e);
     });
-
   });
 
   //darn global variables get off my lawn
@@ -44,9 +43,12 @@
   var slideWidth;
   var thumbnailPosition = 0;
   var thumbWidth = null;
+  var stopsList = [];
 
   //this function is called by angular when the view is changed
-  function runPeekOnMouseover(page, total){
+  function onContentLoaded(page, total){
+    
+    thumbWidth = $(".page-thumbnail").outerWidth(true);
 
     currentPage = page;
     totalPages = total;
@@ -159,6 +161,7 @@
     }
   };
 
+  
   function getWrapperPosition(){
     var wrapperPosition;
     if(currentPage === 1)
@@ -188,15 +191,31 @@
       };
 
 
-//create mouseover peek based on coordinates
+//Thumbnail slider behavior
 //----------------------------------------------------
-// based on https://www.cloudtec.ch/blog/web/change-image-with-jquery-mouse-position.html
+function initThumbnailStops(){
+      thumbWidth = $(".page-thumbnail").outerWidth(true);
+      var stops = 0;
+      for (var i = 0; i<=totalPages; i++) {
+        stopsList.push(stops);
+        stops -= thumbWidth;
+      };
+  };
+
+function setThumbs(page){
+  console.log("set thumbs via angular: " + page);
+  var position = stopsList[page-1];
+  // console.log = (stopsList[page]);
+  $(".holder").animate({left: position}, 200);
+}
+
 function advanceThumbnails(e){
   var thumbContainerWidth = $(".holder").width();
-  var stopSize = Math.ceil(thumbContainerWidth/totalPages);
-  if(!thumbWidth){
-    thumbWidth = $(".page-thumbnail img").width() + parseInt($(".page-thumbnail").css("margin-left"));
-  }
+  var holder = $(".holder");
+
+  //TODO create array with stops in it so indices correspond to 'currentPage'
+   
+  
   
   console.log("Thumbcontainer width: " + thumbContainerWidth);
   if(e.currentTarget.className == "next btn"){ 
@@ -204,7 +223,7 @@ function advanceThumbnails(e){
     // console.log("thumb image width: " + thumbWidth);
     thumbnailPosition -= thumbWidth;
     console.log("new thumbposition: " + thumbnailPosition);
-    $(".holder").animate({left: thumbnailPosition}, 400) 
+    TweenLite.to(holder, .5, {left:thumbnailPosition, ease:Power4.easeOut});
     };
   }else
   if(e.currentTarget.className == "prev btn"){ 
@@ -212,7 +231,7 @@ function advanceThumbnails(e){
     // console.log("thumb image width: " + thumbWidth);
     thumbnailPosition += thumbWidth;
     console.log("new thumbposition: " + thumbnailPosition);
-    $(".holder").animate({left: thumbnailPosition}, 400) 
+    TweenLite.to(holder, .5, {left:thumbnailPosition, ease:Power4.easeOut});    
     };
   };   
 }
@@ -284,7 +303,7 @@ function advanceThumbnails(e){
 <!-- 
                 <li ng-repeat="page in pages" ng-if="$index == activePage() ||  $index == activePage()-1 || $index == activePage()+1" class="thumbnail-container"> --> 
 
-                <li ng-repeat="page in pages" class="thumbnail-container"> 
+                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
                     <img ng-src="img/{{page.thumb}}"/>
                   </a> 

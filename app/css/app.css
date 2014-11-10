@@ -316,6 +316,7 @@ body {
   display: block; }
 
 .page-turner-container {
+  text-align: center;
   width: 100%;
   display: block;
   position: absolute;
@@ -328,7 +329,8 @@ nav.page-turner {
   text-align: center;
   margin: 0 auto;
   background-color: rgba(255, 255, 255, 0.5);
-  width: 460px; }
+  width: auto;
+  display: inline-block; }
   nav.page-turner .hide-nav span {
     display: inline-block;
     width: 100%;
@@ -339,7 +341,7 @@ nav.page-turner {
     position: static; }
 
 li.thumb-scroll-window {
-  width: 384px;
+  width: 396px;
   height: 100px;
   overflow: hidden;
   position: relative; }
@@ -347,7 +349,7 @@ li.thumb-scroll-window {
     width: 2244px;
     height: 88px;
     text-align: center;
-    padding: 0 124px;
+    padding: 0 132px;
     position: absolute; }
 
 ul.thumb-viewer {
@@ -365,22 +367,20 @@ li {
   display: inline-block;
   float: left; }
 
-ul.thumb-viewer.ng-hide {
-  opacity: 0; }
-
 .prev.btn, .next.btn {
   height: 80px; }
 
 .page-thumbnail {
   display: block;
+  width: 124px;
   margin: 4px;
   line-height: 1.42857143;
-  background-color: #555;
+  background-color: white;
   -webkit-transition: all 0.01s ease-in-out;
   -o-transition: all 0.01s ease-in-out;
   transition: all 0.01s ease-in-out; }
   .page-thumbnail img {
-    opacity: 0.3;
+    opacity: 0.5;
     height: 80px; }
 
 .active-thumb img {

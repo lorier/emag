@@ -8,7 +8,8 @@ var myEmag = angular.module('myEmag', [
   'ngRoute',
   'ngAnimate',
   'emagControllers',
-  'emagFactories'
+  'emagFactories',
+  'emagDirectives'
 ]);
 
 // Adding a factory to keep track of state. Code courtesy of
@@ -31,6 +32,30 @@ emagFactories.factory('StateService', function(){
       setActivePage: setActivePage
     };   
   });
+
+//Adding directive to watch for the render completion of the 
+//thumbnails
+var emagDirectives = angular.module ('emagDirectives', []);
+
+emagDirectives.directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+    if (scope.$last) {
+          setTimeout(function(){
+            //trigger jQuery code
+            initThumbnailStops();  
+          }, 1);
+    }
+  };
+});
+
+// emagDirectives.directive('myMainDirective', function() {
+//   return function(scope, element, attrs) {
+//     angular.element(element).css('border','5px solid red');
+//   };
+// });
+
+
+
 //This should be refactored when I figure out how to do it
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -92,6 +117,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.pages = {};
   $scope.pageCount = 0;
   $scope.activePage = StateService.getActivePage;
+  $scope.activePageVal = StateService.getActivePage();
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
   $scope.pageTransition = '';
@@ -167,9 +193,11 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   //update page based on which thumbnail is clicked
   $scope.clickThumb = function(value) {
     $scope.updateActivePage(value);
-    $scope.pageTransition = 'opacity';
+    // $scope.pageTransition = 'opacity';
     if(value !== 1 && value < $scope.pages.length){
-      $scope.changeLoc($scope.activePage());   
+      $scope.changeLoc($scope.activePage());  
+          setThumbs($scope.activePage());;
+ 
     }
   };
 
@@ -190,24 +218,11 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
         $scope.changeLoc(nextPage);
       }
     }
+    //calls jQuery function to set the correct thumbnail position
+    setThumbs($scope.activePage());;
   };
-  $scope.advanceThumbnails = function(direction){
-    //  if(direction == 'prev'){
-    //   $scope.pageTransition  = "back";
-    //   var prevPage = $scope.activePage()-1;
-    //   if (prevPage > 0 ){
-    //     $scope.updateActivePage(prevPage);
-    //     $scope.changeLoc(prevPage);
-    //   }
-    // }else if(direction == 'next'){
-    //   $scope.pageTransition  = "forward";
-    //   var nextPage = $scope.activePage()+1;
-    //   if (nextPage <= $scope.pages.length ){
-    //     $scope.updateActivePage(nextPage);
-    //     $scope.changeLoc(nextPage);
-    //   }
-    // } 
-  };
+
+  
       //concat the new url provided by the function logic
       //and feed it into the $location service. This updates the route.
       //$routeProvider in .config will not work without this.
@@ -218,7 +233,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
    };
     $scope.$on('$viewContentLoaded', function() {
       runJQuery(StateService.getActivePage());
-      runPeekOnMouseover($scope.activePage(),$scope.pageCount);
+      onContentLoaded($scope.activePage(),$scope.pageCount);
    });
       
   $scope.peekPrev = function() {

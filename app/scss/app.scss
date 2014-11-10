@@ -425,6 +425,7 @@ img {
   display: block;
 }
 .page-turner-container{
+  text-align: center;
   width: 100%;
   display:block;
   position:absolute;
@@ -439,7 +440,8 @@ nav.page-turner {
   text-align: center;
   margin: 0 auto; 
   background-color: rgba(255, 255, 255, 0.5);
-  width: 460px;
+  width: auto;
+  display: inline-block;
   .hide-nav span{
     display: inline-block;
     width: 100%;
@@ -454,7 +456,7 @@ nav.page-turner.small .hide-nav {
   
 }
 li.thumb-scroll-window {
-  width: ($thumbnail-width + $thumbnail-margin) * 3;
+  width: $thumbnail-width * 3 + $thumbnail-margin * 6;
   height: 100px;
   overflow: hidden;
   position:relative;
@@ -464,7 +466,7 @@ li.thumb-scroll-window {
     width: ($thumbnail-width + $thumbnail-margin*2) * 17; //15 plus padding on ends
     height: $thumbnail-height + $thumbnail-margin*2;
     text-align: center;
-    padding: 0 $thumbnail-width;
+    padding: 0 ($thumbnail-width + $thumbnail-margin*2);
     position: absolute;
   }
 }
@@ -487,9 +489,9 @@ li.thumb-scroll-window {
 //     width:$thumbnail-width;
 //     height:$thumbnail-height;
 // }
-  ul.thumb-viewer.ng-hide{
-    opacity: 0;
-  }
+  // ul.thumb-viewer.ng-hide{
+  //   opacity: 0;
+  // }
 
 
 //These styles toggle-set by Angular. 
@@ -499,14 +501,15 @@ li.thumb-scroll-window {
 }
 .page-thumbnail {
   display: block;
+  width: $thumbnail-width;
   margin: $thumbnail-margin;
   line-height: 1.42857143;
-  background-color: #555;
+  background-color: white;
   -webkit-transition: all .01s ease-in-out;
   -o-transition: all .01s ease-in-out;
   transition: all .01s ease-in-out;
     img {
-    opacity: .3;
+    opacity: .5;
     height: $thumbnail-height;
   }
 }
