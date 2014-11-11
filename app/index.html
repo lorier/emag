@@ -22,14 +22,15 @@
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
+  <script src="js/windowResizer.js"></script>
   <script type="text/javascript">
   
   $(document).ready(function(){
     getButtonSizes();
     // console.log(thumbWidth);
-    $('.page-turner .btn').on('click', function(e){
-      advanceThumbnails(e);
-    });
+    // $('.page-turner .btn').on('click', function(e){
+    //   advanceThumbnails(e);
+    // });
   });
 
   //darn global variables get off my lawn
@@ -45,6 +46,9 @@
   var thumbWidth = null;
   var stopsList = [];
 
+  //used and reset by advanceThumbnails()
+  var thumbPos = null;
+
   //this function is called by angular when the view is changed
   function onContentLoaded(page, total){
     
@@ -52,7 +56,7 @@
 
     currentPage = page;
     totalPages = total;
-    console.log("total pages: " + totalPages );
+    // console.log("total pages: " + totalPages );
       
       if (currentPage > 1 && currentPage < totalPages){
         $(".page-wrapper").css({"left": "-100%"});
@@ -132,14 +136,12 @@
     }
   }
 
-  function updateLeftAnimation(){
-    console.log("Value of isMouseOverLeftButton: " + isMouseOverLeftButton );
-   
+  function updateLeftAnimation(){   
     //don't animate if this is the first page
     if (currentPage !== 1){
       if(isMouseOverLeftButton){
          $(".page-wrapper").stop().animate({"left": "+=10px"}, {queue:false,duration:200})
-           console.log("inside button");
+           // console.log("inside button");
       }else if(!isMouseOverLeftButton){
         $(".page-wrapper").stop().animate({"left": "-100%"}, {queue:false,duration:200})
             //console.log("outside button");
@@ -154,7 +156,7 @@
       var origWrapperPosition = getWrapperPosition();
       if(isMouseOverRightButton){
          $(".page-wrapper").stop().animate({"left": "-=10px"}, {queue:false,duration:200})
-           console.log("inside button");
+           // console.log("inside button");
       }else if(!isMouseOverRightButton){
         $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:200})
       }
@@ -202,39 +204,53 @@ function initThumbnailStops(){
       };
   };
 
-function setThumbs(page){
+function  setThumbstoCurrentSlide(page){
   console.log("set thumbs via angular: " + page);
   var position = stopsList[page-1];
-  // console.log = (stopsList[page]);
-  $(".holder").animate({left: position}, 200);
+  console.log("set thumbs in jquery, position is: " + position);
+  // $(".holder").animate({left: position}, 200);
+  tweenThumbs(position);
+  thumbPos = null;
 }
 
-function advanceThumbnails(e){
+//called from angular
+function advanceThumbnails(which){
   var thumbContainerWidth = $(".holder").width();
-  var holder = $(".holder");
-
-  //TODO create array with stops in it so indices correspond to 'currentPage'
-   
+  thumbnailPosition = parseInt($(".holder").css('left'));
+  var whichStop;
   
-  
-  console.log("Thumbcontainer width: " + thumbContainerWidth);
-  if(e.currentTarget.className == "next btn"){ 
+  if(which == "next"){ 
+    console.log("thumbnail holder position: " + thumbnailPosition);
+    //constrain the left position of .holder to the negative width of .holder
     if (thumbnailPosition > -Math.abs(thumbContainerWidth)+thumbWidth){
-    // console.log("thumb image width: " + thumbWidth);
-    thumbnailPosition -= thumbWidth;
-    console.log("new thumbposition: " + thumbnailPosition);
-    TweenLite.to(holder, .5, {left:thumbnailPosition, ease:Power4.easeOut});
+      //get current page and add one
+        if (thumbPos == null){
+          thumbPos = currentPage + 1
+        }else{
+          thumbPos = thumbPos + 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
     };
   }else
-  if(e.currentTarget.className == "prev btn"){ 
-    if (thumbnailPosition < 0){
-    // console.log("thumb image width: " + thumbWidth);
-    thumbnailPosition += thumbWidth;
-    console.log("new thumbposition: " + thumbnailPosition);
-    TweenLite.to(holder, .5, {left:thumbnailPosition, ease:Power4.easeOut});    
+    if(which == "prev"){ 
+      if (thumbnailPosition < 0){
+         if (thumbPos == null){
+          thumbPos = currentPage - 1
+        }else{
+          thumbPos = thumbPos - 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
+      }
     };
-  };   
+  };  
+
+function tweenThumbs(whichStop){
+  var holder = $(".holder");   
+  TweenLite.to(holder, .5, {left:whichStop, ease:Power4.easeOut});
 }
+
 
 
 </script>
@@ -268,8 +284,8 @@ function advanceThumbnails(e){
 
     <section class="slides">
           <div class="overlay-buttons">
-            <button type="button" class="btn btn-default button-left" ng-click="advancePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
-            <button type="button" class="btn btn-default button-right" ng-click="advancePage('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
+            <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
+            <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
           </div> 
 
         <div class="page-wrapper">
@@ -282,7 +298,6 @@ function advanceThumbnails(e){
 
             <ng-include src="peekNext()" class="peek-next"></ng-include>
         </div> 
-
     </section>
 
 
@@ -295,17 +310,11 @@ function advanceThumbnails(e){
           </li>
           <li class="thumb-scroll-window">
               <ul class="holder"> 
-            
-              
-<!--                 <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)" class="thumbnail-container">
- --><!--                 <li ng-repeat="page in pages" ng-if="$index == page.page_num" class="thumbnail-container">
- -->
-<!-- 
-                <li ng-repeat="page in pages" ng-if="$index == activePage() ||  $index == activePage()-1 || $index == activePage()+1" class="thumbnail-container"> --> 
 
                 <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
-                  <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-                    <img ng-src="img/{{page.thumb}}"/>
+<!--                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+ -->                <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+                       <img ng-src="img/{{page.thumb}}"/>
                   </a> 
                 </li>
               </ul>

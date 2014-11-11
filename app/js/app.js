@@ -48,11 +48,6 @@ emagDirectives.directive('myRepeatDirective', function() {
   };
 });
 
-// emagDirectives.directive('myMainDirective', function() {
-//   return function(scope, element, attrs) {
-//     angular.element(element).css('border','5px solid red');
-//   };
-// });
 
 
 
@@ -104,7 +99,7 @@ myEmag.config(['$routeProvider', function($routeProvider) {
       when('/view/15', {
       templateUrl:'partials/page15.html' ,
       }).
-     	otherwise({redirectTo: '/view'});
+     	otherwise({redirectTo: '/view/'});
 }]);
 
 //Controllers
@@ -120,7 +115,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.activePageVal = StateService.getActivePage();
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
-  $scope.pageTransition = '';
+  $scope.pageTransition = 'forward';
   $scope.thumbTransition = '';
   
   //count number of objects in the json object
@@ -137,19 +132,19 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     return "partials/target.svg";
   };
 
-  $scope.setThumbsPosition = function(){
-    //console.log($scope.thumbsPosition);
-    if($scope.isThumbsVisible){
-      $scope.thumbsPosition = "small";
-    }else{
-      $scope.thumbsPosition = "big";
-    }
-  };
+  // $scope.setThumbsPosition = function(){
+  //   //console.log($scope.thumbsPosition);
+  //   if($scope.isThumbsVisible){
+  //     $scope.thumbsPosition = "small";
+  //   }else{
+  //     $scope.thumbsPosition = "big";
+  //   }
+  // };
   
-  $scope.toggleThumbs = function() {
-    $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
-    $scope.setThumbsPosition();
-  };
+  // $scope.toggleThumbs = function() {
+  //   $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
+  //   $scope.setThumbsPosition();
+  // };
   
   $scope.setPrevNextVisibility = function(value){
     if($scope.activePage() === value){
@@ -161,109 +156,125 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.isFirstPage= function(){
     return $scope.activePage()===1;
   };
-  
   $scope.isLastPage= function(){
     return $scope.activePage()===$scope.pages.length;
   };
-
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
   };
-  $scope.activeThumb = function(value){
-    if(value == $scope.activePage()){
-      return 'true';
-    }
-  };
+  // $scope.activeThumb = function(value){
+  //   if(value == $scope.activePage()){
+  //     return 'true';
+  //   }
+  // };
   
-  $scope.showThumb = function(value){
-    if($scope.activePage() <= 2){
-      if (value <= 3){
-         return true;
-      }
-    }else if($scope.activePage() >= $scope.pages.length - 1){
-      if (value >= $scope.pages.length - 2){
-         return true;
-      }
-    }else
-    if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
-      return true;
-    }
+  // $scope.showThumb = function(value){
+  //   if($scope.activePage() <= 2){
+  //     if (value <= 3){
+  //        return true;
+  //     }
+  //   }else if($scope.activePage() >= $scope.pages.length - 1){
+  //     if (value >= $scope.pages.length - 2){
+  //        return true;
+  //     }
+  //   }else
+  //   if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
+  //     return true;
+  //   }
+  // };
+
+  $scope.advanceThumb = function(which, page){
+      //fire jquery function
+      console.log("advanceThumb called");
+      advanceThumbnails(which, page);
   };
 
-  //update page based on which thumbnail is clicked
-  $scope.clickThumb = function(value) {
+  //update the slide based on which thumbnail is clicked
+  $scope.onThumbClick = function(value) {
+    console.log("OnThumbClick value: " + value);
+    $scope.pageTransition = $scope.setSlideTransitionDirection(value);
+    // console.log("OnThumbclick current page: " + $scope.activePage());
     $scope.updateActivePage(value);
-    // $scope.pageTransition = 'opacity';
     if(value !== 1 && value < $scope.pages.length){
-      $scope.changeLoc($scope.activePage());  
-          setThumbs($scope.activePage());;
- 
+      $scope.changeSlide($scope.activePage());  
+      setThumbstoCurrentSlide($scope.activePage());
     }
   };
-
-  //Logic for prev/next buttons. Could use some refactoring
-  $scope.advancePage = function(direction){
+  $scope.setSlideTransitionDirection = function(value){
+    var whichWay
+    if (value > $scope.activePage()){
+      whichWay = "forward" 
+    }else if (value < $scope.activePage()){
+      whichWay = "back";
+    }
+    return whichWay;
+  };
+  //Logic for prev/next buttons on slides. Could use some refactoring
+  $scope.moveSlide = function(direction){
     if(direction == 'prev'){
       $scope.pageTransition  = "back";
       var prevPage = $scope.activePage()-1;
       if (prevPage > 0 ){
         $scope.updateActivePage(prevPage);
-        $scope.changeLoc(prevPage);
+        $scope.changeSlide(prevPage);
       }
     }else if(direction == 'next'){
       $scope.pageTransition  = "forward";
       var nextPage = $scope.activePage()+1;
       if (nextPage <= $scope.pages.length ){
         $scope.updateActivePage(nextPage);
-        $scope.changeLoc(nextPage);
+        $scope.changeSlide(nextPage);
       }
     }
     //calls jQuery function to set the correct thumbnail position
-    setThumbs($scope.activePage());;
+    setThumbstoCurrentSlide($scope.activePage());
   };
 
-  
-      //concat the new url provided by the function logic
-      //and feed it into the $location service. This updates the route.
-      //$routeProvider in .config will not work without this.
-  $scope.changeLoc = function(location){
+  //concat the new url. 
+  //and feed it into the $location service. This updates the route.
+  //$routeProvider in .config will not work without this.
+  $scope.changeSlide = function(location){
     var loc = '/view/' + location;
-
     $location.path(loc);
    };
-    $scope.$on('$viewContentLoaded', function() {
-      runJQuery(StateService.getActivePage());
+
+  $scope.$on('$viewContentLoaded', function() {
+      //using the $location service to get the page number from the URL
+      //this captures the new page value if the user types in the page number
+      //in the address bar
+      var urlSlice = parseInt($location.path().slice(6) || 1);
+      console.log("view content loaded called. " + urlSlice);
+      StateService.setActivePage(urlSlice);
+
+      console.log("view content loaded called. ActivePage: " + $scope.activePage());
+      runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
+      setThumbstoCurrentSlide($scope.activePage());
    });
-      
+
+
+
   $scope.peekPrev = function() {
       var current = $scope.activePage();
       var prev =  current - 1;
     
-      // console.log("peekPrev: prev value is: " + prev);
-
       if( current > 1 ){ 
         return "partials/page" + prev + ".html";
       } else {
-        //console.log("You can't go before page1");
-        // return "partials/page" + StateService.getActivePage() + ".html";
-  }
- 
-     $scope.peekNext = function() {
-            var current = $scope.activePage();
-            var next = current + 1;
-               //console.log("peekNext: next value is: " + next);
-               // console.log($scope.pageCount);
-            if( current < $scope.pageCount ){ 
-              // console.log("peekNext: current page (" + current + ") is less than: " + $scope.pageCount);
-
-              return "partials/page" + next + ".html";
-            } else {
-              //console.log("you've reached the last page");
-              // return "partials/page" + StateService.getActivePage() + ".html";
-            }
-      };
+        return;
+      }
     };
+ 
+ $scope.peekNext = function() {
+    var current = $scope.activePage();
+    var next = current + 1;
+    if( current < $scope.pageCount ){ 
+      return "partials/page" + next + ".html";
+    } else {
+      return;
+    }
+  };
+
 }]);
 
 /*!

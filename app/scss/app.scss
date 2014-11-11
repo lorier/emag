@@ -325,7 +325,7 @@ img {
   font-size:16px;
 }
 .top-bar {
-  padding-top: 5px;
+  padding: 5px 0;
   text-align: center;
 
   >div {
@@ -463,11 +463,12 @@ li.thumb-scroll-window {
   
   .holder {
 //    padding: 0 143px; //add a blank 'thumbnail' on each end
-    width: ($thumbnail-width + $thumbnail-margin*2) * 17; //15 plus padding on ends
+    width: ($thumbnail-width + $thumbnail-margin*2) * 16; //14 plus padding on ends
     height: $thumbnail-height + $thumbnail-margin*2;
     text-align: center;
     padding: 0 ($thumbnail-width + $thumbnail-margin*2);
     position: absolute;
+    left: 0;
   }
 }
   ul.thumb-viewer {
@@ -509,7 +510,7 @@ li.thumb-scroll-window {
   -o-transition: all .01s ease-in-out;
   transition: all .01s ease-in-out;
     img {
-    opacity: .5;
+    // opacity: .5;
     height: $thumbnail-height;
   }
 }
@@ -572,6 +573,9 @@ footer {
   padding: 0px 20px 10px 20px;
   background-color: white;
   position: relative;
+
+  transform-origin: 50% 0% 0px; 
+  -webkit-transform-origin: 50% 0%;
 }
 /*--Styles for slides!--*/
 

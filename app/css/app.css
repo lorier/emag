@@ -242,7 +242,7 @@ body {
   font-size: 16px; }
 
 .top-bar {
-  padding-top: 5px;
+  padding: 5px 0;
   text-align: center; }
   .top-bar > div {
     display: inline-block; }
@@ -346,11 +346,12 @@ li.thumb-scroll-window {
   overflow: hidden;
   position: relative; }
   li.thumb-scroll-window .holder {
-    width: 2244px;
+    width: 2112px;
     height: 88px;
     text-align: center;
     padding: 0 132px;
-    position: absolute; }
+    position: absolute;
+    left: 0; }
 
 ul.thumb-viewer {
   -webkit-transition: all linear 0.5s;
@@ -380,7 +381,6 @@ li {
   -o-transition: all 0.01s ease-in-out;
   transition: all 0.01s ease-in-out; }
   .page-thumbnail img {
-    opacity: 0.5;
     height: 80px; }
 
 .active-thumb img {
@@ -423,7 +423,9 @@ footer {
   margin: 0 auto;
   padding: 0px 20px 10px 20px;
   background-color: white;
-  position: relative; }
+  position: relative;
+  transform-origin: 50% 0% 0px;
+  -webkit-transform-origin: 50% 0%; }
 
 /*--Styles for slides!--*/
 .slides {
