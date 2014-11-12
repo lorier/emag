@@ -159,14 +159,18 @@
     //don't animate if this is the last page
     if (currentPage != totalPages){        
       //find the .slider position before we start
-      var origWrapperPosition = getWrapperPosition();
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = (numericPosition - 2) + "%";
+
       if(isMouseOverRightButton){
-         $(".page-wrapper").stop().animate({"left": "-=15px"}, {queue:false,duration:200})
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:200})
            // console.log("inside button");
       }else if(!isMouseOverRightButton){
         $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:200})
       }
     }
+    console.log("original wrapper: " + origWrapperPosition);
   };
 
   
