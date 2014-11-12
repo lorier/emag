@@ -1,31 +1,46 @@
 <!--partial-->
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
-function runJQuery(page){
-		// console.log("Active page: " + page);
-      	$('.page1').fadeTo('medium', 1, function(){
-      		$(".headline").animate({
-				opacity: 1,
-			    left: "10%"
-	      	}, 100, function(){
-	      		$(".polaroids").fadeTo('slow', 1, function(){
-	      			$(".logo").animate({
-	      				opacity: 1,
-	      				left: "8%"
-	      			}, 100)
-	      		})
-	      	});
-      	});
+function runJQuery(){
+		console.log("im ready!");
+		
+
+			var tl = new TimelineLite ();			
+			      tl.add (TweenLite.set(".page1 #pic1", {y:1000, x:800, autoAlpha:1}));	
+			      tl.add (TweenLite.set(".page1 #pic2", {y:-800, x:800, autoAlpha:1}));	
+				  tl.add (TweenLite.set(".page1 #pic3", {y:800, x:800, autoAlpha:1}));	
+				  tl.add (TweenLite.set(".page1 #pic4", {y:100, x:800, autoAlpha:1}));
+				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
+				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.5")				
+				  .to(".page1 #pic1", .7, {x:300, y:445, rotation:7, autoAlpha:1, ease:Power3.easeOut}, "-=.4")
+				  .to(".page1 #pic2", 1, {x:135, y:-10, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.4")
+				  .to(".page1 #pic3", 1, {x:-80, y:390, rotation:-2, autoAlpha:1, ease:Power3.easeOut},  "-=.4")		
+				  .to(".page1 #pic4", 1, {x:70, y:170, rotation:3, autoAlpha:1, ease:Power3.easeOut}, "-=.4")
+				  .fromTo(".page1 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=1")
+				  .to(".page1 #swirl", 1, {autoAlpha:1}, "-=1")
+				  .to(".page1 #logo", 1, {autoAlpha:1});
+     
 };
+
 </script>
+
 <div class="page1 page-container">
 
 	<div class="headline">
-		<h1><span class="cantarell blue">It’s the beginning of</span><span class="amatic light-orange">A Beautiful Day</span></h1>
-<!-- 		<ng-include src="addSVG()"></ng-include>
- -->
-		</div>
-	<img class="logo" src="img/page_01_logo.png" alt="Aegis Living">
-	<div class="polaroids"><img src="img/page_01_polaroids.png" alt="Aegis Living"></div>
+	    <h2 class="cantarell pantone633">It's the beginning of</h2>
+		<h1 id="secondhead" class="amatic pantone130">A Beautiful Day</h1>
+	</div>
+	
+	<div id="mask">
+	<div id="swirl"><img src="img/page_01_swirl.png" alt="swirl"></div>
+	</div>
+
+	<img id="logo" src="img/page_01_logo.png" alt="Aegis Living">
+	<img id="pic1" src="img/page_01_pic1.jpg" alt="petting a dog">
+	<img id="pic2" src="img/page_01_pic2.jpg" alt="gardening">
+	<img id="pic3" src="img/page_01_pic3.jpg" alt="car">
+	<img id="pic4" src="img/page_01_pic4.jpg" alt="giggle">
+
+	
 </div>
 

@@ -8,7 +8,7 @@
 		"page_num": 2
 	},
 	{ 	"image": "page_03.jpg",
-		"thumb":"page_01_thumb.jpg",
+		"thumb":"page_03_thumb.jpg",
 		"page_num": 3
 	},
 	{ 	"image": "page_04.jpg",
@@ -54,9 +54,5 @@
 	{ 	"image": "page_14.jpg",
 		"thumb":"page_14_thumb.jpg",
 		"page_num": 14
-	},
-	{ 	"image": "page_15.jpg",
-		"thumb":"page_15_thumb.jpg",
-		"page_num": 15
 	}
 ]

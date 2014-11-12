@@ -1,5 +1,58 @@
-<!--partial 2-->
- <div>
-	<img  ng-src="img/page_11.jpg" class="big-pic"/>
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		console.log("im ready!");
+		var tl = new TimelineLite ();
+		 tl.add (TweenLite.set(".page11 #bluebar", {y:0, x:350, autoAlpha:1}));
+		 tl.add (TweenLite.set(".page11 #pic1", {y:300, x:0, autoAlpha:1}));
+	     tl.add (TweenLite.set(".page11 #pic2", {y:600, x:0, autoAlpha:1}));	
+	     tl.add (TweenLite.set(".page11 #pic3", {y:600, x:0, autoAlpha:1}));
+	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-300}))	
+		 tl.to(".page11 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut, delay:.2})
+		.to(".page11 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut})
+		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.5")
+		.to(".page11 #pic3", 1, {x:0, y:0, rotation:1, autoAlpha:1, ease:Power3.easeOut}, "-=.5")
+        .to(".page11 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut});
+
+		$('.page11 button').on('click', function () {
+			$('.page11 #clicktext').fadeToggle( "fast", "linear");
+		});
+	
+};
+
+</script>
+
+<div class="page11 page-container">
+
+
+<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
+<div id="clicktext">
+<a><img id="icon" src="img/page_11_icon.png" alt="icon"></a>
+<h4 class="pantone166 cantarell bold">Mocktail Time!</h4>
+<p>Make happy hour festive with a beautiful berry mocktail.<br />
+Tasty Berry Bubbles<br />
+1 cup berries (chose your favorite in season)<br />
+1 tsp lemon juice<br />
+2 tbsp honey<br />
+1 cup soda water<br />
+Add berries, lemon juice and honey to a blender and combine until smooth. Add soda water and pulse until combined. If using frozen berries, you may add ingredients all at once. Add a dash of extra soda water at the end for a few additional bubbles!</p>
+</div>
+
+<div id="bluebar">	
+	<h3>Around the Dinner Table</h3>
+	<p>Mealtimes are some of the most popular times of the day. Enjoy restaurant style dining as our chef prepares seasonal cuisine made with fresh local ingredients. Savor customized nutritious meals to stay active and enjoy the dining room buzz with conversation and laughter.</p>	
+</div>
+
+<img id="pic1" src="img/page_11_pic1.jpg" alt="cupcake">
+<img id="pic2" src="img/page_11_pic2.jpg" alt="linguine">
+<img id="pic3" src="img/page_11_pic3.jpg" alt="chicken">
+
+<img id="arrow" src="img/page_11_arrow.png" alt="Our chef in action">
+
+<div id="vid-wrap">
+<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+</div>
+	
 </div>
 

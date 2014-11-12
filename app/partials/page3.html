@@ -1,8 +1,42 @@
-<!--partial 3-->
+<!--partial-->
 <script type="text/javascript">
-function runJQuery(page){
-	console.log("Active page: " + page);     	
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		console.log("im ready!");
+		
+			var tl = new TimelineLite ();			
+			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:350, autoAlpha:1}));	
+				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:.2})
+				  .to(".page3 p", 1, {autoAlpha:1})				
+				  .to(".page3 h2", 1, {autoAlpha:1})
+				  .to(".page3 #bluebar", .7, {x:10, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+				  .to(".page3 #arrow", 1, {autoAlpha:1}, "-=.5");			
+						
+				// VIDEO BUTTON
+				/*$('.page3 button').on('click', function () {	
+				});*/
 };
+
 </script>
- 	<div class="page3 page-container">
+
+<div class="page3 page-container">
+	
+	<div class="headline">
+	    <h1 class="amatic pantone152">Rise &amp; Shine</h1>
+	<p class="headline">Savor simple pleasures with a warm mug of coffee, your eggs cooked just so, and leisurely reading the morning newspaper.</p>
+	<h2 class="pantone633 cantarell">A perfect start to the day.</h2>
+	</div>
+	
+	<img id="arrow" src="img/page_03_arrow.png" alt="mornin'">	
+	
+	<div id="bluebar">	
+		<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+		<h3>Ted Talks</h3>
+		<p>See how you can dive deeper into almost any topic or current issue with a world of inspirational lectures that spark lively debates and active discussions.</p>
+		<h3>News and Views</h3>
+		<p>Join the discussion of the latest headlines and stay in touch with world events, as we share in the thrill of sports, the controversies of politics, and the triumphs of the human spirit that make the daily news.</p>
+	</div>	
+
+	
 </div>
+
