@@ -223,6 +223,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
+      console.log($scope.activePage());
    });
 
 

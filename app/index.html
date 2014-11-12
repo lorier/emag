@@ -25,9 +25,6 @@
   <script src="js/windowResizer.js"></script>
   <script type="text/javascript">
   
-  $(document).ready(function(){
- 
-  });
 
   //darn global variables get off my lawn
   var currentPage;
@@ -40,7 +37,7 @@
   var lButtonTop;
   var thumbnailPosition = 0;
   var thumbWidth = null;
-  var stopsList = [];
+  var stopsList = null;
 
   //used and reset by advanceThumbnails()
   var thumbPos = null;
@@ -48,7 +45,6 @@
   //this function is called by angular when the view is changed
   function onContentLoaded(page, total){
     getButtonSizes();
-
     thumbWidth = $(".page-thumbnail").outerWidth(true);
 
     currentPage = page;
@@ -186,6 +182,8 @@
 //Thumbnail slider behavior
 //----------------------------------------------------
 function initThumbnailStops(){
+    console.log("thumbnail stops initialized");
+
       thumbWidth = $(".page-thumbnail").outerWidth(true);
       var stops = 0;
       for (var i = 0; i<=totalPages; i++) {
@@ -195,7 +193,13 @@ function initThumbnailStops(){
   };
 
 function  setThumbstoCurrentSlide(page){
+  console.log("set thumbs to current slide called");
+  if(stopsList == null){
+    stopsList = [];
+    initThumbnailStops();
+  }
   var position = stopsList[page-1];
+  console.log(position);
   tweenThumbs(position);
   thumbPos = null;
 }
