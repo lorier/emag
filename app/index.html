@@ -145,11 +145,16 @@
   function updateLeftAnimation(){   
     //don't animate if this is the first page
     if (currentPage !== 1){
+       //find the .slider position before we start
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = (numericPosition + 2) + "%";
+
       if(isMouseOverLeftButton){
-         $(".page-wrapper").stop().animate({"left": "+=15px"}, {queue:false,duration:200})
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
            // console.log("inside button");
       }else if(!isMouseOverLeftButton){
-        $(".page-wrapper").stop().animate({"left": "-100%"}, {queue:false,duration:200})
+        $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
             //console.log("outside button");
       }
     }
@@ -164,10 +169,10 @@
       var peekAmount = (numericPosition - 2) + "%";
 
       if(isMouseOverRightButton){
-         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:200})
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
            // console.log("inside button");
       }else if(!isMouseOverRightButton){
-        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:200})
+        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
       }
     }
     console.log("original wrapper: " + origWrapperPosition);
@@ -271,18 +276,9 @@ function tweenThumbs(whichStop){
         <div class="link-out"><a href="#link">Find a community</a> near you.</div>
         <div class="social-buttons">
           <ul>
-            <li>
-                  <span class="mouse-coords"></span>
-
-              <a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a>
-            </li>
+            <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
             <li><a href="#link"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
-            <li><a href="#link">
-              <img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img>
-            </a></li>
-            <li><a href="#link">
-              <img src="img/resize.png" height="70" width="72"></img>
-            </a></li>
+            <li><a href="#link"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
             <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
           </ul>
         </div>
@@ -290,7 +286,6 @@ function tweenThumbs(whichStop){
     </section>
 
     <section class="slides">
-		
 		
 		    <section class="page-turner-container">
 		      <nav class="page-turner" ng-class="thumbsPosition">
@@ -305,8 +300,7 @@ function tweenThumbs(whichStop){
 		              <ul class="holder"> 
 
 		                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
-		<!--                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
-		 -->                <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+               <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
 		                       <img ng-src="img/{{page.thumb}}"/>
 		                  </a> 
 		                </li>
@@ -318,11 +312,6 @@ function tweenThumbs(whichStop){
 		        </ul>
 		      </nav> 
 		    </section>
-			
-			
-		
-		
-		
           <div class="overlay-buttons">
             <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
@@ -335,7 +324,6 @@ function tweenThumbs(whichStop){
             <div ng-view ng-class="pageTransition" class="view-container">
             </div>
           </div>
-
             <ng-include src="peekNext()" class="peek-next"></ng-include>
         </div> 
     </section>
@@ -352,15 +340,10 @@ function tweenThumbs(whichStop){
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
-<!-- Considered trying to dive into using this mashup of Bootstrap and Angular for styling but haven't  
-  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script> 
-  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script> -->
+
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="js/app.js"></script>
- <!--<script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script> -->
+
 </body>
 </html>

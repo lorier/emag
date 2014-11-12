@@ -134,19 +134,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     return "partials/target.svg";
   };
 
-  // $scope.setThumbsPosition = function(){
-  //   //console.log($scope.thumbsPosition);
-  //   if($scope.isThumbsVisible){
-  //     $scope.thumbsPosition = "small";
-  //   }else{
-  //     $scope.thumbsPosition = "big";
-  //   }
-  // };
-  
-  // $scope.toggleThumbs = function() {
-  //   $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
-  //   $scope.setThumbsPosition();
-  // };
+
   $scope.toggleThumbs = function(event){
 	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
 	  var target = angular.element(event.target)
@@ -170,26 +158,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
   };
-  // $scope.activeThumb = function(value){
-  //   if(value == $scope.activePage()){
-  //     return 'true';
-  //   }
-  // };
   
-  // $scope.showThumb = function(value){
-  //   if($scope.activePage() <= 2){
-  //     if (value <= 3){
-  //        return true;
-  //     }
-  //   }else if($scope.activePage() >= $scope.pages.length - 1){
-  //     if (value >= $scope.pages.length - 2){
-  //        return true;
-  //     }
-  //   }else
-  //   if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
-  //     return true;
-  //   }
-  // };
 
   $scope.advanceThumb = function(which, page){
       //fire jquery function
