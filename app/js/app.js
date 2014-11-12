@@ -48,9 +48,6 @@ emagDirectives.directive('myRepeatDirective', function() {
   };
 });
 
-
-
-
 //This should be refactored when I figure out how to do it
 //possible resource
 //http://stackoverflow.com/questions/13681116/angularjs-dynamic-routing
@@ -223,6 +220,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
+      console.log($scope.activePage());
    });
 
 

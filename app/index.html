@@ -25,22 +25,19 @@
   <script src="js/windowResizer.js"></script>
   <script type="text/javascript">
   
-  $(document).ready(function(){
- 
-  });
 
   //darn global variables get off my lawn
   var currentPage;
   var totalPages;
-  // var slideDivTop;
-  // var slideDivBottom;
-  // var slideDivRight;
-  // var slideDivLeft;
-  // var slideHeight;
-  // var slideWidth;
+  var ButtonHeight;
+  var ButtonWidth;
+  var rButtonLeft;
+  var rButtonTop;
+  var lButtonLeft;
+  var lButtonTop;
   var thumbnailPosition = 0;
   var thumbWidth = null;
-  var stopsList = [];
+  var stopsList = null;
 
   //used and reset by advanceThumbnails()
   var thumbPos = null;
@@ -48,7 +45,6 @@
   //this function is called by angular when the view is changed
   function onContentLoaded(page, total){
     getButtonSizes();
-
     thumbWidth = $(".page-thumbnail").outerWidth(true);
 
     currentPage = page;
@@ -82,14 +78,7 @@
   // get the initial button measurements as the page loads
   // we use the right button since the left is hidden by ng-hide on page 1
   // This should not update unless index.html reloads
-  var ButtonHeight;
-  var ButtonWidth;
 
-  var rButtonLeft;
-  var rButtonTop;
-
-  var lButtonLeft;
-  var lButtonTop;
 
   function getButtonSizes(){
     ButtonHeight = $(".button-right").height();
@@ -103,7 +92,6 @@
     $(".mouse-coords").text(mouseX + ", "+ mouseY);
 
     //left button coords
-
     if(
         (mouseX < lButtonLeft + ButtonWidth)  &&  
         (mouseX > lButtonLeft) && 
@@ -115,10 +103,10 @@
               isMouseOverLeftButton = true;
               updateLeftAnimation();
             }
-    } else if (isMouseOverLeftButton){
-              isMouseOverLeftButton = false;
-              console.log("mouse is over left button");
-              updateLeftAnimation();
+    } else 
+        if (isMouseOverLeftButton){
+            isMouseOverLeftButton = false;
+            updateLeftAnimation();
     }
     //right button coords
     if(
@@ -126,10 +114,7 @@
         (mouseX > rButtonLeft) && 
         (mouseY < rButtonTop + ButtonHeight ) && 
         (mouseY > rButtonTop)   )
-  
         {
-                        console.log("mouse is over right button");
-
         if (!isMouseOverRightButton){
               isMouseOverRightButton = true;
               updateRightAnimation();
@@ -145,17 +130,14 @@
   function updateLeftAnimation(){   
     //don't animate if this is the first page
     if (currentPage !== 1){
-       //find the .slider position before we start
+      //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
       var numericPosition = parseInt(origWrapperPosition);
       var peekAmount = (numericPosition + 2) + "%";
-
       if(isMouseOverLeftButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
-           // console.log("inside button");
       }else if(!isMouseOverLeftButton){
         $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
-            //console.log("outside button");
       }
     }
   };
@@ -170,12 +152,10 @@
 
       if(isMouseOverRightButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
-           // console.log("inside button");
       }else if(!isMouseOverRightButton){
         $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
       }
     }
-    console.log("original wrapper: " + origWrapperPosition);
   };
 
   
@@ -192,23 +172,18 @@
   };
       
   function init(){
-      //is this reset necessary?
-      // mouseX = 0;
-      // mouseY = 0;
-      console.log("init called");
-
       rButtonLeft = $(".button-right").offset().left;
       rButtonTop = $(".button-right").offset().top;
-
       lButtonLeft = $(".overlay-buttons").offset().left;
       lButtonTop = $(".overlay-buttons").offset().top;
-    
       };
 
 
 //Thumbnail slider behavior
 //----------------------------------------------------
 function initThumbnailStops(){
+    console.log("thumbnail stops initialized");
+
       thumbWidth = $(".page-thumbnail").outerWidth(true);
       var stops = 0;
       for (var i = 0; i<=totalPages; i++) {
@@ -218,8 +193,13 @@ function initThumbnailStops(){
   };
 
 function  setThumbstoCurrentSlide(page){
+  console.log("set thumbs to current slide called");
+  if(stopsList == null){
+    stopsList = [];
+    initThumbnailStops();
+  }
   var position = stopsList[page-1];
-  // $(".holder").animate({left: position}, 200);
+  console.log(position);
   tweenThumbs(position);
   thumbPos = null;
 }
@@ -260,8 +240,6 @@ function tweenThumbs(whichStop){
   var holder = $(".holder");   
   TweenLite.to(holder, .5, {left:whichStop, ease:Power4.easeOut});
 }
-
-
 
 </script>
  
