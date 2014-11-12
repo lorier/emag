@@ -191,6 +191,7 @@ img {
   position: relative;
   text-align: center;
   background: url('../img/ajax-loader.gif') no-repeat center center;
+ overflow: hidden;
 }
 
 .container .text-muted {

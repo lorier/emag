@@ -101,7 +101,12 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   });
 
-  $scope.setThumbsPosition = function(){
+$scope.addSVG = function(){
+    return "partials/circlebutton.svg";
+  };
+
+
+$scope.setThumbsPosition = function(){
     console.log($scope.thumbsPosition);
     if($scope.isThumbsVisible){
       $scope.thumbsPosition = "small";

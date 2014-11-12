@@ -1,5 +1,28 @@
-<!--partial 2-->
- <div>
-	<img  ng-src="img/page_06.jpg" class="big-pic"/>
-</div>
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		
+		var tl = new TimelineLite ();
+			  tl.add (TweenLite.set(".page6 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
+			  tl.to(".page6 .headline h1", 1, {autoAlpha:1, delay:1})
+			    .to(".page6 .headline p", 1, {autoAlpha:1}, "-=.5")
+			.to(".page6 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.5");
 
+	
+};
+</script>
+
+<div class="page6 page-container">
+	
+	<div class="headline">
+	    <h1 class="amatic white">Giving Back</h1>
+	<p class="headline white">Our residents have a wealth of talents and enthusiasm to share through volunteer projects that enrich the lives of those who live in our surrounding neighborhoods and communities.</p>
+	
+	<div id="vid-wrap">
+	<img id="arrow" src="img/page_06_hero.png" alt="live in action here">
+	<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+	</div>
+
+	
+</div>

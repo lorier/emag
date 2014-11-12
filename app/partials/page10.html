@@ -1,5 +1,51 @@
-<!--partial 2-->
- <div>
-	<img  ng-src="img/page_10.jpg" class="big-pic"/>
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+		var tl = new TimelineLite ();
+			tl.add (TweenLite.set(".page10 #stay-connected", {y:0, x:-300}));
+			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:1})
+			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
+			  .to(".page10 #stay-connected", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
+			
+					$('.page10 button.one').on('click', function () {
+						$(".page10 #clicktext2").hide();
+						$('.page10 #clicktext1').fadeToggle( "fast", "linear");
+					});
+
+					$('.page10 button.two').on('click', function () {
+							$(".page10 #clicktext1").hide();	
+							$('.page10 #clicktext2').fadeToggle( "fast", "linear");	
+					});
+};
+
+</script>
+
+<div class="page10 page-container">
+	
+<div class="headline">
+    <h1 class="amatic pantone166">Strong Family Ties</h1>
+	<p>Families are as close as a click away. At Aegis, we are happy to assist our residents with Skype to bring loved ones face-to-face. </p>
+</div>
+
+<img id="stay-connected" src="img/page_10_arrow.png" alt="Stay connected">
+
+<div id="vid-wrap">
+<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+</div>
+
+<button class="one"><div id="clickme1"><ng-include src="addSVG()"></ng-include></div></button>
+<div id="clicktext1">
+<h4 class="pantone633 cantarell bold">Put Us on Your Calendar</h4>
+<p>Throughout the year, communities will plan family dinners, holiday events, live music, happy hour, ice cream socials and outings to encourage family members to participate at the community and meet the other families living there.</p>
+</div>
+
+<button class="two"><div id="clickme2"><ng-include src="addSVG()"></ng-include></div></button>
+<div id="clicktext2">
+<h4 class="pantone633 cantarell bold">The Most Meaningful Visits</h4>
+<p>You are always welcome to join us at Aegis. Family and friends are the heart of any home. Share your photos, favorite recipes, or tell us your family stories – knowing details about our residents helps us do our jobs even better! </p>
+</div>
+	
 </div>
 
