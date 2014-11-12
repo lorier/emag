@@ -24,18 +24,18 @@ $(document).ready(function(e) {
 			var theRatio = mainwrap.innerHeight() / contH;
 			if(mainwrap.innerWidth() < contW){
 				var newOffset =  -(((contW) / 2) - (( mainwrap.innerWidth() ) / 2)) ; // centering
-				TweenLite.set(contentwrap,{x:newOffset, y:0, force3D:true, scale:theRatio  });
+				TweenLite.set(contentwrap,{x:newOffset, y:0,  scale:theRatio  });
 			}else{
-				TweenLite.set(contentwrap,{x:0, y:0,scale:theRatio,force3D:true});
+				TweenLite.set(contentwrap,{x:0, y:0,scale:theRatio});
 			}
 		}else{
 			
 			var theRatio = mainwrap.innerWidth() / contW;
 			if(mainwrap.innerWidth() < contW){
 				var newOffset =  -(((contW) / 2) - (( mainwrap.innerWidth() ) / 2)) ; // centering
-				TweenLite.set(contentwrap,{x:newOffset, y:0, force3D:true, scale:theRatio  });
+				TweenLite.set(contentwrap,{x:newOffset, y:0, scale:theRatio  });
 			}else{
-				TweenLite.set(contentwrap,{x:0, y:0,scale:theRatio,force3D:true});
+				TweenLite.set(contentwrap,{x:0, y:0,scale:theRatio});
 			}
 		}
 	}
