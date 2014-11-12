@@ -9,7 +9,8 @@ var myEmag = angular.module('myEmag', [
   'ngAnimate',
   'emagControllers',
   'emagFactories',
-  'emagDirectives'
+  'emagDirectives',
+  'ngDialog'
 ]);
 
 // Adding a factory to keep track of state. Code courtesy of
@@ -47,6 +48,7 @@ emagDirectives.directive('myRepeatDirective', function() {
     }
   };
 });
+
 
 //This should be refactored when I figure out how to do it
 //possible resource
@@ -105,7 +107,7 @@ myEmag.config(['$routeProvider', function($routeProvider) {
 
 var emagControllers = angular.module ('emagControllers', []);
 
-emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', function($scope, StateService, $http, $location, $route, $routeParams){
+emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function($scope, StateService, $http, $location, $route, $routeParams, ngDialog){
    
    //initialize variables
   $scope.pages = {};
@@ -130,8 +132,27 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.addSVG = function(){
     return "partials/target.svg";
   };
+  
+  $scope.doYoutube = function(linkurl){
+		 console.log("do dialog");
+		 $scope.theme = 'ngdialog-theme-plain';
 
+		 ngDialog.open({
+			 template: '<iframe width="100%" height="100%" src="//www.youtube.com/embed/zoJx7JaicC0" frameborder="0" allowfullscreen></iframe>',
+			 plain: true,
+		     className: 'ngdialog-theme-plain'
+		 }); 
+	 }
+  $scope.doVimeo = function(linkurl){
+		 console.log("do dialog");
+		 $scope.theme = 'ngdialog-theme-plain';
 
+		 ngDialog.open({
+			 template: '<iframe src="//player.vimeo.com/video/'+linkurl+'?title=0" width="100%" height="100%" frameborder="0" title="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+			 plain: true,
+		     className: 'ngdialog-theme-plain'
+		 }); 
+	 }
   $scope.toggleThumbs = function(event){
 	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
 	  var target = angular.element(event.target)

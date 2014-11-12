@@ -13,6 +13,10 @@ cross fading between routes with ngView
 /*-------------------------------------------------- 
 //Slides: When click PREVIOUS button
 -------------------------------------------------- */
+.player .title {
+	display: none;
+}
+
 .view-container.ng-enter.back {
   -webkit-animation: 0.5s fade-in-right;
   -moz-animation: 0.5s fade-in-right;
@@ -112,7 +116,7 @@ cross fading between routes with ngView
     margin-left: 0%; }
 
   to {
-    margin-left: -0%; } }
+    margin-left: 0%; } }
 
 @-moz-keyframes fade-out-left {
   from {
