@@ -10,17 +10,6 @@ cross fading between routes with ngView
 /*-------------------------------------------------- 
 //SLIDE ANIMATIONS
 -------------------------------------------------- */
-.view-container.ng-enter, .view-container.ng-leave {
-  background: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0; }
-
-.view-container.ng-enter, .view-container.ng-leave {
-  position: absolute;
-  float: left; }
-
 /*-------------------------------------------------- 
 //Slides: When click PREVIOUS button
 -------------------------------------------------- */
@@ -29,14 +18,14 @@ cross fading between routes with ngView
   -moz-animation: 0.5s fade-in-right;
   -o-animation: 0.5s fade-in-right;
   animation: 0.5s fade-in-right;
-  z-index: 99; }
+  z-index: 100; }
 
 .view-container.ng-leave.back {
   -webkit-animation: 0.5s fade-out-right;
   -moz-animation: 0.5s fade-out-right;
   -o-animation: 0.5s fade-out-right;
   animation: 0.5s fade-out-right;
-  z-index: 100; }
+  z-index: 99; }
 
 @keyframes fade-in-right {
   from {
@@ -97,12 +86,40 @@ cross fading between routes with ngView
   animation: 0.5s fade-out-left;
   z-index: 99; }
 
+@keyframes fade-in-left {
+  from {
+    margin-left: 100%; }
+
+  to {
+    margin-left: 0%; } }
+
+@-moz-keyframes fade-in-left {
+  from {
+    margin-left: 100%; }
+
+  to {
+    margin-left: 0%; } }
+
 @-webkit-keyframes fade-in-left {
   from {
     margin-left: 100%; }
 
   to {
     margin-left: 0%; } }
+
+@keyframes fade-out-left {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -0%; } }
+
+@-moz-keyframes fade-out-left {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -100%; } }
 
 @-webkit-keyframes fade-out-left {
   from {
@@ -115,65 +132,12 @@ cross fading between routes with ngView
 //When click THUMBNAIL 
 //Changes behavior to opacity
 -------------------------------------------------- */
-.view-container.ng-enter.opacity {
-  -webkit-animation: 0.5s fade-in;
-  -moz-animation: 0.5s fade-in;
-  -o-animation: 0.5s fade-in;
-  animation: 0.5s fade-in;
-  z-index: 99; }
-
-.view-container.ng-leave.opacity {
-  -webkit-animation: 0.5s fade-out;
-  -moz-animation: 0.5s fade-out;
-  -o-animation: 0.5s fade-out;
-  animation: 0.5s fade-out;
-  z-index: 100; }
-
-@keyframes fade-in {
-  from {
-    opacity: 0; }
-
-  to {
-    opacity: 1; } }
-
-@-moz-keyframes fade-in {
-  from {
-    opacity: 0; }
-
-  to {
-    opacity: 1; } }
-
-@-webkit-keyframes fade-in {
-  from {
-    opacity: 0; }
-
-  to {
-    opacity: 1; } }
-
-@keyframes fade-out {
-  from {
-    opacity: 1; }
-
-  to {
-    opacity: 0; } }
-
-@-moz-keyframes fade-out {
-  from {
-    opacity: 1; }
-
-  to {
-    opacity: 0; } }
-
-@-webkit-keyframes fade-out {
-  from {
-    opacity: 1; }
-
-  to {
-    opacity: 0; } }
-
 /*** importing 'views' at the bottom for testing overrides */
 /* Reset button styles and disable select highlighting
 ===============================================================*/
+body {
+  overflow: hidden; }
+
 button {
   background: none;
   border: none;
@@ -212,16 +176,20 @@ button {
   box-shadow: none !important; }
 
 .page2 {
-  background: tan url('../img/page_02.jpg') no-repeat center center; }
+  background: url('../img/page_02.jpg') no-repeat center center;
+  background-size: 100%; }
 
 .page3 {
-  background: blue url('../img/page_03.jpg') no-repeat center center; }
+  background: url('../img/page_03.jpg') no-repeat center center;
+  background-size: 100%; }
 
 .page4 {
-  background: red url('../img/page_04.jpg') no-repeat center center; }
+  background: url('../img/page_04.jpg') no-repeat center center;
+  background-size: 100%; }
 
 .page5 {
-  background: gray url('../img/page_05.jpg') no-repeat center center; }
+  background: url('../img/page_05.jpg') no-repeat center center;
+  background-size: 100%; }
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -434,7 +402,7 @@ footer {
   overflow: hidden;
   position: relative;
   text-align: center;
-  background: url('../img/ajax-loader.gif') no-repeat center center; }
+  background: url('../img/loading.gif') no-repeat center center; }
 
 .page-wrapper {
   position: relative;
@@ -458,14 +426,6 @@ footer {
   height: 760px; }
 
 /* Media Queries */
-@media only screen and (max-width: 1024px) {
-  .wrapper {
-    width: 1024px;
-    height: 714.6px; }
-  .page-container, .slides, .peek-next, .peek-prev, .page-wrapper {
-    height: 639.6px !important;
-    width: 984px !important; } }
-
 /* colors 
 	text blue: #007197
 	text orange: #F7A700

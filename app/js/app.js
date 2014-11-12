@@ -52,6 +52,8 @@ emagDirectives.directive('myRepeatDirective', function() {
 
 
 //This should be refactored when I figure out how to do it
+//possible resource
+//http://stackoverflow.com/questions/13681116/angularjs-dynamic-routing
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
   		when('/view/', {
@@ -185,13 +187,11 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.advanceThumb = function(which, page){
       //fire jquery function
-      console.log("advanceThumb called");
       advanceThumbnails(which, page);
   };
 
   //update the slide based on which thumbnail is clicked
   $scope.onThumbClick = function(value) {
-    console.log("OnThumbClick value: " + value);
     $scope.pageTransition = $scope.setSlideTransitionDirection(value);
     // console.log("OnThumbclick current page: " + $scope.activePage());
     $scope.updateActivePage(value);
@@ -243,10 +243,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       //this captures the new page value if the user types in the page number
       //in the address bar
       var urlSlice = parseInt($location.path().slice(6) || 1);
-      console.log("view content loaded called. " + urlSlice);
       StateService.setActivePage(urlSlice);
 
-      console.log("view content loaded called. ActivePage: " + $scope.activePage());
       runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());

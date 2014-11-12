@@ -86,20 +86,20 @@ cross fading between routes with ngView
 //SLIDE ANIMATIONS
 -------------------------------------------------- */
 
-.view-container.ng-enter,
-.view-container.ng-leave
+// .view-container.ng-enter,
+// .view-container.ng-leave
 
-  {background: white;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-.view-container.ng-enter,
-.view-container.ng-leave{
-  position: absolute;
-  float:left;
-}
+//   {background: white;
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+// }
+// .view-container.ng-enter,
+// .view-container.ng-leave{
+//   position: absolute;
+//   float:left;
+// }
 
 /*-------------------------------------------------- 
 //Slides: When click PREVIOUS button
@@ -107,21 +107,19 @@ cross fading between routes with ngView
 
 
 .view-container.ng-enter.back
-// .pagination .ng-hide-add  {
  { -webkit-animation: 0.5s fade-in-right;
   -moz-animation: 0.5s fade-in-right;
   -o-animation: 0.5s fade-in-right;
   animation: 0.5s fade-in-right;
-  z-index: 99;
+  z-index: 100;
 }
 
 .view-container.ng-leave.back
-// .pagination .ng-hide-remove {
 {  -webkit-animation: 0.5s fade-out-right;
   -moz-animation: 0.5s fade-out-right;
   -o-animation: 0.5s fade-out-right;
   animation: 0.5s fade-out-right;
-  z-index: 100;
+  z-index: 99;
 }
 
 
@@ -150,12 +148,11 @@ cross fading between routes with ngView
   from {margin-left: 0%}
   to { margin-left: 100%}
 }
+
 /*-------------------------------------------------- 
 //Slides: When click NEXT button
 -------------------------------------------------- */
-
 .view-container.ng-enter.forward
-// .pagination .ng-hide-add  {
  { -webkit-animation: 0.5s fade-in-left;
   -moz-animation: 0.5s fade-in-left;
   -o-animation: 0.5s fade-in-left;
@@ -164,7 +161,6 @@ cross fading between routes with ngView
 }
 
 .view-container.ng-leave.forward
-// .pagination .ng-hide-remove {
 {  -webkit-animation: 0.5s fade-out-left;
   -moz-animation: 0.5s fade-out-left;
   -o-animation: 0.5s fade-out-left;
@@ -172,27 +168,27 @@ cross fading between routes with ngView
   z-index: 99;
 }
 
-// @keyframes fade-in-left {
-//   from { opacity: 0; margin-left: 0% }
-//   to { opacity: 1; margin-left: 100%;}
-// }
-// @-moz-keyframes fade-in-left {
-//   from { opacity: 0; margin-left: 0% }
-//   to { opacity: 1; margin-left: 100%;}
-// }
+@keyframes fade-in-left {
+  from { margin-left: 100% }
+  to {  margin-left: 0%;}
+}
+@-moz-keyframes fade-in-left {
+  from {margin-left: 100% }
+  to { margin-left: 0%;}
+}
 @-webkit-keyframes fade-in-left {
   from { margin-left: 100% }
   to { margin-left: 0%;}
 }
 
-// @keyframes fade-out-left {
-//   from { opacity: 1; margin-left:100%}
-//   to { opacity: 0; margin-left:0%}
-// }
-// @-moz-keyframes fade-out-left {
-//   from { opacity: 1; margin-left: 100%}
-//   to { opacity: 0; margin-left: 0%}
-// }
+@keyframes fade-out-left {
+  from { margin-left: 0%}
+  to {  margin-left: -000%}
+}
+@-moz-keyframes fade-out-left {
+  from {  margin-left: 0%}
+  to { margin-left: -100%}
+}
 @-webkit-keyframes fade-out-left {
   from { margin-left: 0%}
   to {  margin-left: -100%}
@@ -201,50 +197,50 @@ cross fading between routes with ngView
 //When click THUMBNAIL 
 //Changes behavior to opacity
 -------------------------------------------------- */
-.view-container.ng-enter.opacity
-// .pagination .ng-hide-add  {
- { -webkit-animation: 0.5s fade-in;
-  -moz-animation: 0.5s fade-in;
-  -o-animation: 0.5s fade-in;
-  animation: 0.5s fade-in;
-  z-index: 99;
-}
+// .view-container.ng-enter.opacity
+// // .pagination .ng-hide-add  {
+//  { -webkit-animation: 0.5s fade-in;
+//   -moz-animation: 0.5s fade-in;
+//   -o-animation: 0.5s fade-in;
+//   animation: 0.5s fade-in;
+//   z-index: 99;
+// }
 
-.view-container.ng-leave.opacity
-// .pagination .ng-hide-remove {
-{  -webkit-animation: 0.5s fade-out;
-  -moz-animation: 0.5s fade-out;
-  -o-animation: 0.5s fade-out;
-  animation: 0.5s fade-out;
-  z-index: 100;
-}
+// .view-container.ng-leave.opacity
+// // .pagination .ng-hide-remove {
+// {  -webkit-animation: 0.5s fade-out;
+//   -moz-animation: 0.5s fade-out;
+//   -o-animation: 0.5s fade-out;
+//   animation: 0.5s fade-out;
+//   z-index: 100;
+// }
 
 
-@keyframes fade-in {
-  from { opacity: 0 }
-  to {  opacity: 1}
-}
-@-moz-keyframes fade-in {
-  from { opacity: 0 }
-  to {  opacity: 1}
-}
-@-webkit-keyframes fade-in {
-  from { opacity: 0 }
-  to {  opacity: 1}
-}
+// @keyframes fade-in {
+//   from { opacity: 0 }
+//   to {  opacity: 1}
+// }
+// @-moz-keyframes fade-in {
+//   from { opacity: 0 }
+//   to {  opacity: 1}
+// }
+// @-webkit-keyframes fade-in {
+//   from { opacity: 0 }
+//   to {  opacity: 1}
+// }
 
-@keyframes fade-out {
-  from { opacity: 1 }
-  to {  opacity: 0}
-}
-@-moz-keyframes fade-out {
-  from { opacity: 1 }
-  to {  opacity: 0}
-}
-@-webkit-keyframes fade-out {
-  from { opacity: 1 }
-  to {  opacity: 0}
-}
+// @keyframes fade-out {
+//   from { opacity: 1 }
+//   to {  opacity: 0}
+// }
+// @-moz-keyframes fade-out {
+//   from { opacity: 1 }
+//   to {  opacity: 0}
+// }
+// @-webkit-keyframes fade-out {
+//   from { opacity: 1 }
+//   to {  opacity: 0}
+// }
 
 @import 'colors';
 @import 'variables';
@@ -252,6 +248,9 @@ cross fading between routes with ngView
 
 /* Reset button styles and disable select highlighting
 ===============================================================*/
+body {
+  overflow: hidden;
+}
 button { background: none; border: none; margin: 0; padding: 0; font-size: 0; line-height: 0; width: auto; overflow: visible; }
 
 .btn {
@@ -286,19 +285,26 @@ button { background: none; border: none; margin: 0; padding: 0; font-size: 0; li
 ///
 .page2{
   //
-  background: tan url('../img/page_02.jpg') no-repeat center center;
+  background:  url('../img/page_02.jpg') no-repeat center center;
+    background-size: 100%;
 }
 .page3{
   //
-  background: blue url('../img/page_03.jpg') no-repeat center center;
+  background:  url('../img/page_03.jpg') no-repeat center center;
+    background-size: 100%;
+
 }
 .page4{
   //
-  background: red url('../img/page_04.jpg') no-repeat center center;
+  background:  url('../img/page_04.jpg') no-repeat center center;
+    background-size: 100%;
+
 }
 .page5{
   //
-  background: gray url('../img/page_05.jpg') no-repeat center center;
+  background:  url('../img/page_05.jpg') no-repeat center center;
+    background-size: 100%;
+
 }
 /* Custom page CSS
 -------------------------------------------------- */
@@ -586,7 +592,7 @@ footer {
   overflow: hidden;
   position: relative;
   text-align: center;
-  background: url('../img/ajax-loader.gif') no-repeat center center;
+  background: url('../img/loading.gif') no-repeat center center;
 }
 .page-wrapper {
     position: relative;
@@ -620,21 +626,21 @@ footer {
 /* Media Queries */ 
 
 //trying to hit the major breakpoints
-@media only screen and (max-width: 1024px) {
-  // .page-wrapper {
-  //   @include set-wrapper-width-height(1024px)
-  // }
-  .wrapper{
-    @include set-wrapper-width-height(1024px)
-  }
-  .page-container, .slides, .peek-next, .peek-prev, .page-wrapper
-  { 
-    //subtract 40x padding to get the new width of the inner image,
-    //then multiply by the aspect ratio to get the new image height
-    height: set-proportional-height(1024px) !important;
-    width: set-proportional-width(1024px) !important;
-  }
-}
+// @media only screen and (max-width: 1024px) {
+//   // .page-wrapper {
+//   //   @include set-wrapper-width-height(1024px)
+//   // }
+//   .wrapper{
+//     @include set-wrapper-width-height(1024px)
+//   }
+//   .page-container, .slides, .peek-next, .peek-prev, .page-wrapper
+//   { 
+//     //subtract 40x padding to get the new width of the inner image,
+//     //then multiply by the aspect ratio to get the new image height
+//     height: set-proportional-height(1024px) !important;
+//     width: set-proportional-width(1024px) !important;
+//   }
+// }
 //hide the bottom navigation from phones
 // @media only screen and (max-width: 960px) {
 //   .wrapper{
