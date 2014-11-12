@@ -147,6 +147,12 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   //   $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
   //   $scope.setThumbsPosition();
   // };
+  $scope.toggleThumbs = function(event){
+	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
+	  var target = angular.element(event.target)
+	  target.parent().parent().parent().toggleClass( "stash" ); //naughty dom climbing
+	  
+  };
   
   $scope.setPrevNextVisibility = function(value){
     if($scope.activePage() === value){
