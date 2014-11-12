@@ -283,6 +283,39 @@ function tweenThumbs(whichStop){
     </section>
 
     <section class="slides">
+		
+		
+		    <section class="page-turner-container">
+		      <nav class="page-turner" ng-class="thumbsPosition">
+		        <div class"hide-nav"><span  class="glyphicon stash-button" ng-class="{'glyphicon-chevron-down': !isActive, 'glyphicon-chevron-up': isActive}"
+		       ng-init="isActive = false"
+		       ng-click="isActive = !isActive; toggleThumbs($event)"></span></div>
+		        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
+		          <li>
+		            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+		          </li>
+		          <li class="thumb-scroll-window">
+		              <ul class="holder"> 
+
+		                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
+		<!--                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+		 -->                <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/{{page.thumb}}"/>
+		                  </a> 
+		                </li>
+		              </ul>
+		          </li>
+		          <li>
+		            <button class="next btn" ng-click="advanceThumb('next')"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		          </li>
+		        </ul>
+		      </nav> 
+		    </section>
+			
+			
+		
+		
+		
           <div class="overlay-buttons">
             <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
@@ -301,30 +334,7 @@ function tweenThumbs(whichStop){
     </section>
 
 
-    <section class="page-turner-container">
-      <nav class="page-turner" ng-class="thumbsPosition">
-        <div class"hide-nav"><span ng-click="toggleThumbs()" class="glyphicon glyphicon-chevron-down"></span></div>
-        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
-          <li>
-            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
-          </li>
-          <li class="thumb-scroll-window">
-              <ul class="holder"> 
 
-                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
-<!--                   <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
- -->                <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
-                       <img ng-src="img/{{page.thumb}}"/>
-                  </a> 
-                </li>
-              </ul>
-          </li>
-          <li>
-            <button class="next btn" ng-click="advanceThumb('next')"><span class="glyphicon glyphicon-chevron-right"></span></button>
-          </li>
-        </ul>
-      </nav> 
-    </section>
     <footer>
       <div ng-cloak class="page-number">{{activePage()}} of {{pages.length}}</div>
     </footer>

@@ -232,7 +232,8 @@ body {
   font-family: "Cantarell", Arial, sans-serif;
   background-color: #EAEAEA;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  overflow: hidden; }
 
 .wrapper img {
   max-height: 100%; }
@@ -320,9 +321,27 @@ body {
   width: 100%;
   display: block;
   position: absolute;
-  bottom: 0;
+  bottom: -30px;
+  /* MM */
   left: 0;
-  z-index: 201; }
+  z-index: 201;
+  transition: bottom 0.4s ease-in;
+  /* MM */
+  -ms-transition: bottom 0.4s ease-in;
+  /* MM */
+  -moz-transition: bottom 0.4s ease-in;
+  /* MM */
+  -webkit-transition: bottom 0.4s ease-in;
+  /* MM */ }
+
+.page-turner-container.stash {
+  /* MM */
+  bottom: -123px;
+  /* MM */ }
+
+/* MM */
+.page-turner-container .stash-button {
+  width: 400px; }
 
 nav.page-turner {
   border-radius: 5px 5px 0 0;
@@ -462,9 +481,11 @@ footer {
   .wrapper {
     width: 1024px;
     height: 714.6px; }
+
   .page-container, .slides, .peek-next, .peek-prev, .page-wrapper {
     height: 639.6px !important;
-    width: 984px !important; } }
+    width: 984px !important; }
+ }
 
 /* colors 
 	text blue: #007197
@@ -526,7 +547,8 @@ not terribly semantic, but fast production-wise */
   .page1 .logo {
     width: 300px; }
   .page1 .polaroids img {
-    height: 639.6px; } }
+    height: 639.6px; }
+ }
 
 /* --- page2 ------ */
 .page2 {
@@ -543,4 +565,3 @@ not terribly semantic, but fast production-wise */
     font-size: 120px;
     display: block; }
 
-@media only screen and (max-width: 1024px) { }
