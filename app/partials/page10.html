@@ -2,21 +2,13 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
-<<<<<<< HEAD
-		console.log("im ready!");
-		var tl = new TimelineLite ();
-			tl.add (TweenLite.set(".page10 #stay-connected", {y:0, x:-300}));
-			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:.2})
-			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2})
-			  .to(".page10 #stay-connected", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut});
-=======
 
 		var tl = new TimelineLite ();
 			tl.add (TweenLite.set(".page10 #stay-connected", {y:0, x:-300}));
 			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
 			  .to(".page10 #stay-connected", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
->>>>>>> emi-branch
+
 			
 					$('.page10 button.one').on('click', function () {
 						$(".page10 #clicktext2").hide();

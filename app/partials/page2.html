@@ -3,28 +3,14 @@
 <script type="text/javascript">
 
 function runJQuery(){
-<<<<<<< HEAD
-		console.log("pg 2 ready!");
-		
-=======
 
->>>>>>> emi-branch
+
+
       	var tl = new TimelineLite ();	
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
-<<<<<<< HEAD
-			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:.2})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1})
-			  .to(".page2 #circle", 1, {autoAlpha:1}, "-=1")
-		      .to(".page2 .headline span.line2", 1, {autoAlpha:1, delay:.5})
-		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.1")
-		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.1")
-		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.1")
-			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
-			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2")
-			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=1")
-=======
+
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
 			  .to(".page2 #circle", 1, {autoAlpha:1}, "-=1")
@@ -35,7 +21,7 @@ function runJQuery(){
 			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
 			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2.5")
 			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=2")
->>>>>>> emi-branch
+
 			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
 		
 			$('.page2 button').on('click', function () {	
