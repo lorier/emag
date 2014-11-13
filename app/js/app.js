@@ -289,4 +289,5 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     )
     document.querySelector('head').appendChild(msViewportStyle)
   }
-})();
+})()
+
