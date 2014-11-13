@@ -1,0 +1,14 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"/>
+  
+  <circle id="circle-one" fill="#fff"  fill-opacity= "0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"/>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"/>
+	</g> 
+  
+</g>
+
+</svg>

@@ -54,5 +54,12 @@
 	{ 	"image": "page_14.jpg",
 		"thumb":"page_14_thumb.jpg",
 		"page_num": 14
+<<<<<<< HEAD
+=======
+	},
+	{ 	"image": "page_15.jpg",
+		"thumb":"page_15_thumb.jpg",
+		"page_num": 15
+>>>>>>> emi-branch
 	}
 ]

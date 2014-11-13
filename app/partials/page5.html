@@ -2,6 +2,7 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+<<<<<<< HEAD
 		console.log("im ready!");
 		
 		var tl = new TimelineLite ();	
@@ -20,6 +21,25 @@ function runJQuery(){
 };
 </script>
 
+=======
+
+		var tl = new TimelineLite ();	
+			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1})
+			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
+				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
+				.to(".page5 #play-dot", 1, {autoAlpha:1}, "-=.2")
+				.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
+				.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
+				.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5");
+			
+					$('.page5 button').on('click', function () {
+						$('.page5 #clicktext').fadeToggle( "fast", "linear");
+					});
+	
+};
+</script>
+
+>>>>>>> emi-branch
 <div class="page5 page-container">
 
 	<img id="play-dot" src="img/page_05_circle.png" alt="play">
