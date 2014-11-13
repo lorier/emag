@@ -123,28 +123,28 @@ cross fading between routes with ngView
 
 
 @keyframes fade-in-right {
-  from { margin-left: -100% }
+  from { margin-left: -98% }
   to {  margin-left: 0%;}
 }
 @-moz-keyframes fade-in-right {
-  from {  margin-left: -100% }
+  from {  margin-left: -98% }
   to {margin-left: 0%;}
 }
 @-webkit-keyframes fade-in-right {
-  from { margin-left: -100% }
+  from { margin-left: -98% }
   to { margin-left: 0%;}
 }
 
 @keyframes fade-out-right {
-  from { margin-left: 0%}
-  to { margin-left:100%}
+  from { margin-left: 2%}
+  to { margin-left: 100%}
 }
 @-moz-keyframes fade-out-right {
-  from {  margin-left: 0%}
-  to {  margin-left:100%}
+  from {  margin-left: 2%}
+  to {  margin-left: 100%}
 }
 @-webkit-keyframes fade-out-right {
-  from {margin-left: 0%}
+  from {margin-left: 2%}
   to { margin-left: 100%}
 }
 
@@ -156,7 +156,7 @@ cross fading between routes with ngView
   -moz-animation: 0.5s fade-in-left;
   -o-animation: 0.5s fade-in-left;
   animation: 0.5s fade-in-left;
-  z-index: 100;
+  z-index: 101;
 }
 
 .view-container.ng-leave.forward
@@ -164,32 +164,32 @@ cross fading between routes with ngView
   -moz-animation: 0.5s fade-out-left;
   -o-animation: 0.5s fade-out-left;
   animation: 0.5s fade-out-left;
-  z-index: 99;
+  z-index: 100;
 }
 
 @keyframes fade-in-left {
-  from { margin-left: 100% }
+  from { margin-left: 98% }
   to {  margin-left: 0%;}
 }
 @-moz-keyframes fade-in-left {
-  from {margin-left: 100% }
+  from {margin-left: 98% }
   to { margin-left: 0%;}
 }
 @-webkit-keyframes fade-in-left {
-  from { margin-left: 100% }
+  from { margin-left: 98% }
   to { margin-left: 0%;}
 }
 
 @keyframes fade-out-left {
-  from { margin-left: 0%}
-  to {  margin-left: -000%}
+  from { margin-left: -2%}
+  to {  margin-left: -100%}
 }
 @-moz-keyframes fade-out-left {
-  from {  margin-left: 0%}
+  from {  margin-left: -2%}
   to { margin-left: -100%}
 }
 @-webkit-keyframes fade-out-left {
-  from { margin-left: 0%}
+  from { margin-left: -2%}
   to {  margin-left: -100%}
 }
 /*-------------------------------------------------- 
