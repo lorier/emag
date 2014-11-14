@@ -119,9 +119,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.pageTransition = 'forward';
   $scope.thumbTransition = '';
   
-  //count number of objects in the json object
-  //might need a polyfill for older browsers
-  
 
   //get the json data
   $http.get('json/magazine.json').success(function(data) {
