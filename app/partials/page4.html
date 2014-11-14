@@ -2,6 +2,8 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+// <<<<<<< HEAD
+
 		
 		var tl = new TimelineLite ();
 			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
@@ -10,6 +12,7 @@ function runJQuery(){
 				.fromTo(".page4 #mask", 1, {css:{height:0}}, {css:{height:800}, ease:Power1.easeOut}, "-=1")
 				 .to(".page4 #class-list", 1, {autoAlpha:1}, "-=1")
 				 .to(".page4 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
+
 				
 					$('.page4 button.one').on('click', function () {
 						$(".page4 #clicktext2").hide();

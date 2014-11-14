@@ -2,11 +2,13 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+
 		
 		var tl = new TimelineLite ();
 			  tl.add (TweenLite.set(".page6 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
 			  tl.to(".page6 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page6 .headline p", 1, {autoAlpha:1}, "-=.5")
+
 			.to(".page6 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.5");
 
 	

@@ -4,6 +4,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!-- Miles ate all the chips  -->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,10 +18,228 @@
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" href="css/app.css"/>
+   <link rel="stylesheet" href="css/popupcss/ngDialog.css">
+   <link rel="stylesheet" href="css/popupcss/ngDialog-theme-default.css">
+   <link rel="stylesheet" href="css/popupcss/ngDialog-theme-plain.css">
 
   <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
+  <script src="js/windowResizer.js"></script>
+  <script type="text/javascript">
+  
+
+  //darn global variables get off my lawn
+  var currentPage;
+  var totalPages;
+  var ButtonHeight;
+  var ButtonWidth;
+  var rButtonLeft;
+  var rButtonTop;
+  var lButtonLeft;
+  var lButtonTop;
+  var thumbnailPosition = 0;
+  var thumbWidth = null;
+  var stopsList = null;
+
+  //used and reset by advanceThumbnails()
+  var thumbPos = null;
+
+  //this function is called by angular when the view is changed
+  function onContentLoaded(page, total){
+    getButtonSizes();
+    thumbWidth = $(".page-thumbnail").outerWidth(true);
+
+    currentPage = page;
+    totalPages = total;
+      
+      if (currentPage > 1 && currentPage < totalPages){
+        $(".page-wrapper").css({"left": "-100%"});
+        origPosition = "-100%";
+      }
+      if (currentPage === 1){
+        $(".page-wrapper").css({"left": "0"});      
+      }
+      //find position and dimension of slide container
+      init();
+      // $(window).resize(function(){
+      //   //recalculate .slides div size if the page scales
+      //   init();
+      // })
+      //track mouse position
+      $(window).mousemove(getMousePosition);
+  };
+    
+
+  //create mouseover peek based on coordinates
+  //----------------------------------------------------
+  // based on https://www.cloudtec.ch/blog/web/change-image-with-jquery-mouse-position.html
+   
+  var isMouseOverLeftButton = isMouseOverRightButton = false;
+
+  // get the initial button measurements as the page loads
+  // we use the right button since the left is hidden by ng-hide on page 1
+  // This should not update unless index.html reloads
+
+
+  function getButtonSizes(){
+    ButtonHeight = $(".button-right").height();
+    ButtonWidth = $(".button-right").width();
+  };
+
+
+  function getMousePosition(event){
+    mouseY = event.pageY;
+    mouseX = event.pageX;
+    $(".mouse-coords").text(mouseX + ", "+ mouseY);
+
+    //left button coords
+    if(
+        (mouseX < lButtonLeft + ButtonWidth)  &&  
+        (mouseX > lButtonLeft) && 
+        (mouseY < lButtonTop + ButtonHeight ) && 
+        (mouseY > lButtonTop)   )
+  
+        {
+        if (!isMouseOverLeftButton){
+              isMouseOverLeftButton = true;
+              updateLeftAnimation();
+            }
+    } else 
+        if (isMouseOverLeftButton){
+            isMouseOverLeftButton = false;
+            updateLeftAnimation();
+    }
+    //right button coords
+    if(
+        (mouseX < rButtonLeft + ButtonWidth)  &&  
+        (mouseX > rButtonLeft) && 
+        (mouseY < rButtonTop + ButtonHeight ) && 
+        (mouseY > rButtonTop)   )
+        {
+        if (!isMouseOverRightButton){
+              isMouseOverRightButton = true;
+              updateRightAnimation();
+            }
+    } else if (isMouseOverRightButton){
+              isMouseOverRightButton = false;
+              updateRightAnimation();
+    }
+  }  
+
+
+  function updateLeftAnimation(){   
+    //don't animate if this is the first page
+    if (currentPage !== 1){
+      //find the .slider position before we start
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = (numericPosition + 2) + "%";
+      if(isMouseOverLeftButton){
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+      }else if(!isMouseOverLeftButton){
+        $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
+      }
+    }
+  };
+
+  function updateRightAnimation(){
+    //don't animate if this is the last page
+    if (currentPage != totalPages){        
+      //find the .slider position before we start
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = (numericPosition - 2) + "%";
+
+      if(isMouseOverRightButton){
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+      }else if(!isMouseOverRightButton){
+        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+      }
+    }
+  };
+
+  
+  function getWrapperPosition(){
+    var wrapperPosition;
+    if(currentPage === 1)
+        { wrapperPosition = "0";
+      }else if(currentPage === totalPages.length){
+        wrapperPosition = "-200%";
+      }else{
+        wrapperPosition = "-100%";
+      };
+    return wrapperPosition
+  };
+      
+  function init(){
+      rButtonLeft = $(".button-right").offset().left;
+      rButtonTop = $(".button-right").offset().top;
+      lButtonLeft = $(".overlay-buttons").offset().left;
+      lButtonTop = $(".overlay-buttons").offset().top;
+      };
+
+
+//Thumbnail slider behavior
+//----------------------------------------------------
+function initThumbnailStops(){
+
+      thumbWidth = $(".page-thumbnail").outerWidth(true);
+      var stops = 0;
+      for (var i = 0; i<=totalPages; i++) {
+        stopsList.push(stops);
+        stops -= thumbWidth;
+      };
+  };
+
+function  setThumbstoCurrentSlide(page){
+  if(stopsList == null){
+    stopsList = [];
+    initThumbnailStops();
+  }
+  var position = stopsList[page-1];
+  tweenThumbs(position);
+  thumbPos = null;
+}
+
+//called from angular
+function advanceThumbnails(which){
+  var thumbContainerWidth = $(".holder").width();
+  thumbnailPosition = parseInt($(".holder").css('left'));
+  var whichStop;
+  
+  if(which == "next"){ 
+    //constrain the left position of .holder to the negative width of .holder
+    if (thumbnailPosition > -Math.abs(thumbContainerWidth)+thumbWidth){
+      //get current page and add one
+        if (thumbPos == null){
+          thumbPos = currentPage + 1
+        }else{
+          thumbPos = thumbPos + 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
+    };
+  }else
+    if(which == "prev"){ 
+      if (thumbnailPosition < 0){
+         if (thumbPos == null){
+          thumbPos = currentPage - 1
+        }else{
+          thumbPos = thumbPos - 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
+      }
+    };
+  };  
+
+function tweenThumbs(whichStop){
+  var holder = $(".holder");   
+  TweenLite.to(holder, .5, {left:whichStop, ease:Power4.easeOut});
+}
+
+</script>
  
 </head>
 <body ng-controller="ThumbnailCtrl as pages" >
@@ -33,16 +252,9 @@
         <div class="link-out"><a href="#link">Find a community</a> near you.</div>
         <div class="social-buttons">
           <ul>
-            <li>
-              <a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a>
-            </li>
+            <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
             <li><a href="#link"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
-            <li><a href="#link">
-              <img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img>
-            </a></li>
-            <li><a href="#link">
-              <img src="img/resize.png" height="70" width="72"></img>
-            </a></li>
+            <li><a href="#link"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
             <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
           </ul>
         </div>
@@ -50,37 +262,50 @@
     </section>
 
     <section class="slides">
+		
+		    <section class="page-turner-container">
+		      <nav class="page-turner" ng-class="thumbsPosition">
+		        <div class"hide-nav"><span  class="glyphicon stash-button" ng-class="{'glyphicon-chevron-down': !isActive, 'glyphicon-chevron-up': isActive}"
+		       ng-init="isActive = false"
+		       ng-click="isActive = !isActive; toggleThumbs($event)"></span></div>
+		        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
+		          <li>
+		            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+		          </li>
+		          <li class="thumb-scroll-window">
+		              <ul class="holder"> 
+
+		                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
+               <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/{{page.thumb}}"/>
+		                  </a> 
+		                </li>
+		              </ul>
+		          </li>
+		          <li>
+		            <button class="next btn" ng-click="advanceThumb('next')"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		          </li>
+		        </ul>
+		      </nav> 
+		    </section>
           <div class="overlay-buttons">
-            <button type="button" class="btn btn-default button-left" ng-click="advanceSinglePage('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
-            <button type="button" class="btn btn-default button-right" ng-click="advanceSinglePage('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
+            <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
+            <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
           </div> 
 
-        <!--view is injected here-->
-        <div ng-view class="view-container"></div> 
+        <div class="page-wrapper">
+          <ng-include src="peekPrev()" class="peek-prev"></ng-include>        
+                  <!--view is injected here-->
+          <div class="center">          
+            <div ng-view ng-class="pageTransition" class="view-container">
+            </div>
+          </div>
+            <ng-include src="peekNext()" class="peek-next"></ng-include>
+        </div> 
+    </section>
 
-    </section>
-    <section class="page-turner-container">
-      <nav class="page-turner" ng-class="thumbsPosition">
-        <div class"hide-nav"><span ng-click="toggleThumbs()" class="glyphicon glyphicon-chevron-down"></span></div>
-        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
-          <li>
-            <button class="prev btn" ng-click="advanceSinglePage('prev')" ng-class="setPrevNextVisibility(1)"><span class="glyphicon glyphicon-chevron-left"></span> </button>
-          </li>
-          <li>
-              <ul> 
-                <li ng-repeat="page in pages" ng-show="showThumb(page.page_num)">
-                  <a ng-class="{'active-thumb': activeThumb(page.page_num)}" class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="clickThumb(page.page_num)">
-                    <img ng-src="img/{{page.thumb}}"/>
-                  </a> 
-                </li>
-              </ul>
-          </li>
-          <li>
-            <button class="next btn" ng-click="advanceSinglePage('next')" ng-class="setPrevNextVisibility(pages.length)"><span class="glyphicon glyphicon-chevron-right"></span></button>
-          </li>
-        </ul>
-      </nav> 
-    </section>
+
+
     <footer>
       <div ng-cloak class="page-number">{{activePage()}} of {{pages.length}}</div>
     </footer>
@@ -91,15 +316,11 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
   <script src="bower_components/angular/angular.js"></script>
-<!-- Considered trying to dive into using this mashup of Bootstrap and Angular for styling but haven't  
-  <script src="bower_components/angular-strap/dist/angular-strap.min.js"></script> 
-  <script src="bower_components/angular-strap/dist/angular-strap.tpl.min.js"></script> -->
+
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="js/ngDialog.min.js"></script>
   <script src="js/app.js"></script>
- <!--<script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script> -->
+
 </body>
 </html>
