@@ -52,7 +52,6 @@
 
     currentPage = page;
     totalPages = total;
-    // console.log("total pages: " + totalPages );
       
       if (currentPage > 1 && currentPage < totalPages){
         $(".page-wrapper").css({"left": "-100%"});
@@ -63,10 +62,10 @@
       }
       //find position and dimension of slide container
       init();
-      $(window).resize(function(){
-        //recalculate .slides div size if the page scales
-        init();
-      })
+      // $(window).resize(function(){
+      //   //recalculate .slides div size if the page scales
+      //   init();
+      // })
       //track mouse position
       $(window).mousemove(getMousePosition);
   };
@@ -124,7 +123,6 @@
             }
     } else if (isMouseOverRightButton){
               isMouseOverRightButton = false;
-              console.log("mouse is over right button");
               updateRightAnimation();
     }
   }  
@@ -185,7 +183,6 @@
 //Thumbnail slider behavior
 //----------------------------------------------------
 function initThumbnailStops(){
-    console.log("thumbnail stops initialized");
 
       thumbWidth = $(".page-thumbnail").outerWidth(true);
       var stops = 0;
@@ -196,13 +193,11 @@ function initThumbnailStops(){
   };
 
 function  setThumbstoCurrentSlide(page){
-  console.log("set thumbs to current slide called");
   if(stopsList == null){
     stopsList = [];
     initThumbnailStops();
   }
   var position = stopsList[page-1];
-  console.log(position);
   tweenThumbs(position);
   thumbPos = null;
 }
