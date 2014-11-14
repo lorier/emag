@@ -4,7 +4,7 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<!-- Miles is eating potato chips. yummy  -->
+<!-- Miles ate all the chips  -->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +52,6 @@
 
     currentPage = page;
     totalPages = total;
-    // console.log("total pages: " + totalPages );
       
       if (currentPage > 1 && currentPage < totalPages){
         $(".page-wrapper").css({"left": "-100%"});
@@ -63,10 +62,10 @@
       }
       //find position and dimension of slide container
       init();
-      $(window).resize(function(){
-        //recalculate .slides div size if the page scales
-        init();
-      })
+      // $(window).resize(function(){
+      //   //recalculate .slides div size if the page scales
+      //   init();
+      // })
       //track mouse position
       $(window).mousemove(getMousePosition);
   };
@@ -124,7 +123,6 @@
             }
     } else if (isMouseOverRightButton){
               isMouseOverRightButton = false;
-              console.log("mouse is over right button");
               updateRightAnimation();
     }
   }  
@@ -185,7 +183,6 @@
 //Thumbnail slider behavior
 //----------------------------------------------------
 function initThumbnailStops(){
-    console.log("thumbnail stops initialized");
 
       thumbWidth = $(".page-thumbnail").outerWidth(true);
       var stops = 0;
@@ -196,13 +193,11 @@ function initThumbnailStops(){
   };
 
 function  setThumbstoCurrentSlide(page){
-  console.log("set thumbs to current slide called");
   if(stopsList == null){
     stopsList = [];
     initThumbnailStops();
   }
   var position = stopsList[page-1];
-  console.log(position);
   tweenThumbs(position);
   thumbPos = null;
 }
@@ -243,6 +238,10 @@ function tweenThumbs(whichStop){
   var holder = $(".holder");   
   TweenLite.to(holder, .5, {left:whichStop, ease:Power4.easeOut});
 }
+
+
+
+
 
 </script>
  
@@ -325,6 +324,15 @@ function tweenThumbs(whichStop){
   <script src="bower_components/angular-route/angular-route.js"></script>
   <script src="bower_components/angular-animate/angular-animate.js"></script>
   <script src="js/ngDialog.min.js"></script>
+  <script src="js/buzz.min.js"></script>
+  
+  <script>
+  //SOUND STUFF CAN BE MOVED TO DOCUMENT READY/WINDOW LOAD
+  buzz.defaults.preload = 'auto';
+  buzz.defaults.autoplay = false;
+  buzz.defaults.loop = false;
+  buzz.defaults.formats = ['mp3'];
+  </script>
   <script src="js/app.js"></script>
 
 </body>

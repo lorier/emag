@@ -55,7 +55,7 @@ emagDirectives.directive('myRepeatDirective', function() {
 //http://stackoverflow.com/questions/13681116/angularjs-dynamic-routing
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-  		when('/view/', {
+  		when('/view/1', {
   		templateUrl:'partials/page1.html' ,
   		}).
       when('/view/2', {
@@ -100,7 +100,7 @@ myEmag.config(['$routeProvider', function($routeProvider) {
       when('/view/15', {
       templateUrl:'partials/page15.html' ,
       }).
-     	otherwise({redirectTo: '/view/'});
+     	otherwise({redirectTo: '/view/1'});
 }]);
 
 //Controllers
@@ -113,7 +113,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.pages = {};
   $scope.pageCount = 0;
   $scope.activePage = StateService.getActivePage;
-  $scope.activePageVal = StateService.getActivePage();
+  // $scope.activePageVal = StateService.getActivePage();
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
   $scope.pageTransition = 'forward';
@@ -153,13 +153,15 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 		     className: 'ngdialog-theme-plain'
 		 }); 
 	 }
+
   $scope.toggleThumbs = function(event){
 	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
 	  var target = angular.element(event.target)
 	  target.parent().parent().parent().toggleClass( "stash" ); //naughty dom climbing
-	  
   };
-  
+
+  //the next 4 functions govern the 
+  //forward and back arrows on the slides
   $scope.setPrevNextVisibility = function(value){
     if($scope.activePage() === value){
       return "hide-arrow";
@@ -173,11 +175,12 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.isLastPage= function(){
     return $scope.activePage()===$scope.pages.length;
   };
+
+
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
   };
   
-
   $scope.advanceThumb = function(which, page){
       //fire jquery function
       advanceThumbnails(which, page);
@@ -186,7 +189,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   //update the slide based on which thumbnail is clicked
   $scope.onThumbClick = function(value) {
     $scope.pageTransition = $scope.setSlideTransitionDirection(value);
-    // console.log("OnThumbclick current page: " + $scope.activePage());
     $scope.updateActivePage(value);
     if(value !== 1 && value < $scope.pages.length){
       $scope.changeSlide($scope.activePage());  
@@ -202,6 +204,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     }
     return whichWay;
   };
+
   //Logic for prev/next buttons on slides. Could use some refactoring
   $scope.moveSlide = function(direction){
     if(direction == 'prev'){
@@ -217,8 +220,9 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       if (nextPage <= $scope.pages.length ){
         $scope.updateActivePage(nextPage);
         $scope.changeSlide(nextPage);
+
       }
-    }
+    } 
     //calls jQuery function to set the correct thumbnail position
     setThumbstoCurrentSlide($scope.activePage());
   };
@@ -237,11 +241,9 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       //in the address bar
       var urlSlice = parseInt($location.path().slice(6) || 1);
       StateService.setActivePage(urlSlice);
-
       runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
-      console.log($scope.activePage());
    });
 
 
@@ -289,4 +291,5 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     )
     document.querySelector('head').appendChild(msViewportStyle)
   }
-})();
+})()
+
