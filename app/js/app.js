@@ -17,6 +17,9 @@ var myEmag = angular.module('myEmag', [
 // http://onehungrymind.com/building-a-website-with-angularjs-pt-2-now-with-state/
 // https://www.youtube.com/watch?v=WEGppmA9URM#t=26
 // 
+// 
+myEmag.constant("Modernizr", Modernizr);
+
 var emagFactories = angular.module ('emagFactories', []);
 
 emagFactories.factory('StateService', function(){
@@ -107,7 +110,7 @@ myEmag.config(['$routeProvider', function($routeProvider) {
 
 var emagControllers = angular.module ('emagControllers', []);
 
-emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function($scope, StateService, $http, $location, $route, $routeParams, ngDialog){
+emagControllers.controller('ThumbnailCtrl', ['Modernizr', '$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function(Modernizr, $scope, StateService, $http, $location, $route, $routeParams, ngDialog){
    
    //initialize variables
   $scope.pages = {};
@@ -125,6 +128,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       $scope.pages = data;
       $scope.pageCount = Object.keys($scope.pages).length;
   });
+  $scope.touch = Modernizr.touch;
+
 
   $scope.addSVG = function(){
     return "partials/target.svg";
@@ -246,6 +251,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
 
   $scope.peekPrev = function() {
+    if(!$scope.touch){
       var current = $scope.activePage();
       var prev =  current - 1;
     
@@ -254,9 +260,11 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       } else {
         return;
       }
-    };
+    }
+  };
  
  $scope.peekNext = function() {
+  if(!$scope.isTouch){
     var current = $scope.activePage();
     var next = current + 1;
     if( current < $scope.pageCount ){ 
@@ -264,7 +272,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     } else {
       return;
     }
-  };
+  }
+};
 
 }]);
 

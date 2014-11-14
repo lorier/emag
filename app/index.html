@@ -4,7 +4,8 @@
 <!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
-<!-- Miles ate all the chips  -->
+<!--[if IE]>           <html lang="en" ng-app="myApp" class="ie"> <![endif]-->
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,15 +42,21 @@
   var thumbnailPosition = 0;
   var thumbWidth = null;
   var stopsList = null;
+  var enablePeek = false;
+
+
 
   //used and reset by advanceThumbnails()
   var thumbPos = null;
+
+  $(document).ready(function(){
+    enablePeek=true;
+  })
 
   //this function is called by angular when the view is changed
   function onContentLoaded(page, total){
     getButtonSizes();
     thumbWidth = $(".page-thumbnail").outerWidth(true);
-
     currentPage = page;
     totalPages = total;
       
@@ -145,6 +152,7 @@
 
   function updateRightAnimation(){
     //don't animate if this is the last page
+    
     if (currentPage != totalPages){        
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
