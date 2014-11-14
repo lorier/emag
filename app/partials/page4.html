@@ -1,9 +1,8 @@
 <!--partial-->
 <script type="text/javascript">
-//runJQuery is called in the angular app after this view partial loads.
-function runJQuery(){
-// <<<<<<< HEAD
 
+function runJQuery(){
+		var clickAnywhereToClose = false;
 		
 		var tl = new TimelineLite ();
 			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
@@ -15,19 +14,34 @@ function runJQuery(){
 
 				
 					$('.page4 button.one').on('click', function () {
-						$(".page4 #clicktext2").hide();
-						$('.page4 #clicktext1').fadeToggle( "fast", "linear");
+						$(document).off('click');//remove the event listener if it's already there
+						clickAnywhereToClose = true;
+						$('.page4 #clicktext1').fadeIn( "fast", "linear", function() {
+							setUpClose('.page4 button.two', this)
+						});	
+						$('.page4 #clicktext2').fadeOut("fast", "linear");
 					});
-					
+
 					$('.page4 button.two').on('click', function () {
-							$(".page4 #clicktext1").hide();	
-							$('.page4 #clicktext2').fadeToggle( "fast", "linear");	
-					});	
-					
-					
-					// VIDEO BUTTON
-					/*$('.page4 button').on('click', function () {	
-					});*/				
+						$(document).off('click');
+					    clickAnywhereToClose = true;
+						$('.page4 #clicktext2').fadeIn( "fast", "linear", function(){
+							setUpClose('.page4 button.one', this)
+						});
+						$('.page4 #clicktext1').fadeOut("fast", "linear");
+					});
+
+					function setUpClose(exceptionCase, obj)
+					{ 	
+						//exceptionCase == other buttons we want to keep listening to
+						$(document).on('click', function(event) {
+							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+								  {
+								    $(obj).fadeOut("fast", "linear");
+								    	clickAnywhereToClose = false;
+									}
+								})
+					}			
 };
 	</script>		
 		
@@ -36,7 +50,7 @@ function runJQuery(){
 	    <h1 class="amatic pantone152"><span class="white">Stretch.</span> <span class="pantone130">Move.</span><span class="pantone166">Take a Deep Breath.</span> </h1>
 	<p class="headline white">Daily exercise is not only good for the body, but boosts the spirit and mind. We offer a variety of activities to meet the interests and physical capabilities of our residents to improve their strength, coordination, and balance for healthy aging.</p>
 	</div>
-	
+
 	<button class="one"><div id="clickme1"><ng-include src="addSVG()"></ng-include></div></button>
 	<div id="clicktext1">
 	<h4 class="pantone166 cantarell bold">I Want to Be a Part of It!</h4>
@@ -69,9 +83,8 @@ function runJQuery(){
 
 <div id="vid-wrap">
 <img id="arrow" src="img/page_04_arrow.png" alt="live in action here">
-<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+		<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 </div>
-
 
 </div>
 

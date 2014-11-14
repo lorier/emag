@@ -2,7 +2,7 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
-
+	    var clickAnywhereToClose = false;
 
 		
 		var tl = new TimelineLite ();
@@ -18,22 +18,47 @@ function runJQuery(){
 
 			
 					$('.page8 button.one').on('click', function () {
-						$(".page8 #clicktext2").hide();
-						$(".page8 #clicktext3").hide();
-						$('.page8 #clicktext1').fadeToggle( "fast", "linear");
+						$(document).off('click');//remove the event listener if it's already there
+						clickAnywhereToClose = true;
+						$('.page8 #clicktext1').fadeIn( "fast", "linear", function() {
+							setUpClose('.page8 button.two', this)
+						});	
+						$('.page8 #clicktext2').fadeOut("fast", "linear");
+						$('.page8 #clicktext3').fadeOut("fast", "linear");
 					});
 
 					$('.page8 button.two').on('click', function () {
-							$(".page8 #clicktext1").hide();	
-							$(".page8 #clicktext3").hide();
-							$('.page8 #clicktext2').fadeToggle( "fast", "linear");	
+						$(document).off('click');
+					    clickAnywhereToClose = true;
+						$('.page8 #clicktext2').fadeIn( "fast", "linear", function(){
+							setUpClose('.page8 button.one', this)
+						});
+						$('.page8 #clicktext1').fadeOut("fast", "linear");
+						$('.page8 #clicktext3').fadeOut("fast", "linear");
 					});
 					
-					$('.page8 button.three').on('click', function () {
-							$(".page8 #clicktext1").hide();	
-							$(".page8 #clicktext2").hide();
-							$('.page8 #clicktext3').fadeToggle( "fast", "linear");	
-					});	
+						$('.page8 button.three').on('click', function () {
+							$(document).off('click');
+						    clickAnywhereToClose = true;
+							$('.page8 #clicktext3').fadeIn( "fast", "linear", function(){
+								setUpClose('.page8 button.one', this)
+							});
+							$('.page8 #clicktext1').fadeOut("fast", "linear");
+							$('.page8 #clicktext2').fadeOut("fast", "linear");
+						});
+					
+						function setUpClose(exceptionCase, obj)
+						{ 	
+							//exceptionCase == other buttons we want to keep listening to
+							$(document).on('click', function(event) {
+								if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+									  {
+									    $(obj).fadeOut("fast", "linear");
+									    	clickAnywhereToClose = false;
+										}
+									})
+						}
+					
 				
 };
 

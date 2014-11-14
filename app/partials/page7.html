@@ -3,10 +3,8 @@
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 
-
-
 			var tl = new TimelineLite ();			
-			      tl.add (TweenLite.set(".page7 #pic1", {y:0, x:-800, autoAlpha:1}));	
+			      tl.add (TweenLite.set(".page7 #pic1", {y:0, x:-400, autoAlpha:1}));	
 			      tl.add (TweenLite.set(".page7 #pic2", {y:0, x:-800, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page7 #pic3", {y:0, x:-800, autoAlpha:1}));	
 	 	
@@ -36,15 +34,15 @@ function runJQuery(){
 	<img id="pic1" src="img/page_07_pic1.jpg" alt="1">
 	<img id="pic2" src="img/page_07_pic2.jpg" alt="2">
 	<img id="pic3" src="img/page_07_pic3.jpg" alt="3">
-
 	
 	<img id="splat1" src="img/page_07_splat1.png" alt="1">
 	<img id="splat2" src="img/page_07_splat2.png" alt="1">
 	<img id="splat3" src="img/page_07_splat3.png" alt="1">
 	<img id="splat4" src="img/page_07_splat4.png" alt="1">
 	
+	
 	<div id="vid-wrap">
-	<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+	<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 	</div>
 	
 </div>
