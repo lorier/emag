@@ -489,8 +489,6 @@ margin-top: 431px;
 background-color: #404041;
 top: 108px;
 left: 20px;
-width: 90%;
-height: 62%;
 position: absolute;
 width: 283px;
 height: 180px; 
@@ -656,8 +654,6 @@ margin-top:470px;
 background-color: #404041;
 top: 27%;
 left: 11%;
-width: 90%;
-height: 62%;
 position: absolute;
 width: 283px;
 height: 180px; 
@@ -796,8 +792,6 @@ opacity: 0;
 background-color: #404041;
 top: 18%;
 left: 269%;
-width: 90%;
-height: 62%;
 position: absolute;
 width: 283px;
 height: 180px; 
@@ -985,8 +979,6 @@ background-color: #66665c;
 	background-color: #404041;
 	top: 35%;
 	left: 65%;
-	width: 90%;
-	height: 62%;
 	position: absolute;
 	width: 283px;
 	height: 180px; 
@@ -1103,7 +1095,23 @@ background-color: #66665c;
 	margin-left: -70%;
 	margin-top: -31%;
 	opacity: 1;
+	}
+	
+	#videobox {
+	background-color: #404041;
+	top: 35%;
+	left: 65%;
+	position: absolute;
+	width: 283px;
+	height: 180px; 
+	border-radius: 8px 8px 8px 8px;
+	-moz-border-radius: 8px 8px 8px 8px;
+	border-radius: 8px 8px 8px 8px;
+	transition: background-color 0.4s ease;
+	}
 
+	#videobox:hover {
+	background-color: #66665c;
 	}
 	
 	span.line3 {padding-left:13%;}
@@ -1341,8 +1349,6 @@ margin-top:470px;
 background-color: #404041;
 top: 22%;
 left: 7%;
-width: 90%;
-height: 62%;
 position: absolute;
 width: 283px;
 height: 180px; 
@@ -1441,8 +1447,6 @@ left: 9%;
 	background-color: #404041;
 	top: 30%;
 	left: 65%;
-	width: 90%;
-	height: 62%;
 	position: absolute;
 	width: 283px;
 	height: 180px; 
