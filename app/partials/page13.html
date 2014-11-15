@@ -1,0 +1,41 @@
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+			
+ 		var tl = new TimelineLite ();	
+		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));	
+			  tl.to(".page13 .headline h1", 1, {autoAlpha:1, delay:1})
+			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
+			
+					$('.page13 button').on('click', function () {
+						$('.page13 #clicktext').fadeToggle( "fast", "linear");
+					});
+};
+
+</script>
+
+<div class="page13 page-container">
+
+	<div class="headline">
+	    <h1 class="amatic pantone166">Dreams Can Come True</h1>
+	</div>
+	
+		<div id="bluebar">	
+		<p class="white">At Aegis Living, we are honored to learn the rich history and unique stories of each of our residents. We cherish their full and extraordinary lives. It is our privilege to capture a moment in time and give it back to them.  </p>
+		<img id="arrow" src="img/page_13_arrow.png" alt="world war II pilot reunites with B-52 bomber">	
+			<div id="vid-wrap">
+				<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+			</div>
+		</div>
+	
+	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
+	<div id="clicktext">
+	<h4 class="pantone633 cantarell bold">Fly fishing in assisted living?</h4>
+	<p> Yep. Fred loves it. In fact, he practices in the activity room and now his community has a Fly Fishing Club. Share your interests and we’ll share a way to enjoy to them. We believe the word impossible is spelled, “I’m possible.”</p>
+	</div>
+
+	
+</div>
+

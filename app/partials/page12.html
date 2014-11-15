@@ -1,0 +1,62 @@
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+	
+		var tl = new TimelineLite ();
+		tl.add (TweenLite.set(".page12 #filmstrip", {y:900, x:0, autoAlpha:1}));
+		tl.add (TweenLite.set(".page12 #filmpic1", {y:900, x:0, autoAlpha:1}));
+	    tl.add (TweenLite.set(".page12 #filmpic2", {y:900, x:0, autoAlpha:1}));	
+	    tl.add (TweenLite.set(".page12 #vid-wrap", {y:900, x:0, autoAlpha:1}));	
+	    tl.add (TweenLite.set(".page12 #filmpic3", {y:900, x:0, autoAlpha:1}));
+	    tl.add (TweenLite.set(".page12 #filmpic4", {y:900, x:0, autoAlpha:1}));
+	     tl.add (TweenLite.set(".page12 #arrow", {y:0, x:-300}))
+
+		tl.to(".page12 .headline h1", 1, {autoAlpha:1, delay:1})
+		  .to(".page12 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
+		  .to(".page12 #filmstrip", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1.3")	
+		  .to(".page12 #filmpic1", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+		  .to(".page12 #filmpic2", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+		  .to(".page12 #vid-wrap", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+		  .to(".page12 #filmpic3", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+		  .to(".page12 #filmpic4", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
+
+          .to(".page12 #arrow", 1, {autoAlpha:1, delay:.2}, "-=.7")
+
+		$('.page12 button').on('click', function () {
+			$('.page12 #clicktext').fadeToggle( "fast", "linear");
+		});
+	
+};
+
+</script>
+
+<div class="page12 page-container">
+
+<div class="headline">
+	    <h1 class="amatic white">Let Us Entertain You</h1>
+		<p class="white">Sit back, relax, and share a classic movie with your friends. We will pop the popcorn – your seat is waiting!</p>	
+</div>
+
+<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
+<div id="clicktext">
+<h4 class="pantone166 cantarell bold">Never Act Your Age!</h4>
+<p>Video games are not only for the young, but also the young at heart. Our Wii activities allow our residents to be physically active – aiding with joint mobility, balance, and coordination. Also gaming can bridge the generational gap – so bring the grandkids to join in a little friendly competition. But watch out, Grandma knows how to pick up a 7-10 split!</p>
+</div>
+
+
+<img id="filmstrip" src="img/page_12_filmstrip.png" alt="filmstrip">	
+
+<div id="vid-wrap">
+	<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+</div>
+
+	<img id="filmpic1" src="img/page_12_pic1.jpg" alt="film one">
+	<img id="filmpic2" src="img/page_12_pic2.jpg" alt="film two">
+	<img id="filmpic3" src="img/page_12_pic3.jpg" alt="film three">
+	<img id="filmpic4" src="img/page_12_pic4.jpg" alt="film four">
+	
+<img id="arrow" src="img/page_12_arrow.png" alt="dance to live music">	
+</div>
+
