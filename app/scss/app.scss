@@ -433,13 +433,13 @@ img {
   display: block;
 }
 .page-turner-container{
-text-align: center;
-width: 40%;
-display: block;
-position: absolute;
-bottom: -30px;
-left: 30%;
-z-index: 201;
+  text-align: center;
+  width: 100%;
+  display:block;
+  position:absolute;
+  bottom: -30px; /* MM */
+  left:0;
+  z-index: 201;
   transition: bottom 0.4s ease-in; /* MM */
       -ms-transition: bottom 0.4s ease-in; /* MM */
       -moz-transition: bottom 0.4s ease-in; /* MM */

@@ -9,8 +9,6 @@ function runJQuery(){
 			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
 			  .to(".page10 #stay-connected", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
-
-
 					$('.page10 button.one').on('click', function () {
 						$(document).off('click');//remove the event listener if it's already there
 						clickAnywhereToClose = true;
@@ -19,7 +17,6 @@ function runJQuery(){
 						});	
 						$('.page10 #clicktext2').fadeOut("fast", "linear");
 					});
-
 					$('.page10 button.two').on('click', function () {
 						$(document).off('click');
 					    clickAnywhereToClose = true;
@@ -40,10 +37,8 @@ function runJQuery(){
 									}
 								})
 					}
-
 				
 };
-
 </script>
 
 <div class="page10 page-container">
@@ -72,4 +67,3 @@ function runJQuery(){
 </div>
 	
 </div>
-
