@@ -119,9 +119,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.pageTransition = 'forward';
   $scope.thumbTransition = '';
   
-  //count number of objects in the json object
-  //might need a polyfill for older browsers
-  
 
   //get the json data
   $http.get('json/magazine.json').success(function(data) {
@@ -138,7 +135,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({
-			 template: '<iframe width="100%" height="100%" src="http://www.youtube.com/embed/zoJx7JaicC0&rel=1" frameborder="0" allowfullscreen></iframe>',
+			 template: '<iframe width="100%" height="100%" src="//www.youtube.com/embed/zoJx7JaicC0" frameborder="0" allowfullscreen></iframe>',
 			 plain: true,
 		     className: 'ngdialog-theme-plain'
 		 }); 

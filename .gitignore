@@ -4,3 +4,8 @@ node_modules/
 tmp
 .DS_Store
 .idea
+app/scss/app.scss
+
+app/index.html
+
+app/js/app.js
