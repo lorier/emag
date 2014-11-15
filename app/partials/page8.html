@@ -2,20 +2,16 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
-
-
 		
 		var tl = new TimelineLite ();
 		      tl.add (TweenLite.set(".page8 #pic1", {y:300, x:0, autoAlpha:1}));
 			  tl.add (TweenLite.set(".page8 #pic2", {y:600, x:0, autoAlpha:1}));	
 		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
-
 			  tl.to(".page8 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page8 .headline h2", 1, {autoAlpha:1}, "-=.7")
 			    .to(".page8 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
 			    .to(".page8 #pic2", 1, {x:0, y:0, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
 			    .to(".page8 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
-
 			
 					$('.page8 button.one').on('click', function () {
 						$(".page8 #clicktext2").hide();
@@ -35,6 +31,7 @@ function runJQuery(){
 							$('.page8 #clicktext3').fadeToggle( "fast", "linear");	
 					});	
 				
+
 };
 
 </script>

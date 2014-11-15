@@ -1,245 +1,69 @@
 
+
 /* Animations from Phonecat Demo
 -------------------------------------------------- 
 cross fading between routes with ngView 
 
-*/
-//from the phonecat app
-//.phone-listing.ng-enter,
-// .thumbnail-container.ng-leave,
-// .thumbnail-container.ng-move {
-//   -webkit-transition: 0.5s linear all;
-//   -moz-transition: 0.5s linear all;
-//   -o-transition: 0.5s linear all;
-//   transition: 0.5s linear all;
+TODO - this is causing the overlying UI to disappear and reappear.
+// .view-container{
+//   // position: relative;
 // }
-
-// .thumbnail-container.ng-enter,
-// .thumbnail-container.ng-move {
-//   left: 66%;
-// }
-
-// .thumbnail-container.ng-move.ng-move-active,
-// .thumbnail-container.ng-enter.ng-enter-active {
-//   opacity: 1;
-//   height: 120px;
-// }
-
-// .thumbnail-container.ng-leave {
-//   left:-100%;
-//   // overflow: hidden;
-// }
-
-// .thumbnail-container.ng-leave.ng-leave-active {
-//   left:-100%;
-//   // opacity: 0;
-//   // height: 0;
-//   // padding-top: 0;
-//   // padding-bottom: 0;
-// }
-//-----------------------------------------
-
-
-
-
-
-/*-------------------------------------------------- 
-//Thumnailes: When click  button
--
-------------------------------------------------- */
-// .thumbnail-container.ng-enter
-// {
-//   -webkit-animation: 1s fade-to-left-thumb;
-//   // -moz-animation: 0.5s fade-in-right;
-//   // -o-animation: 0.5s fade-in-right;
-//   animation: 1s fade-to-left-thumb;
-//   z-index: 99;
-// }
-// // .thumbnail-container.ng-enter
-// // {
-// //   -webkit-animation: 1s fade-to-left-thumb;
-// //   // -moz-animation: 0.5s fade-in-right;
-// //   // -o-animation: 0.5s fade-in-right;
-// //   animation: 1s fade-to-left-thumb;
-// //   z-index: 99;
-// // }
-// .thumbnail-container.ng-leave
-// {
-//   -webkit-animation: 1s fade-from-left-thumb;
-//   // -moz-animation: 0.5s fade-in-right;
-//   // -o-animation: 0.5s fade-in-right;
-//   animation: 1s fade-from-left-thumb;
-//   z-index: 99;
-// }
-
-// @-webkit-keyframes fade-to-left-thumb {
-//   from { margin-left: 100% }
-//   to { margin-left: 66%}
-// }
-// @-webkit-keyframes fade-from-left-thumb {
-//   from { margin-left: 0% }
-//   to { margin-left: -100%;}
-// }
-
-/*-------------------------------------------------- 
-//SLIDE ANIMATIONS
--------------------------------------------------- */
 
 // .view-container.ng-enter,
 // .view-container.ng-leave
-
+// // .pagination .ng-hide-add,
+// // .pagination .ng-hide-remove {
 //   {background: white;
 //   position: absolute;
 //   top: 0;
 //   left: 0;
 //   right: 0;
 // }
-// .view-container.ng-enter,
-// .view-container.ng-leave{
-//   position: absolute;
-//   float:left;
-// }
 
-/*-------------------------------------------------- 
-//Slides: When click PREVIOUS button
--------------------------------------------------- */
-
-
-.view-container.ng-enter.back
- { -webkit-animation: 0.5s fade-in-right;
-  -moz-animation: 0.5s fade-in-right;
-  -o-animation: 0.5s fade-in-right;
-  animation: 0.5s fade-in-right;
-  z-index: 100;
-}
-
-.view-container.ng-leave.back
-{  -webkit-animation: 0.5s fade-out-right;
-  -moz-animation: 0.5s fade-out-right;
-  -o-animation: 0.5s fade-out-right;
-  animation: 0.5s fade-out-right;
-  z-index: 99;
-}
-
-
-@keyframes fade-in-right {
-  from { margin-left: -98% }
-  to {  margin-left: 0%;}
-}
-@-moz-keyframes fade-in-right {
-  from {  margin-left: -98% }
-  to {margin-left: 0%;}
-}
-@-webkit-keyframes fade-in-right {
-  from { margin-left: -98% }
-  to { margin-left: 0%;}
-}
-
-@keyframes fade-out-right {
-  from { margin-left: 2%}
-  to { margin-left: 100%}
-}
-@-moz-keyframes fade-out-right {
-  from {  margin-left: 2%}
-  to {  margin-left: 100%}
-}
-@-webkit-keyframes fade-out-right {
-  from {margin-left: 2%}
-  to { margin-left: 100%}
-}
-
-/*-------------------------------------------------- 
-//Slides: When click NEXT button
--------------------------------------------------- */
-.view-container.ng-enter.forward
- { -webkit-animation: 0.5s fade-in-left;
-  -moz-animation: 0.5s fade-in-left;
-  -o-animation: 0.5s fade-in-left;
-  animation: 0.5s fade-in-left;
-  z-index: 101;
-}
-
-.view-container.ng-leave.forward
-{  -webkit-animation: 0.5s fade-out-left;
-  -moz-animation: 0.5s fade-out-left;
-  -o-animation: 0.5s fade-out-left;
-  animation: 0.5s fade-out-left;
-  z-index: 100;
-}
-
-@keyframes fade-in-left {
-  from { margin-left: 98% }
-  to {  margin-left: 0%;}
-}
-@-moz-keyframes fade-in-left {
-  from {margin-left: 98% }
-  to { margin-left: 0%;}
-}
-@-webkit-keyframes fade-in-left {
-  from { margin-left: 98% }
-  to { margin-left: 0%;}
-}
-
-@keyframes fade-out-left {
-  from { margin-left: -2%}
-  to {  margin-left: -100%}
-}
-@-moz-keyframes fade-out-left {
-  from {  margin-left: -2%}
-  to { margin-left: -100%}
-}
-@-webkit-keyframes fade-out-left {
-  from { margin-left: -2%}
-  to {  margin-left: -100%}
-}
-/*-------------------------------------------------- 
-//When click THUMBNAIL 
-//Changes behavior to opacity
--------------------------------------------------- */
-// .view-container.ng-enter.opacity
+// .view-container.ng-enter
 // // .pagination .ng-hide-add  {
-//  { -webkit-animation: 0.5s fade-in;
-//   -moz-animation: 0.5s fade-in;
-//   -o-animation: 0.5s fade-in;
-//   animation: 0.5s fade-in;
-//   z-index: 99;
-// }
-
-// .view-container.ng-leave.opacity
-// // .pagination .ng-hide-remove {
-// {  -webkit-animation: 0.5s fade-out;
-//   -moz-animation: 0.5s fade-out;
-//   -o-animation: 0.5s fade-out;
-//   animation: 0.5s fade-out;
+//  { -webkit-animation: 0.15s fade-in;
+//   -moz-animation: 0.15s fade-in;
+//   -o-animation: 0.15s fade-in;
+//   animation: 0.15s fade-in;
 //   z-index: 100;
 // }
 
+// .view-container.ng-leave,
+// // .pagination .ng-hide-remove {
+// {  -webkit-animation: 0.15s fade-out;
+//   -moz-animation: 0.15s fade-out;
+//   -o-animation: 0.15s fade-out;
+//   animation: 0.15s fade-out;
+//   z-index: 99;
+// }
 
 // @keyframes fade-in {
-//   from { opacity: 0 }
-//   to {  opacity: 1}
+//   from { opacity: 0; }
+//   to { opacity: 1; }
 // }
 // @-moz-keyframes fade-in {
-//   from { opacity: 0 }
-//   to {  opacity: 1}
+//   from { opacity: 0; }
+//   to { opacity: 1; }
 // }
 // @-webkit-keyframes fade-in {
-//   from { opacity: 0 }
-//   to {  opacity: 1}
+//   from { opacity: 0; }
+//   to { opacity: 1; }
 // }
 
 // @keyframes fade-out {
-//   from { opacity: 1 }
-//   to {  opacity: 0}
+//   from { opacity: 1; }
+//   to { opacity: 0; }
 // }
 // @-moz-keyframes fade-out {
-//   from { opacity: 1 }
-//   to {  opacity: 0}
+//   from { opacity: 1; }
+//   to { opacity: 0; }
 // }
 // @-webkit-keyframes fade-out {
-//   from { opacity: 1 }
-//   to {  opacity: 0}
+//   from { opacity: 1; }
+//   to { opacity: 0; }
 // }
+*/
 
 @import 'colors';
 @import 'variables';
@@ -247,9 +71,6 @@ cross fading between routes with ngView
 
 /* Reset button styles and disable select highlighting
 ===============================================================*/
-body {
-  overflow: hidden;
-}
 button { background: none; border: none; margin: 0; padding: 0; font-size: 0; line-height: 0; width: auto; overflow: visible; }
 
 .btn {
@@ -279,32 +100,6 @@ button { background: none; border: none; margin: 0; padding: 0; font-size: 0; li
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
-///REMOVE!
-///TEMPORARY BGS FOR VIEWS
-///
-.page2{
-  //
-  background:  url('../img/page_02.jpg') no-repeat center center;
-    background-size: 100%;
-}
-.page3{
-  //
-  background:  url('../img/page_03.jpg') no-repeat center center;
-    background-size: 100%;
-
-}
-.page4{
-  //
-  background:  url('../img/page_04.jpg') no-repeat center center;
-    background-size: 100%;
-
-}
-.page5{
-  //
-  background:  url('../img/page_05.jpg') no-repeat center center;
-    background-size: 100%;
-
-}
 
 /* Custom page CSS
 -------------------------------------------------- */
@@ -317,8 +112,7 @@ body {
   font-family: "Cantarell", Arial, sans-serif;
   background-color: #EAEAEA;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
+  height: 100%
 }
 
 img {
@@ -332,7 +126,7 @@ img {
   font-size:16px;
 }
 .top-bar {
-  padding: 5px 0;
+  padding-top: 5px;
   text-align: center;
 
   >div {
@@ -384,7 +178,21 @@ img {
     height: 100%;
   }
 }
+.view-container{
+  }
+ 
+    .big-pic {
+      width: 100%;
+    }
 
+
+.slides {
+  height: auto;
+  position: relative;
+  text-align: center;
+  background: url('../img/ajax-loader.gif') no-repeat center center;
+ overflow: hidden;
+}
 
 .container .text-muted {
   margin: 20px 0;
@@ -395,7 +203,7 @@ img {
   width: 100%;
   position:absolute;
   top: 43%;
-  z-index: 200;
+  z-index: 10;
   > button {
     border-radius: 8px;
     cursor: pointer;
@@ -428,28 +236,15 @@ img {
     right: 0;
   }
 }
-
 .button-row {
   display: block;
 }
 .page-turner-container{
-  text-align: center;
   width: 100%;
   display:block;
   position:absolute;
-  bottom: -30px; /* MM */
+  bottom: 0;
   left:0;
-  z-index: 201;
-  transition: bottom 0.4s ease-in; /* MM */
-      -ms-transition: bottom 0.4s ease-in; /* MM */
-      -moz-transition: bottom 0.4s ease-in; /* MM */
-      -webkit-transition: bottom 0.4s ease-in; /* MM */
-}
-.page-turner-container.stash{ /* MM */
-	bottom:-123px; /* MM */
-}/* MM */
-.page-turner-container .stash-button{
-	width:400px;
 }
 nav.page-turner {
   border-radius: 5px 5px 0 0;
@@ -458,8 +253,7 @@ nav.page-turner {
   text-align: center;
   margin: 0 auto; 
   background-color: rgba(255, 255, 255, 0.5);
-  width: auto;
-  display: inline-block;
+  width: 460px;
   .hide-nav span{
     display: inline-block;
     width: 100%;
@@ -472,22 +266,6 @@ nav.page-turner {
 }
 nav.page-turner.small .hide-nav {
   
-}
-li.thumb-scroll-window {
-  width: $thumbnail-width * 3 + $thumbnail-margin * 6;
-  height: 100px;
-  overflow: hidden;
-  position:relative;
-  
-  .holder {
-//    padding: 0 143px; //add a blank 'thumbnail' on each end
-    width: ($thumbnail-width + $thumbnail-margin*2) * 16; //14 plus padding on ends
-    height: $thumbnail-height + $thumbnail-margin*2;
-    text-align: center;
-    padding: 0 ($thumbnail-width + $thumbnail-margin*2);
-    position: absolute;
-    left: 0;
-  }
 }
   ul.thumb-viewer {
     -webkit-transition:all linear 0.5s;
@@ -502,15 +280,11 @@ li.thumb-scroll-window {
     }
     li {
       display: inline-block;
-      float:left;
   }
-// li.thumbnail-container {
-//     width:$thumbnail-width;
-//     height:$thumbnail-height;
-// }
-  // ul.thumb-viewer.ng-hide{
-  //   opacity: 0;
-  // }
+
+  ul.thumb-viewer.ng-hide{
+    opacity: 0;
+  }
 
 
 //These styles toggle-set by Angular. 
@@ -520,15 +294,14 @@ li.thumb-scroll-window {
 }
 .page-thumbnail {
   display: block;
-  width: $thumbnail-width;
-  margin: $thumbnail-margin;
+  margin: 4px;
   line-height: 1.42857143;
-  background-color: white;
+  background-color: #555;
   -webkit-transition: all .01s ease-in-out;
   -o-transition: all .01s ease-in-out;
   transition: all .01s ease-in-out;
     img {
-    // opacity: .5;
+    opacity: .3;
     height: $thumbnail-height;
   }
 }
@@ -555,9 +328,6 @@ footer {
   visibility: hidden !important;
   display:inline-block;
 }
-
-
-
 /* 
   Allow angular.js to be loaded in body, hiding cloaked elements until 
   templates compile.  The !important is important given that there may be 
@@ -591,68 +361,25 @@ footer {
   padding: 0px 20px 10px 20px;
   background-color: white;
   position: relative;
-
-  transform-origin: 50% 0% 0px; 
-  -webkit-transform-origin: 50% 0%;
 }
-/*--Styles for slides!--*/
-
-
-.slides {
+.page-container {
   height: 760px;
-  width: 1170px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  background: url('../img/loading.gif') no-repeat center center;
-}
-.page-wrapper {
-    position: relative;
-    width: 3510px;
-    left: 0;
-
-    // height: 760px;
-}
-      .view-container{
-          position:absolute;
-
-          overflow: hidden;
-          // width: 1170px;
-          // height: 760px;
-      }
-          .page-container{
-            position: relative;
-            width: 1170px;
-            height: 760px;
-          } 
-
-/* Styles for the next and previous pages that "peek" in */
-.peek-next, .peek-prev, .center {
-    position: relative;
-    float: left;
-    width: 1170px;
-    height: 760px;
-    // left: 100%;
 }
 
 /* Media Queries */ 
 
 //trying to hit the major breakpoints
-// @media only screen and (max-width: 1024px) {
-//   // .page-wrapper {
-//   //   @include set-wrapper-width-height(1024px)
-//   // }
-//   .wrapper{
-//     @include set-wrapper-width-height(1024px)
-//   }
-//   .page-container, .slides, .peek-next, .peek-prev, .page-wrapper
-//   { 
-//     //subtract 40x padding to get the new width of the inner image,
-//     //then multiply by the aspect ratio to get the new image height
-//     height: set-proportional-height(1024px) !important;
-//     width: set-proportional-width(1024px) !important;
-//   }
-// }
+@media only screen and (max-width: 1024px) {
+  .wrapper{
+    @include set-wrapper-width-height(1024px)
+  }
+  .page-container
+  { 
+    //subtract 40x padding to get the new width of the inner image,
+    //then multiply by the aspect ratio to get the new image height
+    height: set-proportional-height(1024px) !important;
+  }
+}
 //hide the bottom navigation from phones
 // @media only screen and (max-width: 960px) {
 //   .wrapper{

@@ -3,8 +3,6 @@
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 
-
-
 		var tl = new TimelineLite ();
 		 tl.add (TweenLite.set(".page11 #bluebar", {y:0, x:350, autoAlpha:1}));
 		 tl.add (TweenLite.set(".page11 #pic1", {y:300, x:0, autoAlpha:1}));
@@ -16,7 +14,6 @@ function runJQuery(){
 		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
 		.to(".page11 #pic3", 1, {x:0, y:0, rotation:1, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
         .to(".page11 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
-
 
 		$('.page11 button').on('click', function () {
 			$('.page11 #clicktext').fadeToggle( "fast", "linear");
