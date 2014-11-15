@@ -8,7 +8,9 @@ var myEmag = angular.module('myEmag', [
   'ngRoute',
   'ngAnimate',
   'emagControllers',
-  'emagFactories'
+  'emagFactories',
+  'emagDirectives',
+  'ngDialog'
 ]);
 
 // Adding a factory to keep track of state. Code courtesy of
@@ -24,18 +26,36 @@ emagFactories.factory('StateService', function(){
   };
   var setActivePage = function(pg){
     activePage = pg;
-    console.log(activePage);
+    //console.log(activePage);
   };
   return {
       getActivePage: getActivePage,
       setActivePage: setActivePage
-    };
-    
+    };   
   });
+
+//Adding directive to watch for the render completion of the 
+//thumbnails
+var emagDirectives = angular.module ('emagDirectives', []);
+
+emagDirectives.directive('myRepeatDirective', function() {
+  return function(scope, element, attrs) {
+    if (scope.$last) {
+          setTimeout(function(){
+            //trigger jQuery code
+            initThumbnailStops();  
+          }, 1);
+    }
+  };
+});
+
+
 //This should be refactored when I figure out how to do it
+//possible resource
+//http://stackoverflow.com/questions/13681116/angularjs-dynamic-routing
 myEmag.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
-  		when('/view/', {
+  		when('/view/1', {
   		templateUrl:'partials/page1.html' ,
   		}).
       when('/view/2', {
@@ -80,125 +100,174 @@ myEmag.config(['$routeProvider', function($routeProvider) {
       when('/view/15', {
       templateUrl:'partials/page15.html' ,
       }).
-     	otherwise({redirectTo: '/view'});
+     	otherwise({redirectTo: '/view/1'});
 }]);
 
 //Controllers
 
 var emagControllers = angular.module ('emagControllers', []);
 
-emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', function($scope, StateService, $http, $location, $route, $routeParams){
+emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function($scope, StateService, $http, $location, $route, $routeParams, ngDialog){
    
    //initialize variables
   $scope.pages = {};
+  $scope.pageCount = 0;
   $scope.activePage = StateService.getActivePage;
+  // $scope.activePageVal = StateService.getActivePage();
   $scope.thumbsPosition = '';
   $scope.isThumbsVisible = false;
+  $scope.pageTransition = 'forward';
+  $scope.thumbTransition = '';
+  
+  //count number of objects in the json object
+  //might need a polyfill for older browsers
+  
 
-  $scope.$on('$viewContentLoaded', function(){
-    //Here your view content is fully loaded !!
-    console.log("$viewContentLoaded");
-
+  //get the json data
+  $http.get('json/magazine.json').success(function(data) {
+      $scope.pages = data;
+      $scope.pageCount = Object.keys($scope.pages).length;
   });
 
-$scope.addSVG = function(){
-    return "partials/circlebutton.svg";
-  };
-
-
-$scope.setThumbsPosition = function(){
-    console.log($scope.thumbsPosition);
-    if($scope.isThumbsVisible){
-      $scope.thumbsPosition = "small";
-    }else{
-      $scope.thumbsPosition = "big";
-    }
+  $scope.addSVG = function(){
+    return "partials/target.svg";
   };
   
-  $scope.toggleThumbs = function() {
-    $scope.isThumbsVisible = $scope.isThumbsVisible === false ? true: false;
-    $scope.setThumbsPosition();
+  $scope.doYoutube = function(linkurl){
+		 console.log("do dialog");
+		 $scope.theme = 'ngdialog-theme-plain';
+
+		 ngDialog.open({
+			 template: '<iframe width="100%" height="100%" src="http://www.youtube.com/embed/zoJx7JaicC0&rel=1" frameborder="0" allowfullscreen></iframe>',
+			 plain: true,
+		     className: 'ngdialog-theme-plain'
+		 }); 
+	 }
+  $scope.doVimeo = function(linkurl){
+		 console.log("do dialog");
+		 $scope.theme = 'ngdialog-theme-plain';
+
+		 ngDialog.open({
+			 template: '<iframe src="//player.vimeo.com/video/'+linkurl+'?title=0" width="100%" height="100%" frameborder="0" title="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>',
+			 plain: true,
+		     className: 'ngdialog-theme-plain'
+		 }); 
+	 }
+
+  $scope.toggleThumbs = function(event){
+	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
+	  var target = angular.element(event.target)
+	  target.parent().parent().parent().toggleClass( "stash" ); //naughty dom climbing
   };
-  
+
+  //the next 4 functions govern the 
+  //forward and back arrows on the slides
   $scope.setPrevNextVisibility = function(value){
     if($scope.activePage() === value){
       return "hide-arrow";
     }else {
       return "visible";
     }
-  }
+  };
   $scope.isFirstPage= function(){
     return $scope.activePage()===1;
   };
-  
   $scope.isLastPage= function(){
     return $scope.activePage()===$scope.pages.length;
   };
-  
-  //get the json data
-  $http.get('json/magazine.json').success(function(data) {
-      $scope.pages = data;
-  });
+
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
   };
-  $scope.activeThumb = function(value){
-    if(value == $scope.activePage()){
-      return 'true';
-    }
-  };
-  //
-  $scope.showThumb = function(value){
-    if($scope.activePage() <= 2){
-      if (value <= 3){
-         return true;
-      }
-    }else if($scope.activePage() >= $scope.pages.length - 1){
-      if (value >= $scope.pages.length - 2){
-         return true;
-      }
-    }else
-    if ((value >= $scope.activePage() - 1) && (value <= $scope.activePage() + 1)) {
-      return true;
-    }
+  
+  $scope.advanceThumb = function(which, page){
+      //fire jquery function
+      advanceThumbnails(which, page);
   };
 
-  //update page based on which thumbnail is clicked
-  $scope.clickThumb = function(value) {
+  //update the slide based on which thumbnail is clicked
+  $scope.onThumbClick = function(value) {
+    $scope.pageTransition = $scope.setSlideTransitionDirection(value);
     $scope.updateActivePage(value);
     if(value !== 1 && value < $scope.pages.length){
-      $scope.changeLoc($scope.activePage());   
+      $scope.changeSlide($scope.activePage());  
+      setThumbstoCurrentSlide($scope.activePage());
     }
   };
+  $scope.setSlideTransitionDirection = function(value){
+    var whichWay
+    if (value > $scope.activePage()){
+      whichWay = "forward" 
+    }else if (value < $scope.activePage()){
+      whichWay = "back";
+    }
+    return whichWay;
+  };
 
-  //Logic for prev/next buttons. Could use some refactoring
-  $scope.advanceSinglePage = function(direction){
+  //Logic for prev/next buttons on slides. Could use some refactoring
+  $scope.moveSlide = function(direction){
     if(direction == 'prev'){
+      $scope.pageTransition  = "back";
       var prevPage = $scope.activePage()-1;
       if (prevPage > 0 ){
         $scope.updateActivePage(prevPage);
-        $scope.changeLoc(prevPage);
+        $scope.changeSlide(prevPage);
       }
     }else if(direction == 'next'){
+      $scope.pageTransition  = "forward";
       var nextPage = $scope.activePage()+1;
       if (nextPage <= $scope.pages.length ){
         $scope.updateActivePage(nextPage);
-        $scope.changeLoc(nextPage);
+        $scope.changeSlide(nextPage);
+
       }
-    }
-  //concat the new url provided by the function logic
+    } 
+    //calls jQuery function to set the correct thumbnail position
+    setThumbstoCurrentSlide($scope.activePage());
+  };
+
+  //concat the new url. 
   //and feed it into the $location service. This updates the route.
   //$routeProvider in .config will not work without this.
-  };
-  $scope.changeLoc = function(location){
+  $scope.changeSlide = function(location){
     var loc = '/view/' + location;
-
     $location.path(loc);
    };
-   $scope.$on('$viewContentLoaded', function() {
-      runJQuery();
-});
+
+  $scope.$on('$viewContentLoaded', function() {
+      //using the $location service to get the page number from the URL
+      //this captures the new page value if the user types in the page number
+      //in the address bar
+      var urlSlice = parseInt($location.path().slice(6) || 1);
+      StateService.setActivePage(urlSlice);
+      runJQuery($scope.activePage());
+      onContentLoaded($scope.activePage(),$scope.pageCount);
+      setThumbstoCurrentSlide($scope.activePage());
+   });
+
+
+
+  $scope.peekPrev = function() {
+      var current = $scope.activePage();
+      var prev =  current - 1;
+    
+      if( current > 1 ){ 
+        return "partials/page" + prev + ".html";
+      } else {
+        return;
+      }
+    };
+ 
+ $scope.peekNext = function() {
+    var current = $scope.activePage();
+    var next = current + 1;
+    if( current < $scope.pageCount ){ 
+      return "partials/page" + next + ".html";
+    } else {
+      return;
+    }
+  };
 
 }]);
 
@@ -222,4 +291,5 @@ $scope.setThumbsPosition = function(){
     )
     document.querySelector('head').appendChild(msViewportStyle)
   }
-})();
+})()
+

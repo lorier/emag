@@ -1,5 +1,12 @@
 $thumbnail-height: 80px;
+$thumbnail-width: 124px;
+$thumbnail-margin: 4px;
 
+
+@function set-proportional-width($breakpoint){
+	//subtract 40x padding to get the new width of the inner image,
+	@return ($breakpoint - 40px)
+}
 @function set-proportional-height($breakpoint){
 	//subtract 40x padding to get the new width of the inner image,
     //then multiply by the aspect ratio to get the new image height

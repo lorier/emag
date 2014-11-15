@@ -4,10 +4,13 @@
 
 function runJQuery(){
 
+
+
       	var tl = new TimelineLite ();	
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
+
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
 			  .to(".page2 #circle", 1, {autoAlpha:1}, "-=1")
@@ -18,6 +21,7 @@ function runJQuery(){
 			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
 			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2.5")
 			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=2")
+
 			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
 		
 			$('.page2 button').on('click', function () {	
@@ -31,8 +35,8 @@ function runJQuery(){
 </script>
 
 <div class="page2 page-container">
-	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
-	<div id="clicktext">
+<!-- 	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
+ -->	<div id="clicktext">
 	<h4 class="pantone633 cantarell bold">What is the<br />Life Enrichment Program?</h4>
 	<p>Our Life Enrichment program is just that – to enrich the daily lives of our residents in big and small ways.  We want to bring a smile to everyday, offer a unique challenge, teach something new, or share warm memories from the past.  Our Life Enrichment Directors customize our daily activities to stimulate the mind, increase physical activity, and nurture the emotional health of each resident. </p>
 	</div>
