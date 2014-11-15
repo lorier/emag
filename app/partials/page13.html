@@ -2,6 +2,7 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+	var clickAnywhereToClose = false;
 
 			
  		var tl = new TimelineLite ();	
@@ -10,8 +11,24 @@ function runJQuery(){
 			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
 			
 					$('.page13 button').on('click', function () {
-						$('.page13 #clicktext').fadeToggle( "fast", "linear");
+							$(document).off('click');
+						    clickAnywhereToClose = true;	
+							$('.page13 #clicktext').fadeIn( "fast", "linear", function(){
+								setUpClose('.page13 button.one', this)
+							});
 					});
+
+					function setUpClose(exceptionCase, obj)
+					{ 	
+						//exceptionCase == other buttons we want to keep listening to
+						$(document).on('click', function(event) {
+							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+								  {
+								    $(obj).fadeOut("fast", "linear");
+								    	clickAnywhereToClose = false;
+									}
+								})
+					}
 };
 
 </script>
@@ -26,7 +43,7 @@ function runJQuery(){
 		<p class="white">At Aegis Living, we are honored to learn the rich history and unique stories of each of our residents. We cherish their full and extraordinary lives. It is our privilege to capture a moment in time and give it back to them.  </p>
 		<img id="arrow" src="img/page_13_arrow.png" alt="world war II pilot reunites with B-52 bomber">	
 			<div id="vid-wrap">
-				<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+				<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 			</div>
 		</div>
 	

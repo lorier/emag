@@ -2,6 +2,7 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+	var clickAnywhereToClose = false;
 
 	
 		var tl = new TimelineLite ();
@@ -24,9 +25,25 @@ function runJQuery(){
 
           .to(".page12 #arrow", 1, {autoAlpha:1, delay:.2}, "-=.7")
 
-		$('.page12 button').on('click', function () {
-			$('.page12 #clicktext').fadeToggle( "fast", "linear");
-		});
+			$('.page12 button').on('click', function () {
+					$(document).off('click');
+				    clickAnywhereToClose = true;	
+					$('.page12 #clicktext').fadeIn( "fast", "linear", function(){
+						setUpClose('.page12 button.one', this)
+					});
+			});
+
+			function setUpClose(exceptionCase, obj)
+			{ 	
+				//exceptionCase == other buttons we want to keep listening to
+				$(document).on('click', function(event) {
+					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+						  {
+						    $(obj).fadeOut("fast", "linear");
+						    	clickAnywhereToClose = false;
+							}
+						})
+			}
 	
 };
 
@@ -49,7 +66,7 @@ function runJQuery(){
 <img id="filmstrip" src="img/page_12_filmstrip.png" alt="filmstrip">	
 
 <div id="vid-wrap">
-	<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+	<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 </div>
 
 	<img id="filmpic1" src="img/page_12_pic1.jpg" alt="film one">

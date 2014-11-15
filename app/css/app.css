@@ -721,8 +721,8 @@ p {
     position: absolute;
     display: none;
     width: 34%;
-    left: 5%;
-    top: 44%;
+    left: 55px;
+    top: 334px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -933,9 +933,8 @@ p {
   .page5 #play-dot {
     position: absolute;
     width: 206px;
-    margin-top: 10px;
-    margin-left: 50px;
-    opacity: 1;
+    left: 0;
+    margin-top: 140px;
     opacity: 0; }
   .page5 #clickme {
     opacity: 1;
@@ -1029,7 +1028,7 @@ p {
 
 /* --- page7 ------ */
 .page7 {
-  background: url('../img/page_07_overlay.jpg') no-repeat center center;
+  background: url('../img/page_07.jpg') no-repeat center center;
   background-size: 100%;
   opacity: 1; }
   .page7 h1 {
@@ -1045,9 +1044,8 @@ p {
     margin-left: 7%;
     opacity: 0; }
   .page7 #pic1 {
-    opacity: 1;
-    margin-top: 410px;
-    margin-left: 100px;
+    opacity: 0;
+    left: 200px;
     position: absolute;
     width: 200px;
     -ms-transform: rotate(-80deg);
@@ -1059,9 +1057,8 @@ p {
     -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page7 #pic2 {
-    opacity: 1;
-    margin-top: 38%;
-    margin-left: -29%;
+    opacity: 0;
+    left: 200px;
     position: absolute;
     width: 200px;
     -ms-transform: rotate(-80deg);
@@ -1073,9 +1070,8 @@ p {
     -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page7 #pic3 {
-    opacity: 1;
-    margin-top: 37%;
-    margin-left: -12%;
+    opacity: 0;
+    left: 200px;
     position: absolute;
     width: 200px;
     -ms-transform: rotate(-80deg);
@@ -1088,31 +1084,31 @@ p {
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page7 #splat1 {
     opacity: 1;
-    margin-top: 27%;
-    margin-left: -48%;
+    margin-top: 310px;
+    left: 23px;
     position: absolute;
     width: 178px;
     opacity: 0; }
   .page7 #splat2 {
     opacity: 1;
-    margin-top: 28%;
-    margin-left: -33%;
+    margin-top: 333px;
+    left: 203px;
     position: absolute;
     width: 194px;
     opacity: 0; }
   .page7 #splat3 {
     opacity: 1;
-    margin-top: 33%;
-    margin-left: -4%;
+    margin-top: 384px;
+    left: 540px;
     position: absolute;
     width: 190px;
     opacity: 0; }
   .page7 #splat4 {
     opacity: 1;
-    margin-top: 29%;
-    margin-left: 10%;
+    margin-top: 344px;
+    left: 701px;
     position: absolute;
-    width: 201px;
+    width: 210px;
     mix-blend-mode: multiply;
     opacity: 0; }
   .page7 #vid-wrap {
@@ -1155,23 +1151,21 @@ p {
     margin-left: 1%;
     opacity: 0; }
   .page8 #pic1 {
-    opacity: 1;
-    margin-top: 41%;
-    margin-left: 3%;
+    left: 400px;
+    opacity: 0;
     position: absolute;
     width: 210px;
-    -ms-transform: rotate(-50deg);
+    -ms-transform: rotate(50deg);
     /* IE 9 */
-    -webkit-transform: rotate(-50deg);
+    -webkit-transform: rotate(50deg);
     /* Chrome, Safari, Opera */
-    transform: rotate(-50deg);
-    -webkit-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
-    -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
-    box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
+    transform: rotate(50deg);
+    -webkit-box-shadow: 0px 0px 17px 0px rgba(4, 126, 140, 0.6);
+    -moz-box-shadow: 0px 0px 17px 0px rgba(4, 126, 140, 0.6);
+    box-shadow: 0px 0px 17px 0px rgba(4, 126, 140, 0.6); }
   .page8 #pic2 {
+    left: 400px;
     opacity: 1;
-    margin-top: 17%;
-    margin-left: 2%;
     position: absolute;
     width: 210px;
     -ms-transform: rotate(50deg);
@@ -1272,13 +1266,13 @@ p {
     position: absolute;
     width: 300px;
     height: 300px;
-    margin-left: -50%;
-    margin-top: 5%;
+    margin-left: -177px;
+    margin-top: 267px;
     opacity: 1; }
   .page8 #videobox {
     background-color: #404041;
-    top: 35%;
-    left: 65%;
+    top: 133px;
+    left: 204px;
     position: absolute;
     width: 283px;
     height: 180px;
@@ -1299,13 +1293,14 @@ p {
   .page8 #arrow {
     position: absolute;
     width: 209px;
-    margin-left: 19%;
-    margin-top: 2%; }
+    left: 208px;
+    margin-top: 30px; }
   .page8 #bluebar p {
+    position: absolute;
     color: #fff;
     font-size: 17px;
-    line-height: 142%;
-    margin-top: -3%; }
+    line-height: 144%;
+    margin-top: -6px; }
   .page8 #bluebar h3 {
     font-family: "Amatic SC", sans-serif;
     color: #ffd923;
@@ -1337,8 +1332,8 @@ p {
   .page9 #roses {
     position: absolute;
     width: 303px;
-    margin-top: 19%;
-    margin-left: -20%;
+    margin-top: 219px;
+    left: 350px;
     opacity: 0; }
   .page9 #bluebar {
     position: absolute;
@@ -1359,7 +1354,11 @@ p {
     color: #ffd923;
     text-align: left;
     font-size: 46px;
-    margin-top: 6%; }
+    margin-top: 20px; }
+  .page9 #bluebar h3.movedown {
+    margin-top: 192px; }
+  .page9 #bluebar h3.moveup {
+    margin-top: -10px; }
   .page9 #vid-wrap {
     position: absolute;
     width: 300px;
@@ -1509,8 +1508,8 @@ p {
     display: none;
     position: absolute;
     width: 33%;
-    left: 43%;
-    top: 19%;
+    left: 505px;
+    top: 117px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1518,69 +1517,22 @@ p {
     -webkit-border-radius: 8px 8px 8px 0px;
     -moz-border-radius: 8px 8px 8px 0px;
     border-radius: 8px 8px 8px 0px; }
-  .page10 #class-list {
-    font-size: 35px;
-    line-height: 143%;
-    margin-top: -1%;
+  .page10 #stay-connected {
+    width: 230px;
     position: absolute;
-    text-align: left;
-    opacity: 0;
-    overflow: hidden; }
-  .page10 #clickme1 {
-    opacity: 1;
-    width: 50px;
-    top: 64%;
-    left: 19%;
-    position: absolute;
-    cursor: pointer;
-    cursor: hand;
-    z-index: 500; }
-  .page10 #clicktext1 {
-    position: absolute;
-    display: none;
-    width: 32%;
-    left: 21%;
-    top: 37%;
-    background-color: #fff;
-    opacity: 0.8;
-    text-align: left;
-    padding: 12px 10px 0 15px;
-    -webkit-border-radius: 8px 8px 8px 0px;
-    -moz-border-radius: 8px 8px 8px 0px;
-    border-radius: 8px 8px 8px 0px; }
-  .page10 #clickme2 {
-    opacity: 1;
-    width: 50px;
-    top: 44%;
-    left: 68%;
-    position: absolute;
-    cursor: pointer;
-    cursor: hand;
-    z-index: 500; }
-  .page10 #clicktext2 {
-    position: absolute;
-    display: none;
-    width: 33%;
-    left: 37%;
-    top: 11%;
-    background-color: #fff;
-    opacity: 0.8;
-    text-align: left;
-    padding: 12px 10px 0 15px;
-    -webkit-border-radius: 8px 8px 0px 8px;
-    -moz-border-radius: 8px 8px 0px 8px;
-    border-radius: 8px 8px 0px 8px; }
+    margin-left: -530px;
+    margin-top: 641px; }
   .page10 #vid-wrap {
     position: absolute;
     width: 300px;
     height: 300px;
-    left: 0;
-    opacity: 1;
-    margin-top: 470px; }
+    margin-left: -111px;
+    margin-top: 330px;
+    opacity: 1; }
   .page10 #videobox {
     background-color: #404041;
-    top: 22%;
-    left: 7%;
+    top: 35%;
+    left: 65%;
     position: absolute;
     width: 283px;
     height: 180px;
@@ -1590,10 +1542,6 @@ p {
     transition: background-color 0.4s ease; }
   .page10 #videobox:hover {
     background-color: #66665c; }
-  .page10 #arrow {
-    width: 106px;
-    position: absolute;
-    left: 9%; }
 
 /* --- page11 ------ */
 .page11 {
@@ -1613,8 +1561,8 @@ p {
     display: none;
     position: absolute;
     width: 41%;
-    left: 22%;
-    top: 2%;
+    left: 260px;
+    top: 11px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1752,6 +1700,7 @@ p {
     cursor: hand;
     z-index: 500; }
   .page12 #clicktext {
+    z-index: 500;
     display: none;
     position: absolute;
     width: 31%;
@@ -1863,8 +1812,8 @@ p {
     display: none;
     position: absolute;
     width: 34%;
-    left: 10%;
-    top: 54%;
+    left: 120px;
+    top: 403px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1926,8 +1875,8 @@ p {
   .page14 #logo {
     position: absolute;
     width: 297px;
-    margin-top: 48%;
-    margin-left: 3%;
+    margin-top: 564px;
+    left: 621px;
     opacity: 0; }
   .page14 #mask {
     top: 48%;
@@ -1944,6 +1893,6 @@ p {
     margin-top: 0; }
   .page14 #disclaimer {
     position: absolute;
-    font-size: 22px;
-    margin-top: 61%;
-    margin-left: 1%; }
+    font-size: 21px;
+    margin-top: 721px;
+    margin-left: 31px; }

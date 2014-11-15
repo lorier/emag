@@ -6,16 +6,16 @@ function runJQuery(){
 
 		
 		var tl = new TimelineLite ();
-		      tl.add (TweenLite.set(".page8 #pic1", {y:300, x:0, autoAlpha:1}));
-			  tl.add (TweenLite.set(".page8 #pic2", {y:600, x:0, autoAlpha:1}));	
+		      tl.add (TweenLite.set(".page8 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));
+			  tl.add (TweenLite.set(".page8 #pic2", {y:1000, x:800, autoAlpha:1}));	
 		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
 
 			  tl.to(".page8 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page8 .headline h2", 1, {autoAlpha:1}, "-=.7")
 			    .to(".page8 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
-			    .to(".page8 #pic2", 1, {x:0, y:0, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
-			    .to(".page8 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
-
+			    .to(".page8 #pic2", 1, {x:215, y:200, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
+			    .to(".page8 #pic1", .7, {x:215, y:475, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+				
 			
 					$('.page8 button.one').on('click', function () {
 						$(document).off('click');//remove the event listener if it's already there
