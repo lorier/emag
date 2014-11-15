@@ -2,8 +2,6 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
-	
-var clickAnywhereToClose = false;
 
 		var tl = new TimelineLite ();
 		 tl.add (TweenLite.set(".page11 #bluebar", {y:0, x:350, autoAlpha:1}));
@@ -19,24 +17,8 @@ var clickAnywhereToClose = false;
 
 
 		$('.page11 button').on('click', function () {
-				$(document).off('click');
-			    clickAnywhereToClose = true;	
-				$('.page11 #clicktext').fadeIn( "fast", "linear", function(){
-					setUpClose('.page11 button.one', this)
-				});
+			$('.page11 #clicktext').fadeToggle( "fast", "linear");
 		});
-		
-		function setUpClose(exceptionCase, obj)
-		{ 	
-			//exceptionCase == other buttons we want to keep listening to
-			$(document).on('click', function(event) {
-				if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-					  {
-					    $(obj).fadeOut("fast", "linear");
-					    	clickAnywhereToClose = false;
-						}
-					})
-		}
 	
 };
 
@@ -70,7 +52,7 @@ Add berries, lemon juice and honey to a blender and combine until smooth. Add so
 <img id="arrow" src="img/page_11_arrow.png" alt="Our chef in action">
 
 <div id="vid-wrap">
-<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>	
+<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
 </div>
 	
 </div>
