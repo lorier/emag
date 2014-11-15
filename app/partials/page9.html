@@ -1,0 +1,37 @@
+<!--partial-->
+<script type="text/javascript">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+		var tl = new TimelineLite ();
+			tl.add (TweenLite.set(".page9 #bluebar", {y:0, x:450, autoAlpha:1}));	
+		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1})
+		     .to(".page9 .headline h2", 1, {autoAlpha:1}, "-=.7")
+		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+		     .to(".page9 #roses", 1, {autoAlpha:1}, "-=.5");
+};
+
+</script>
+
+<div class="page9 page-container">
+	
+<img id="roses" src="img/page_09_roses.png" alt="check out our furry friends">
+	
+<div id="bluebar">	
+	<h3>Walking Club</h3>
+	<p>Walking hand-in-hand as the seasons change from shades of green, to amber, to hues of grey, then green once more.</p>	
+		<div id="vid-wrap">
+			<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+	<h3 class="movedown">Scenic Drives</h3>
+	<p>Enjoy the bustle of the city, the view of the mountains, the vastness of the ocean, and lush green scenery pass softly by your window.</p>
+	<h3 class="moveup">Gardening</h3>
+	<p>Gardening adds years to your life and life to your years.</p>
+</div>
+
+<div class="headline">
+    <h1 class="amatic pantone166">Explore</h1>
+	<h2 class="amatic white">Your World</h2>
+</div>
+	
+</div>
+
