@@ -1,40 +1,19 @@
 
 //SOUND STUFF CAN BE MOVED TO DOCUMENT READY/WINDOW LOAD
 
-var sound_engine = new Howl({
+var soundFX = new Howl({
   urls: ['sounds/engine.mp3'],
-  autoplay: false
-});
-
-var sound_birds = new Howl({
-  urls: ['sounds/birds.mp3'],
-  autoplay: false
-});
-
-var sound_giggle = new Howl({
-  urls: ['sounds/giggle.mp3'],
-  autoplay: false
+  sprite: {
+    engine: [0, 3000]
+  }
 });
 
 
 //http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 function soundMachine(theFileName){
-  console.log("sound" +theFileName);
-  switch(theFileName){
-	case 'engine':
-	    sound_engine.play();
-	    break;
-	case 'giggle':
-	    sound_giggle.play();
-	    break;
-	case 'birds':
-	    sound_birds.play();
-	    break;	
-	default:
-	    break;
-	}
+  console.log("sound");
   
-  
+  soundFX.play('engine');
 	
 }
 
@@ -59,3 +38,5 @@ var soundMachinery = Object.create(SoundMachinery.prototype, {
     set: function (value) { this.rawDesc = value.toLowerCase(); }  
   }
 }); 
+car2.color = 'blue';
+alert(car2.getInfo()); //displays 'A RED PORSCHE BOXTER.'
