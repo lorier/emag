@@ -60,7 +60,8 @@
     currentPage = page;
     totalPages = total;
 	
-      if (currentPage > 1 && currentPage < totalPages){
+	
+      if (currentPage > 1 && currentPage <= totalPages){
         $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
 		
         origPosition = "-100%";
@@ -241,6 +242,7 @@ function tweenThumbs(whichStop){
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+<div class="screenWrapper">
    <div class="wrapper">
     <section class="top-bar">
         <!--logo and links go here-->
@@ -269,8 +271,8 @@ function tweenThumbs(whichStop){
 			  }
 			  </style>
             <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
-            <li><a href="#link"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
-            <li><a href="#link"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
+            <li><a href="https://twitter.com/aegisliving" target="_blank"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
+            <li><a href="https://www.facebook.com/AegisLiving" target="_blank"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
 			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
             <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
           </ul>
@@ -341,6 +343,6 @@ function tweenThumbs(whichStop){
    <script src="js/soundMachine.js"></script>  
   <script src="js/jquery.slotmachine.js"></script>
   <script src="js/app.js"></script>
-
+</div>
 </body>
 </html>
