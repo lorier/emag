@@ -50,12 +50,18 @@ function soundMachine(theFileName){
 	  switch(theFileName){
 		case 'engine':
 		    sound_engine.play();
+			sound_giggle.stop();
+			sound_birds.stop();
 		    break;
 		case 'giggle':
-		    sound_giggle.play();
+		    sound_engine.stop();
+			sound_giggle.play();
+			sound_birds.stop();
 		    break;
 		case 'birds':
-		    sound_birds.play();
+		    sound_engine.stop();
+			sound_giggle.stop();
+			sound_birds.play();
 		    break;	
 		default:
 		    break;
