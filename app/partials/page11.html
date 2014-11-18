@@ -17,24 +17,38 @@ function runJQuery(){
         .to(".page11 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
 
 		$('.page11 button').on('click', function () {
+			$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+			$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+			$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+			
 				$(document).off('click');
 			    clickAnywhereToClose = true;	
 				$('.page11 #clicktext').fadeIn( "fast", "linear", function(){
-					setUpClose('.page11 button.one', this)
+					setUpClose('.page11 button', this)
 				});
+				
 		});
-		
-		function setUpClose(exceptionCase, obj)
-		{ 	
-			//exceptionCase == other buttons we want to keep listening to
-			$(document).on('click', function(event) {
-				if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-					  {
-					    $(obj).fadeOut("fast", "linear");
-					    	clickAnywhereToClose = false;
-						}
-					})
-		}
+	
+			function setUpClose(exceptionCase, obj)
+			{ 	
+				//exceptionCase == other buttons we want to keep listening to
+				$(document).on('click', function(event) {
+					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+						  {
+						    $(obj).fadeOut("fast", "linear");
+						    	clickAnywhereToClose = false;
+							}
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
+						})
+			}
 	
 };
 

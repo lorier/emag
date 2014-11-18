@@ -26,14 +26,14 @@ function runJQuery(){
 			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
 		
 			$('.page2 button').on('click', function () {
-				document.getElementById("circle-one").setAttribute('stroke', 'rgb(118,195,212)');
-				document.getElementById("circle-two").setAttribute('stroke', 'rgb(118,195,212)');
-				document.getElementById("circle-plus").setAttribute('fill', 'rgb(118,195,212)');
+				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
 				
 					$(document).off('click');
 				    clickAnywhereToClose = true;	
 					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page2 button.one', this)
+						setUpClose('.page2 button', this)
 					});
 					
 			});
@@ -47,9 +47,15 @@ function runJQuery(){
 						    $(obj).fadeOut("fast", "linear");
 						    	clickAnywhereToClose = false;
 							}
-							document.getElementById("circle-two").setAttribute('stroke', 'rgb(255,255,255)');
-							document.getElementById("circle-one").setAttribute('stroke', 'rgb(255,255,255)');
-							document.getElementById("circle-plus").setAttribute('fill', 'rgb(255,255,255)');
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
 						})
 			}
 			

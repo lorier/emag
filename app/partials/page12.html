@@ -26,25 +26,38 @@ function runJQuery(){
           .to(".page12 #arrow", 1, {autoAlpha:1, delay:.2}, "-=.7")
 
 			$('.page12 button').on('click', function () {
+				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+
 					$(document).off('click');
 				    clickAnywhereToClose = true;	
 					$('.page12 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page12 button.one', this)
+						setUpClose('.page12 button', this)
 					});
+
 			});
 
-			function setUpClose(exceptionCase, obj)
-			{ 	
-				//exceptionCase == other buttons we want to keep listening to
-				$(document).on('click', function(event) {
-					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-						  {
-						    $(obj).fadeOut("fast", "linear");
-						    	clickAnywhereToClose = false;
-							}
-						})
-			}
-	
+				function setUpClose(exceptionCase, obj)
+				{ 	
+					//exceptionCase == other buttons we want to keep listening to
+					$(document).on('click', function(event) {
+						if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+							  {
+							    $(obj).fadeOut("fast", "linear");
+							    	clickAnywhereToClose = false;
+								}
+								$('.view-container svg #circle-one').each(function( index ) {
+									  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+								});
+								$('.view-container svg #circle-two').each(function( index ) {
+									  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+								});
+								$('.view-container svg #circle-plus').each(function( index ) {
+									  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+								});
+							})
+				}
 };
 
 </script>
@@ -66,7 +79,7 @@ function runJQuery(){
 <img id="filmstrip" src="img/page_12_filmstrip.png" alt="filmstrip">	
 
 <div id="vid-wrap">
-	<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+	<div id="videobox" ng-click="doYoutube('mY9qfcjhoLs')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 </div>
 
 	<img id="filmpic1" src="img/page_12_pic1.jpg" alt="film one">

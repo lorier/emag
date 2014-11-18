@@ -16,48 +16,70 @@ function runJQuery(){
 			    .to(".page8 #pic2", 1, {x:215, y:200, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
 			    .to(".page8 #pic1", .7, {x:215, y:475, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
 				
-			
+				
 					$('.page8 button.one').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
 						$(document).off('click');//remove the event listener if it's already there
 						clickAnywhereToClose = true;
 						$('.page8 #clicktext1').fadeIn( "fast", "linear", function() {
 							setUpClose('.page8 button.two', this)
+							setUpClose('.page8 button.three', this)
 						});	
 						$('.page8 #clicktext2').fadeOut("fast", "linear");
 						$('.page8 #clicktext3').fadeOut("fast", "linear");
 					});
 
 					$('.page8 button.two').on('click', function () {
-						$(document).off('click');
-					    clickAnywhereToClose = true;
-						$('.page8 #clicktext2').fadeIn( "fast", "linear", function(){
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+						$(document).off('click');//remove the event listener if it's already there
+						clickAnywhereToClose = true;
+						$('.page8 #clicktext2').fadeIn( "fast", "linear", function() {
 							setUpClose('.page8 button.one', this)
-						});
+							setUpClose('.page8 button.three', this)
+						});	
 						$('.page8 #clicktext1').fadeOut("fast", "linear");
 						$('.page8 #clicktext3').fadeOut("fast", "linear");
 					});
-					
-						$('.page8 button.three').on('click', function () {
-							$(document).off('click');
-						    clickAnywhereToClose = true;
-							$('.page8 #clicktext3').fadeIn( "fast", "linear", function(){
-								setUpClose('.page8 button.one', this)
-							});
-							$('.page8 #clicktext1').fadeOut("fast", "linear");
-							$('.page8 #clicktext2').fadeOut("fast", "linear");
+				
+					$('.page8 button.three').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+						$(document).off('click');//remove the event listener if it's already there
+						clickAnywhereToClose = true;
+						$('.page8 #clicktext3').fadeIn( "fast", "linear", function() {
+							setUpClose('.page8 button.one', this)
+							setUpClose('.page8 button.two', this)
+						});	
+						$('.page8 #clicktext1').fadeOut("fast", "linear");
+						$('.page8 #clicktext2').fadeOut("fast", "linear");
 						});
+
 					
-						function setUpClose(exceptionCase, obj)
-						{ 	
-							//exceptionCase == other buttons we want to keep listening to
-							$(document).on('click', function(event) {
-								if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-									  {
-									    $(obj).fadeOut("fast", "linear");
-									    	clickAnywhereToClose = false;
-										}
-									})
-						}
+					function setUpClose(exceptionCase, obj)
+					{ 	
+						//exceptionCase == other buttons we want to keep listening to
+						$(document).on('click', function(event) {
+							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) {
+								$(obj).fadeOut("fast", "linear");
+								clickAnywhereToClose = false;
+							}
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
+						
+						})
+					}
 					
 				
 };

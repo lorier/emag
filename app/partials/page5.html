@@ -2,6 +2,7 @@
 <script type="text/javascript">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+		var clickAnywhereToClose = false;
 
 		var tl = new TimelineLite ();	
 			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1})
@@ -11,15 +12,19 @@ function runJQuery(){
 				.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
 				.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
 				.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5");
-			
+				
 					$('.page5 button').on('click', function () {
-						$('.page5 #clicktext').fadeToggle( "fast", "linear");
-					});
-	
-	
-							
-									
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(0,113,151)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(0,113,151)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(0,113,151)');
 
+							$(document).off('click');
+						    clickAnywhereToClose = true;	
+							$('.page5 #clicktext').fadeIn( "fast", "linear", function(){
+								setUpClose('.page5 button', this)
+							});
+
+					});
 				
 				
 									var machine1 = $('#machineFake1').slotMachine({
@@ -59,6 +64,27 @@ function runJQuery(){
 										}
 										
 									});
+			
+			function setUpClose(exceptionCase, obj)
+			{ 	
+				//exceptionCase == other buttons we want to keep listening to
+				$(document).on('click', function(event) {
+					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
+						  {
+						    $(obj).fadeOut("fast", "linear");
+						    	clickAnywhereToClose = false;
+							}
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
+						})
+			}
 				
 				/*					var machine1 = $("#machineFake1").slotMachine({
 														active	: 1,
@@ -95,8 +121,6 @@ function runJQuery(){
 													});
 						
 	*/
-	
-	
 	
 };
 </script>
