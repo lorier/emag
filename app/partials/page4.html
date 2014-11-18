@@ -14,6 +14,9 @@ function runJQuery(){
 
 				
 					$('.page4 button.one').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
 						$(document).off('click');//remove the event listener if it's already there
 						clickAnywhereToClose = true;
 						$('.page4 #clicktext1').fadeIn( "fast", "linear", function() {
@@ -21,8 +24,12 @@ function runJQuery(){
 						});	
 						$('.page4 #clicktext2').fadeOut("fast", "linear");
 					});
-
+					
+					
 					$('.page4 button.two').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
 						$(document).off('click');
 					    clickAnywhereToClose = true;
 						$('.page4 #clicktext2').fadeIn( "fast", "linear", function(){
@@ -31,16 +38,22 @@ function runJQuery(){
 						$('.page4 #clicktext1').fadeOut("fast", "linear");
 					});
 
+	
+
 					function setUpClose(exceptionCase, obj)
 					{ 	
 						//exceptionCase == other buttons we want to keep listening to
 						$(document).on('click', function(event) {
+								console.log($('.view-container svg').find("#circle-one"));
 							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-								  {
-								    $(obj).fadeOut("fast", "linear");
-								    	clickAnywhereToClose = false;
-									}
-								})
+							{
+							$(obj).fadeOut("fast", "linear");
+							clickAnywhereToClose = false;
+							}
+								$('.view-container svg #circle-one').get( 0 ).setAttribute('stroke', 'rgb(255,255,255)');
+								$('.view-container svg #circle-two').get( 0 ).setAttribute('stroke', 'rgb(255,255,255)');
+								$('.view-container svg #circle-plus').get( 0 ).setAttribute('fill', 'rgb(255,255,255)');
+						})
 					}			
 };
 	</script>		

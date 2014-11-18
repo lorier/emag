@@ -5,6 +5,7 @@
 function runJQuery(){
 
 	var clickAnywhereToClose = false;
+	//var svgElement = document.getElementById("circlegroup");
 	
       	var tl = new TimelineLite ();	
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
@@ -25,11 +26,16 @@ function runJQuery(){
 			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
 		
 			$('.page2 button').on('click', function () {
+				document.getElementById("circle-one").setAttribute('stroke', 'rgb(118,195,212)');
+				document.getElementById("circle-two").setAttribute('stroke', 'rgb(118,195,212)');
+				document.getElementById("circle-plus").setAttribute('fill', 'rgb(118,195,212)');
+				
 					$(document).off('click');
 				    clickAnywhereToClose = true;	
 					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
 						setUpClose('.page2 button.one', this)
 					});
+					
 			});
 			
 			function setUpClose(exceptionCase, obj)
@@ -41,9 +47,13 @@ function runJQuery(){
 						    $(obj).fadeOut("fast", "linear");
 						    	clickAnywhereToClose = false;
 							}
+							document.getElementById("circle-two").setAttribute('stroke', 'rgb(255,255,255)');
+							document.getElementById("circle-one").setAttribute('stroke', 'rgb(255,255,255)');
+							document.getElementById("circle-plus").setAttribute('fill', 'rgb(255,255,255)');
 						})
 			}
 			
+		
 			//TARGET IMAGE PULSING FADE IN AND OUT
 			//TweenMax.to(".page2 #clickme", 1, {alpha:.3, repeatDelay:.2, repeat:10, yoyo:true})
 };
@@ -51,6 +61,7 @@ function runJQuery(){
 </script>
 
 <div class="page2 page-container">
+		
 	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
 	<div id="clicktext">
 	<h4 class="pantone633 cantarell bold">What is the<br />Life Enrichment Program?</h4>

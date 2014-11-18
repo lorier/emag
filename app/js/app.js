@@ -130,7 +130,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   });
 
   $scope.addSVG = function(){
-    return "partials/target.svg";
+    return "partials/circlebutton.svg";
   };
   
   $scope.doYoutube = function(linkurl){
