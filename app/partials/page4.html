@@ -44,15 +44,22 @@ function runJQuery(){
 					{ 	
 						//exceptionCase == other buttons we want to keep listening to
 						$(document).on('click', function(event) {
-								console.log($('.view-container svg').find("#circle-one"));
-							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-							{
-							$(obj).fadeOut("fast", "linear");
-							clickAnywhereToClose = false;
+							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) {
+								$(obj).fadeOut("fast", "linear");
+								clickAnywhereToClose = false;
 							}
-								$('.view-container svg #circle-one').get( 0 ).setAttribute('stroke', 'rgb(255,255,255)');
-								$('.view-container svg #circle-two').get( 0 ).setAttribute('stroke', 'rgb(255,255,255)');
-								$('.view-container svg #circle-plus').get( 0 ).setAttribute('fill', 'rgb(255,255,255)');
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
+								//$('.view-container svg #circle-one')[0].setAttribute('stroke', 'rgb(255,255,255)');
+								//$('.view-container svg #circle-two')[0].setAttribute('stroke', 'rgb(255,255,255)');
+								//$('.view-container svg #circle-plus')[0].setAttribute('fill', 'rgb(255,255,255)');
 						})
 					}			
 };
