@@ -559,6 +559,35 @@ p {
   100% {
     -webkit-transform: rotate(0deg); } }
 
+#clickme:active {
+  -webkit-animation: clickAnimation 0.2s 1 ease-out;
+  -moz-animation: clickAnimation 0.2s 1 ease-out;
+  -o-animation: clickAnimation 0.2s 1 ease-out;
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%; }
+
+@-webkit-keyframes clickAnimation {
+  from {
+    -webkit-transform: scale(1) translate(0px); }
+
+  to {
+    -webkit-transform: scale(0.8) translate(0px); } }
+
+@-moz-keyframes clickAnimation {
+  from {
+    -moz-transform: scale(1) translate(0px); }
+
+  to {
+    -moz-transform: scale(0.8) translate(0px); } }
+
+@-o-keyframes clickAnimation {
+  from {
+    -o-transform: scale(1) translate(0px); }
+
+  to {
+    -o-transform: scale(0.8) translate(0px); } }
+
 /*----------------------------------------------*/
 /* --- page1 ------ */
 .page1 {
@@ -1347,8 +1376,9 @@ p {
   .page9 #roses {
     position: absolute;
     width: 303px;
-    margin-top: 219px;
-    left: 350px;
+    margin-top: 210px;
+    left: 325px;
+    transform-origin: 50% 160%;
     opacity: 0; }
   .page9 #bluebar {
     position: absolute;

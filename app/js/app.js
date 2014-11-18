@@ -207,6 +207,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   //Logic for prev/next buttons on slides. Could use some refactoring
   $scope.moveSlide = function(direction){
+	 // soundMachineClear();
     if(direction == 'prev'){
       $scope.pageTransition  = "back";
       var prevPage = $scope.activePage()-1;

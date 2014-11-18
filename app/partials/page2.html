@@ -11,11 +11,12 @@ function runJQuery(){
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
+		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
 
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #circle", 1, {autoAlpha:1}, "-=1")
-		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "-=.2")
+			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.2")
+		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
@@ -29,7 +30,9 @@ function runJQuery(){
 				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
-				
+				/*if(!$('.view-container .page-container .click-layer').length){
+					$('.view-container .page-container').prepend("<div class='click-layer'></div>");
+				}*/
 					$(document).off('click');
 				    clickAnywhereToClose = true;	
 					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
@@ -67,7 +70,7 @@ function runJQuery(){
 </script>
 
 <div class="page2 page-container">
-		
+	
 	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
 	<div id="clicktext">
 	<h4 class="pantone633 cantarell bold">What is the<br />Life Enrichment Program?</h4>
