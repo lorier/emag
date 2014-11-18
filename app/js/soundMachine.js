@@ -13,6 +13,9 @@ $(document).ready(function(){
 		$('li.nav-sound a .nav-holder').toggleClass('nosound');
 		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
 			localStorage.playSound = "false";
+		    sound_engine.stop();
+			sound_giggle.stop();
+			sound_birds.stop();
 			e.preventDefault();
 		}else{
 			initSounds();
