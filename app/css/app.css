@@ -138,6 +138,11 @@ cross fading between routes with ngView
 body {
   overflow: hidden; }
 
+.screenWrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
 button {
   background: none;
   border: none;
@@ -195,6 +200,9 @@ button {
 -------------------------------------------------- */
 h1, h2, h3, h4 {
   font-family: "Amatic SC", cursive; }
+
+html {
+  height: 100%; }
 
 body {
   font-family: "Cantarell", Arial, sans-serif;
@@ -708,6 +716,8 @@ p {
     -webkit-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
+  .page2 .red {
+    border: 1px solid red; }
   .page2 #clickme {
     opacity: 1;
     width: 50px;
@@ -763,9 +773,10 @@ p {
     margin-left: 19%;
     opacity: 0; }
   .page3 #videobox {
-    background-color: #404041;
-    width: 106%;
-    height: 24%;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
+    width: 284px;
+    height: 179px;
     position: absolute;
     top: 6%;
     left: -19%;
@@ -850,7 +861,7 @@ p {
     display: none;
     width: 32%;
     left: 251px;
-    top: 274px;
+    bottom: 251px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -872,11 +883,11 @@ p {
     display: none;
     width: 34%;
     left: 429px;
-    top: 76px;
+    bottom: 400px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
-    padding: 12px 0 0 15px;
+    padding: 12px 10px 0 15px;
     -webkit-border-radius: 8px 8px 0px 8px;
     -moz-border-radius: 8px 8px 0px 8px;
     border-radius: 8px 8px 0px 8px; }
@@ -888,12 +899,13 @@ p {
     opacity: 1;
     margin-top: 431px; }
   .page4 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
     top: 108px;
     left: 20px;
     position: absolute;
     width: 283px;
-    height: 180px;
+    height: 178px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
@@ -974,7 +986,7 @@ p {
     fill: #007197; }
   .page5 #slots {
     position: absolute;
-    margin-top: 27%;
+    margin-top: 340px;
     margin-left: 2%; }
   .page5 img.slot {
     width: 193px;
@@ -1008,12 +1020,13 @@ p {
     opacity: 1;
     margin-top: 470px; }
   .page6 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
     top: 27%;
     left: 11%;
     position: absolute;
     width: 283px;
-    height: 180px;
+    height: 178px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
@@ -1120,7 +1133,8 @@ p {
     margin-top: 470px;
     opacity: 0; }
   .page7 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_07_video.jpg");
+    background-size: 100%;
     top: 18%;
     left: 269%;
     position: absolute;
@@ -1190,8 +1204,8 @@ p {
     display: none;
     position: absolute;
     width: 28%;
-    left: 39%;
-    top: 23%;
+    left: 458px;
+    top: 177px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1217,7 +1231,7 @@ p {
     position: absolute;
     width: 38%;
     left: 12%;
-    top: 50%;
+    bottom: 180px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1245,8 +1259,8 @@ p {
     display: none;
     position: absolute;
     width: 27%;
-    left: 23%;
-    top: 48%;
+    left: 271px;
+    bottom: 119px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1270,12 +1284,13 @@ p {
     margin-top: 267px;
     opacity: 1; }
   .page8 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_08_video.jpg");
+    background-size: 100%;
     top: 133px;
     left: 204px;
     position: absolute;
-    width: 283px;
-    height: 180px;
+    width: 287px;
+    height: 176px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
@@ -1347,7 +1362,7 @@ p {
   .page9 #bluebar p {
     color: #fff;
     font-size: 17px;
-    line-height: 142%;
+    line-height: 140%;
     margin-top: -3%; }
   .page9 #bluebar h3 {
     font-family: "Amatic SC", sans-serif;
@@ -1356,23 +1371,24 @@ p {
     font-size: 46px;
     margin-top: 20px; }
   .page9 #bluebar h3.movedown {
-    margin-top: 192px; }
+    margin-top: 188px; }
   .page9 #bluebar h3.moveup {
-    margin-top: -10px; }
+    margin-top: -13px; }
   .page9 #vid-wrap {
     position: absolute;
     width: 300px;
     height: 300px;
-    margin-left: -70%;
-    margin-top: -31%;
+    margin-left: -247px;
+    margin-top: -112px;
     opacity: 1; }
   .page9 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
     top: 35%;
     left: 65%;
     position: absolute;
     width: 283px;
-    height: 180px;
+    height: 178px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
@@ -1509,7 +1525,7 @@ p {
     position: absolute;
     width: 33%;
     left: 505px;
-    top: 117px;
+    bottom: 430px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1520,8 +1536,9 @@ p {
   .page10 #stay-connected {
     width: 230px;
     position: absolute;
-    margin-left: -530px;
-    margin-top: 641px; }
+    left: 50px;
+    margin-top: 641px;
+    opacity: 0; }
   .page10 #vid-wrap {
     position: absolute;
     width: 300px;
@@ -1530,11 +1547,12 @@ p {
     margin-top: 330px;
     opacity: 1; }
   .page10 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_10_video.jpg");
+    background-size: 100%;
     top: 35%;
     left: 65%;
     position: absolute;
-    width: 283px;
+    width: 286px;
     height: 180px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
@@ -1557,12 +1575,14 @@ p {
     cursor: pointer;
     cursor: hand;
     z-index: 500; }
+  .page11 #clicktext h4 {
+    line-height: 80%; }
   .page11 #clicktext {
     display: none;
     position: absolute;
     width: 41%;
-    left: 260px;
-    top: 11px;
+    left: 259px;
+    bottom: 409px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1571,7 +1591,7 @@ p {
     -moz-border-radius: 8px 8px 0px 8px;
     border-radius: 8px 8px 0px 8px; }
   .page11 #clicktext p {
-    line-height: 152%; }
+    line-height: 140%; }
   .page11 #bluebar {
     position: absolute;
     height: 100%;
@@ -1602,12 +1622,13 @@ p {
     margin-top: 38%;
     opacity: 1; }
   .page11 #videobox {
-    background-color: #404041;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
     top: 30%;
     left: 65%;
     position: absolute;
     width: 283px;
-    height: 180px;
+    height: 178px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;
@@ -1748,12 +1769,13 @@ p {
     margin-top: 25%;
     opacity: 1; }
   .page12 #videobox {
-    background-color: #404041;
-    top: 30%;
+    background-image: url("../img/page_x_video.jpg");
+    background-size: 100%;
+    top: 15px;
     left: 65%;
     position: absolute;
     width: 219px;
-    height: 140px;
+    height: 138px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
     border-radius: 8px 8px 8px 8px;

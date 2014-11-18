@@ -8,7 +8,7 @@ $(document).ready(function(e) {
 	var contW = contentwrap.innerWidth(); //init these from the css...
 	var displayRatio = contW/contH;
 	$("body").css('height', '100vh');
-	
+	console.log($("body").css('height'));
 	
 	function iOSversion() {
 	  if (/iP(hone|od|ad)/.test(navigator.platform)) {
@@ -19,7 +19,7 @@ $(document).ready(function(e) {
 	}
 	function checkios7(){
 		var iosVer = iOSversion();
-		if (iosVer[0] < 8) {
+		if (iosVer < 8) {
 			console.log('good ios')
 			return true;
 		}else{
@@ -27,7 +27,7 @@ $(document).ready(function(e) {
 			return false;
 		}
 	}
-	var badiosVer = checkios7; // true < 7
+	var badiosVer = checkios7(); // true < 7
 	
 	
     $( window ).resize(function() {

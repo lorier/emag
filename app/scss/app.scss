@@ -250,6 +250,11 @@ cross fading between routes with ngView
 body {
   overflow: hidden;
 }
+.screenWrapper{
+	height:100%;
+	width:100%;
+	overflow: hidden;
+}
 button { background: none; border: none; margin: 0; padding: 0; font-size: 0; line-height: 0; width: auto; overflow: visible; }
 
 .btn {
@@ -312,7 +317,10 @@ h1, h2, h3, h4 {
   font-family: "Amatic SC", cursive;
 }
 
+html{
+    height: 100%;
 
+}
 body {
   font-family: "Cantarell", Arial, sans-serif;
   background-color: #EAEAEA;

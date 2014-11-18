@@ -49,6 +49,12 @@ function initSounds(){
 	});
 
 }
+function soundMachineClear(){
+    sound_engine.stop();
+	sound_giggle.stop();
+	sound_birds.stop();
+	sound_slots.stop();
+}
 
 //http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
 function soundMachine(theFileName){
