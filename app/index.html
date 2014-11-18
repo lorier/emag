@@ -59,13 +59,14 @@
     thumbWidth = $(".page-thumbnail").outerWidth(true);
     currentPage = page;
     totalPages = total;
-      
+	
       if (currentPage > 1 && currentPage < totalPages){
-        $(".page-wrapper").css({"left": "-100%"});
+        $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
+		
         origPosition = "-100%";
       }
       if (currentPage === 1){
-        $(".page-wrapper").css({"left": "0"});      
+        $(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
       }
       //find position and dimension of slide container
       init();
@@ -74,7 +75,7 @@
       //   init();
       // })
       //track mouse position
-      $(window).mousemove(getMousePosition);
+      //$(window).mousemove(getMousePosition);
   };
     
 
@@ -93,46 +94,7 @@
     ButtonHeight = $(".button-right").height();
     ButtonWidth = $(".button-right").width();
   };
-
-
-  function getMousePosition(event){
-    mouseY = event.pageY;
-    mouseX = event.pageX;
-    $(".mouse-coords").text(mouseX + ", "+ mouseY);
-
-    //left button coords
-    if(
-        (mouseX < lButtonLeft + ButtonWidth)  &&  
-        (mouseX > lButtonLeft) && 
-        (mouseY < lButtonTop + ButtonHeight ) && 
-        (mouseY > lButtonTop)   )
-  
-        {
-        if (!isMouseOverLeftButton){
-              isMouseOverLeftButton = true;
-              updateLeftAnimation();
-            }
-    } else 
-        if (isMouseOverLeftButton){
-            isMouseOverLeftButton = false;
-            updateLeftAnimation();
-    }
-    //right button coords
-    if(
-        (mouseX < rButtonLeft + ButtonWidth)  &&  
-        (mouseX > rButtonLeft) && 
-        (mouseY < rButtonTop + ButtonHeight ) && 
-        (mouseY > rButtonTop)   )
-        {
-        if (!isMouseOverRightButton){
-              isMouseOverRightButton = true;
-              updateRightAnimation();
-            }
-    } else if (isMouseOverRightButton){
-              isMouseOverRightButton = false;
-              updateRightAnimation();
-    }
-  }  
+ 
 
 
   function updateLeftAnimation(){   
@@ -141,7 +103,8 @@
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
       var numericPosition = parseInt(origWrapperPosition);
-      var peekAmount = (numericPosition + 2) + "%";
+      var peekAmount = parseInt(numericPosition + 5) + "%";
+
       if(isMouseOverLeftButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
       }else if(!isMouseOverLeftButton){
@@ -157,7 +120,7 @@
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
       var numericPosition = parseInt(origWrapperPosition);
-      var peekAmount = (numericPosition - 2) + "%";
+      var peekAmount = parseInt(numericPosition - 5) + "%";
 
       if(isMouseOverRightButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
@@ -185,8 +148,28 @@
       rButtonTop = $(".button-right").offset().top;
       lButtonLeft = $(".overlay-buttons").offset().left;
       lButtonTop = $(".overlay-buttons").offset().top;
-      };
-
+	  
+	  
+	 $(".button-right").on('mouseenter',function(){
+        isMouseOverRightButton = true;
+        updateRightAnimation();
+      });
+	  $(".button-right").on('mouseleave',function(){
+          isMouseOverRightButton = false;
+          updateRightAnimation();
+      });
+	  
+ 	 $(".button-left").on('mouseenter',function(){
+          isMouseOverLeftButton = true;
+          updateLeftAnimation();
+       });
+ 	  $(".button-left").on('mouseleave',function(){
+           isMouseOverLeftButton = false;
+           updateLeftAnimation();
+       });
+		 
+		
+	}
 
 //Thumbnail slider behavior
 //----------------------------------------------------
@@ -264,9 +247,31 @@ function tweenThumbs(whichStop){
         <div class="link-out"><a href="#link">Find a community</a> near you.</div>
         <div class="social-buttons">
           <ul>
+			  <style>
+
+			  li.nav-sound a .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  background-position-x:0;
+				  background-image:url('img/sound.png');
+				  background-size: cover;
+			  }
+			  li.nav-sound a .nav-holder.nosound{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  background-position-x:100%;
+				  background-image:url('img/sound.png');
+				  background-size: cover;
+			  }
+			  </style>
             <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
             <li><a href="#link"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
             <li><a href="#link"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
+			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
             <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
           </ul>
         </div>
