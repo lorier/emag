@@ -20,8 +20,10 @@ $(document).ready(function(e) {
 	function checkios7(){
 		var iosVer = iOSversion();
 		if (iosVer[0] < 8) {
+			console.log('good ios')
 			return true;
 		}else{
+			console.log('bad ios')
 			return false;
 		}
 	}

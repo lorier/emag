@@ -103,7 +103,7 @@
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
       var numericPosition = parseInt(origWrapperPosition);
-      var peekAmount = parseInt(numericPosition + 5) + "%";
+      var peekAmount = parseInt(numericPosition + 3) + "%";
 
       if(isMouseOverLeftButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
@@ -120,7 +120,7 @@
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
       var numericPosition = parseInt(origWrapperPosition);
-      var peekAmount = parseInt(numericPosition - 5) + "%";
+      var peekAmount = parseInt(numericPosition - 3) + "%";
 
       if(isMouseOverRightButton){
          $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
