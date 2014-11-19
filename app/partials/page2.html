@@ -15,16 +15,16 @@ function runJQuery(){
 
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.2")
+			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
 		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #pic1", 1, {x:0, y:0, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
-			  .to(".page2 #pic2", 1, {x:0, y:0, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2.5")
-			  .to(".page2 #pic3", 1, {x:0, y:0, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=2")
-
-			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
+			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
+			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
+			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=1")
+			  .to(".page2 #clickme", 1.5, {autoAlpha:.5,scale:1.3,repeat:-1,yoyo:true,ease:Elastic.easeIn}, "-=1");
+			
 		
 			$('.page2 #clickme').on('click', function () {
 				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
@@ -62,9 +62,7 @@ function runJQuery(){
 						})
 			}
 			
-		
-			//TARGET IMAGE PULSING FADE IN AND OUT
-			//TweenMax.to(".page2 #clickme", 1, {alpha:.3, repeatDelay:.2, repeat:10, yoyo:true})
+			
 };
 
 </script>
