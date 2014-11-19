@@ -5,11 +5,11 @@ function runJQuery(){
 
 			var tl = new TimelineLite ();			
 			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page3 #arrow", {x:-10}));	
+				  tl.add (TweenLite.set(".page3 #arrow", {x:-80}));	
 				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:1})
 				  .to(".page3 p", 1, {autoAlpha:1}, "-=.5")				
 				  .to(".page3 h2", 1, {autoAlpha:1}, "-=.5")
-				  .to(".page3 #bluebar", .7, {x:10, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
+				  .to(".page3 #bluebar", .7, {x:10, y:0, autoAlpha:1, ease:Back.easeOut}, "-=1.5")
 				  .to(".page3 #arrow", .8, {autoAlpha:1, x:0, ease:Elastic.easeOut}, "-=.7");			
 						
 				// VIDEO BUTTON

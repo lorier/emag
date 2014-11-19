@@ -8,7 +8,7 @@ function runJQuery(){
 			tl.add (TweenLite.set(".page9 #roses", {rotation:90}));	
 		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1})
 		     .to(".page9 .headline h2", 1, {autoAlpha:1}, "-=.7")
-		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
 		     .to(".page9 #roses", 1, {autoAlpha:1,rotation:0}, "-=.5");
 };
 
@@ -16,12 +16,13 @@ function runJQuery(){
 
 <div class="page9 page-container">
 	
-	<div class="headline">
-	    <h1 class="amatic pantone166">Explore</h1>
-		<h2 class="amatic white">Your World</h2>
-	</div>
-	
 <img id="roses" src="img/page_09_roses.png" alt="check out our furry friends">
+	
+<div class="headline">
+    <h1 class="amatic pantone166">Explore</h1>
+	<h2 class="amatic white">Your World</h2>
+</div>
+	
 	
 <div id="bluebar">	
 	<h3>Walking Club</h3>
@@ -33,8 +34,6 @@ function runJQuery(){
 	<p>Enjoy the bustle of the city, the view of the mountains, the vastness of the ocean, and lush green scenery pass softly by your window.</p>
 	<h3 class="moveup">Gardening</h3>
 	<p>Gardening adds years to your life and life to your years.</p>
-
-
 	
 </div>
 

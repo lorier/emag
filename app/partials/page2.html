@@ -20,13 +20,13 @@ function runJQuery(){
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
 		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
-			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2.5")
-			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=2")
+			  .to(".page2 #pic1", 1, {x:0, y:0, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=3")
+			  .to(".page2 #pic2", 1, {x:0, y:0, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=2.5")
+			  .to(".page2 #pic3", 1, {x:0, y:0, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=2")
 
 			  .to(".page2 #clickme", 1, {autoAlpha:1, delay:1});
 		
-			$('.page2 button').on('click', function () {
+			$('.page2 #clickme').on('click', function () {
 				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
@@ -36,7 +36,7 @@ function runJQuery(){
 					$(document).off('click');
 				    clickAnywhereToClose = true;	
 					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page2 button', this)
+						setUpClose('.page2 #clickme', this)
 					});
 					
 			});
@@ -71,7 +71,7 @@ function runJQuery(){
 
 <div class="page2 page-container">
 	
-	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
+	<div id="clickme"><ng-include src="addSVG()"></ng-include></div>
 	<div id="clicktext">
 	<h4 class="pantone633 cantarell bold">What is the<br />Life Enrichment Program?</h4>
 	<p>Our Life Enrichment program is just that – to enrich the daily lives of our residents in big and small ways.  We want to bring a smile to everyday, offer a unique challenge, teach something new, or share warm memories from the past.  Our Life Enrichment Directors customize our daily activities to stimulate the mind, increase physical activity, and nurture the emotional health of each resident. </p>

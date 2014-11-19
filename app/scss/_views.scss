@@ -39,9 +39,9 @@ text-align: left;
 }
 
 #video-play {
-width: 37px; 
+width: 57px; 
 position: relative;
-top: 39%;
+top: 35%;
 cursor: pointer;
 cursor: hand;
 }
@@ -225,7 +225,7 @@ to { -o-transform:  scale(.8)  translate(0px); }
    h1 {
 		font-size: 105px;
 		display: block;
-		margin-top: -8px;
+		margin-top: 10px;
 		opacity: 0;
 	}
 
@@ -244,7 +244,8 @@ to { -o-transform:  scale(.8)  translate(0px); }
 	span.line5 {padding-left:33%;}
 	
 	#pic1 {
-	left: 400px;
+	margin-top: 447px;
+	left: 570px;
 	opacity: 0;
 	position: absolute;
 	width: 195px;
@@ -257,6 +258,8 @@ to { -o-transform:  scale(.8)  translate(0px); }
 	}
 	
 	#pic2 {
+	margin-top: 450px;
+	left: 774px;
 	opacity: 0;
 	position: absolute;
 	width: 195px;
@@ -269,6 +272,8 @@ to { -o-transform:  scale(.8)  translate(0px); }
 	}
 	
 	#pic3 {
+	margin-top: 455px;
+	left: 976px;
 	opacity: 0;
 	position: absolute;
 	width: 195px;
@@ -286,7 +291,7 @@ to { -o-transform:  scale(.8)  translate(0px); }
 	opacity:1;
 	width: 50px;
 	top: 310px;
-	left: 32px;
+	left: 84px;
 	position: absolute;
 	cursor: pointer; 
 	cursor: hand; 
@@ -297,7 +302,7 @@ to { -o-transform:  scale(.8)  translate(0px); }
 	position: absolute;
 	display:none;
 	width: 34%;
-	left: 55px;
+	left: 109px;
 	top: 334px;
 	background-color: #fff;
 	opacity:.8;
@@ -812,7 +817,7 @@ opacity: 0;
 }
 
 #videobox {
-background-image: url("../img/page_07_video.jpg");
+background-image: url("../img/page_07_video2.jpg");
 background-size: 100%;
 top: 18%;
 left: 269%;
@@ -954,8 +959,8 @@ background-color: #66665c;
 	#clickme3 {
 	opacity:1;
 	width: 50px;
-	top: 81%;
-	left: 48%;
+	top: 550px;
+	left: 553px;
 	position: absolute;
 	cursor: pointer; 
 	cursor: hand; 
@@ -966,8 +971,8 @@ background-color: #66665c;
 	display: none;	
 	position: absolute;
 	width: 27%;
-	left: 271px;
-	bottom: 119px;
+	left: 262px;
+	bottom: 186px;
 	background-color: #fff;
 	opacity: 0.8;
 	text-align: left;
@@ -1025,12 +1030,22 @@ background-color: #66665c;
 	left: 70%;
 	opacity: 1;
 	}
-
+	
 	#arrow {
 	position: absolute;
-	width: 209px;
-	left: 208px;
-	margin-top: 30px;
+	width: 53px;
+	left: 366px;
+	margin-top: 83px;
+	-ms-transform: rotate(-20deg); /* IE 9 */
+	-webkit-transform: rotate(-20deg); /* Chrome, Safari, Opera */
+	transform: rotate(-20deg);
+	}
+	
+	#arrowtext {
+	position: absolute;
+	width: 149px;
+	left: 204px;
+	margin-top: 36px;
 	}
 
 	#bluebar p {
@@ -1077,6 +1092,7 @@ background-color: #66665c;
 	margin-top: 5%;
 	margin-left: 72%;
 	opacity: 0;
+	z-index:500;
 	}
 	
 	#roses {
@@ -1092,11 +1108,12 @@ background-color: #66665c;
 	position: absolute;
 	height: 100%;
 	width: 30%;
-	background-color: none;
+	background-color: #3ab0c8;
 	padding: 151px 40px 0 21px;
 	left: 71%;
 	top: 0;
 	opacity: 1;
+	z-index: 10;
 	}
 	
 	#bluebar p {
@@ -1328,11 +1345,11 @@ background-color: #66665c;
 	#videobox {
 	background-image: url("../img/page_10_video.jpg");
 	background-size: 100%;
-	top: 35%;
-	left: 65%;
+	top: 88px;
+	left: 207px;
 	position: absolute;
-	width: 286px;
-	height: 180px; 
+	width: 246px;
+	height: 180px;
 	border-radius: 8px 8px 8px 8px;
 	-moz-border-radius: 8px 8px 8px 8px;
 	border-radius: 8px 8px 8px 8px;
@@ -1441,8 +1458,9 @@ background-color: #66665c;
 	
 	#pic1 {
 	opacity: 0;
-	margin-top: 47%;
-	margin-left: 5%;
+	opacity: 0;
+	margin-top: 480px;
+	margin-left: 40px;
 	position: absolute;
 	width: 210px;
 	-ms-transform: rotate(-50deg); /* IE 9 */
@@ -1455,8 +1473,8 @@ background-color: #66665c;
 	
 	#pic2 {
 	opacity: 0;
-	margin-top: 44%;
-	margin-left: 16%;
+	margin-top: 460px;
+	margin-left: 200px;
 	position: absolute;
 	width: 210px;
 	-ms-transform: rotate(-50deg); /* IE 9 */
@@ -1469,8 +1487,8 @@ background-color: #66665c;
 	
 	#pic3 {
 	opacity: 0;
-	margin-top: 46%;
-	margin-left: 31%;
+	margin-top: 490px;
+	margin-left: 350px;
 	position: absolute;
 	width: 210px;
 	-ms-transform: rotate(-50deg); /* IE 9 */
@@ -1531,8 +1549,8 @@ background-color: #66665c;
 	#clickme {
 	opacity: 1;
 	width: 50px;
-	top: 56%;
-	left: 2%;
+	top: 420px;
+	left: 100px;
 	position: absolute;
 	cursor: pointer;
 	cursor: hand;
@@ -1544,8 +1562,8 @@ background-color: #66665c;
 	display:none;
 	position: absolute;
 	width: 31%;
-	left: 4%;
-	top: 59%;
+	left: 124px;
+	top: 444px;
 	background-color: #fff;
 	opacity: 0.8;
 	text-align: left;

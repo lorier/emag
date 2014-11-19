@@ -11,10 +11,14 @@ function runJQuery(){
 		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
 
 			  tl.to(".page8 .headline h1", 1, {autoAlpha:1, delay:1})
-			    .to(".page8 .headline h2", 1, {autoAlpha:1}, "-=.7")
-			    .to(".page8 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+			    .to(".page8 .headline h2", 1, {autoAlpha:1}, "-=.1")
+			    .to(".page8 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.3")
 			    .to(".page8 #pic2", 1, {x:215, y:200, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
 			    .to(".page8 #pic1", .7, {x:215, y:475, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+				//.fromTo(".page8 #mask", 2, {css:{height:0}}, {css:{height:200}, ease:Power1.easeOut})
+				//.to(".page8 #arrow", 1, {autoAlpha:1}, "-=1")
+			    .to(".page8 #arrow", 2, {delay:1, rotation:360, ease:Expo.easeOut, repeat:-1, repeatDelay:1.5});
+			  
 				
 				
 					$('.page8 button.one').on('click', function () {
@@ -93,12 +97,16 @@ function runJQuery(){
 		<h2 class="amatic white">that Feels like an Old Friend?</h2>
 	</div>
 	
-		<div id="bluebar">	
+		<div id="bluebar">
+		
 			<h3>Memory Care:</h3>
 			<h4 class="white">Making new friends</h4>
 			<p>For those dealing with memory loss, meeting new friends who share the same challenges can be priceless. Our Friendship Club is specifically designed for seniors in the early stages of dementia. It provides a unique setting where residents can socialize and actively engage with their peers. This program helps to prevent isolation, slow memory loss, and lessen frustration.</p>	
 		<div id="vid-wrap">
-		<img id="arrow" src="img/page_08_arrow.png" alt="check out our furry friends">
+		<img id="arrowtext" src="img/page_08_arrowtext.png" alt="check out our furry friends">
+			<div id="mask">
+				<img id="arrow" src="img/page_08_arrow.png" alt="arrow">	
+			</div>
 		<div id="videobox" ng-click="doYoutube('ZOXiUZ7PHF4')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 		</div>
 	</div>

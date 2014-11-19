@@ -138,6 +138,11 @@ cross fading between routes with ngView
 body {
   overflow: hidden; }
 
+.screenWrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; }
+
 button {
   background: none;
   border: none;
@@ -195,6 +200,9 @@ button {
 -------------------------------------------------- */
 h1, h2, h3, h4 {
   font-family: "Amatic SC", cursive; }
+
+html {
+  height: 100%; }
 
 body {
   font-family: "Cantarell", Arial, sans-serif;
@@ -511,9 +519,9 @@ p {
   text-align: left; }
 
 #video-play {
-  width: 37px;
+  width: 57px;
   position: relative;
-  top: 39%;
+  top: 35%;
   cursor: pointer;
   cursor: hand; }
 
@@ -550,6 +558,35 @@ p {
 
   100% {
     -webkit-transform: rotate(0deg); } }
+
+#clickme:active {
+  -webkit-animation: clickAnimation 0.2s 1 ease-out;
+  -moz-animation: clickAnimation 0.2s 1 ease-out;
+  -o-animation: clickAnimation 0.2s 1 ease-out;
+  -ms-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%; }
+
+@-webkit-keyframes clickAnimation {
+  from {
+    -webkit-transform: scale(1) translate(0px); }
+
+  to {
+    -webkit-transform: scale(0.8) translate(0px); } }
+
+@-moz-keyframes clickAnimation {
+  from {
+    -moz-transform: scale(1) translate(0px); }
+
+  to {
+    -moz-transform: scale(0.8) translate(0px); } }
+
+@-o-keyframes clickAnimation {
+  from {
+    -o-transform: scale(1) translate(0px); }
+
+  to {
+    -o-transform: scale(0.8) translate(0px); } }
 
 /*----------------------------------------------*/
 /* --- page1 ------ */
@@ -655,7 +692,7 @@ p {
   .page2 h1 {
     font-size: 105px;
     display: block;
-    margin-top: -8px;
+    margin-top: 10px;
     opacity: 0; }
   .page2 h3 {
     font-size: 36px;
@@ -672,7 +709,8 @@ p {
   .page2 span.line5 {
     padding-left: 33%; }
   .page2 #pic1 {
-    left: 400px;
+    margin-top: 447px;
+    left: 570px;
     opacity: 0;
     position: absolute;
     width: 195px;
@@ -685,6 +723,8 @@ p {
     -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page2 #pic2 {
+    margin-top: 450px;
+    left: 774px;
     opacity: 0;
     position: absolute;
     width: 195px;
@@ -697,6 +737,8 @@ p {
     -moz-box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3);
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page2 #pic3 {
+    margin-top: 455px;
+    left: 976px;
     opacity: 0;
     position: absolute;
     width: 195px;
@@ -714,7 +756,7 @@ p {
     opacity: 1;
     width: 50px;
     top: 310px;
-    left: 32px;
+    left: 84px;
     position: absolute;
     cursor: pointer;
     cursor: hand;
@@ -723,7 +765,7 @@ p {
     position: absolute;
     display: none;
     width: 34%;
-    left: 55px;
+    left: 109px;
     top: 334px;
     background-color: #fff;
     opacity: 0.8;
@@ -1125,7 +1167,7 @@ p {
     margin-top: 470px;
     opacity: 0; }
   .page7 #videobox {
-    background-image: url("../img/page_07_video.jpg");
+    background-image: url("../img/page_07_video2.jpg");
     background-size: 100%;
     top: 18%;
     left: 269%;
@@ -1241,8 +1283,8 @@ p {
   .page8 #clickme3 {
     opacity: 1;
     width: 50px;
-    top: 81%;
-    left: 48%;
+    top: 550px;
+    left: 553px;
     position: absolute;
     cursor: pointer;
     cursor: hand;
@@ -1251,8 +1293,8 @@ p {
     display: none;
     position: absolute;
     width: 27%;
-    left: 271px;
-    bottom: 119px;
+    left: 262px;
+    bottom: 186px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
@@ -1299,9 +1341,19 @@ p {
     opacity: 1; }
   .page8 #arrow {
     position: absolute;
-    width: 209px;
-    left: 208px;
-    margin-top: 30px; }
+    width: 53px;
+    left: 366px;
+    margin-top: 83px;
+    -ms-transform: rotate(-20deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-20deg);
+    /* Chrome, Safari, Opera */
+    transform: rotate(-20deg); }
+  .page8 #arrowtext {
+    position: absolute;
+    width: 149px;
+    left: 204px;
+    margin-top: 36px; }
   .page8 #bluebar p {
     position: absolute;
     color: #fff;
@@ -1335,22 +1387,25 @@ p {
     font-size: 107px;
     margin-top: 5%;
     margin-left: 72%;
-    opacity: 0; }
+    opacity: 0;
+    z-index: 500; }
   .page9 #roses {
     position: absolute;
     width: 303px;
-    margin-top: 219px;
-    left: 350px;
+    margin-top: 210px;
+    left: 325px;
+    transform-origin: 50% 160%;
     opacity: 0; }
   .page9 #bluebar {
     position: absolute;
     height: 100%;
     width: 30%;
-    background-color: none;
+    background-color: #3ab0c8;
     padding: 151px 40px 0 21px;
     left: 71%;
     top: 0;
-    opacity: 1; }
+    opacity: 1;
+    z-index: 10; }
   .page9 #bluebar p {
     color: #fff;
     font-size: 17px;
@@ -1541,10 +1596,10 @@ p {
   .page10 #videobox {
     background-image: url("../img/page_10_video.jpg");
     background-size: 100%;
-    top: 35%;
-    left: 65%;
+    top: 88px;
+    left: 207px;
     position: absolute;
-    width: 286px;
+    width: 246px;
     height: 180px;
     border-radius: 8px 8px 8px 8px;
     -moz-border-radius: 8px 8px 8px 8px;
@@ -1629,8 +1684,9 @@ p {
     background-color: #66665c; }
   .page11 #pic1 {
     opacity: 0;
-    margin-top: 47%;
-    margin-left: 5%;
+    opacity: 0;
+    margin-top: 480px;
+    margin-left: 40px;
     position: absolute;
     width: 210px;
     -ms-transform: rotate(-50deg);
@@ -1643,8 +1699,8 @@ p {
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page11 #pic2 {
     opacity: 0;
-    margin-top: 44%;
-    margin-left: 16%;
+    margin-top: 460px;
+    margin-left: 200px;
     position: absolute;
     width: 210px;
     -ms-transform: rotate(-50deg);
@@ -1657,8 +1713,8 @@ p {
     box-shadow: 0px 0px 17px 0px rgba(0, 113, 151, 0.3); }
   .page11 #pic3 {
     opacity: 0;
-    margin-top: 46%;
-    margin-left: 31%;
+    margin-top: 490px;
+    margin-left: 350px;
     position: absolute;
     width: 210px;
     -ms-transform: rotate(-50deg);
@@ -1706,8 +1762,8 @@ p {
   .page12 #clickme {
     opacity: 1;
     width: 50px;
-    top: 56%;
-    left: 2%;
+    top: 420px;
+    left: 100px;
     position: absolute;
     cursor: pointer;
     cursor: hand;
@@ -1717,8 +1773,8 @@ p {
     display: none;
     position: absolute;
     width: 31%;
-    left: 4%;
-    top: 59%;
+    left: 124px;
+    top: 444px;
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
