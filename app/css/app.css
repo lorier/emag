@@ -828,7 +828,7 @@ p {
     margin-left: 19%;
     opacity: 0; }
   .page3 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_03_video.jpg");
     background-size: 100%;
     width: 284px;
     height: 179px;
@@ -954,7 +954,7 @@ p {
     opacity: 1;
     margin-top: 431px; }
   .page4 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_04_video.jpg");
     background-size: 100%;
     top: 108px;
     left: 20px;
@@ -1075,7 +1075,7 @@ p {
     opacity: 1;
     margin-top: 470px; }
   .page6 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_06_video.jpg");
     background-size: 100%;
     top: 27%;
     left: 11%;
@@ -1432,7 +1432,7 @@ p {
   .page9 #bluebar p {
     color: #fff;
     font-size: 17px;
-    line-height: 140%;
+    line-height: 130%;
     margin-top: -3%; }
   .page9 #bluebar h3 {
     font-family: "Amatic SC", sans-serif;
@@ -1441,7 +1441,7 @@ p {
     font-size: 46px;
     margin-top: 20px; }
   .page9 #bluebar h3.movedown {
-    margin-top: 188px; }
+    margin-top: 183px; }
   .page9 #bluebar h3.moveup {
     margin-top: -13px; }
   .page9 #vid-wrap {
@@ -1452,7 +1452,7 @@ p {
     margin-top: -112px;
     opacity: 1; }
   .page9 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_09_video.jpg");
     background-size: 100%;
     top: 35%;
     left: 65%;
@@ -1692,7 +1692,7 @@ p {
     margin-top: 38%;
     opacity: 1; }
   .page11 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_11_video.jpg");
     background-size: 100%;
     top: 30%;
     left: 65%;
@@ -1840,7 +1840,7 @@ p {
     margin-top: 25%;
     opacity: 1; }
   .page12 #videobox {
-    background-image: url("../img/page_x_video.jpg");
+    background-image: url("../img/page_12_video.jpg");
     background-size: 100%;
     top: 32px;
     left: 65%;
