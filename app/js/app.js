@@ -175,6 +175,13 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.isLastPage= function(){
     return $scope.activePage()===$scope.pages.length;
   };
+  $scope.turnOffTargets = function(){
+	$(".view-container .click-layer").on('click', function () {
+		$(this).removeClass('clicked'); //turn off layer
+		$('.view-container .clickme').removeClass('clicked'); //turn off buttons
+		$('.view-container .clicktext').removeClass('clicked'); //turn off text!
+	});
+  }
 
 
   $scope.updateActivePage = function(value){
@@ -248,7 +255,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
    });
 
 
-
   $scope.peekPrev = function() {
       var current = $scope.activePage();
       var prev =  current - 1;
@@ -270,7 +276,101 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     }
   };
 
+
+
+/*
+  $scope.overlayState = false;
+  $scope.setTargetStater = function(){
+   $scope.overlayState = ! $scope.overlayState;
+  }
+*/
+  $scope.targetState = 'none';
+  
+  $scope.setTargetState = function(theElement){
+	  if(theElement == null || $scope.targetState== theElement){
+		  $scope.targetState = 'none';
+	  }else{
+		  $scope.targetState = theElement;
+ 	 }
+  }
+
+
+
+
+
 }]);
+
+
+emagControllers.directive(
+		"bnSlideShow",
+		function() {  
+
+			// I allow an instance of the directive to be hooked
+			// into the user-interaction model outside of the
+			// AngularJS context.
+			// http://www.bennadel.com/blog/2440-creating-a-custom-show-hide-directive-in-angularjs.htm
+			function link( $scope, element, attributes ) {
+
+				// I am the TRUTHY expression to watch.
+				var expression = attributes.bnSlideShow;
+
+				// I am the optional slide duration.
+				var duration = ( attributes.slideShowDuration || "fast" );
+
+
+				// I check to see the default display of the
+				// element based on the link-time value of the
+				// model we are watching.
+				if ( ! $scope.$eval( expression ) ) {
+					element.hide();
+				}
+
+
+				// I watch the expression in $scope context to
+				// see when it changes - and adjust the visibility
+				// of the element accordingly.
+				$scope.$watch(
+					expression,
+					function( newValue, oldValue ) {
+
+						// Ignore first-run values since we've
+						// already defaulted the element state.
+						if ( newValue === oldValue ) {
+							return;
+						}
+
+						// Show element.
+						if ( newValue ) {
+							element
+								.stop( true, true )
+								.slideDown( duration );
+						// Hide element.
+						} else {
+							console.log();
+							element
+								.stop( true, true )
+								.slideUp( duration );
+						}
+
+					}
+				);
+
+			}
+
+
+			// Return the directive configuration.
+			return({
+				link: link,
+				restrict: "A"
+			});
+
+		}
+	);
+
+
+	
+	
+	
 
 /*!
  * IE10 viewport hack for Surface/desktop Windows 8 bug

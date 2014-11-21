@@ -9,14 +9,20 @@ function runJQuery(){
 		 tl.add (TweenLite.set(".page11 #pic1", {y:300, x:0, autoAlpha:1}));
 	     tl.add (TweenLite.set(".page11 #pic2", {y:600, x:0, autoAlpha:1}));	
 	     tl.add (TweenLite.set(".page11 #pic3", {y:600, x:0, autoAlpha:1}));
-	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-300}))	
+	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-250}))	
 		 tl.to(".page11 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut, delay:1})
 		.to(".page11 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
 		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
 		.to(".page11 #pic3", 1, {x:0, y:0, rotation:1, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
-        .to(".page11 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7");
+        .to(".page11 #arrow", 2, {x:0, y:0,  ease:Elastic.easeOut, onStart:doAnimation});
 
-		$('.page11 button').on('click', function () {
+	  function doAnimation(){
+
+		TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
+		//TweenMax.to(".page8 #arrow", 2, {delay:1, rotation:360, ease:Expo.easeOut, repeat:-1, repeatDelay:1.5});
+
+	  }	 
+		/*$('.page11 button').on('click', function () {
 			$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 			$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
 			$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
@@ -48,7 +54,7 @@ function runJQuery(){
 								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
 							});
 						})
-			}
+			}*/
 	
 };
 
@@ -57,18 +63,7 @@ function runJQuery(){
 <div class="page11 page-container">
 
 
-<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
-<div id="clicktext">
-<a><img id="icon" src="img/page_11_icon.png" alt="icon"></a>
-<h4 class="pantone166 cantarell bold">Mocktail Time!</h4>
-<p>Make happy hour festive with a beautiful berry mocktail.<br />
-Tasty Berry Bubbles<br />
-1 cup berries (chose your favorite in season)<br />
-1 tsp lemon juice<br />
-2 tbsp honey<br />
-1 cup soda water<br />
-Add berries, lemon juice and honey to a blender and combine until smooth. Add soda water and pulse until combined. If using frozen berries, you may add ingredients all at once. Add a dash of extra soda water at the end for a few additional bubbles!</p>
-</div>
+
 
 <div id="bluebar">	
 	<h3>Around the Dinner Table</h3>
@@ -84,6 +79,26 @@ Add berries, lemon juice and honey to a blender and combine until smooth. Add so
 <div id="vid-wrap">
 <div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 </div>
+
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"  ></div>
+
+	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+	<div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clicktext" class="clicktext">
+	<a><img id="icon" src="img/page_11_icon.png" alt="icon"></a>
+	<h4 class="pantone166 cantarell bold">Mocktail Time!</h4>
+	<p>Make happy hour festive with a beautiful berry mocktail.<br />
+	Tasty Berry Bubbles<br />
+	1 cup berries (chose your favorite in season)<br />
+	1 tsp lemon juice<br />
+	2 tbsp honey<br />
+	1 cup soda water<br />
+	Add berries, lemon juice and honey to a blender and combine until smooth. Add soda water and pulse until combined. If using frozen berries, you may add ingredients all at once. Add a dash of extra soda water at the end for a few additional bubbles!</p>
+	</div>
+</div>
+
+
+
 	
 </div>
 

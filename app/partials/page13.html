@@ -6,29 +6,16 @@ function runJQuery(){
 
 			
  		var tl = new TimelineLite ();	
-		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));	
+		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));
+			   tl.add (TweenLite.set(".page13 #arrow", {y:-50, x:0, opacity:0}));	
 			  tl.to(".page13 .headline h1", 1, {autoAlpha:1, delay:1})
-			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7");
+			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut,onStart:doAnimation}, "-=.7")
+				.to(".page13 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
 			
-					$('.page13 button').on('click', function () {
-							$(document).off('click');
-						    clickAnywhereToClose = true;	
-							$('.page13 #clicktext').fadeIn( "fast", "linear", function(){
-								setUpClose('.page13 button.one', this)
-							});
-					});
+  			  function doAnimation(){
+  				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
+  			  }	
 
-					function setUpClose(exceptionCase, obj)
-					{ 	
-						//exceptionCase == other buttons we want to keep listening to
-						$(document).on('click', function(event) {
-							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-								  {
-								    $(obj).fadeOut("fast", "linear");
-								    	clickAnywhereToClose = false;
-									}
-								})
-					}
 };
 
 </script>
@@ -47,11 +34,15 @@ function runJQuery(){
 			</div>
 		</div>
 	
-	<button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
-	<div id="clicktext">
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"  ></div>
+
+	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+<div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clicktext" class="clicktext">
 	<h4 class="pantone633 cantarell bold">Fly fishing in assisted living?</h4>
 	<p> Yep. Fred loves it. In fact, he practices in the activity room and now his community has a Fly Fishing Club. Share your interests and we’ll share a way to enjoy to them. We believe the word impossible is spelled, “I’m possible.”</p>
 	</div>
+</div>
 
 	
 </div>

@@ -42,9 +42,19 @@ text-align: left;
 width: 57px; 
 position: relative;
 top: 35%;
-cursor: pointer;
 cursor: hand;
+transition: transform .3s;
 }
+#videobox:hover img#video-play {
+transform: scale(1.2);
+transition: transform .3s;
+}
+
+#videobox{
+	cursor:pointer;
+}
+
+
 
 /* fonts */
 .amatic { 
@@ -55,6 +65,32 @@ cursor: hand;
 }
 
 .bold {font-weight: bold;}
+
+
+.view-container .page-container .targetWrapper.clicked div.clicktext{
+	opacity:1;
+	display:block!important;
+}
+
+
+.click-layer.clicked{
+	display:block;
+	opacity:.2;
+    transition: opacity 2s, transform 2s;
+    -webkit-transition: opacity 2s,-webkit-transform 2s;
+
+}
+
+.click-layer{
+	opacity:.3;
+	position:absolute;
+	display:none;
+	width:100%;
+	height:100%;
+	background-color:black;
+}
+
+
 
 #circle-group:hover #circle-one{
   stroke: #76c3d4;
@@ -1033,9 +1069,14 @@ background-color: #66665c;
 	width: 53px;
 	left: 366px;
 	margin-top: 83px;
-	-ms-transform: rotate(-20deg); /* IE 9 */
-	-webkit-transform: rotate(-20deg); /* Chrome, Safari, Opera */
+
+	transform-origin: 20% 130%;
 	transform: rotate(-20deg);
+	-webkit-transform-origin: 20% 130%;
+	-webkit-transform: rotate(-20deg);
+	-ms-transform-origin: 20% 130%;
+	-ms-transform: rotate(-20deg);
+	
 	}
 	
 	#arrowtext {
@@ -1097,6 +1138,7 @@ background-color: #66665c;
 	width: 303px;
 	margin-top: 210px;
 	left: 325px;
+	-webkit-transform-origin: 50% 160%;
 	transform-origin: 50% 160%;
 	opacity: 0;
 	}
@@ -1104,7 +1146,7 @@ background-color: #66665c;
 	#bluebar {
 	position: absolute;
 	height: 100%;
-	width: 30%;
+	width: 29%;
 	background-color: #3ab0c8;
 	padding: 151px 40px 0 21px;
 	left: 71%;
@@ -1500,7 +1542,7 @@ background-color: #66665c;
 	position: absolute;
 	width: 180px;
 	left: 6%;
-	top: 61%;
+	top: 435px;
 	opacity: 1;
 	}
 	
@@ -1621,7 +1663,7 @@ background-color: #66665c;
 	#videobox {
 	background-image: url("../img/page_x_video.jpg");
 	background-size: 100%;
-	top: 15px;
+	top: 32px;
 	left: 65%;
 	position: absolute;
 	width: 219px;

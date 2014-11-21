@@ -5,11 +5,13 @@ function runJQuery(){
 
 		
 		var tl = new TimelineLite ();
-			  tl.add (TweenLite.set(".page6 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
+			  tl.add (TweenLite.set(".page6 #vid-wrap", {y:0, x:-320, autoAlpha:1}));
+			   tl.add (TweenLite.set(".page6 #arrow", {y:-50, x:0, opacity:0}));	
 			  tl.to(".page6 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page6 .headline p", 1, {autoAlpha:1}, "-=.5")
 
-			.to(".page6 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.5");
+			.to(".page6 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.5")
+			  .to(".page6 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
 
 	
 };
@@ -23,7 +25,7 @@ function runJQuery(){
 	
 	<div id="vid-wrap">
 	<img id="arrow" src="img/page_06_hero.png" alt="live in action here">
-	<div id="videobox" ng-click="doYoutube('zoJx7JaicC0')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+	<div id="videobox" ng-click="doYoutube('dy1MOc8Ywlo')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 	</div>
 
 	

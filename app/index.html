@@ -235,6 +235,7 @@ function tweenThumbs(whichStop){
 
 
 
+
 </script>
  
 </head>
@@ -250,7 +251,42 @@ function tweenThumbs(whichStop){
         <div class="social-buttons">
           <ul>
 			  <style>
-
+			  li.st_facebook_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 8px;
+				  margin-right: 8px;
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/facebook.png');
+				  background-size: cover;
+			  }
+			  li.st_twitter_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 13px;
+				  margin-right: 13px;
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/twitter.png');
+				  background-size: cover;
+			  }
+			  li.st_email_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 13px;
+				  
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/email.png');
+				  background-size: cover;
+			  }
 			  li.nav-sound a .nav-holder{
 				  display: inline-block;
 				  vertical-align:top;
@@ -271,10 +307,10 @@ function tweenThumbs(whichStop){
 			  }
 			  </style>
             <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
-            <li><a href="https://twitter.com/aegisliving" target="_blank"><img src="img/twitter.png" height="70" width="72" alt="Follow us on Twitter"></a></li>
-            <li><a href="https://www.facebook.com/AegisLiving" target="_blank"><img src="img/facebook.png" height="70" width="72" alt="Find us on Facebook"></img></a></li>
+            <li class="st_twitter_custom"><div class="nav-holder"></div></li>
+            <li class="st_facebook_custom"><div class="nav-holder"></div></li>
 			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
-            <li><a href="#link"><img src="img/email.png" height="70" width="72" alt="Email this to a friend"></a></li>
+            <li class="st_email_custom" ><div class="nav-holder"></div></li>
           </ul>
         </div>
         <div class="logo"><img src="img/aegis_logo.png"  height="49" width="240" alt="Aegis Living"></div>
@@ -343,6 +379,10 @@ function tweenThumbs(whichStop){
    <script src="js/soundMachine.js"></script>  
   <script src="js/jquery.slotmachine.js"></script>
   <script src="js/app.js"></script>
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "00eb8adc-83f8-4769-a976-3b9550cd7f29", doNotHash: false, doNotCopy: false, servicePopup: true, popop:true, hashAddressBar: false});</script>	  
+	  
 </div>
 </body>
 </html>

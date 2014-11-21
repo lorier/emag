@@ -67,47 +67,59 @@ function runJQuery(){
 			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onStart:doSlots})
 			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
 				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
-				.to(".page5 #play-dot", 1, {autoAlpha:1}, "-=.2")
-				.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
-				.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
-				.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5");
+				.to(".page5 #play-dot", 1, {autoAlpha:1,onStart:doAnimation}, "-=.2")
+				//.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5")
 				
-					$('.page5 button').on('click', function () {
-						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(0,113,151)');
-						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(0,113,151)');
-						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(0,113,151)');
+  			  function doAnimation(){
 
-							$(document).off('click');
-						    clickAnywhereToClose = true;	
-							$('.page5 #clicktext').fadeIn( "fast", "linear", function(){
-								setUpClose('.page5 button', this)
-							});
+  				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
 
+  			  }	 
+
+
+/*
+				$(document).ready(function(){
+				$(".view-container .click-layer").on('click', function () {
+						$(this).removeClass('clicked'); //turn off layer
+						$('.view-container .clickme').removeClass('clicked'); //turn off buttons
+						$('.view-container .clicktext').removeClass('clicked'); //turn off text!
 					});
+
+					$('.view-container .clickme').on('click', function () {
+						if($(this).hasClass('clicked')){
+							$(".view-container .click-layer").trigger('click');
+						}else{
+							$(this).addClass('clicked');
+							$('.view-container .clickme').not($(this)).removeClass('clicked');
+							$('.view-container .clicktext').removeClass('clicked');  //remove all LAME
+							var indexNumber = $.inArray($(this)[0],$('.view-container .clickme'));
+							$('.view-container .clicktext').eq(indexNumber).addClass('clicked'); //turn on only my matching text
+							$(".view-container .click-layer").addClass('clicked'); //turn on
+						}
+					});
+				})  
+*/
+				
+				
+				/*
+				
+	<div class="click-layer"></div>
+    <div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clickme" class="clickme theSecond deleteMe" style="left:300px"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clicktext" class="clicktext">
+	<div id="clicktext" class="clicktext"></div>
+				
+				1.id's are not being used...
+				2. Add click-layer to every partial that needs it <div class="click-layer"></div>
+				3. elements needed class="clickme" and class="clicktext"
+				
+				
+				*/
 				
 				
 
-			
-			function setUpClose(exceptionCase, obj)
-			{ 	
-				//exceptionCase == other buttons we want to keep listening to
-				$(document).on('click', function(event) {
-					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-						  {
-						    $(obj).fadeOut("fast", "linear");
-						    	clickAnywhereToClose = false;
-							}
-							$('.view-container svg #circle-one').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-two').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-plus').each(function( index ) {
-								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
-							});
-						})
-			}
 				
 
 	
@@ -115,18 +127,46 @@ function runJQuery(){
 </script>
 
 
-<div class="page5 page-container">
-
-	<img id="play-dot" src="img/page_05_circle.png" alt="play">
-	
-	<div class="headline">
-	    <h1 class="amatic pantone633">Mid-day Mind Play</h1>
-		<h2 class="cantarell pantone166">Laugh like you won the jackpot!</h2>
-	<p class="headline">Our rotating selection of signature brain fitness programs encourage a little friendly competition, active participation, and mental calisthenics to keep the mind sharp.</p>
-	</div>
-	
 	<style>
+	/*.view-container .page-container div.clicktext.clicked{
+		opacity:1;
+		display:block!important;
+	}
+	
+	
+	.click-layer.clicked{
+		display:block;
+		opacity:.2;
+	    transition: opacity 2s, transform 2s;
+	    -webkit-transition: opacity 2s,-webkit-transform 2s;
 
+	}
+	.click-layer{
+		display:none;
+		opacity:0;
+		width:100%;
+		height:100%;
+		background-color:black;
+	}*/
+	
+	
+	/* SVG styles */
+
+	.page-container .clickme.clicked svg #circle-group #circle-one{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-two{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-plus{
+		fill:rgb(0,113,151);
+	}
+	
+	
+	
+	
+	
+	
 	.slotWrapper {
 		top: 60px;
 		text-align: left;
@@ -267,6 +307,20 @@ function runJQuery(){
 	
 	</style>
 	
+
+
+
+<div class="page5 page-container">
+
+	<img id="play-dot" src="img/page_05_circle.png" alt="play">
+	
+	<div class="headline">
+	    <h1 class="amatic pantone633">Mid-day Mind Play</h1>
+		<h2 class="cantarell pantone166">Laugh like you won the jackpot!</h2>
+	<p class="headline">Our rotating selection of signature brain fitness programs encourage a little friendly competition, active participation, and mental calisthenics to keep the mind sharp.</p>
+	</div>
+	
+	
 	
 
 <div id="slots">
@@ -326,18 +380,16 @@ function runJQuery(){
 
 
 	
-	
-	
-    <button><div id="clickme"><ng-include src="addSVG()"></ng-include></div></button>
-	<div id="clicktext">
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"  ></div>
+
+<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+	<div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clicktext" class="clicktext">
 	<h4 class="pantone633 cantarell bold">Join the Club</h4>
 	<p>Keep your mind sharp, as well as, your card-shark skills as part of the bridge club or poker. Or if you are more of the creative type, a poetry club might be a new challenge. And for those world travelers, it is never too late to learn a new language- bueno!</p>
 	</div>
-	
-	<!--div id="slots">
-		<img id="slot1" class="slot" src="img/page_05_slot_lang.png" alt="slot1">
-		<img id="slot2" class="slot" src="img/page_05_slot_games.png" alt="slot2">
-		<img id="slot3" class="slot" src="img/page_05_slot_bridge.png" alt="slot3">
-	</div-->
+
+	</div>
+
 	
 </div>
