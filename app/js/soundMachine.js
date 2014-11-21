@@ -13,10 +13,7 @@ $(document).ready(function(){
 		$('li.nav-sound a .nav-holder').toggleClass('nosound');
 		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
 			localStorage.playSound = "false";
-		    sound_engine.stop();
-			sound_giggle.stop();
-			sound_birds.stop();
-			sound_slots.stop();
+			soundMachineClear();
 			e.preventDefault();
 		}else{
 			initSounds();
@@ -30,7 +27,7 @@ $(document).ready(function(){
 function initSounds(){
 
 	sound_engine = new Howl({
-	  urls: ['sounds/engine.mp3'],
+	  urls: ['sounds/engine_laugh.mp3'],
 	  autoplay: false
 	});
 
@@ -39,10 +36,6 @@ function initSounds(){
 	  autoplay: false
 	});
 
-	sound_giggle = new Howl({
-	  urls: ['sounds/giggle.mp3'],
-	  autoplay: false
-	});
 	sound_slots = new Howl({
 	  urls: ['sounds/slots.mp3'],
 	  autoplay: false
@@ -50,8 +43,9 @@ function initSounds(){
 
 }
 function soundMachineClear(){
+    console.log("sound stoppage");
+	
     sound_engine.stop();
-	sound_giggle.stop();
 	sound_birds.stop();
 	sound_slots.stop();
 }
@@ -64,25 +58,16 @@ function soundMachine(theFileName){
 	  switch(theFileName){
 		case 'engine':
 		    sound_engine.play();
-			sound_giggle.stop();
-			sound_birds.stop();
-			sound_slots.stop();
-		    break;
-		case 'giggle':
-		    sound_engine.stop();
-			sound_giggle.play();
 			sound_birds.stop();
 			sound_slots.stop();
 		    break;
 		case 'birds':
 		    sound_engine.stop();
-			sound_giggle.stop();
 			sound_birds.play();
 			sound_slots.stop();
 		    break;	
 		case 'slots':
 		    sound_engine.stop();
-			sound_giggle.stop();
 			sound_birds.stop();
 			sound_slots.play();
 		    break;	

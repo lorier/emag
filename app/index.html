@@ -60,7 +60,6 @@
     currentPage = page;
     totalPages = total;
 	
-	
       if (currentPage > 1 && currentPage <= totalPages){
         $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
 		
@@ -100,6 +99,7 @@
 
   function updateLeftAnimation(){   
     //don't animate if this is the first page
+	  
     if (currentPage !== 1){
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
@@ -116,7 +116,7 @@
 
   function updateRightAnimation(){
     //don't animate if this is the last page
-    
+	  
     if (currentPage != totalPages){        
       //find the .slider position before we start
       origWrapperPosition = getWrapperPosition()
