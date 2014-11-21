@@ -203,6 +203,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
     }
   };
   $scope.setSlideTransitionDirection = function(value){
+
     var whichWay
     if (value > $scope.activePage()){
       whichWay = "forward" 
@@ -241,6 +242,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.changeSlide = function(location){
     var loc = '/view/' + location;
     $location.path(loc);
+	 soundMachineClear();
    };
 
   $scope.$on('$viewContentLoaded', function() {
@@ -249,6 +251,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       //in the address bar
       var urlSlice = parseInt($location.path().slice(6) || 1);
       StateService.setActivePage(urlSlice);
+	  
       runJQuery($scope.activePage());
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
