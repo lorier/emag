@@ -12,6 +12,7 @@
   <title>My AngularJS App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <meta name=”fragment” content=”!” />
   <!-- HTML5 Boilerplate is packaged with angular-seed but I'm using boostrap styles 
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css"> -->
@@ -331,7 +332,7 @@ function tweenThumbs(whichStop){
 		              <ul class="holder"> 
 
 		                <li ng-repeat="page in pages" class="thumbnail-container" my-repeat-directive> 
-               <a class="page-thumbnail" href="#/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
+               <a class="page-thumbnail" href="#!/view/{{page.page_num}}" ng-click="onThumbClick(page.page_num)">
 		                       <img ng-src="img/{{page.thumb}}"/>
 		                  </a> 
 		                </li>

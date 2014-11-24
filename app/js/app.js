@@ -53,7 +53,7 @@ emagDirectives.directive('myRepeatDirective', function() {
 //This should be refactored when I figure out how to do it
 //possible resource
 //http://stackoverflow.com/questions/13681116/angularjs-dynamic-routing
-myEmag.config(['$routeProvider', function($routeProvider) {
+myEmag.config(['$routeProvider', '$locationProvider', function($routeProvider, $location) {
   $routeProvider.
   		when('/view/1', {
   		templateUrl:'partials/page1.html' ,
@@ -101,6 +101,8 @@ myEmag.config(['$routeProvider', function($routeProvider) {
       templateUrl:'partials/page15.html' ,
       }).
      	otherwise({redirectTo: '/view/1'});
+
+      $location.hashPrefix('!');
 }]);
 
 //Controllers
