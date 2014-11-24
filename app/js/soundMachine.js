@@ -43,11 +43,11 @@ function initSounds(){
 
 }
 function soundMachineClear(){
-    console.log("sound stoppage");
-	
-    sound_engine.stop();
-	sound_birds.stop();
-	sound_slots.stop();
+	if(localStorage.playSound == 'true'){
+	    sound_engine.stop();
+		sound_birds.stop();
+		sound_slots.stop();
+	}
 }
 
 //http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
