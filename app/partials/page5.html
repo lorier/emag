@@ -3,7 +3,7 @@
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 		var clickAnywhereToClose = false;
-		var machine1,machine2,machine3;
+		var machine1, machine2, machine3;
 
 
 	
@@ -15,31 +15,14 @@ function runJQuery(){
 		$(".page5 #play-dot").click(function(){
 			TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
 			TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
-			if (clickCount+1 ==1){
-				machine1.shuffle(3);
-				machine2.shuffle(3.5);
-				machine3.shuffle(4);
-				clickCount =+ 1;
-				soundMachine('slots');
-			}else{
-				machine1.setRandomize(9);
-				machine2.setRandomize(9);
-				machine3.setRandomize(9);
-				machine1.shuffle(3);
-				machine2.shuffle(3.5);
-				machine3.shuffle(4);
-				soundMachine('slots');
-			}
+			doSlots();
 			
 			
 		});
 
-		function doSlots(){
-			$(".page5 #play-dot").click(function(){
-				TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
-				TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
-			});
-			soundMachine('slots');
+		
+		function initSlots(){
+			
 			machine1 = $('.page5 #machineFake1').slotMachine({
 				active:2,
 				delay: 400
@@ -50,75 +33,95 @@ function runJQuery(){
 			});
 		
 			machine3 = $('.page5 #machineFake3').slotMachine({
-				active:9,
+				active:6,
 				delay: 400
 			});
-			console.log(machine1.isRunning + 'is running')
+			console.log(machine1.isRunning + 'is running');
+			
+			
+		}
+		function doSlots(){
+			//$(".page5 #play-dot").click(function(){
+			//	TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
+			//	TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
+			//});
+			soundMachine('slots');
+
 		
+			if (clickCount ==0){
+				console.log('SLOTS: 1');
+
+				machine1.setRandomize(0);
+				machine2.setRandomize(1);
+				machine3.setRandomize(2);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else if (clickCount == 1){
+				console.log('SLOTS: 2');
+				machine1.setRandomize(3);
+				machine2.setRandomize(4);
+				machine3.setRandomize(5);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else if (clickCount == 2){
+				console.log('SLOTS: 3');
+				machine1.setRandomize(6);
+				machine2.setRandomize(7);
+				machine3.setRandomize(8);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else{
+				console.log('SLOTS: final');
+				machine1.setRandomize(9);
+				machine2.setRandomize(9);
+				machine3.setRandomize(9);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				soundMachine('slots');
+			}
+		
+			console.log('cc '+clickCount);
+	
 			machine1.shuffle(2);
 			machine2.shuffle(3);
 			machine3.shuffle(4);
 		}
 		
 		
-
+		machine1 = '';
+		machine2 = '';
+		machine3 = '';
+		
 
 		var tl = new TimelineLite ();	
-			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onStart:doSlots})
+			tl.set(".page5 #play-dot", {top:-100});
+			tl.set(".page5 .slotWrapper", {top:-800});
+			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onComplete:initSlots})
 			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
 				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
-				.to(".page5 #play-dot", 1, {autoAlpha:1,onStart:doAnimation}, "-=.2")
+			.to(".page5 .slotWrapper", 1, {top:0 ,ease:Quad.easeOut,onComplete:doSlots})
+				.to(".page5 #play-dot", 1, {autoAlpha:1, top: 0, onComplete:doAnimation,ease:Elastic.easeOut}, "-=.2")
 				//.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
 				//.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
 				//.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5")
 				
   			  function doAnimation(){
-
+				
   				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
 
   			  }	 
 
 
-/*
-				$(document).ready(function(){
-				$(".view-container .click-layer").on('click', function () {
-						$(this).removeClass('clicked'); //turn off layer
-						$('.view-container .clickme').removeClass('clicked'); //turn off buttons
-						$('.view-container .clicktext').removeClass('clicked'); //turn off text!
-					});
-
-					$('.view-container .clickme').on('click', function () {
-						if($(this).hasClass('clicked')){
-							$(".view-container .click-layer").trigger('click');
-						}else{
-							$(this).addClass('clicked');
-							$('.view-container .clickme').not($(this)).removeClass('clicked');
-							$('.view-container .clicktext').removeClass('clicked');  //remove all LAME
-							var indexNumber = $.inArray($(this)[0],$('.view-container .clickme'));
-							$('.view-container .clicktext').eq(indexNumber).addClass('clicked'); //turn on only my matching text
-							$(".view-container .click-layer").addClass('clicked'); //turn on
-						}
-					});
-				})  
-*/
-				
-				
-				/*
-				
-	<div class="click-layer"></div>
-    <div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
-	<div id="clickme" class="clickme theSecond deleteMe" style="left:300px"><ng-include src="addSVG()"></ng-include></div>
-	<div id="clicktext" class="clicktext">
-	<div id="clicktext" class="clicktext"></div>
-				
-				1.id's are not being used...
-				2. Add click-layer to every partial that needs it <div class="click-layer"></div>
-				3. elements needed class="clickme" and class="clicktext"
-				
-				
-				*/
-				
-				
 
 				
 
@@ -128,26 +131,7 @@ function runJQuery(){
 
 
 	<style>
-	/*.view-container .page-container div.clicktext.clicked{
-		opacity:1;
-		display:block!important;
-	}
-	
-	
-	.click-layer.clicked{
-		display:block;
-		opacity:.2;
-	    transition: opacity 2s, transform 2s;
-	    -webkit-transition: opacity 2s,-webkit-transform 2s;
 
-	}
-	.click-layer{
-		display:none;
-		opacity:0;
-		width:100%;
-		height:100%;
-		background-color:black;
-	}*/
 	
 	
 	/* SVG styles */
@@ -303,7 +287,10 @@ function runJQuery(){
 	}
 	.slotWrapper{
 		width:620px;
+		position:absolute;
 	}
+	
+	
 	
 	</style>
 	
