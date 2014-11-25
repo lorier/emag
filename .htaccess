@@ -1,0 +1,5 @@
+# http://www.yearofmoo.com/2012/11/angularjs-and-seo.html
+RewriteEngine On
+RewriteCond %{REQUEST_URI}  ^/$
+RewriteCond %{QUERY_STRING} ^_escaped_fragment_=/?(.*)$
+RewriteRule ^(.*)$ /snapshots/%1? [NC,L]

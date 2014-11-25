@@ -298,7 +298,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 		  $scope.targetState = theElement;
  	 }
   }
-
+  $scope.status='ready';
 
 
 
