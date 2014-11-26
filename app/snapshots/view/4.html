@@ -1,0 +1,1048 @@
+<html lang="en" ng-app="myEmag" class="js no-flexbox canvas canvastext no-webgl touch no-geolocation postmessage websqldatabase no-indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent no-video no-audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths ng-scope" style=""><!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><!--<![endif]--><!--[if IE]>           <html lang="en" ng-app="myApp" class="ie"> <![endif]--><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <meta name="fragment" content="!">
+  <!-- HTML5 Boilerplate is packaged with angular-seed but I'm using boostrap styles 
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css"> -->
+  <link href="http://fonts.googleapis.com/css?family=Cantarell:400,700,400italic,700italic|Amatic+SC:400,700" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="css/app.css">
+   <link rel="stylesheet" href="css/popupcss/ngDialog.css">
+   <link rel="stylesheet" href="css/popupcss/ngDialog-theme-default.css">
+   <link rel="stylesheet" href="css/popupcss/ngDialog-theme-plain.css">
+
+  <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/1.13.2/TweenMax.min.js"></script>
+  <script src="js/windowResizer.js"></script>
+  <script type="text/javascript">
+  
+
+  //darn global variables get off my lawn
+  var currentPage;
+  var totalPages;
+  var ButtonHeight;
+  var ButtonWidth;
+  var rButtonLeft;
+  var rButtonTop;
+  var lButtonLeft;
+  var lButtonTop;
+  var thumbnailPosition = 0;
+  var thumbWidth = null;
+  var stopsList = null;
+  var enablePeek = false;
+
+
+
+  //used and reset by advanceThumbnails()
+  var thumbPos = null;
+
+  $(document).ready(function(){
+    enablePeek=true;
+  })
+
+  //this function is called by angular when the view is changed
+  function onContentLoaded(page, total){
+    getButtonSizes();
+    thumbWidth = $(".page-thumbnail").outerWidth(true);
+    currentPage = page;
+    totalPages = total;
+	
+      if (currentPage > 1 && currentPage <= totalPages){
+        $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
+		
+        origPosition = "-100%";
+      }
+      if (currentPage === 1){
+        $(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
+      }
+      //find position and dimension of slide container
+      init();
+      // $(window).resize(function(){
+      //   //recalculate .slides div size if the page scales
+      //   init();
+      // })
+      //track mouse position
+      //$(window).mousemove(getMousePosition);
+  };
+    
+
+  //create mouseover peek based on coordinates
+  //----------------------------------------------------
+  // based on https://www.cloudtec.ch/blog/web/change-image-with-jquery-mouse-position.html
+   
+  var isMouseOverLeftButton = isMouseOverRightButton = false;
+
+  // get the initial button measurements as the page loads
+  // we use the right button since the left is hidden by ng-hide on page 1
+  // This should not update unless index.html reloads
+
+
+  function getButtonSizes(){
+    ButtonHeight = $(".button-right").height();
+    ButtonWidth = $(".button-right").width();
+  };
+ 
+
+
+  function updateLeftAnimation(){   
+    //don't animate if this is the first page
+	  
+    if (currentPage !== 1){
+      //find the .slider position before we start
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = parseInt(numericPosition + 3) + "%";
+
+      if(isMouseOverLeftButton){
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+      }else if(!isMouseOverLeftButton){
+        $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
+      }
+    }
+  };
+
+  function updateRightAnimation(){
+    //don't animate if this is the last page
+	  
+    if (currentPage != totalPages){        
+      //find the .slider position before we start
+      origWrapperPosition = getWrapperPosition()
+      var numericPosition = parseInt(origWrapperPosition);
+      var peekAmount = parseInt(numericPosition - 3) + "%";
+
+      if(isMouseOverRightButton){
+         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+      }else if(!isMouseOverRightButton){
+        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+      }
+    }
+  };
+
+  
+  function getWrapperPosition(){
+    var wrapperPosition;
+    if(currentPage === 1)
+        { wrapperPosition = "0";
+      }else if(currentPage === totalPages.length){
+        wrapperPosition = "-200%";
+      }else{
+        wrapperPosition = "-100%";
+      };
+    return wrapperPosition
+  };
+      
+  function init(){
+      rButtonLeft = $(".button-right").offset().left;
+      rButtonTop = $(".button-right").offset().top;
+      lButtonLeft = $(".overlay-buttons").offset().left;
+      lButtonTop = $(".overlay-buttons").offset().top;
+	  
+	  
+	 $(".button-right").on('mouseenter',function(){
+        isMouseOverRightButton = true;
+        updateRightAnimation();
+      });
+	  $(".button-right").on('mouseleave',function(){
+          isMouseOverRightButton = false;
+          updateRightAnimation();
+      });
+	  
+ 	 $(".button-left").on('mouseenter',function(){
+          isMouseOverLeftButton = true;
+          updateLeftAnimation();
+       });
+ 	  $(".button-left").on('mouseleave',function(){
+           isMouseOverLeftButton = false;
+           updateLeftAnimation();
+       });
+		 
+		
+	}
+
+//Thumbnail slider behavior
+//----------------------------------------------------
+function initThumbnailStops(){
+
+      thumbWidth = $(".page-thumbnail").outerWidth(true);
+      var stops = 0;
+      for (var i = 0; i<=totalPages; i++) {
+        stopsList.push(stops);
+        stops -= thumbWidth;
+      };
+  };
+
+function  setThumbstoCurrentSlide(page){
+  if(stopsList == null){
+    stopsList = [];
+    initThumbnailStops();
+  }
+  var position = stopsList[page-1];
+  tweenThumbs(position);
+  thumbPos = null;
+}
+
+//called from angular
+function advanceThumbnails(which){
+  var thumbContainerWidth = $(".holder").width();
+  thumbnailPosition = parseInt($(".holder").css('left'));
+  var whichStop;
+  
+  if(which == "next"){ 
+    //constrain the left position of .holder to the negative width of .holder
+    if (thumbnailPosition > -Math.abs(thumbContainerWidth)+thumbWidth){
+      //get current page and add one
+        if (thumbPos == null){
+          thumbPos = currentPage + 1
+        }else{
+          thumbPos = thumbPos + 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
+    };
+  }else
+    if(which == "prev"){ 
+      if (thumbnailPosition < 0){
+         if (thumbPos == null){
+          thumbPos = currentPage - 1
+        }else{
+          thumbPos = thumbPos - 1;
+        }
+      whichStop = stopsList[thumbPos-1];
+      tweenThumbs(whichStop);
+      }
+    };
+  };  
+
+function tweenThumbs(whichStop){
+  var holder = $(".holder");   
+  TweenLite.to(holder, .5, {left:whichStop, ease:Power4.easeOut});
+}
+
+
+
+
+
+
+</script>
+ 
+<script type="text/javascript" src="http://wd-edge.sharethis.com/button/getAllAppDefault.esi?cb=stLight.allDefault&amp;app=all&amp;publisher=00eb8adc-83f8-4769-a976-3b9550cd7f29&amp;domain=localhost"></script><script type="text/javascript" src="http://wd-edge.sharethis.com/button/checkOAuth.esi"></script></head>
+<body ng-controller="ThumbnailCtrl as pages" data-status="ready" class="ng-scope">
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+<div class="screenWrapper">
+   <div class="wrapper" style="z-index: 0; -webkit-transform: matrix(0.3305785123966942, 0, 0, 0.3305785123966942, -405, 0); ">
+    <section class="top-bar">
+        <!--logo and links go here-->
+        <div class="link-out"><a href="#link">Find a community</a> near you.</div>
+        <div class="social-buttons">
+          <ul>
+			  <style>
+			  li.st_facebook_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 8px;
+				  margin-right: 8px;
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/facebook.png');
+				  background-size: cover;
+			  }
+			  li.st_twitter_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 13px;
+				  margin-right: 13px;
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/twitter.png');
+				  background-size: cover;
+			  }
+			  li.st_email_custom  .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  margin-left: 13px;
+				  
+				  cursor:pointer;
+				  background-position-x:0;
+				  background-image:url('img/email.png');
+				  background-size: cover;
+			  }
+			  li.nav-sound a .nav-holder{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  background-position-x:0;
+				  background-image:url('img/sound.png');
+				  background-size: cover;
+			  }
+			  li.nav-sound a .nav-holder.nosound{
+				  display: inline-block;
+				  vertical-align:top;
+				  width:25px;
+				  height:25px;
+				  background-position-x:100%;
+				  background-image:url('img/sound.png');
+				  background-size: cover;
+			  }
+			  </style>
+            <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
+            <li class="st_twitter_custom"><div class="nav-holder"></div></li>
+            <li class="st_facebook_custom"><div class="nav-holder"></div></li>
+			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
+            <li class="st_email_custom"><div class="nav-holder"></div></li>
+          </ul>
+        </div>
+        <div class="logo"><img src="img/aegis_logo.png" height="49" width="240" alt="Aegis Living"></div>
+    </section>
+
+    <section class="slides">
+		
+		    <section class="page-turner-container">
+		      <nav class="page-turner" ng-class="thumbsPosition">
+		        <div class"hide-nav"=""><span class="glyphicon stash-button glyphicon-chevron-down" ng-class="{'glyphicon-chevron-down': !isActive, 'glyphicon-chevron-up': isActive}" ng-init="isActive = false" ng-click="isActive = !isActive; toggleThumbs($event)"></span></div>
+		        <ul class="thumb-viewer" ng-hide="isThumbsVisible">
+		          <li>
+		            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
+		          </li>
+		          <li class="thumb-scroll-window">
+		              <ul class="holder" style="left: -396px; "> 
+
+		                <!-- ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/1" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_01_thumb.jpg" src="img/page_01_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/2" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_02_thumb.jpg" src="img/page_02_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/3" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_03_thumb.jpg" src="img/page_03_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/4" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_04_thumb.jpg" src="img/page_04_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/5" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_05_thumb.jpg" src="img/page_05_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/6" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_06_thumb.jpg" src="img/page_06_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/7" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_07_thumb.jpg" src="img/page_07_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/8" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_08_thumb.jpg" src="img/page_08_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/9" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_09_thumb.jpg" src="img/page_09_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/10" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_10_thumb.jpg" src="img/page_10_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/11" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_11_thumb.jpg" src="img/page_11_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/12" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_12_thumb.jpg" src="img/page_12_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/13" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_13_thumb.jpg" src="img/page_13_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
+               <a class="page-thumbnail" href="#!/view/14" ng-click="onThumbClick(page.page_num)">
+		                       <img ng-src="img/page_14_thumb.jpg" src="img/page_14_thumb.jpg">
+		                  </a> 
+		                </li><!-- end ngRepeat: page in pages -->
+		              </ul>
+		          </li>
+		          <li>
+		            <button class="next btn" ng-click="advanceThumb('next')"><span class="glyphicon glyphicon-chevron-right"></span></button>
+		          </li>
+		        </ul>
+		      </nav> 
+		    </section>
+          <div class="overlay-buttons">
+            <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
+          </div> 
+
+        <div class="page-wrapper" style="left: -49.21463413440897%; ">
+          <!-- ngInclude: undefined --><ng-include src="peekPrev()" class="peek-prev ng-scope"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+
+function runJQuery(){
+
+			var tl = new TimelineLite ();			
+			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:800, autoAlpha:1}));	
+				  tl.add (TweenLite.set(".page3 #arrow", {x:-80}));	
+				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:1})
+				  .to(".page3 p", 1, {autoAlpha:1}, "-=.5")				
+				  .to(".page3 h2", 1, {autoAlpha:1}, "-=.5")
+				  .to(".page3 #bluebar", .7, {x:10, y:0, autoAlpha:1, ease:Back.easeOut}, "-=1.5")
+				  .to(".page3 #arrow", .8, {autoAlpha:1, x:0, ease:Elastic.easeOut}, "-=.7");			
+						
+				// VIDEO BUTTON
+				/*$('.page3 button').on('click', function () {	
+				});*/
+};
+
+</script>
+
+<div class="page3 page-container ng-scope">
+	
+	<div class="headline">
+	    <h1 class="amatic pantone152">Rise &amp; Shine</h1>
+	<p class="headline">Savor simple pleasures with a warm mug of coffee, your eggs cooked just so, and leisurely reading the morning newspaper.</p>
+	<h2 class="pantone633 cantarell">A perfect start to the day.</h2>
+	</div>
+	
+	<img id="arrow" src="img/page_03_arrow.png" alt="mornin'">	
+	
+	<div id="bluebar">	
+			
+		<div id="videobox" ng-click="doYoutube('-PJkZFvIDFU')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+<!-- 		<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
+ -->		<h3>Ted Talks</h3>
+		<p>See how you can dive deeper into almost any topic or current issue with a world of inspirational lectures that spark lively debates and active discussions.</p>
+		<h3>News and Views</h3>
+		<p>Join the discussion of the latest headlines and stay in touch with world events, as we share in the thrill of sports, the controversies of politics, and the triumphs of the human spirit that make the daily news.</p>
+	</div>	
+
+	
+</div>
+
+
+
+	
+	
+</ng-include>        
+                  <!--view is injected here-->
+          <div class="center">          
+            <!-- ngView:  --><div ng-view="" ng-class="pageTransition" class="view-container ng-scope forward ng-animate ng-enter ng-enter-active"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+
+function runJQuery(){
+		var clickAnywhereToClose = false;
+		
+		var tl = new TimelineLite ();
+			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
+			  tl.add (TweenLite.set(".page4 #arrow", {y:-20, x:0, opacity:0}));	
+			  tl.to(".page4 .headline h1", 1, {autoAlpha:1, delay:1})
+			    .to(".page4 .headline p", 1, {autoAlpha:1}, "-=.5")
+				.fromTo(".page4 #mask", 1, {css:{height:0}}, {css:{height:800}, ease:Power1.easeOut}, "-=1")
+				 .to(".page4 #class-list", 1, {autoAlpha:1}, "-=1")
+			  .to(".page4 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut, onStart:doAnimation}, "-=.7")
+			   .to(".page4 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
+			  
+			  function doAnimation(){
+
+				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
+				//TweenMax.to(".page8 #arrow", 2, {delay:1, rotation:360, ease:Expo.easeOut, repeat:-1, repeatDelay:1.5});
+
+			  }	
+
+				/*
+					$('.page4 button.one').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+						$(document).off('click');//remove the event listener if it's already there
+						clickAnywhereToClose = true;
+						$('.page4 #clicktext1').fadeIn( "fast", "linear", function() {
+							setUpClose('.page4 button.two', this)
+						});	
+						$('.page4 #clicktext2').fadeOut("fast", "linear");
+					});
+					
+					
+					$('.page4 button.two').on('click', function () {
+						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
+						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
+						$(document).off('click');
+					    clickAnywhereToClose = true;
+						$('.page4 #clicktext2').fadeIn( "fast", "linear", function(){
+							setUpClose('.page4 button.one', this)
+						});
+						$('.page4 #clicktext1').fadeOut("fast", "linear");
+					});
+
+	
+
+					function setUpClose(exceptionCase, obj)
+					{ 	
+						//exceptionCase == other buttons we want to keep listening to
+						$(document).on('click', function(event) {
+							if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) {
+								$(obj).fadeOut("fast", "linear");
+								clickAnywhereToClose = false;
+							}
+							$('.view-container svg #circle-one').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-two').each(function( index ) {
+								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
+							});
+							$('.view-container svg #circle-plus').each(function( index ) {
+								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
+							});
+								//$('.view-container svg #circle-one')[0].setAttribute('stroke', 'rgb(255,255,255)');
+								//$('.view-container svg #circle-two')[0].setAttribute('stroke', 'rgb(255,255,255)');
+								//$('.view-container svg #circle-plus')[0].setAttribute('fill', 'rgb(255,255,255)');
+						})
+					}	*/
+				 		
+};
+	</script>		
+		
+<div class="page4 page-container ng-scope">
+	<div class="headline">
+	    <h1 class="amatic pantone152"><span class="white">Stretch.</span> <span class="pantone130">Move.</span><span class="pantone166">Take a Deep Breath.</span> </h1>
+	<p class="headline white">Daily exercise is not only good for the body, but boosts the spirit and mind. We offer a variety of activities to meet the interests and physical capabilities of our residents to improve their strength, coordination, and balance for healthy aging.</p>
+	</div>
+
+
+	<div id="mask" style="height: 0px; ">
+	<div id="class-list" class="white">
+		Yoga<br>
+		Pilates<br>
+		Zumba<br>
+		Tai Chi<br>
+		Walking Clubs<br>
+		SingFit<br>
+		Chair Exercises Classes<br>
+		Bowling<br>
+		Balance<br>
+		Stretch<br>
+		Fall Reduction<br>
+		Miniture Golf<br>
+		Wii Fitness
+	</div>
+	</div>
+
+
+<div id="vid-wrap" style="z-index: 0; visibility: inherit; opacity: 1; -webkit-transform: matrix(1, 0, 0, 1, -320, 0); ">
+<img id="arrow" src="img/page_04_arrow.png" alt="live in action here" style="z-index: 0; opacity: 0; -webkit-transform: matrix(1, 0, 0, 1, 0, -20); ">
+		<div id="videobox" ng-click="doYoutube('sH8ywWOR63s')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+</div>
+
+
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
+
+
+	
+	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+		<div id="clickme1" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"></circle>
+  
+  <circle id="circle-one" fill="#fff" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"></circle>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"></path>
+	</g> 
+  
+</g>
+
+</svg></ng-include></div>
+	<div id="clicktext1" class="clicktext">
+	<h4 class="pantone166 cantarell bold">I Want to Be a Part of It!</h4>
+	<p>Join the chorus line and kick up your heels to Frank Sinatra’s popular song New York, New York! Our unique SingFit program combines mood-boosting, classic songs for this generation with singing, dancing and reminiscing. So hold up your jazz hands and belt out the songs like no one is listening!</p>
+	</div>
+	</div>
+	
+	<div class="one targetWrapper" ng-click="setTargetState('two')" ng-class="{'clicked': targetState == 'two'}"><div id="clickme2" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"></circle>
+  
+  <circle id="circle-one" fill="#fff" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"></circle>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"></path>
+	</g> 
+  
+</g>
+
+</svg></ng-include></div>
+	<div id="clicktext2" class="clicktext">
+	<h4 class="pantone166 cantarell bold">Staying Fit as You Sit!</h4>
+	<p>Chair exercises are an ideal, safe way for our aging residents to get the exercise they need. We want our residents to stay as independent as possible, therefore a regular fitness routine can aid in flexibility, help with balance, increase strength, alleviate pain, and help reduce the occurrence of falls. Although our residents are seated, they still get a full range of movement and conditioning.</p>
+	</div>	
+	</div>
+	
+
+
+
+
+</div>
+
+
+
+</div>
+          </div>
+            <!-- ngInclude: undefined --><ng-include src="peekNext()" class="peek-next ng-scope"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		var clickAnywhereToClose = false;
+		var machine1,machine2,machine3;
+
+
+	
+
+		
+		
+		var clickCount = 0;
+
+		$(".page5 #play-dot").click(function(){
+			TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
+			TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
+			if (clickCount+1 ==1){
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount =+ 1;
+				soundMachine('slots');
+			}else{
+				machine1.setRandomize(9);
+				machine2.setRandomize(9);
+				machine3.setRandomize(9);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				soundMachine('slots');
+			}
+			
+			
+		});
+
+		function doSlots(){
+			$(".page5 #play-dot").click(function(){
+				TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
+				TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
+			});
+			soundMachine('slots');
+			machine1 = $('.page5 #machineFake1').slotMachine({
+				active:2,
+				delay: 400
+			});
+			machine2 = $('.page5 #machineFake2').slotMachine({
+				active:5,
+				delay: 400
+			});
+		
+			machine3 = $('.page5 #machineFake3').slotMachine({
+				active:9,
+				delay: 400
+			});
+			console.log(machine1.isRunning + 'is running')
+		
+			machine1.shuffle(2);
+			machine2.shuffle(3);
+			machine3.shuffle(4);
+		}
+		
+		
+
+
+		var tl = new TimelineLite ();	
+			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onStart:doSlots})
+			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
+				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
+				.to(".page5 #play-dot", 1, {autoAlpha:1,onStart:doAnimation}, "-=.2")
+				//.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5")
+				
+  			  function doAnimation(){
+
+  				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
+
+  			  }	 
+
+
+/*
+				$(document).ready(function(){
+				$(".view-container .click-layer").on('click', function () {
+						$(this).removeClass('clicked'); //turn off layer
+						$('.view-container .clickme').removeClass('clicked'); //turn off buttons
+						$('.view-container .clicktext').removeClass('clicked'); //turn off text!
+					});
+
+					$('.view-container .clickme').on('click', function () {
+						if($(this).hasClass('clicked')){
+							$(".view-container .click-layer").trigger('click');
+						}else{
+							$(this).addClass('clicked');
+							$('.view-container .clickme').not($(this)).removeClass('clicked');
+							$('.view-container .clicktext').removeClass('clicked');  //remove all LAME
+							var indexNumber = $.inArray($(this)[0],$('.view-container .clickme'));
+							$('.view-container .clicktext').eq(indexNumber).addClass('clicked'); //turn on only my matching text
+							$(".view-container .click-layer").addClass('clicked'); //turn on
+						}
+					});
+				})  
+*/
+				
+				
+				/*
+				
+	<div class="click-layer"></div>
+    <div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clickme" class="clickme theSecond deleteMe" style="left:300px"><ng-include src="addSVG()"></ng-include></div>
+	<div id="clicktext" class="clicktext">
+	<div id="clicktext" class="clicktext"></div>
+				
+				1.id's are not being used...
+				2. Add click-layer to every partial that needs it <div class="click-layer"></div>
+				3. elements needed class="clickme" and class="clicktext"
+				
+				
+				*/
+				
+				
+
+				
+
+	
+};
+</script>
+
+
+	<style class="ng-scope">
+	/*.view-container .page-container div.clicktext.clicked{
+		opacity:1;
+		display:block!important;
+	}
+	
+	
+	.click-layer.clicked{
+		display:block;
+		opacity:.2;
+	    transition: opacity 2s, transform 2s;
+	    -webkit-transition: opacity 2s,-webkit-transform 2s;
+
+	}
+	.click-layer{
+		display:none;
+		opacity:0;
+		width:100%;
+		height:100%;
+		background-color:black;
+	}*/
+	
+	
+	/* SVG styles */
+
+	.page-container .clickme.clicked svg #circle-group #circle-one{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-two{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-plus{
+		fill:rgb(0,113,151);
+	}
+	
+	
+	
+	
+	
+	
+	.slotWrapper {
+		top: 60px;
+		text-align: left;
+		width: 620px;
+	}
+	.machineBorder{
+		display:inline-block;
+		border: 3px double orange;
+		margin-right: 10px;
+		-webkit-border-radius: 14px;
+		-moz-border-radius: 14px;
+		border-radius: 14px;
+		background-color: #fff;
+		overflow: hidden;
+		height: 320px;
+		width:190px;
+	}
+	.machineContainer{
+		background-color: #000;
+		overflow: hidden;
+		height: 320px;
+		width:190px;
+
+	}
+	.slotMachine{
+		height: 320px;
+		width:100%;
+		/*border: 5px solid #000;*/
+		
+		padding: 0px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: center;
+		/*margin: 0px 5px;*/
+		/*border: 5px solid #000;*/
+		background-color: #ffffff;
+	}
+	.machineResult{
+		color:#fff;
+		text-align:center;
+		font-weight: 900;
+	}
+	.noBorder{
+		border:none !important;
+		background: transparent !important;
+	}
+	.slotMachine .slot {
+		height: 320px;
+		width: 190px;
+		background-size: cover;
+		background-position-x: 50%;
+		background-repeat: no-repeat;
+	}
+	.slot1{
+		background-image: url("img/slot-1.jpg");
+	}
+	.slot2{
+			background-image: url("img/slot-2.jpg");	
+	}
+	.slot3{
+			background-image: url("img/slot-3.jpg");	}
+	.slot4{
+			background-image: url("img/slot-4.jpg");	}
+	.slot5{
+			background-image: url("img/slot-5.jpg");	}
+	.slot6{
+			background-image: url("img/slot-6.jpg");	}
+	.slot7{
+			background-image: url("img/slot-7.jpg");	}
+	.slot8{
+			background-image: url("img/slot-8.jpg");	}
+	.slot9{
+			background-image: url("img/slot-9.jpg");	}
+	.slot10{
+			background-image: url("img/slot-10.jpg");	}
+
+
+
+
+	#textMachine, #textMachine2{
+		width:520px;
+		height: 67px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: left;
+	}
+	#textMachine > *, #textMachine2 > *{
+		padding: 0px 0px;
+	}
+
+
+
+
+	.slotMachineButton{
+		width:100px;
+		height: 100px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: center;
+	}
+	.slotMachineButton {
+		-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25) );
+		background:-moz-linear-gradient( center top, #ffc477 5%, #fb9e25 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+		background-color:#ffc477;
+		border-radius: 75px;
+		text-indent:0px;
+		border:6px solid #eeb44f;
+		display:inline-block;
+		color:#ffffff;
+		font-size:40px;
+		font-weight:bold;
+		font-style:normal;
+		height:100px;
+		line-height:90px;
+		margin-top:10px;
+		width:100px;
+		text-decoration:none;
+		text-align:center;
+		text-shadow:1px 1px 0px #cc9f52;
+		cursor:pointer;
+	}
+	.slotMachineButton:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+		background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+		background-color:#fb9e25;
+	}.slotMachineButton:active {
+		position:relative;
+		top:1px;
+	}
+	.slotWrapper{
+		width:620px;
+	}
+	
+	</style>
+	
+
+
+
+<div class="page5 page-container ng-scope">
+
+	<img id="play-dot" src="img/page_05_circle.png" alt="play">
+	
+	<div class="headline">
+	    <h1 class="amatic pantone633">Mid-day Mind Play</h1>
+		<h2 class="cantarell pantone166">Laugh like you won the jackpot!</h2>
+	<p class="headline">Our rotating selection of signature brain fitness programs encourage a little friendly competition, active participation, and mental calisthenics to keep the mind sharp.</p>
+	</div>
+	
+	
+	
+
+<div id="slots">
+	<div class="content" style="text-align: center">
+		<div class="slotWrapper">
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake1" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake2" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake3" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
+
+<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+	<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"></circle>
+  
+  <circle id="circle-one" fill="#fff" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"></circle>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"></path>
+	</g> 
+  
+</g>
+
+</svg></ng-include></div>
+	<div id="clicktext" class="clicktext">
+	<h4 class="pantone633 cantarell bold">Join the Club</h4>
+	<p>Keep your mind sharp, as well as your card-shark skills as part of the bridge or poker club. Or if you are more of the creative type, a poetry club might be a new challenge. And for those world travelers, it is never too late to learn a new language- bueno!</p>
+	</div>
+
+	</div>
+
+	
+</div></ng-include>
+        </div> 
+    </section>
+
+
+
+    <footer>
+      <div class="page-number ng-binding">4 of 14</div>
+    </footer>
+  
+  </div>
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="js/ngDialog.min.js"></script>
+  <script src="js/howler.min.js"></script>  
+   <script src="js/soundMachine.js"></script>  
+  <script src="js/jquery.slotmachine.js"></script>
+  <script src="js/app.js"></script>
+<script type="text/javascript">var switchTo5x=false;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "00eb8adc-83f8-4769-a976-3b9550cd7f29", doNotHash: false, doNotCopy: false, servicePopup: true, popop:true, hashAddressBar: false});</script>	  
+	  
+</div>
+
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F4&amp;jsref=&amp;rnd=1416944423382" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>
