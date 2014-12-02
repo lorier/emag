@@ -6,16 +6,23 @@ function runJQuery(){
 
 			
  		var tl = new TimelineLite ();	
+			tl.set(".view-container .clickme", {scale:.01});
+		
 		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));
 			   tl.add (TweenLite.set(".page13 #arrow", {y:-50, x:0, opacity:0}));	
 			  tl.to(".page13 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut,onStart:doAnimation}, "-=.7")
 				.to(".page13 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
 			
-  			  function doAnimation(){
-  				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
-  			  }	
-
+		  	  function doAnimation(){
+		  		 $(".view-container .clickme").each(function(index){
+		  		 			$(this).delay(800*index).queue(function(next){
+		  						TweenLite.set($(this), {scale:1});
+		  						$(this).addClass('bounce');
+		  						$(this).dequeue();
+		  					});
+		  			});
+		  	  }	
 };
 
 </script>

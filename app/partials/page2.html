@@ -8,6 +8,7 @@ function runJQuery(){
 	//var svgElement = document.getElementById("circlegroup");
 	
       	var tl = new TimelineLite ();	
+			tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
@@ -23,12 +24,17 @@ function runJQuery(){
 			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
 			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
 			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
+		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
 			  
 		  function doAnimation(){
-
-			TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
-
-		  }	
+			 $(".view-container .clickme").each(function(index){
+			 			$(this).delay(800*index).queue(function(next){
+ 							TweenLite.set($(this), {scale:1});
+							$(this).addClass('bounce');
+							$(this).dequeue();
+						});
+				});
+		  }	 
 		  
 		
 			/*$('.page2 #clickme').on('click', function () {

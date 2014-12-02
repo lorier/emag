@@ -6,6 +6,8 @@ function runJQuery(){
 
 		//TweenLite.to(".clickme", 1.5, {autoAlpha:.5,scale:1.3,yoyo:true,repeat:10, ease:Elastic.easeIn});
 		var tl = new TimelineLite ();
+			tl.set(".view-container .clickme", {scale:.01});
+		
 		      tl.add (TweenLite.set(".page8 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));
 			  tl.add (TweenLite.set(".page8 #pic2", {y:1000, x:800, autoAlpha:1}));	
 		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
@@ -22,31 +24,18 @@ function runJQuery(){
 				//.fromTo(".page8 #mask", 2, {css:{height:0}}, {css:{height:200}, ease:Power1.easeOut})
 				//.to(".page8 #arrow", 1, {autoAlpha:1}, "-=1")
 
-			  ;
 			  
 			  function doAnimation(){
-
-				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
-				//TweenMax.to(".page8 #arrow", .7, { delay:.8, rotation:'+=30', repeat:-1});
-
-			  }	  
+				 $(".view-container .clickme").each(function(index){
+				 			$(this).delay(800*index).queue(function(next){
+	 							TweenLite.set($(this), {scale:1});
+								$(this).addClass('bounce');
+								$(this).dequeue();
+							});
+					});
+			  }	 
 				
-				
-				/*	$('.page8 button.one').on('click', function () {
-						$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-						$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-						$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
-						$(document).off('click');//remove the event listener if it's already there
-						clickAnywhereToClose = true;
-						$('.page8 #clicktext1').fadeIn( "fast", "linear", function() {
-							setUpClose('.page8 button.two', this)
-							setUpClose('.page8 button.three', this)
-						});	
-						$('.page8 #clicktext2').fadeOut("fast", "linear");
-						$('.page8 #clicktext3').fadeOut("fast", "linear");
-					});*/
-
-					
+			
 				
 };
 
