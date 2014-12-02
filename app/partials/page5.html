@@ -104,22 +104,27 @@ function runJQuery(){
 		
 
 		var tl = new TimelineLite ();	
+			tl.set(".view-container .clickme", {scale:.01});
 			tl.set(".page5 #play-dot", {top:-100});
-			tl.set(".page5 .slotWrapper", {top:-800});
+			tl.set(".page5 .slotWrapper .machineBorder", {opacity:0});
 			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onComplete:initSlots})
 			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
 				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
-			.to(".page5 .slotWrapper", 1, {top:0 ,ease:Quad.easeOut,onComplete:doSlots})
+			.to(".page5 .slotWrapper .machineBorder", 1, {opacity:1 ,ease:Quad.easeOut,onComplete:doSlots})
 				.to(".page5 #play-dot", 1, {autoAlpha:1, top: 0, onComplete:doAnimation,ease:Elastic.easeOut}, "-=.2")
 				//.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
 				//.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
 				//.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5")
 				
-  			  function doAnimation(){
-				
-  				TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
-
-  			  }	 
+		  function doAnimation(){
+			 $(".view-container .clickme").each(function(index){
+			 			$(this).delay(800*index).queue(function(next){
+ 							TweenLite.set($(this), {scale:1});
+							$(this).addClass('bounce');
+							$(this).dequeue();
+						});
+				});
+		  }	 
 
 
 
