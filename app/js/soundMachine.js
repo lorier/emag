@@ -1,4 +1,4 @@
-var sound_engine, sound_birds, sound_giggle
+var sound_engine, sound_birds, sound_giggle;
 
 
 $(document).ready(function(){
@@ -9,17 +9,32 @@ $(document).ready(function(){
 		$('li.nav-sound a .nav-holder').addClass('nosound');
 	}
 	var soundButton = $('li.nav-sound a');
-	soundButton.click(function(e){
-		$('li.nav-sound a .nav-holder').toggleClass('nosound');
-		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
-			localStorage.playSound = "false";
-			soundMachineClear();
-			e.preventDefault();
-		}else{
+
+	soundButton.on('soundOn',function(e){
+		$('li.nav-sound a .nav-holder').removeClass('nosound');
 			initSounds();
 			localStorage.playSound = "true";
 			e.preventDefault();
+	})
+	soundButton.on('soundOff',function(e){
+		$('li.nav-sound a .nav-holder').addClass('nosound');
+		localStorage.playSound = "false";
+		soundMachineClear();
+		e.preventDefault();
+	})
+	
+	soundButton.click(function(e){
+		angular.element('li.nav-sound a .nav-holder').toggleClass('nosound');
+		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
+			$(this).trigger('soundOff');
+		}else{
+			$(this).trigger('soundOn');
 		}
+		
+		
+		
+		
+		e.preventDefault();
 	})
 	
 })
@@ -43,11 +58,10 @@ function initSounds(){
 
 }
 function soundMachineClear(){
-	if(localStorage.playSound == 'true'){
 	    sound_engine.stop();
 		sound_birds.stop();
 		sound_slots.stop();
-	}
+	
 }
 
 //http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library

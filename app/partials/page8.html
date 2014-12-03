@@ -13,6 +13,8 @@ function runJQuery(){
 		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
 			  tl.add (TweenLite.set(".page8 #arrowtext", {y:-30, x:0, opacity:0}));
 			   tl.add (TweenLite.set(".page8 #arrow", {y:-30, x:0, opacity:0}));	
+	 		  tl.pause();//crazy sound alert thing
+
 
 			  tl.to(".page8 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page8 .headline h2", 1, {autoAlpha:1}, "-=.1")
@@ -34,6 +36,7 @@ function runJQuery(){
 							});
 					});
 			  }	 
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
 				
 			
 				

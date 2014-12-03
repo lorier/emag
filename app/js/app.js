@@ -109,6 +109,51 @@ myEmag.config(['$routeProvider', '$locationProvider', function($routeProvider, $
 
 var emagControllers = angular.module ('emagControllers', []);
 
+emagControllers.controller('mobileAlertCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function($scope, StateService, $http, $location, $route, $routeParams, ngDialog){
+	$scope.soundValue = function(){
+		return (500);
+	}
+	$scope.soundAlert = function(e){
+		var dialogSound; 
+
+		if(localStorage.playSound != 'false' && sessionStorage.getItem("iosSound") != 'true' && isMobile.any()){   //play or unknown
+			$('.link-out').append('LS ');
+			 dialogSound  = ngDialog.open({
+				 template: '\
+	                <p>This presentation uses sound would you like to enable it?</p>\
+	                <div class="ngdialog-buttons">\
+	                    <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-click="closeThisDialog(0)">No</button>\
+	                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(1)">Yes</button>\
+	                </div>',
+				 plain: true,
+			     className: 'ngdialog-theme-default'
+			 }); 
+		
+			 dialogSound.closePromise.then(function (data) {
+				 if(data.value == 0){
+					 sessionStorage.setItem("iosSound", "false");
+					 localStorage.playSound = 'false';
+					 $('li.nav-sound a .nav-holder').trigger('soundOff');
+				 }else{
+				 	sessionStorage.setItem("iosSound", "true");
+					$('li.nav-sound a .nav-holder').trigger('soundOn');
+				 }
+			     console.log(data.id + ' has been dismissed.');
+				 e.play();
+			 });
+		 }else{
+		 	 e.play();
+		 }
+		
+	}
+
+
+
+}]);
+
+
+
+
 emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', '$location', '$route', '$routeParams', 'ngDialog', function($scope, StateService, $http, $location, $route, $routeParams, ngDialog){
    
    //initialize variables
@@ -254,7 +299,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       var urlSlice = parseInt($location.path().slice(6) || 1);
       StateService.setActivePage(urlSlice);
 	  
-      runJQuery($scope.activePage());
+	  runJQuery($scope.activePage()); // function in partials fires 
+	  
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
    });
@@ -302,8 +348,11 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
 
 
-
 }]);
+
+
+
+
 
 
 emagControllers.directive(

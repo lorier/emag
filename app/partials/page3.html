@@ -2,10 +2,12 @@
 <script type="text/javascript">
 
 function runJQuery(){
+	console.log('RUN 03');
 
 			var tl = new TimelineLite ();			
 			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:800, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page3 #arrow", {x:-80}));	
+				  tl.pause();//crazy sound alert thing
 				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:1})
 				  .to(".page3 p", 1, {autoAlpha:1}, "-=.5")				
 				  .to(".page3 h2", 1, {autoAlpha:1}, "-=.5")
@@ -15,6 +17,8 @@ function runJQuery(){
 				// VIDEO BUTTON
 				/*$('.page3 button').on('click', function () {	
 				});*/
+					
+					angular.element('.screenWrapper').scope().soundAlert(tl)
 };
 
 </script>

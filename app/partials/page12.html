@@ -14,6 +14,8 @@ function runJQuery(){
 	    tl.add (TweenLite.set(".page12 #filmpic3", {y:900, x:0, autoAlpha:1}));
 	    tl.add (TweenLite.set(".page12 #filmpic4", {y:900, x:0, autoAlpha:1}));
 	     tl.add (TweenLite.set(".page12 #arrow", {y:-30, x:-300}))
+	    tl.pause();//crazy sound alert thing
+		
 
 		tl.to(".page12 .headline h1", 1, {autoAlpha:1, delay:1})
 		  .to(".page12 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
@@ -35,40 +37,9 @@ function runJQuery(){
 					});
 			});
 	  }	
-
-			/*$('.page12 button').on('click', function () {
-				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
-
-					$(document).off('click');
-				    clickAnywhereToClose = true;	
-					$('.page12 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page12 button', this)
-					});
-
-			});
-
-				function setUpClose(exceptionCase, obj)
-				{ 	
-					//exceptionCase == other buttons we want to keep listening to
-					$(document).on('click', function(event) {
-						if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-							  {
-							    $(obj).fadeOut("fast", "linear");
-							    	clickAnywhereToClose = false;
-								}
-								$('.view-container svg #circle-one').each(function( index ) {
-									  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-								});
-								$('.view-container svg #circle-two').each(function( index ) {
-									  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-								});
-								$('.view-container svg #circle-plus').each(function( index ) {
-									  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
-								});
-							})
-				}*/
+	  angular.element('.screenWrapper').scope().soundAlert(tl);
+	  
+	  
 };
 
 </script>

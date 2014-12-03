@@ -7,6 +7,8 @@ function runJQuery(){
 		var tl = new TimelineLite ();
 			tl.set(".view-container .clickme", {scale:.01});
 			tl.add (TweenLite.set(".page10 #stay-connected", {y:0, x:-300}));
+  		    tl.pause();//crazy sound alert thing
+			
 			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:1})
 			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
 			  .to(".page10 #stay-connected", 1.7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut,onStart: doAnimation}, "-=.7");
@@ -20,7 +22,8 @@ function runJQuery(){
 							});
 					});
 			  }	 
-
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  
 				
 };
 

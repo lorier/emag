@@ -10,7 +10,9 @@ function runJQuery(){
 		 tl.add (TweenLite.set(".page11 #pic1", {y:300, x:0, autoAlpha:1}));
 	     tl.add (TweenLite.set(".page11 #pic2", {y:600, x:0, autoAlpha:1}));	
 	     tl.add (TweenLite.set(".page11 #pic3", {y:600, x:0, autoAlpha:1}));
-	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-250}))	
+	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-250}));
+	     tl.pause();//crazy sound alert thing
+		 	
 		 tl.to(".page11 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut, delay:1})
 		.to(".page11 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
 		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
@@ -26,7 +28,8 @@ function runJQuery(){
 					});
 		 });
 	  }	
-
+	  angular.element('.screenWrapper').scope().soundAlert(tl);
+	  
 	
 };
 

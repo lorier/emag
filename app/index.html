@@ -97,6 +97,27 @@
   };
  
 
+  var isMobile = {
+      Android: function() {
+          return navigator.userAgent.match(/Android/i);
+      },
+      BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i);
+      },
+      iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+      },
+      Opera: function() {
+          return navigator.userAgent.match(/Opera Mini/i);
+      },
+      Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i);
+      },
+      any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+      }
+  };
+
 
   function updateLeftAnimation(){   
     //don't animate if this is the first page
@@ -244,11 +265,11 @@ function tweenThumbs(whichStop){
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-<div class="screenWrapper">
+<div class="screenWrapper" ng-controller="mobileAlertCtrl">
    <div class="wrapper">
     <section class="top-bar">
         <!--logo and links go here-->
-        <div class="link-out"><a href="#link">Find a community</a> near you.</div>
+        <div class="link-out"><a href="http://www.aegisliving.com/our-communities/">Find a community</a> near you.</div>
         <div class="social-buttons">
           <ul>
 			  <style>
@@ -307,14 +328,14 @@ function tweenThumbs(whichStop){
 				  background-size: cover;
 			  }
 			  </style>
-            <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
+            <li><a href="#!/view/1"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
             <li class="st_twitter_custom"><div class="nav-holder"></div></li>
             <li class="st_facebook_custom"><div class="nav-holder"></div></li>
-			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
+			<li class="nav-sound"><a href="#link"><div class="nav-holder" sound-watcher></div></a></li>
             <li class="st_email_custom" ><div class="nav-holder"></div></li>
           </ul>
         </div>
-        <div class="logo"><img src="img/aegis_logo.png"  height="49" width="240" alt="Aegis Living"></div>
+        <div class="logo"><a href='http://www.aegisliving.com/'><img src="img/aegis_logo.png"  height="49" width="240" alt="Aegis Living"></a></div>
     </section>
 
     <section class="slides">
