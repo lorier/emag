@@ -29,6 +29,7 @@ function runJQuery(){
 		 });
 	  }	
 	  angular.element('.screenWrapper').scope().soundAlert(tl);
+	  angular.element('body').scope().updateTween(tl);
 	  
 	
 };
@@ -60,7 +61,7 @@ function runJQuery(){
 	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
 	<div id="clickme" class="clickme"><ng-include src="addSVG()"></ng-include></div>
 	<div id="clicktext" class="clicktext">
-	<a><img id="icon" src="img/page_11_icon.png" alt="icon"></a>
+	<!--a class="st_email_custom" st_title="Beautiful Berry Mocktail" st_summary="Tasty Berry Bubbles" ><img id="icon" src="img/page_11_icon.png" alt="icon"></a-->
 	<h4 class="pantone166 cantarell bold">Mocktail Time!</h4>
 	<p>Make happy hour festive with a beautiful berry mocktail.<br />
 	Tasty Berry Bubbles<br />

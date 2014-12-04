@@ -165,7 +165,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.isThumbsVisible = false;
   $scope.pageTransition = 'forward';
   $scope.thumbTransition = '';
-  
+  $scope.currentTween;
   //count number of objects in the json object
   //might need a polyfill for older browsers
   
@@ -230,6 +230,15 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 	});
   }
 
+  $scope.updateTween = function(theTL){
+      $scope.currentTween = theTL;
+  };
+  $scope.stopTween = function(){
+	  if($scope.currentTween != null){
+	  	$scope.currentTween.stop();
+	  }
+      
+  };
 
   $scope.updateActivePage = function(value){
       StateService.setActivePage(value);
@@ -289,6 +298,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   $scope.changeSlide = function(location){
     var loc = '/view/' + location;
     $location.path(loc);
+	$scope.stopTween();
 	 soundMachineClear();
    };
 

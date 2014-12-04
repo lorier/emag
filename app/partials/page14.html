@@ -5,6 +5,7 @@ function runJQuery(){
 
 
 			var tl = new TimelineLite ();	
+			
   		  tl.pause();//crazy sound alert thing
 					
 				  tl.to(".page14 .headline h1", 1, {autoAlpha:1, delay:1,onStart:soundMachine, onStartParams:["birds"]})
@@ -14,6 +15,7 @@ function runJQuery(){
 				   .fromTo(".page14 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=2")
 				  .to(".page14 #swirl", 1, {autoAlpha:1}, "-=2");
 				  angular.element('.screenWrapper').scope().soundAlert(tl);
+				  angular.element('body').scope().updateTween(tl);
 				  
 };
 

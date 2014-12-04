@@ -13,6 +13,7 @@ function runJQuery(){
 		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
 		     .to(".page9 #roses", 1, {autoAlpha:1,rotation:0}, "-=.5");
 		  angular.element('.screenWrapper').scope().soundAlert(tl);
+		  angular.element('body').scope().updateTween(tl);
 			 
 };
 
