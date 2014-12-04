@@ -44,7 +44,7 @@
   var thumbWidth = null;
   var stopsList = null;
   var enablePeek = false;
-
+  var pageAnim = new TimelineLite({});	
 
 
 
@@ -63,12 +63,14 @@
     totalPages = total;
 	
       if (currentPage > 1 && currentPage <= totalPages){
-        $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
+          TweenLite.to(".page-wrapper", .4, {left:'-100%'});
+        //$(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
 		
         origPosition = "-100%";
       }
       if (currentPage === 1){
-        $(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
+          TweenLite.to(".page-wrapper", .4, {left:0});
+        //$(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
       }
       //find position and dimension of slide container
       init();
@@ -130,9 +132,11 @@
       var peekAmount = parseInt(numericPosition + 3) + "%";
 
       if(isMouseOverLeftButton){
-         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+		  TweenLite.to(".page-wrapper", .2, {left:peekAmount});
+         //$(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
       }else if(!isMouseOverLeftButton){
-        $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
+		  TweenLite.to(".page-wrapper", .4, {left:origWrapperPosition});
+		//$(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
       }
     }
   };
@@ -147,9 +151,12 @@
       var peekAmount = parseInt(numericPosition - 3) + "%";
 
       if(isMouseOverRightButton){
-         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+         //$(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+		 TweenLite.to(".page-wrapper", .2, {left:peekAmount});
       }else if(!isMouseOverRightButton){
-        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+          TweenLite.to(".page-wrapper", .4, {left:origWrapperPosition});
+        //$(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+		  
       }
     }
   };
@@ -174,20 +181,20 @@
       lButtonTop = $(".overlay-buttons").offset().top;
 	  
 	  
-	 $(".button-right").on('mouseenter',function(){
+	 $(".button-right").on('mouseover',function(){
         isMouseOverRightButton = true;
         updateRightAnimation();
       });
-	  $(".button-right").on('mouseleave',function(){
+	  $(".button-right").on('mouseout',function(){
           isMouseOverRightButton = false;
           updateRightAnimation();
       });
 	  
- 	 $(".button-left").on('mouseenter',function(){
+ 	 $(".button-left").on('mouseover',function(){
           isMouseOverLeftButton = true;
           updateLeftAnimation();
        });
- 	  $(".button-left").on('mouseleave',function(){
+ 	  $(".button-left").on('mouseout',function(){
            isMouseOverLeftButton = false;
            updateLeftAnimation();
        });
@@ -367,6 +374,7 @@ function tweenThumbs(whichStop){
 		      </nav> 
 		    </section>
           <div class="overlay-buttons">
+			  
             <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')"ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></button>
           </div> 

@@ -117,7 +117,7 @@ emagControllers.controller('mobileAlertCtrl', ['$scope', 'StateService', '$http'
 		var dialogSound; 
 
 		if(localStorage.playSound != 'false' && sessionStorage.getItem("iosSound") != 'true' && isMobile.any()){   //play or unknown
-			$('.link-out').append('LS ');
+			
 			 dialogSound  = ngDialog.open({
 				 template: '\
 	                <p>This presentation uses sound would you like to enable it?</p>\
@@ -126,6 +126,7 @@ emagControllers.controller('mobileAlertCtrl', ['$scope', 'StateService', '$http'
 	                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="closeThisDialog(1)">Yes</button>\
 	                </div>',
 				 plain: true,
+				 controller: 'mobileAlertCtrl',
 			     className: 'ngdialog-theme-default'
 			 }); 
 		

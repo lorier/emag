@@ -7,7 +7,7 @@ $(document).ready(function(e) {
 	var contH = contentwrap.innerHeight();
 	var contW = contentwrap.innerWidth(); //init these from the css...
 	var displayRatio = contW/contH;
-	$("body").css('height', '100vh');
+	//$("body").css('height', '100vh');
 	console.log($("body").css('height'));
 	
 	function iOSversion() {
@@ -64,6 +64,7 @@ $(document).ready(function(e) {
 				TweenLite.set(contentwrap,{x:0, y:0,scale:theRatio});
 			}
 		}
+		
 	}
 	doResizer();
 	

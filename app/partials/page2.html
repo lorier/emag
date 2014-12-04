@@ -15,7 +15,7 @@ function runJQuery(){
 		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
 		  tl.pause();//crazy sound alert thing
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
+			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
 			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
 		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")

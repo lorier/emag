@@ -1,4 +1,4 @@
-var sound_engine, sound_birds, sound_giggle;
+var sound_engine, sound_birds, sound_giggle, sound_birds2;
 
 
 $(document).ready(function(){
@@ -50,6 +50,10 @@ function initSounds(){
 	  urls: ['sounds/birds.mp3'],
 	  autoplay: false
 	});
+	sound_birds2 = new Howl({
+	  urls: ['sounds/birds2.mp3'],
+	  autoplay: false
+	});
 
 	sound_slots = new Howl({
 	  urls: ['sounds/slots.mp3'],
@@ -58,9 +62,12 @@ function initSounds(){
 
 }
 function soundMachineClear(){
+	if(sound_engine != null){
 	    sound_engine.stop();
+		sound_birds2.stop();
 		sound_birds.stop();
 		sound_slots.stop();
+	}
 	
 }
 
@@ -73,15 +80,24 @@ function soundMachine(theFileName){
 		case 'engine':
 		    sound_engine.play();
 			sound_birds.stop();
+			sound_birds2.stop();
 			sound_slots.stop();
 		    break;
 		case 'birds':
 		    sound_engine.stop();
 			sound_birds.play();
+			sound_birds2.stop();
 			sound_slots.stop();
-		    break;	
+		    break;
+		case 'birds2':
+		    sound_engine.stop();
+			sound_birds.stop();			
+			sound_birds2.play();
+			sound_slots.stop();
+		    break;		
 		case 'slots':
 		    sound_engine.stop();
+			sound_birds2.stop();
 			sound_birds.stop();
 			sound_slots.play();
 		    break;	
