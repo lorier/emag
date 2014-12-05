@@ -4,7 +4,7 @@
 
 function runJQuery(){
 
-	var clickAnywhereToClose = false;
+	console.log('RUN 02');
 	//var svgElement = document.getElementById("circlegroup");
 	
       	var tl = new TimelineLite ();	
@@ -13,9 +13,9 @@ function runJQuery(){
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
 		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
-
+		  tl.pause();//crazy sound alert thing
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
+			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
 			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
 		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
@@ -37,39 +37,8 @@ function runJQuery(){
 		  }	 
 		  
 		
-			/*$('.page2 #clickme').on('click', function () {
-				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
-
-					$(document).off('click');
-				    clickAnywhereToClose = true;	
-					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page2 #clickme', this)
-					});
-					
-			});
-			
-			function setUpClose(exceptionCase, obj)
-			{ 	
-				//exceptionCase == other buttons we want to keep listening to
-				$(document).on('click', function(event) {
-					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-						  {
-						    $(obj).fadeOut("fast", "linear");
-						    	clickAnywhereToClose = false;
-							}
-							$('.view-container svg #circle-one').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-two').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-plus').each(function( index ) {
-								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
-							});
-						})
-			}*/
+		  angular.element('.screenWrapper').scope().soundAlert(tl);
+		  angular.element('body').scope().updateTween(tl);
 			
 			
 };

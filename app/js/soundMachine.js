@@ -1,4 +1,4 @@
-var sound_engine, sound_birds, sound_giggle
+var sound_engine, sound_birds, sound_giggle, sound_birds2;
 
 
 $(document).ready(function(){
@@ -9,17 +9,32 @@ $(document).ready(function(){
 		$('li.nav-sound a .nav-holder').addClass('nosound');
 	}
 	var soundButton = $('li.nav-sound a');
-	soundButton.click(function(e){
-		$('li.nav-sound a .nav-holder').toggleClass('nosound');
-		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
-			localStorage.playSound = "false";
-			soundMachineClear();
-			e.preventDefault();
-		}else{
+
+	soundButton.on('soundOn',function(e){
+		$('li.nav-sound a .nav-holder').removeClass('nosound');
 			initSounds();
 			localStorage.playSound = "true";
 			e.preventDefault();
+	})
+	soundButton.on('soundOff',function(e){
+		$('li.nav-sound a .nav-holder').addClass('nosound');
+		localStorage.playSound = "false";
+		soundMachineClear();
+		e.preventDefault();
+	})
+	
+	soundButton.click(function(e){
+		angular.element('li.nav-sound a .nav-holder').toggleClass('nosound');
+		if ($('li.nav-sound a .nav-holder').hasClass('nosound')){
+			$(this).trigger('soundOff');
+		}else{
+			$(this).trigger('soundOn');
 		}
+		
+		
+		
+		
+		e.preventDefault();
 	})
 	
 })
@@ -35,6 +50,10 @@ function initSounds(){
 	  urls: ['sounds/birds.mp3'],
 	  autoplay: false
 	});
+	sound_birds2 = new Howl({
+	  urls: ['sounds/birds2.mp3'],
+	  autoplay: false
+	});
 
 	sound_slots = new Howl({
 	  urls: ['sounds/slots.mp3'],
@@ -43,11 +62,13 @@ function initSounds(){
 
 }
 function soundMachineClear(){
-	if(localStorage.playSound == 'true'){
+	if(sound_engine != null){
 	    sound_engine.stop();
+		sound_birds2.stop();
 		sound_birds.stop();
 		sound_slots.stop();
 	}
+	
 }
 
 //http://goldfirestudios.com/blog/104/howler.js-Modern-Web-Audio-Javascript-Library
@@ -59,15 +80,24 @@ function soundMachine(theFileName){
 		case 'engine':
 		    sound_engine.play();
 			sound_birds.stop();
+			sound_birds2.stop();
 			sound_slots.stop();
 		    break;
 		case 'birds':
 		    sound_engine.stop();
 			sound_birds.play();
+			sound_birds2.stop();
 			sound_slots.stop();
-		    break;	
+		    break;
+		case 'birds2':
+		    sound_engine.stop();
+			sound_birds.stop();			
+			sound_birds2.play();
+			sound_slots.stop();
+		    break;		
 		case 'slots':
 		    sound_engine.stop();
+			sound_birds2.stop();
 			sound_birds.stop();
 			sound_slots.play();
 		    break;	

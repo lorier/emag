@@ -6,6 +6,7 @@ function runJQuery(){
 			  tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
 			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
 			  tl.add (TweenLite.set(".page4 #arrow", {y:-20, x:0, opacity:0}));	
+			  tl.pause();//crazy sound alert thing
 			  tl.to(".page4 .headline h1", 1, {autoAlpha:1, delay:1})
 			    .to(".page4 .headline p", 1, {autoAlpha:1}, "-=.5")
 				.fromTo(".page4 #mask", 1, {css:{height:0}}, {css:{height:800}, ease:Power1.easeOut}, "-=1")
@@ -23,6 +24,8 @@ function runJQuery(){
 							});
 					});
 			  }	 
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  angular.element('body').scope().updateTween(tl);
 				 		
 };
 	</script>		

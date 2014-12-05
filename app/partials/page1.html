@@ -3,7 +3,8 @@
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 
-		
+	
+	//angular.element('.screenWrapper').scope().soundAlert();
 			var tl = new TimelineLite ();		
 			
 			
@@ -12,6 +13,7 @@ function runJQuery(){
 			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
+				  tl.pause();//crazy sound alert thing
 				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
 
 				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
@@ -40,6 +42,9 @@ function runJQuery(){
 				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
 			  	
 			  }
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  angular.element('body').scope().updateTween(tl);
+			  console.log('RUN 01' );
 };
 
 </script>

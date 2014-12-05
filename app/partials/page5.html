@@ -47,7 +47,7 @@ function runJQuery(){
 			//});
 			soundMachine('slots');
 
-		
+			
 			if (clickCount ==0){
 				console.log('SLOTS: 1');
 
@@ -95,6 +95,7 @@ function runJQuery(){
 			machine1.shuffle(2);
 			machine2.shuffle(3);
 			machine3.shuffle(4);
+			
 		}
 		
 		
@@ -107,6 +108,7 @@ function runJQuery(){
 			tl.set(".view-container .clickme", {scale:.01});
 			tl.set(".page5 #play-dot", {top:-100});
 			tl.set(".page5 .slotWrapper .machineBorder", {opacity:0});
+			tl.pause();//crazy sound alert thing
 			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onComplete:initSlots})
 			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
 				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
@@ -125,7 +127,9 @@ function runJQuery(){
 						});
 				});
 		  }	 
-
+		  angular.element('.screenWrapper').scope().soundAlert(tl);
+		  angular.element('body').scope().updateTween(tl);
+		  
 
 
 				

@@ -6,10 +6,15 @@ function runJQuery(){
 		var tl = new TimelineLite ();
 			tl.add (TweenLite.set(".page9 #bluebar", {y:0, x:450, autoAlpha:1}));
 			tl.add (TweenLite.set(".page9 #roses", {rotation:90}));	
+  		 	 tl.pause();//crazy sound alert thing
+			
 		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1})
 		     .to(".page9 .headline h2", 1, {autoAlpha:1}, "-=.7")
 		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
 		     .to(".page9 #roses", 1, {autoAlpha:1,rotation:0}, "-=.5");
+		  angular.element('.screenWrapper').scope().soundAlert(tl);
+		  angular.element('body').scope().updateTween(tl);
+			 
 };
 
 </script>
@@ -28,7 +33,7 @@ function runJQuery(){
 	<h3>Walking Club</h3>
 	<p>Walking hand-in-hand as the seasons change from shades of green, to amber, to hues of grey, then green once more.</p>	
 		<div id="vid-wrap">
-			<div id="videobox" ng-click="doYoutube('dy1MOc8Ywlo')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+			<div id="videobox" ng-click="doYoutube('8bc9zsxqgW8')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 		</div>
 	<h3 class="movedown">Scenic Drives</h3>
 	<p>Enjoy the bustle of the city, the view of the mountains, the vastness of the ocean, and lush green scenery pass softly by your window.</p>
