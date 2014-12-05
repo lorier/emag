@@ -1,33 +1,7 @@
 <!--partial-->
 <script type="text/javascript">
 
-function runJQuery(){
-		var tl = new TimelineLite ();
-			  tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
-			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
-			  tl.add (TweenLite.set(".page4 #arrow", {y:-20, x:0, opacity:0}));	
-			  tl.pause();//crazy sound alert thing
-			  tl.to(".page4 .headline h1", 1, {autoAlpha:1, delay:1})
-			    .to(".page4 .headline p", 1, {autoAlpha:1}, "-=.5")
-				.fromTo(".page4 #mask", 1, {css:{height:0}}, {css:{height:800}, ease:Power1.easeOut}, "-=1")
-				 .to(".page4 #class-list", 1, {autoAlpha:1}, "-=1")
-			  .to(".page4 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut, onStart:doAnimation}, "-=.7")
-			  .to(".page4 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7")
-			  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
-			  
-			  function doAnimation(){
-				 $(".view-container .clickme").each(function(index){
-				 			$(this).delay(800*index).queue(function(next){
-	 							TweenLite.set($(this), {scale:1});
-								$(this).addClass('bounce');
-								$(this).dequeue();
-							});
-					});
-			  }	 
-			  angular.element('.screenWrapper').scope().soundAlert(tl);
-			  angular.element('body').scope().updateTween(tl);
-				 		
-};
+
 	</script>		
 		
 <div class="page4 page-container">

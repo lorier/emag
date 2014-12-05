@@ -1907,3 +1907,64 @@ background-color: #66665c;
 	margin-left: 31px;
 	}
 }
+
+
+ @media only screen and (max-width: 480px) {
+     .page1 {
+     	 	background: url('../img/page_01_sm.jpg') no-repeat center center;
+			background-size:cover;
+     }
+     .page2 {
+     	 	background: url('../img/page_02_sm.jpg') no-repeat center center;
+			background-size:cover;
+     }
+     .page3 {
+     	 	background: url('../img/page_03_sm.jpg') no-repeat center center;
+			background-size:cover;
+     }
+     .page4 {
+     	 	background: url('../img/page_04_sm.jpg') no-repeat center center;
+			background-size:cover;
+     }
+     .page5 {
+     	 	background: url('../img/page_05_sm.jpg') no-repeat center center;
+			background-size:cover;
+     }
+    .page6 {
+    	 	background: url('../img/page_06_sm.jpg') no-repeat center center;
+			background-size:cover;
+    }
+   	.page7 {
+   	 	background: url('../img/page_07_sm.jpg') no-repeat center center;
+		background-size:cover;
+   	}
+  	.page8 {
+  	 	background: url('../img/page_08_sm.jpg') no-repeat center center;
+		background-size:cover;
+  	}
+ 	.page9 {
+ 	 	background: url('../img/page_09_sm.jpg') no-repeat center center;
+		background-size:cover;
+ 	}
+	.page10 {
+ 	 	background: url('../img/page_10_sm.jpg') no-repeat center center;
+		background-size:cover;
+ 	}
+ 	.page11 {
+ 	 	background: url('../img/page_11_sm.jpg') no-repeat center center;
+		background-size:cover;
+ 	}
+ 	.page12 {
+ 	 	background: url('../img/page_12_sm.jpg') no-repeat center center;
+		background-size:cover;
+ 	}
+ 	.page13 {
+ 	 	background: url('../img/page_13_sm.jpg') no-repeat center center;
+		background-size:cover;
+ 	}
+	.page14 {
+	 	background: url('../img/page_14_sm.jpg') no-repeat center center;
+		background-size:cover;
+	}
+	 
+ }

@@ -62,6 +62,7 @@ function initSounds(){
 
 }
 function soundMachineClear(){
+	console.log("clearSounds");
 	if(sound_engine != null){
 	    sound_engine.stop();
 		sound_birds2.stop();

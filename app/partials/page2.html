@@ -4,42 +4,7 @@
 
 function runJQuery(){
 
-	console.log('RUN 02');
-	//var svgElement = document.getElementById("circlegroup");
-	
-      	var tl = new TimelineLite ();	
-			tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
-		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
-	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
-		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
-		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
-		  tl.pause();//crazy sound alert thing
-			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
-			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
-		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
-		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
-			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
-			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
-		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
-			  
-		  function doAnimation(){
-			 $(".view-container .clickme").each(function(index){
-			 			$(this).delay(800*index).queue(function(next){
- 							TweenLite.set($(this), {scale:1});
-							$(this).addClass('bounce');
-							$(this).dequeue();
-						});
-				});
-		  }	 
-		  
-		
-		  angular.element('.screenWrapper').scope().soundAlert(tl);
-		  angular.element('body').scope().updateTween(tl);
-			
+
 			
 };
 

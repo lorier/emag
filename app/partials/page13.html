@@ -1,37 +1,5 @@
 <!--partial-->
-<script type="text/javascript">
-//runJQuery is called in the angular app after this view partial loads.
-function runJQuery(){
-	var clickAnywhereToClose = false;
 
-			
- 		var tl = new TimelineLite ();	
-			tl.set(".view-container .clickme", {scale:.01});
-		
-		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));
-			   tl.add (TweenLite.set(".page13 #arrow", {y:-50, x:0, opacity:0}));
-	 		  tl.pause();//crazy sound alert thing
-			   
-			   	
-			  tl.to(".page13 .headline h1", 1, {autoAlpha:1, delay:1})
-			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut,onStart:doAnimation}, "-=.7")
-				.to(".page13 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
-			
-		  	  function doAnimation(){
-		  		 $(".view-container .clickme").each(function(index){
-		  		 			$(this).delay(800*index).queue(function(next){
-		  						TweenLite.set($(this), {scale:1});
-		  						$(this).addClass('bounce');
-		  						$(this).dequeue();
-		  					});
-		  			});
-		  	  }	
-			  angular.element('.screenWrapper').scope().soundAlert(tl);
-			  angular.element('body').scope().updateTween(tl);
-			  
-};
-
-</script>
 
 <div class="page13 page-container">
 

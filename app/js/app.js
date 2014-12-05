@@ -203,6 +203,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 	 }
 
   $scope.toggleThumbs = function(event){
+	  console.log('toggle');
 	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
 	  var target = angular.element(event.target)
 	  target.parent().parent().parent().toggleClass( "stash" ); //naughty dom climbing
@@ -233,15 +234,20 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.updateTween = function(theTL){
       $scope.currentTween = theTL;
+	  console.log($scope.currentTween);
   };
   $scope.stopTween = function(){
+	  
 	  if($scope.currentTween != null){
-	  	$scope.currentTween.stop();
+		  $scope.currentTween.pause('',true);
+		 
 	  }
       
   };
 
   $scope.updateActivePage = function(value){
+	  $scope.stopTween();
+	  //	   console.log("before "+$('.page-container').attr("class"));
       StateService.setActivePage(value);
   };
   
@@ -309,8 +315,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       //in the address bar
       var urlSlice = parseInt($location.path().slice(6) || 1);
       StateService.setActivePage(urlSlice);
-	  
-	  runJQuery($scope.activePage()); // function in partials fires 
+	  console.log($('.page-container').attr("class"));
+	  doPageAnimation($scope.activePage());
 	  
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
