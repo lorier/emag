@@ -179,6 +179,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.addSVG = function(){
     return "partials/circlebutton.svg";
+	//return "partials/clickbutton.html";
   };
   
   $scope.doYoutube = function(linkurl){
@@ -186,7 +187,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({
-			 template: '<iframe width="100%" height="100%" src="http://www.youtube.com/embed/'+linkurl+ '?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>',
+			 template: '<iframe class="popup-video" width="100%" height="100%" src="http://www.youtube.com/embed/'+linkurl+ '?rel=0&autoplay=1&showinfo=0&controls=1" frameborder="0" allowfullscreen></iframe>',
 			 plain: true,
 		     className: 'ngdialog-theme-plain'
 		 }); 
@@ -234,7 +235,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.updateTween = function(theTL){
       $scope.currentTween = theTL;
-	  console.log($scope.currentTween);
+	  //console.log($scope.currentTween);
   };
   $scope.stopTween = function(){
 	  
@@ -354,11 +355,24 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 */
   $scope.targetState = 'none';
   
+  
   $scope.setTargetState = function(theElement){
+	  console.log('TARGETOFF');
+	  var tweens = TweenMax.getTweensOf(".clickme");
+	  //tweens.pause();
+	  console.log(tweens);
+
+	  
 	  if(theElement == null || $scope.targetState== theElement){
 		  $scope.targetState = 'none';
+		  for(var i=0; i < tweens.length; i++){
+		          tweens[i].resume();
+		      }
 	  }else{
 		  $scope.targetState = theElement;
+		  for(var i=0; i < tweens.length; i++){
+		          tweens[i].pause();
+		      }
  	 }
   }
 

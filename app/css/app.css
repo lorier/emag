@@ -566,14 +566,14 @@ p {
   height: 100%;
   background-color: black; }
 
-#circle-group:hover #circle-one {
+.clicked #circle-group #circle-one, #circle-group:hover #circle-one {
   stroke: #76c3d4;
   fill: #fff; }
 
-#circle-group:hover #circle-two {
+.clicked #circle-group #circle-two, #circle-group:hover #circle-two {
   stroke: #76c3d4; }
 
-#circle-group:hover #circle-plus {
+.clicked #circle-group #circle-plus, #circle-group:hover #circle-plus {
   fill: #76c3d4; }
 
 @-webkit-keyframes in {
@@ -620,13 +620,13 @@ p {
     -o-transform: scale(0.8) translate(0px); } }
 
 .view-container .clickme.bounce {
-  -webkit-animation: click-bounce 1.2s infinite alternate;
+  -webkit-animation: click-bounce 1.2s;
   /* Safari 4+ */
-  -moz-animation: click-bounce 1.2s infinite alternate;
+  -moz-animation: click-bounce 1.2s;
   /* Fx 5+ */
-  -o-animation: click-bounce 1.2s infinite alternate;
+  -o-animation: click-bounce 1.2s;
   /* Opera 12+ */
-  animation: click-bounce 1.2s infinite alternate;
+  animation: click-bounce 1.2s;
   /* IE 10+, Fx 29+ */ }
 
 @-webkit-keyframes click-bounce {
@@ -661,7 +661,7 @@ p {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -o-transform: scale(1);
-  transition: scale(1);
+  transform: scale(1);
   -webkit-animation: none;
   /* Safari 4+ */
   -moz-animation: none;
@@ -1359,7 +1359,7 @@ p {
     background-color: #fff;
     opacity: 0.8;
     text-align: left;
-    padding: 0px 10px 0 15px;
+    padding: 0px 10px 15px 15px;
     -webkit-border-radius: 8px 8px 8px 0px;
     -moz-border-radius: 8px 8px 8px 0px;
     border-radius: 8px 8px 8px 0px; }

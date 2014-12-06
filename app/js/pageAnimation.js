@@ -5,7 +5,19 @@ var tl =new TimelineLite ();
 var machine1, machine2, machine3;	
 
 function doAnimation(){
-	//$(this.target).addClass('bounce');
+	//var tl2 = new TimelineMax({align:'sequence'});
+	//TweenMax.to(this, 0, {scale:1.3, yoyo:true, repeat:-1}, .5);
+	console.log('DO IT!!!');
+  //TweenMax.staggerTo(".view-container .clickme", 0, {scale:1.3, yoyo:true}, .5);
+ TweenMax.staggerFromTo(".view-container .clickme", 1.5, {
+              transform: 1,
+	 	 	yoyo:true,
+              repeat: -1
+          }, {
+              scale: 1.3,
+			  yoyo:true,
+              repeat: -1
+          }, .5);
 
 }	 
 
@@ -69,8 +81,8 @@ function doPageAnimation(pageNumber){
 			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
 			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut},  "-=1")
 //			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
-			.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-			.staggerTo(".view-container .clickme", 1, {className:"+=bounce", ease:Quad.easeOut}, 1)
+			TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:2}, 1, doAnimation);
+			//.staggerTo(".view-container .clickme", 1, {className:"+=bounce", ease:Quad.easeOut}, 1)
 			
  
   	  	
@@ -94,7 +106,7 @@ function doPageAnimation(pageNumber){
 
 	  }else if(pageNumber == 4){
 	  	
-  			  tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
+  			  TweenLite.set(".view-container .clickme", {scale:.01});
   			  tl.add (TweenLite.set(".page4 #vid-wrap", {y:0, x:-320, autoAlpha:1}));	
   			  tl.add (TweenLite.set(".page4 #arrow", {y:-20, x:0, opacity:0}));	
   			  tl.pause();//crazy sound alert thing
@@ -105,8 +117,9 @@ function doPageAnimation(pageNumber){
 			  
   			  .to(".page4 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
   			  .to(".page4 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7")
-  			  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-			  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+  			  TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:4}, 1,doAnimation)
+			 
+			  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
 
 		
 	  }else if(pageNumber == 5){  // SLOTS
@@ -203,8 +216,10 @@ function doPageAnimation(pageNumber){
   				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
   			.to(".page5 .slotWrapper .machineBorder", 1, {opacity:1 ,ease:Quad.easeOut,onComplete:doSlots})
 			.to(".page5 #play-dot", 1, {autoAlpha:1, top: 0, onComplete:doAnimation,ease:Elastic.easeOut}, "-=.2")
-			  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-		  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+			TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:3}, 1, doAnimation);
+			
+			//.staggerTo(".view-container .clickme", 0, {scale:1.3,yoyo:true}, .5);
+		  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
 
 		
 	  }else if(pageNumber == 6){
@@ -236,7 +251,7 @@ function doPageAnimation(pageNumber){
 			  .to(".page7 #splat4", 1, {autoAlpha:1}, "-=.7");			 	
 
 	  }else if (pageNumber == 8){
-	  	  	tl.set(".view-container .clickme", {scale:.01});
+	  	  	TweenLite.set(".view-container .clickme", {scale:.01});
   		      tl.add (TweenLite.set(".page8 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));
   			  tl.add (TweenLite.set(".page8 #pic2", {y:1000, x:800, autoAlpha:1}));	
   		      tl.add (TweenLite.set(".page8 #bluebar", {y:0, x:350, autoAlpha:1}));	
@@ -249,11 +264,11 @@ function doPageAnimation(pageNumber){
   			    .to(".page8 #pic2", 1, {x:215, y:200, rotation:5, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1")
   			    .to(".page8 #pic1", .7, {x:215, y:475, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
   			   .to(".page8 #arrowtext", 2, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=1")
-  			    .to(".page8 #arrow", 2, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "-=2")
-    			  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-  			  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
-  				//.fromTo(".page8 #mask", 2, {css:{height:0}}, {css:{height:200}, ease:Power1.easeOut})
-  				//.to(".page8 #arrow", 1, {autoAlpha:1}, "-=1")
+			  .to(".page8 #arrow", 2, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "-=2");
+			 TweenMax.staggerTo(".view-container .clickme", 0.3, {scale:1, delay:5}, 0.2, doAnimation);
+			  //.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1 ,0,null, doAnimation);
+  			  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+
 		
 	  }else if (pageNumber == 9){
   			tl.add (TweenLite.set(".page9 #bluebar", {y:0, x:450, autoAlpha:1}));
@@ -275,8 +290,10 @@ function doPageAnimation(pageNumber){
   			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
 //  			  .to(".page10 #stay-connected", 1.7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut,onStart: doAnimation}, "-=.7");
 			.to(".page10 #stay-connected", 1.7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "-=.7")
-			.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-			.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+			TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:2}, 1, doAnimation);
+
+			//.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
+			//.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
 
 	  }else if (pageNumber == 11){
 		  
@@ -293,12 +310,14 @@ function doPageAnimation(pageNumber){
   		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
   		.to(".page11 #pic3", 1, {x:0, y:0, rotation:1, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
           .to(".page11 #arrow", 2, {x:0, y:0,  ease:Elastic.easeOut})
-		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-		  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);  
+		TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:2}, 1, doAnimation);
+		 
+		 // .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
+		  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);  
 		  
 	  }else if (pageNumber == 12){
 		  
-  		tl.set(".view-container .clickme", {scale:.01});
+  		TweenLite.set(".view-container .clickme", {scale:.01});
   		tl.add (TweenLite.set(".page12 #filmstrip", {y:900, x:0, autoAlpha:1}));
   		tl.add (TweenLite.set(".page12 #filmpic1", {y:900, x:0, autoAlpha:1}));
   	    tl.add (TweenLite.set(".page12 #filmpic2", {y:900, x:0, autoAlpha:1}));	
@@ -317,14 +336,16 @@ function doPageAnimation(pageNumber){
   		  .to(".page12 #filmpic3", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
   		  .to(".page12 #filmpic4", 1, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=1")
 		.to(".page12 #arrow", 1, {autoAlpha:1, delay:.2, y:0, ease:Elastic.easeOut}, "+=.7")
-	  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-	  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+		TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:2}, 1, doAnimation);
+	  
+	  //.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
+	  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
 		
 		  
 		  
 	  }else if (pageNumber == 13){
 		  
-  			tl.set(".view-container .clickme", {scale:.01});
+  			TweenLite.set(".view-container .clickme", {scale:.01});
   		      tl.add (TweenLite.set(".page13 #bluebar", {y:0, x:350, autoAlpha:1}));
   			   tl.add (TweenLite.set(".page13 #arrow", {y:-50, x:0, opacity:0}));
   	 		  tl.pause();//crazy sound alert thing
@@ -332,8 +353,10 @@ function doPageAnimation(pageNumber){
   			  tl.to(".page13 .headline h1", 1, {autoAlpha:1, delay:1})
   			    .to(".page13 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
   				.to(".page13 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7")
-  			  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
-			  .staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
+  			TweenMax.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut,delay:2}, 1, doAnimation);
+  			  
+			  //.staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1)
+			  //.staggerTo(".view-container .clickme", 0, {className:'+=bounce'}, .5);
 		  
 		  
 	  }else if (pageNumber == 14){
