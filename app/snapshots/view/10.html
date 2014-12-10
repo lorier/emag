@@ -348,7 +348,7 @@ function tweenThumbs(whichStop){
 		            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
 		          </li>
 		          <li class="thumb-scroll-window">
-		              <ul class="holder" style="left: 0px; "> 
+		              <ul class="holder" style="left: -1188px; "> 
 
 		                <!-- ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
                <a class="page-thumbnail" href="#!/view/1" ng-click="onThumbClick(page.page_num)">
@@ -417,160 +417,106 @@ function tweenThumbs(whichStop){
 		    </section>
           <div class="overlay-buttons">
 			  
-            <button type="button" class="btn btn-default button-left ng-hide" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
           </div> 
 
-        <div class="page-wrapper" style="left: 0px; ">
-          <!-- ngInclude: undefined -->        
-                  <!--view is injected here-->
-          <div class="center">          
-            <!-- ngView:  --><div ng-view="" ng-class="pageTransition" class="view-container ng-scope forward"><!--partial-->
+        <div class="page-wrapper" style="left: -100%; ">
+          <!-- ngInclude: undefined --><ng-include src="peekPrev()" class="peek-prev ng-scope"><!--partial-->
 <script type="text/javascript" class="ng-scope">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 
-	
-	//angular.element('.screenWrapper').scope().soundAlert();
-			var tl = new TimelineLite ();		
+		var tl = new TimelineLite ();
+			tl.add (TweenLite.set(".page9 #bluebar", {y:0, x:450, autoAlpha:1}));
+			tl.add (TweenLite.set(".page9 #roses", {rotation:90}));	
+  		 	 tl.pause();//crazy sound alert thing
 			
-			
-			if(localStorage.playSound != "false"){	
-			      tl.add (TweenLite.set(".page1 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));	
-			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
-				  tl.pause();//crazy sound alert thing
-				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
-
-				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
-				  .to(".page1 #pic1", .7, {x:300, y:445, rotation:7, autoAlpha:1, ease:Circ.easeOut}, "-=.7")
-				  .to(".page1 #pic3", 1, {left:500, top:390, rotation:-2, autoAlpha:1, ease:Power3.easeOut, delay:1, onStart:soundMachine, onStartParams:["engine"]},  "-=1")		
-				  .to(".page1 #pic2", 1, {left:715, top:-10, rotation:-5, autoAlpha:1, ease:Power3.easeOut,delay:1}, "-=1")
-				  .to(".page1 #pic4", 1, {left:655, top:170, rotation:3, autoAlpha:1, ease:Power3.easeOut, delay:2}, "-=1")
-				  .fromTo(".page1 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=1")
-				  .to(".page1 #swirl", 1, {autoAlpha:1}, "-=1")
-				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
-
-			  }else{
-			      tl.add (TweenLite.set(".page1 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));	
-			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
-				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
-
-				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
-				  .to(".page1 #pic1", .7, {x:300, y:445, rotation:7, autoAlpha:1, ease:Circ.easeOut}, "-=.7")
-				  .to(".page1 #pic3", 1, {left:500, top:390, rotation:-2, autoAlpha:1, ease:Circ.easeOut, onStart:soundMachine, onStartParams:["engine"]},  "-=.7")		
-				  .to(".page1 #pic2", 1, {left:715, top:-10, rotation:-5, autoAlpha:1, ease:Circ.easeOut}, "-=1")
-				  .to(".page1 #pic4", 1, {left:655, top:170, rotation:3, autoAlpha:1, ease:Circ.easeOut}, "-=1")
-				  .fromTo(".page1 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=1")
-				  .to(".page1 #swirl", 1, {autoAlpha:1}, "-=1")
-				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
-			  	
-			  }
-			  angular.element('.screenWrapper').scope().soundAlert(tl);
-			  angular.element('body').scope().updateTween(tl);
-			  console.log('RUN 01' );
-};
-
-</script>
-
-<div class="page1 page-container ng-scope">
-
-	<div class="headline">
-	    <h2 class="cantarell pantone633">It's the beginning of</h2>
-		<h1 id="secondhead" class="amatic pantone130">A Beautiful Day</h1>
-	</div>
-	
-	<div id="mask" style="width: 0px; ">
-	<div id="swirl"><img src="img/page_01_swirl.png" alt="swirl"></div>
-	</div>
-
-	<img id="logo" src="img/page_01_logo.png" alt="Aegis Living">
-	<img id="pic1" src="img/page_01_pic1.jpg" alt="petting a dog">
-	<img id="pic2" src="img/page_01_pic2.jpg" alt="gardening" style="visibility: inherit; opacity: 1; left: 800px; top: -800px; ">
-	<img id="pic3" src="img/page_01_pic3.jpg" alt="car" style="visibility: inherit; opacity: 1; left: 1200px; top: 800px; ">
-	<img id="pic4" src="img/page_01_pic4.jpg" alt="giggle" style="visibility: inherit; opacity: 1; left: 1300px; top: -100px; ">
-
-	
-</div>
-
-</div>
-          </div>
-            <!-- ngInclude: undefined --><ng-include src="peekNext()" class="peek-next ng-scope"><!--partial 2-->
-
-<script type="text/javascript" class="ng-scope">
-
-function runJQuery(){
-
-	console.log('RUN 02');
-	//var svgElement = document.getElementById("circlegroup");
-	
-      	var tl = new TimelineLite ();	
-			tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
-		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
-	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
-		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
-		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
-		  tl.pause();//crazy sound alert thing
-			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
-			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
-		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
-		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
-			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
-			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
-		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
-			  
-		  function doAnimation(){
-			 $(".view-container .clickme").each(function(index){
-			 			$(this).delay(800*index).queue(function(next){
- 							TweenLite.set($(this), {scale:1});
-							$(this).addClass('bounce');
-							$(this).dequeue();
-						});
-				});
-		  }	 
-		  
-		
+		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1})
+		     .to(".page9 .headline h2", 1, {autoAlpha:1}, "-=.7")
+		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
+		     .to(".page9 #roses", 1, {autoAlpha:1,rotation:0}, "-=.5");
 		  angular.element('.screenWrapper').scope().soundAlert(tl);
 		  angular.element('body').scope().updateTween(tl);
-			
-			
+			 
 };
 
 </script>
 
-<div class="page2 page-container ng-scope">
+<div class="page9 page-container ng-scope">
+	
+<img id="roses" src="img/page_09_roses.png" alt="check out our furry friends">
+	
+<div class="headline">
+    <h1 class="amatic pantone166">Explore</h1>
+	<h2 class="amatic white">Your World</h2>
+</div>
 	
 	
+<div id="bluebar">	
+	<h3>Walking Club</h3>
+	<p>Walking hand-in-hand as the seasons change from shades of green, to amber, to hues of grey, then green once more.</p>	
+		<div id="vid-wrap">
+			<div id="videobox" ng-click="doYoutube('8bc9zsxqgW8')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+		</div>
+	<h3 class="movedown">Scenic Drives</h3>
+	<p>Enjoy the bustle of the city, the view of the mountains, the vastness of the ocean, and lush green scenery pass softly by your window.</p>
+	<h3 class="moveup">Gardening</h3>
+	<p>Gardening adds years to your life and life to your years.</p>
+	
+</div>
 
+</div></ng-include>        
+                  <!--view is injected here-->
+          <div class="center">          
+            <!-- ngView:  --><div ng-view="" ng-class="pageTransition" class="view-container ng-scope forward ng-animate ng-enter ng-enter-active"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+		
+		var tl = new TimelineLite ();
+			tl.set(".view-container .clickme", {scale:.01});
+			tl.add (TweenLite.set(".page10 #stay-connected", {y:0, x:-300}));
+  		    tl.pause();//crazy sound alert thing
+			
+			tl.to(".page10 .headline h1", 1, {autoAlpha:1, delay:1})
+			  .to(".page10 .headline p", 1, {autoAlpha:1, delay:.2}, "-=.7")
+			  .to(".page10 #stay-connected", 1.7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut,onStart: doAnimation}, "-=.7");
 
-	<img id="circle" src="img/page_02_circle.png" alt="pure joy">
-	<img id="pic1" src="img/page_02_pic1.jpg" alt="couple smiling">
-	<img id="pic2" src="img/page_02_pic2.jpg" alt="woman smiling">
-	<img id="pic3" src="img/page_02_pic3.jpg" alt="man smiling">	
+			  function doAnimation(){
+				 $(".view-container .clickme").each(function(index){
+				 			$(this).delay(800*index).queue(function(next){
+	 							TweenLite.set($(this), {scale:1});
+								$(this).addClass('bounce');
+								$(this).dequeue();
+							});
+					});
+			  }	 
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  angular.element('body').scope().updateTween(tl);
+			  
+				
+};
+
+</script>
+
+<div class="page10 page-container ng-scope">
 	
-	<div class="headline">
-		<h1><span class="amatic pantone633">From Dawn to Dusk</span></h1>	
-		<h3 class="cantarell">
-			<span class="line1 pantone166">Creating moments of</span><br>
-			<span class="line2">Each moment adding <br>to the next to create</span><br>
-			<span class="line3 pantone130">A joyful day.</span><br>
-			<span class="line4 pantone152">A full week.</span><br>
-			<span class="line5 pantone166">A happy life.</span>			
-		</h3>	
-	</div>
-	
-	
-		<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
-	
+<div class="headline">
+    <h1 class="amatic pantone166">Strong Family Ties</h1>
+	<p>Families are as close as a click away. At Aegis, we are happy to assist our residents with Skype to bring loved ones face-to-face. </p>
+</div>
+
+<img id="stay-connected" src="img/page_10_arrow.png" alt="Stay connected" style="-webkit-transform: matrix(1, 0, 0, 1, -300, 0); ">
+
+<div id="vid-wrap">
+<div id="videobox" ng-click="doYoutube('4H_GOu5vW68')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+</div>
+
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
+
 	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
-		<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+<div id="clickme1" class="clickme" style="-webkit-transform: matrix(0.010000000000000009, 0, 0, 0.010000000000000009, 0, 0); "><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
 
 <g id="circle-group">
 	
@@ -584,14 +530,128 @@ function runJQuery(){
 </g>
 
 </svg></ng-include></div>
-		<div id="clicktext" class="clicktext">
-		<h4 class="pantone633 cantarell bold">What is the<br>Life Enrichment Program?</h4>
-		<p>Our Life Enrichment  program does just that—enriches daily lives!  Every day we work to bring smiles with new challenges, friendships and purpose-filled fun for residents. Our Life Enrichment Directors customize our daily activities to stimulate the mind, increase physical activity, and nurture the emotional health of each resident. </p>
-		</div>
-	</div>
-	
-	
+<div id="clicktext1" class="clicktext">
+<h4 class="pantone633 cantarell bold">Put Us on Your Calendar</h4>
+<p>Throughout the year, communities will plan family dinners, holiday events, live music, happy hour, ice cream socials and outings to encourage family members to participate at the community and meet the other families living there.</p>
+</div>
+</div>
 
+	<div class="two targetWrapper" ng-click="setTargetState('two')" ng-class="{'clicked': targetState == 'two'}">
+<div id="clickme2" class="clickme" style="-webkit-transform: matrix(0.010000000000000009, 0, 0, 0.010000000000000009, 0, 0); "><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"></circle>
+  
+  <circle id="circle-one" fill="#fff" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"></circle>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"></path>
+	</g> 
+  
+</g>
+
+</svg></ng-include></div>
+<div id="clicktext2" class="clicktext">
+<h4 class="pantone633 cantarell bold">The Most Meaningful Visits</h4>
+<p>You are always welcome to join us at Aegis. Family and friends are the heart of any home. Share your photos, favorite recipes, or tell us your family stories – knowing details about our residents helps us do our jobs even better! </p>
+</div>
+</div>
+	
+</div>
+
+</div>
+          </div>
+            <!-- ngInclude: undefined --><ng-include src="peekNext()" class="peek-next ng-scope"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+	var clickAnywhereToClose = false;
+
+		var tl = new TimelineLite ();
+		tl.set(".view-container .clickme", {scale:.01});
+		 tl.add (TweenLite.set(".page11 #bluebar", {y:0, x:350, autoAlpha:1}));
+		 tl.add (TweenLite.set(".page11 #pic1", {y:300, x:0, autoAlpha:1}));
+	     tl.add (TweenLite.set(".page11 #pic2", {y:600, x:0, autoAlpha:1}));	
+	     tl.add (TweenLite.set(".page11 #pic3", {y:600, x:0, autoAlpha:1}));
+	     tl.add (TweenLite.set(".page11 #arrow", {y:0, x:-250}));
+	     tl.pause();//crazy sound alert thing
+		 	
+		 tl.to(".page11 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut, delay:1})
+		.to(".page11 #pic1", 1, {x:0, y:0, rotation:-5, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+		.to(".page11 #pic2", 1, {x:0, y:0, rotation:5, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
+		.to(".page11 #pic3", 1, {x:0, y:0, rotation:1, autoAlpha:1, ease:Power3.easeOut}, "-=.8")
+        .to(".page11 #arrow", 2, {x:0, y:0,  ease:Elastic.easeOut, onStart:doAnimation});
+
+	  function doAnimation(){
+		 $(".view-container .clickme").each(function(index){
+		 			$(this).delay(800*index).queue(function(next){
+						TweenLite.set($(this), {scale:1});
+						$(this).addClass('bounce');
+						$(this).dequeue();
+					});
+		 });
+	  }	
+	  angular.element('.screenWrapper').scope().soundAlert(tl);
+	  angular.element('body').scope().updateTween(tl);
+	  
+	
+};
+
+</script>
+
+<div class="page11 page-container ng-scope">
+
+
+
+
+<div id="bluebar">	
+	<h3>Around the Dinner Table</h3>
+	<p>Mealtimes are some of the most popular times of the day. Enjoy restaurant style dining as our chef prepares seasonal cuisine made with fresh local ingredients. Savor customized nutritious meals to stay active and enjoy the dining room buzz with conversation and laughter.</p>	
+</div>
+
+<img id="pic1" src="img/page_11_pic1.jpg" alt="cupcake">
+<img id="pic2" src="img/page_11_pic2.jpg" alt="linguine">
+<img id="pic3" src="img/page_11_pic3.jpg" alt="chicken">
+
+<img id="arrow" src="img/page_11_arrow.png" alt="Our chef in action">
+
+<div id="vid-wrap">
+<div id="videobox" ng-click="doYoutube('TKCzVCjKJ28')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+</div>
+
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
+
+	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+	<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<g id="circle-group">
+	
+   	<circle id="circle-two" fill="none" stroke="#FFFFFF" stroke-width="1.8769" stroke-miterlimit="10" cx="24.8" cy="24.9" r="17.1"></circle>
+  
+  <circle id="circle-one" fill="#fff" fill-opacity="0.2" stroke="#FFFFFF" stroke-width="0.6256" stroke-miterlimit="10" cx="24.8" cy="24.9" r="23.8"></circle>
+    	<g>
+		<path id="circle-plus" fill="#FFFFFF" d="M16.9,24.1h7.1V17h1.5v7.1h7.1v1.5h-7.1v7.1h-1.5v-7.1h-7.1V24.1z"></path>
+	</g> 
+  
+</g>
+
+</svg></ng-include></div>
+	<div id="clicktext" class="clicktext">
+	<!--a class="st_email_custom" st_title="Beautiful Berry Mocktail" st_summary="Tasty Berry Bubbles" ><img id="icon" src="img/page_11_icon.png" alt="icon"></a-->
+	<h4 class="pantone166 cantarell bold">Mocktail Time!</h4>
+	<p>Make happy hour festive with a beautiful berry mocktail.<br>
+	Tasty Berry Bubbles<br>
+	1 cup berries (chose your favorite in season)<br>
+	1 tsp lemon juice<br>
+	2 tbsp honey<br>
+	1 cup soda water<br>
+	Add berries, lemon juice and honey to a blender and combine until smooth. Add soda water and pulse until combined. If using frozen berries, you may add ingredients all at once. Add a dash of extra soda water at the end for a few additional bubbles!</p>
+	</div>
+</div>
+
+
+
+	
 </div>
 
 </ng-include>
@@ -601,7 +661,7 @@ function runJQuery(){
 
 
     <footer>
-      <div class="page-number ng-binding">1 of 14</div>
+      <div class="page-number ng-binding">10 of 14</div>
     </footer>
   
   </div>
@@ -625,4 +685,4 @@ function runJQuery(){
 </div>
 
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F1&amp;jsref=&amp;rnd=1418230618609" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F10&amp;jsref=&amp;rnd=1418230879021" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>

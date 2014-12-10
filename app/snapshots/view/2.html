@@ -1,7 +1,7 @@
 <html lang="en" ng-app="myEmag" class="js no-flexbox canvas canvastext no-webgl touch no-geolocation postmessage websqldatabase no-indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients cssreflections csstransforms no-csstransforms3d csstransitions fontface generatedcontent no-video no-audio localstorage sessionstorage webworkers applicationcache svg inlinesvg smil svgclippaths ng-scope" style=""><!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><!--<![endif]--><!--[if IE]>           <html lang="en" ng-app="myApp" class="ie"> <![endif]--><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide{display:none !important;}ng\:form{display:block;}.ng-animate-block-transitions{transition:0s all!important;-webkit-transition:0s all!important;}.ng-hide-add-active,.ng-hide-remove{display:block!important;}</style>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Aegis Living Activities</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <meta name="fragment" content="!">
@@ -36,6 +36,7 @@
   var thumbWidth = null;
   var stopsList = null;
   var enablePeek = false;
+  var pageAnim = new TimelineLite({});	
 
 
 
@@ -54,12 +55,14 @@
     totalPages = total;
 	
       if (currentPage > 1 && currentPage <= totalPages){
-        $(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
+          TweenLite.to(".page-wrapper", .4, {left:'-100%'});
+        //$(".page-wrapper").animate({"left": "-100%"}, {queue:false,duration:400});
 		
         origPosition = "-100%";
       }
       if (currentPage === 1){
-        $(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
+          TweenLite.to(".page-wrapper", .4, {left:0});
+        //$(".page-wrapper").animate({"left": "0"}, {queue:false,duration:400});     
       }
       //find position and dimension of slide container
       init();
@@ -89,6 +92,27 @@
   };
  
 
+  var isMobile = {
+      Android: function() {
+          return navigator.userAgent.match(/Android/i);
+      },
+      BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i);
+      },
+      iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+      },
+      Opera: function() {
+          return navigator.userAgent.match(/Opera Mini/i);
+      },
+      Windows: function() {
+          return navigator.userAgent.match(/IEMobile/i);
+      },
+      any: function() {
+          return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+      }
+  };
+
 
   function updateLeftAnimation(){   
     //don't animate if this is the first page
@@ -100,9 +124,11 @@
       var peekAmount = parseInt(numericPosition + 3) + "%";
 
       if(isMouseOverLeftButton){
-         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+		  TweenLite.to(".page-wrapper", .2, {left:peekAmount});
+         //$(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
       }else if(!isMouseOverLeftButton){
-        $(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
+		  TweenLite.to(".page-wrapper", .4, {left:origWrapperPosition});
+		//$(".page-wrapper").stop().animate({"left":origWrapperPosition}, {queue:false,duration:400})
       }
     }
   };
@@ -117,9 +143,12 @@
       var peekAmount = parseInt(numericPosition - 3) + "%";
 
       if(isMouseOverRightButton){
-         $(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+         //$(".page-wrapper").stop().animate({"left": peekAmount}, {queue:false,duration:400})
+		 TweenLite.to(".page-wrapper", .2, {left:peekAmount});
       }else if(!isMouseOverRightButton){
-        $(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+          TweenLite.to(".page-wrapper", .4, {left:origWrapperPosition});
+        //$(".page-wrapper").stop().animate({"left": origWrapperPosition}, {queue:false,duration:400})
+		  
       }
     }
   };
@@ -144,20 +173,20 @@
       lButtonTop = $(".overlay-buttons").offset().top;
 	  
 	  
-	 $(".button-right").on('mouseenter',function(){
+	 $(".button-right").on('mouseover',function(){
         isMouseOverRightButton = true;
         updateRightAnimation();
       });
-	  $(".button-right").on('mouseleave',function(){
+	  $(".button-right").on('mouseout',function(){
           isMouseOverRightButton = false;
           updateRightAnimation();
       });
 	  
- 	 $(".button-left").on('mouseenter',function(){
+ 	 $(".button-left").on('mouseover',function(){
           isMouseOverLeftButton = true;
           updateLeftAnimation();
        });
- 	  $(".button-left").on('mouseleave',function(){
+ 	  $(".button-left").on('mouseout',function(){
            isMouseOverLeftButton = false;
            updateLeftAnimation();
        });
@@ -236,11 +265,11 @@ function tweenThumbs(whichStop){
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-<div class="screenWrapper">
+<div class="screenWrapper ng-scope" ng-controller="mobileAlertCtrl">
    <div class="wrapper" style="z-index: 0; -webkit-transform: matrix(0.3305785123966942, 0, 0, 0.3305785123966942, -405, 0); ">
     <section class="top-bar">
         <!--logo and links go here-->
-        <div class="link-out"><a href="#link">Find a community</a> near you.</div>
+        <div class="link-out"><a href="http://www.aegisliving.com/our-communities/">Find a community</a> near you.</div>
         <div class="social-buttons">
           <ul>
 			  <style>
@@ -299,14 +328,14 @@ function tweenThumbs(whichStop){
 				  background-size: cover;
 			  }
 			  </style>
-            <li><a href="#link"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
+            <li><a href="#!/view/1" ng-click="onThumbClick(1)"><img src="img/home.png" height="70" width="72" alt="Home"></a></li>
             <li class="st_twitter_custom"><div class="nav-holder"></div></li>
             <li class="st_facebook_custom"><div class="nav-holder"></div></li>
-			<li class="nav-sound"><a href="#link"><div class="nav-holder"></div></a></li>
+			<li class="nav-sound"><a href="#link"><div class="nav-holder" sound-watcher=""></div></a></li>
             <li class="st_email_custom"><div class="nav-holder"></div></li>
           </ul>
         </div>
-        <div class="logo"><img src="img/aegis_logo.png" height="49" width="240" alt="Aegis Living"></div>
+        <div class="logo"><a href="http://www.aegisliving.com/"><img src="img/aegis_logo.png" height="49" width="240" alt="Aegis Living"></a></div>
     </section>
 
     <section class="slides">
@@ -387,17 +416,19 @@ function tweenThumbs(whichStop){
 		      </nav> 
 		    </section>
           <div class="overlay-buttons">
+			  
             <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
           </div> 
 
-        <div class="page-wrapper" style="left: -44.51328444544773%; ">
+        <div class="page-wrapper" style="left: -77.199375%; ">
           <!-- ngInclude: undefined --><ng-include src="peekPrev()" class="peek-prev ng-scope"><!--partial-->
 <script type="text/javascript" class="ng-scope">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
 
-		
+	
+	//angular.element('.screenWrapper').scope().soundAlert();
 			var tl = new TimelineLite ();		
 			
 			
@@ -406,6 +437,7 @@ function runJQuery(){
 			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
+				  tl.pause();//crazy sound alert thing
 				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
 
 				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
@@ -434,6 +466,9 @@ function runJQuery(){
 				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
 			  	
 			  }
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  angular.element('body').scope().updateTween(tl);
+			  console.log('RUN 01' );
 };
 
 </script>
@@ -467,17 +502,18 @@ function runJQuery(){
 
 function runJQuery(){
 
-	var clickAnywhereToClose = false;
+	console.log('RUN 02');
 	//var svgElement = document.getElementById("circlegroup");
 	
       	var tl = new TimelineLite ();	
+			tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
 		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
 	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
 		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
 		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
-
+		  tl.pause();//crazy sound alert thing
 			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1}, "-=.5")
+			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
 			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
 		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
 		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
@@ -486,47 +522,21 @@ function runJQuery(){
 			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
 			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
 			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
+		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
 			  
 		  function doAnimation(){
-
-			TweenMax.fromTo($(".clickme"), 3, {css: {scale:1}}, {css:{scale:1.3},yoyo:true,repeat:-1,ease:Elastic.easeIn});
-
-		  }	
+			 $(".view-container .clickme").each(function(index){
+			 			$(this).delay(800*index).queue(function(next){
+ 							TweenLite.set($(this), {scale:1});
+							$(this).addClass('bounce');
+							$(this).dequeue();
+						});
+				});
+		  }	 
 		  
 		
-			/*$('.page2 #clickme').on('click', function () {
-				$(this).find("#circle-one")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-two")[ 0 ].setAttribute('stroke', 'rgb(118,195,212)');
-				$(this).find("#circle-plus")[ 0 ].setAttribute('fill', 'rgb(118,195,212)');
-
-					$(document).off('click');
-				    clickAnywhereToClose = true;	
-					$('.page2 #clicktext').fadeIn( "fast", "linear", function(){
-						setUpClose('.page2 #clickme', this)
-					});
-					
-			});
-			
-			function setUpClose(exceptionCase, obj)
-			{ 	
-				//exceptionCase == other buttons we want to keep listening to
-				$(document).on('click', function(event) {
-					if (  clickAnywhereToClose && !$(event.target).closest(exceptionCase).length ) 
-						  {
-						    $(obj).fadeOut("fast", "linear");
-						    	clickAnywhereToClose = false;
-							}
-							$('.view-container svg #circle-one').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-two').each(function( index ) {
-								  $( this )[0].setAttribute('stroke', 'rgb(255,255,255)');
-							});
-							$('.view-container svg #circle-plus').each(function( index ) {
-								  $( this )[0].setAttribute('fill', 'rgb(255,255,255)');
-							});
-						})
-			}*/
+		  angular.element('.screenWrapper').scope().soundAlert(tl);
+		  angular.element('body').scope().updateTween(tl);
 			
 			
 };
@@ -558,7 +568,7 @@ function runJQuery(){
 		<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
 	
 	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
-		<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+		<div id="clickme" class="clickme" style="-webkit-transform: matrix(0.010000000000000009, 0, 0, 0.010000000000000009, 0, 0); "><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
 
 <g id="circle-group">
 	
@@ -588,10 +598,12 @@ function runJQuery(){
 <script type="text/javascript" class="ng-scope">
 
 function runJQuery(){
+	console.log('RUN 03');
 
 			var tl = new TimelineLite ();			
 			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:800, autoAlpha:1}));	
 				  tl.add (TweenLite.set(".page3 #arrow", {x:-80}));	
+				  tl.pause();//crazy sound alert thing
 				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:1})
 				  .to(".page3 p", 1, {autoAlpha:1}, "-=.5")				
 				  .to(".page3 h2", 1, {autoAlpha:1}, "-=.5")
@@ -601,6 +613,9 @@ function runJQuery(){
 				// VIDEO BUTTON
 				/*$('.page3 button').on('click', function () {	
 				});*/
+					
+					angular.element('.screenWrapper').scope().soundAlert(tl);
+					angular.element('body').scope().updateTween(tl);
 };
 
 </script>
@@ -663,4 +678,4 @@ function runJQuery(){
 </div>
 
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F2&amp;jsref=&amp;rnd=1416944460836" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F2&amp;jsref=&amp;rnd=1418230643782" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>

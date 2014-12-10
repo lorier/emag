@@ -348,7 +348,7 @@ function tweenThumbs(whichStop){
 		            <button class="prev btn" ng-click="advanceThumb('prev')"><span class="glyphicon glyphicon-chevron-left"></span> </button>
 		          </li>
 		          <li class="thumb-scroll-window">
-		              <ul class="holder" style="left: 0px; "> 
+		              <ul class="holder" style="left: -630px; "> 
 
 		                <!-- ngRepeat: page in pages --><li ng-repeat="page in pages" class="thumbnail-container ng-scope" my-repeat-directive=""> 
                <a class="page-thumbnail" href="#!/view/1" ng-click="onThumbClick(page.page_num)">
@@ -417,115 +417,131 @@ function tweenThumbs(whichStop){
 		    </section>
           <div class="overlay-buttons">
 			  
-            <button type="button" class="btn btn-default button-left ng-hide" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
+            <button type="button" class="btn btn-default button-left" ng-click="moveSlide('prev')" ng-hide="isFirstPage()"><span class="glyphicon glyphicon-chevron-left"></span></button>
             <button type="button" class="btn btn-default button-right" ng-click="moveSlide('next')" ng-hide="isLastPage()"><span class="glyphicon glyphicon-chevron-right"></span></button>
           </div> 
 
-        <div class="page-wrapper" style="left: 0px; ">
-          <!-- ngInclude: undefined -->        
-                  <!--view is injected here-->
-          <div class="center">          
-            <!-- ngView:  --><div ng-view="" ng-class="pageTransition" class="view-container ng-scope forward"><!--partial-->
+        <div class="page-wrapper" style="left: -82.14937499999999%; ">
+          <!-- ngInclude: undefined --><ng-include src="peekPrev()" class="peek-prev ng-scope"><!--partial-->
 <script type="text/javascript" class="ng-scope">
 //runJQuery is called in the angular app after this view partial loads.
 function runJQuery(){
+		var clickAnywhereToClose = false;
+		var machine1, machine2, machine3;
+
 
 	
-	//angular.element('.screenWrapper').scope().soundAlert();
-			var tl = new TimelineLite ();		
+
+		
+		
+		var clickCount = 0;
+
+		$(".page5 #play-dot").click(function(){
+			TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
+			TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
+			doSlots();
 			
 			
-			if(localStorage.playSound != "false"){	
-			      tl.add (TweenLite.set(".page1 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));	
-			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
-				  tl.pause();//crazy sound alert thing
-				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
+		});
 
-				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
-				  .to(".page1 #pic1", .7, {x:300, y:445, rotation:7, autoAlpha:1, ease:Circ.easeOut}, "-=.7")
-				  .to(".page1 #pic3", 1, {left:500, top:390, rotation:-2, autoAlpha:1, ease:Power3.easeOut, delay:1, onStart:soundMachine, onStartParams:["engine"]},  "-=1")		
-				  .to(".page1 #pic2", 1, {left:715, top:-10, rotation:-5, autoAlpha:1, ease:Power3.easeOut,delay:1}, "-=1")
-				  .to(".page1 #pic4", 1, {left:655, top:170, rotation:3, autoAlpha:1, ease:Power3.easeOut, delay:2}, "-=1")
-				  .fromTo(".page1 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=1")
-				  .to(".page1 #swirl", 1, {autoAlpha:1}, "-=1")
-				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
+		
+		function initSlots(){
+			
+			machine1 = $('.page5 #machineFake1').slotMachine({
+				active:2,
+				delay: 400
+			});
+			machine2 = $('.page5 #machineFake2').slotMachine({
+				active:5,
+				delay: 400
+			});
+		
+			machine3 = $('.page5 #machineFake3').slotMachine({
+				active:6,
+				delay: 400
+			});
+			console.log(machine1.isRunning + 'is running');
+			
+			
+		}
+		function doSlots(){
+			//$(".page5 #play-dot").click(function(){
+			//	TweenLite.set($(".page5 #play-dot"), {x:0, y:0, scale:.9});
+			//	TweenLite.to($(".page5 #play-dot"),.1, {x:0, y:0, scale:1,delay:.3});
+			//});
+			soundMachine('slots');
 
-			  }else{
-			      tl.add (TweenLite.set(".page1 #pic1", {y:1000, x:800, autoAlpha:1, delay: 1}));	
-			      tl.add (TweenLite.set(".page1 #pic2", {top:-800, left:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic3", {top:800, left:1200, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page1 #pic4", {top:-100, left:1300, autoAlpha:1}));
-				  tl.to(".page1 .headline h2", 1, {autoAlpha:1, delay:.2})
+			
+			if (clickCount ==0){
+				console.log('SLOTS: 1');
 
-				  .to(".page1 .headline h1", 1, {autoAlpha:1}, "-=.7")				
-				  .to(".page1 #pic1", .7, {x:300, y:445, rotation:7, autoAlpha:1, ease:Circ.easeOut}, "-=.7")
-				  .to(".page1 #pic3", 1, {left:500, top:390, rotation:-2, autoAlpha:1, ease:Circ.easeOut, onStart:soundMachine, onStartParams:["engine"]},  "-=.7")		
-				  .to(".page1 #pic2", 1, {left:715, top:-10, rotation:-5, autoAlpha:1, ease:Circ.easeOut}, "-=1")
-				  .to(".page1 #pic4", 1, {left:655, top:170, rotation:3, autoAlpha:1, ease:Circ.easeOut}, "-=1")
-				  .fromTo(".page1 #mask", 1, {css:{width:0}}, {css:{width:800}, ease:Power1.easeOut}, "-=1")
-				  .to(".page1 #swirl", 1, {autoAlpha:1}, "-=1")
-				  .to(".page1 #logo", 1, {autoAlpha:1}, "-=.5");
-			  	
-			  }
-			  angular.element('.screenWrapper').scope().soundAlert(tl);
-			  angular.element('body').scope().updateTween(tl);
-			  console.log('RUN 01' );
-};
-
-</script>
-
-<div class="page1 page-container ng-scope">
-
-	<div class="headline">
-	    <h2 class="cantarell pantone633">It's the beginning of</h2>
-		<h1 id="secondhead" class="amatic pantone130">A Beautiful Day</h1>
-	</div>
+				machine1.setRandomize(0);
+				machine2.setRandomize(1);
+				machine3.setRandomize(2);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else if (clickCount == 1){
+				console.log('SLOTS: 2');
+				machine1.setRandomize(3);
+				machine2.setRandomize(4);
+				machine3.setRandomize(5);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else if (clickCount == 2){
+				console.log('SLOTS: 3');
+				machine1.setRandomize(6);
+				machine2.setRandomize(7);
+				machine3.setRandomize(8);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				clickCount += 1;
+				soundMachine('slots');
+			}else{
+				console.log('SLOTS: final');
+				machine1.setRandomize(9);
+				machine2.setRandomize(9);
+				machine3.setRandomize(9);
+				machine1.shuffle(3);
+				machine2.shuffle(3.5);
+				machine3.shuffle(4);
+				soundMachine('slots');
+			}
+		
+			console.log('cc '+clickCount);
 	
-	<div id="mask" style="width: 0px; ">
-	<div id="swirl"><img src="img/page_01_swirl.png" alt="swirl"></div>
-	</div>
+			machine1.shuffle(2);
+			machine2.shuffle(3);
+			machine3.shuffle(4);
+			
+		}
+		
+		
+		machine1 = '';
+		machine2 = '';
+		machine3 = '';
+		
 
-	<img id="logo" src="img/page_01_logo.png" alt="Aegis Living">
-	<img id="pic1" src="img/page_01_pic1.jpg" alt="petting a dog">
-	<img id="pic2" src="img/page_01_pic2.jpg" alt="gardening" style="visibility: inherit; opacity: 1; left: 800px; top: -800px; ">
-	<img id="pic3" src="img/page_01_pic3.jpg" alt="car" style="visibility: inherit; opacity: 1; left: 1200px; top: 800px; ">
-	<img id="pic4" src="img/page_01_pic4.jpg" alt="giggle" style="visibility: inherit; opacity: 1; left: 1300px; top: -100px; ">
-
-	
-</div>
-
-</div>
-          </div>
-            <!-- ngInclude: undefined --><ng-include src="peekNext()" class="peek-next ng-scope"><!--partial 2-->
-
-<script type="text/javascript" class="ng-scope">
-
-function runJQuery(){
-
-	console.log('RUN 02');
-	//var svgElement = document.getElementById("circlegroup");
-	
-      	var tl = new TimelineLite ();	
-			tl.add (TweenLite.set(".view-container .clickme", {scale:.01}));
-		  tl.add (TweenLite.set(".page2 #pic1", {y:1200, x:800, autoAlpha:1}));	
-	      tl.add (TweenLite.set(".page2 #pic2", {y:1200, x:800, autoAlpha:1}));	
-		  tl.add (TweenLite.set(".page2 #pic3", {y:1200, x:800, autoAlpha:1}));
-		  tl.add (TweenLite.set(".page2 #circle", {scale:.5}));
-		  tl.pause();//crazy sound alert thing
-			tl.to(".page2 .headline h1", 1, {autoAlpha:1, delay:1})
-			  .to(".page2 .headline span.line1", 1, {autoAlpha:1,onStart:soundMachine, onStartParams:["birds2"]}, "-=.5")		
-			  .to(".page2 #circle", .5, {autoAlpha:1,scale:1,ease:Power3.easeOut}, "-=.5")
-		      .to(".page2 .headline span.line2", 1, {autoAlpha:1}, "+=.5")
-		      .to(".page2 .headline span.line3", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line4", 1, {autoAlpha:1}, "-=.5")
-		      .to(".page2 .headline span.line5", 1, {autoAlpha:1}, "-=.5")
-			  .to(".page2 #pic1", 1, {x:170, y:445, rotation:-4, autoAlpha:1, ease:Power1.easeOut}, "-=2")
-			  .to(".page2 #pic2", 1, {x:190, y:455, rotation:-1, autoAlpha:1, ease:Power3.easeOut}, "-=1.5")
-			  .to(".page2 #pic3", 1, {x:390, y:455, rotation:7, autoAlpha:1, ease:Power3.easeOut,onStart:doAnimation},  "-=1")
-		  .staggerTo(".view-container .clickme", 1, {scale:1, ease:Quad.easeOut}, 1);
-			  
+		var tl = new TimelineLite ();	
+			tl.set(".view-container .clickme", {scale:.01});
+			tl.set(".page5 #play-dot", {top:-100});
+			tl.set(".page5 .slotWrapper .machineBorder", {opacity:0});
+			tl.pause();//crazy sound alert thing
+			  tl.to(".page5 .headline h1", 1, {autoAlpha:1, delay:1,onComplete:initSlots})
+			    .to(".page5 .headline h2", 1, {autoAlpha:1}, "-=.5")			    
+				.to(".page5 .headline p", 1, {autoAlpha:1}, "-=1")
+			.to(".page5 .slotWrapper .machineBorder", 1, {opacity:1 ,ease:Quad.easeOut,onComplete:doSlots})
+				.to(".page5 #play-dot", 1, {autoAlpha:1, top: 0, onComplete:doAnimation,ease:Elastic.easeOut}, "-=.2")
+				//.to(".page5 #slot1", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot2", 1, {autoAlpha:1}, "-=.5")
+				//.to(".page5 #slot3", 1, {autoAlpha:1}, "-=.5")
+				
 		  function doAnimation(){
 			 $(".view-container .clickme").each(function(index){
 			 			$(this).delay(800*index).queue(function(next){
@@ -535,42 +551,259 @@ function runJQuery(){
 						});
 				});
 		  }	 
-		  
-		
 		  angular.element('.screenWrapper').scope().soundAlert(tl);
 		  angular.element('body').scope().updateTween(tl);
-			
-			
-};
+		  
 
+
+				
+
+	
+};
 </script>
 
-<div class="page2 page-container ng-scope">
+
+	<style class="ng-scope">
+
 	
+	
+	/* SVG styles */
+
+	.page-container .clickme.clicked svg #circle-group #circle-one{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-two{
+		stroke:rgb(0,113,151);
+	}
+	.page-container .clickme.clicked svg #circle-group #circle-plus{
+		fill:rgb(0,113,151);
+	}
+	
+	
+	
+	
+	
+	
+	.slotWrapper {
+		top: 60px;
+		text-align: left;
+		width: 620px;
+	}
+	.machineBorder{
+		display:inline-block;
+		border: 3px double orange;
+		margin-right: 10px;
+		-webkit-border-radius: 14px;
+		-moz-border-radius: 14px;
+		border-radius: 14px;
+		background-color: #fff;
+		overflow: hidden;
+		height: 320px;
+		width:190px;
+	}
+	.machineContainer{
+		background-color: #000;
+		overflow: hidden;
+		height: 320px;
+		width:190px;
+
+	}
+	.slotMachine{
+		height: 320px;
+		width:100%;
+		/*border: 5px solid #000;*/
+		
+		padding: 0px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: center;
+		/*margin: 0px 5px;*/
+		/*border: 5px solid #000;*/
+		background-color: #ffffff;
+	}
+	.machineResult{
+		color:#fff;
+		text-align:center;
+		font-weight: 900;
+	}
+	.noBorder{
+		border:none !important;
+		background: transparent !important;
+	}
+	.slotMachine .slot {
+		height: 320px;
+		width: 190px;
+		background-size: cover;
+		background-position-x: 50%;
+		background-repeat: no-repeat;
+	}
+	.slot1{
+		background-image: url("img/slot-1.jpg");
+	}
+	.slot2{
+			background-image: url("img/slot-2.jpg");	
+	}
+	.slot3{
+			background-image: url("img/slot-3.jpg");	}
+	.slot4{
+			background-image: url("img/slot-4.jpg");	}
+	.slot5{
+			background-image: url("img/slot-5.jpg");	}
+	.slot6{
+			background-image: url("img/slot-6.jpg");	}
+	.slot7{
+			background-image: url("img/slot-7.jpg");	}
+	.slot8{
+			background-image: url("img/slot-8.jpg");	}
+	.slot9{
+			background-image: url("img/slot-9.jpg");	}
+	.slot10{
+			background-image: url("img/slot-10.jpg");	}
+
+
+
+
+	#textMachine, #textMachine2{
+		width:520px;
+		height: 67px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: left;
+	}
+	#textMachine > *, #textMachine2 > *{
+		padding: 0px 0px;
+	}
+
+
+
+
+	.slotMachineButton{
+		width:100px;
+		height: 100px;
+		overflow: hidden;
+		display: inline-block;
+		text-align: center;
+	}
+	.slotMachineButton {
+		-moz-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		-webkit-box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		box-shadow:inset 0px 1px 0px 0px #fce2c1;
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ffc477), color-stop(1, #fb9e25) );
+		background:-moz-linear-gradient( center top, #ffc477 5%, #fb9e25 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffc477', endColorstr='#fb9e25');
+		background-color:#ffc477;
+		border-radius: 75px;
+		text-indent:0px;
+		border:6px solid #eeb44f;
+		display:inline-block;
+		color:#ffffff;
+		font-size:40px;
+		font-weight:bold;
+		font-style:normal;
+		height:100px;
+		line-height:90px;
+		margin-top:10px;
+		width:100px;
+		text-decoration:none;
+		text-align:center;
+		text-shadow:1px 1px 0px #cc9f52;
+		cursor:pointer;
+	}
+	.slotMachineButton:hover {
+		background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477) );
+		background:-moz-linear-gradient( center top, #fb9e25 5%, #ffc477 100% );
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fb9e25', endColorstr='#ffc477');
+		background-color:#fb9e25;
+	}.slotMachineButton:active {
+		position:relative;
+		top:1px;
+	}
+	.slotWrapper{
+		width:620px;
+		position:absolute;
+	}
+	
+	
+	
+	</style>
 	
 
 
-	<img id="circle" src="img/page_02_circle.png" alt="pure joy">
-	<img id="pic1" src="img/page_02_pic1.jpg" alt="couple smiling">
-	<img id="pic2" src="img/page_02_pic2.jpg" alt="woman smiling">
-	<img id="pic3" src="img/page_02_pic3.jpg" alt="man smiling">	
+
+<div class="page5 page-container ng-scope">
+
+	<img id="play-dot" src="img/page_05_circle.png" alt="play">
 	
 	<div class="headline">
-		<h1><span class="amatic pantone633">From Dawn to Dusk</span></h1>	
-		<h3 class="cantarell">
-			<span class="line1 pantone166">Creating moments of</span><br>
-			<span class="line2">Each moment adding <br>to the next to create</span><br>
-			<span class="line3 pantone130">A joyful day.</span><br>
-			<span class="line4 pantone152">A full week.</span><br>
-			<span class="line5 pantone166">A happy life.</span>			
-		</h3>	
+	    <h1 class="amatic pantone633">Mid-day Mind Play</h1>
+		<h2 class="cantarell pantone166">Laugh like you won the jackpot!</h2>
+	<p class="headline">Our rotating selection of signature brain fitness programs encourage a little friendly competition, active participation, and mental calisthenics to keep the mind sharp.</p>
 	</div>
 	
 	
-		<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
 	
-	<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
-		<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
+
+<div id="slots">
+	<div class="content" style="text-align: center">
+		<div class="slotWrapper">
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake1" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake2" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+			<div class="machineBorder">
+				<div class="machineContainer">
+					<div id="machineFake3" class="slotMachine">
+						<div class="slot slot1"></div>
+						<div class="slot slot2"></div>
+						<div class="slot slot3"></div>
+						<div class="slot slot4"></div>
+						<div class="slot slot5"></div>
+						<div class="slot slot6"></div>
+						<div class="slot slot7"></div>
+						<div class="slot slot8"></div>
+						<div class="slot slot9"></div>
+						<div class="slot slot10"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	
+	<div class="click-layer" ng-class="{'clicked':  targetState != 'none'}" ng-click="setTargetState()" ng-init="setTargetState()"></div>
+
+<div class="one targetWrapper" ng-click="setTargetState('one')" ng-class="{'clicked': targetState == 'one'}">
+	<div id="clickme" class="clickme"><!-- ngInclude: undefined --><ng-include src="addSVG()" class="ng-scope"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 50 50" enable-background="new 0 0 50 50" space="preserve" width="50" height="50">
 
 <g id="circle-group">
 	
@@ -584,14 +817,102 @@ function runJQuery(){
 </g>
 
 </svg></ng-include></div>
-		<div id="clicktext" class="clicktext">
-		<h4 class="pantone633 cantarell bold">What is the<br>Life Enrichment Program?</h4>
-		<p>Our Life Enrichment  program does just that—enriches daily lives!  Every day we work to bring smiles with new challenges, friendships and purpose-filled fun for residents. Our Life Enrichment Directors customize our daily activities to stimulate the mind, increase physical activity, and nurture the emotional health of each resident. </p>
-		</div>
+	<div id="clicktext" class="clicktext">
+	<h4 class="pantone633 cantarell bold">Join the Club</h4>
+	<p>Keep your mind sharp, as well as your card-shark skills as part of the bridge or poker club. Or if you are more of the creative type, a poetry club might be a new challenge. And for those world travelers, it is never too late to learn a new language- bueno!</p>
+	</div>
+
+	</div>
+
+	
+</div></ng-include>        
+                  <!--view is injected here-->
+          <div class="center">          
+            <!-- ngView:  --><div ng-view="" ng-class="pageTransition" class="view-container ng-scope forward ng-animate ng-enter ng-enter-active"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+		var tl = new TimelineLite ();
+			  tl.add (TweenLite.set(".page6 #vid-wrap", {y:0, x:-320, autoAlpha:1}));
+			   tl.add (TweenLite.set(".page6 #arrow", {y:-50, x:0, opacity:0}));
+	 		  tl.pause();//crazy sound alert thing
+			   	
+			  tl.to(".page6 .headline h1", 1, {autoAlpha:1, delay:1})
+			    .to(".page6 .headline p", 1, {autoAlpha:1}, "-=.5")
+
+			.to(".page6 #vid-wrap", .7, {x:0, y:0, autoAlpha:1, ease:Power3.easeOut}, "-=.5")
+			  .to(".page6 #arrow", .7, {x:0, y:0, autoAlpha:1, ease:Elastic.easeOut}, "+=.7");
+			  angular.element('.screenWrapper').scope().soundAlert(tl);
+			  angular.element('body').scope().updateTween(tl);
+	
+};
+</script>
+
+<div class="page6 page-container ng-scope">
+	
+	<div class="headline">
+	    <h1 class="amatic white">Giving Back</h1>
+	<p class="headline white">Our residents have a wealth of talents and enthusiasm to share through volunteer projects that enrich the lives of those who live in our surrounding neighborhoods and communities.</p>
+	
+	<div id="vid-wrap" style="z-index: 0; visibility: inherit; opacity: 1; -webkit-transform: matrix(1, 0, 0, 1, -320, 0); ">
+	<img id="arrow" src="img/page_06_hero.png" alt="live in action here" style="z-index: 0; opacity: 0; -webkit-transform: matrix(1, 0, 0, 1, 0, -50); ">
+	<div id="videobox" ng-click="doYoutube('zk_eB4x8T8U')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
+	</div>
+
+	
+</div></div></div>
+          </div>
+            <!-- ngInclude: undefined --><ng-include src="peekNext()" class="peek-next ng-scope"><!--partial-->
+<script type="text/javascript" class="ng-scope">
+//runJQuery is called in the angular app after this view partial loads.
+function runJQuery(){
+
+			var tl = new TimelineLite ();			
+			      tl.add (TweenLite.set(".page7 #pic1", {y:0, x:-400, autoAlpha:0}));	
+			      tl.add (TweenLite.set(".page7 #pic2", {y:0, x:-800, autoAlpha:0}));	
+				  tl.add (TweenLite.set(".page7 #pic3", {y:0, x:-800, autoAlpha:0}));	
+				  tl.pause();//crazy sound alert thing
+	 			  
+				  tl.to(".page7 .headline h1", 1, {autoAlpha:1, delay:1})
+				  .to(".page7 .headline h2", 1, {autoAlpha:1}, "-=.7")				
+				  .to(".page7 #pic1", .7, {x:-160, y:400, rotation:-4, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
+				  .to(".page7 #splat1", 1, {autoAlpha:1}, "-=.7")	
+		          .to(".page7 #pic2", 1, {x:50, y:450, rotation:6, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")
+				  .to(".page7 #splat2", 1, {autoAlpha:1}, "-=.7")	
+				  .to(".page7 #pic3", 1, {x:240, y:440, rotation:-2, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")		
+				  .to(".page7 #splat3", 1, {autoAlpha:1}, "-=.7")
+				  .to(".page7 #vid-wrap", 1, {autoAlpha:1}, "-=.5")	
+				  .to(".page7 #splat4", 1, {autoAlpha:1}, "-=.7");			 	
+				  angular.element('.screenWrapper').scope().soundAlert(tl);
+				  angular.element('body').scope().updateTween(tl);
+
+				   
+};
+
+</script>
+
+<div class="page7 page-container ng-scope">
+
+	<div class="headline">
+	    <h1 class="amatic pantone166">Discover</h1>
+		<h2 class="amatic pantone633">New Talents</h2>
+	</div>
+
+	<img id="pic1" src="img/page_07_pic1.jpg" alt="1">
+	<img id="pic2" src="img/page_07_pic2.jpg" alt="2">
+	<img id="pic3" src="img/page_07_pic3.jpg" alt="3">
+	
+	<img id="splat1" src="img/page_07_splat1.png" alt="1">
+	<img id="splat2" src="img/page_07_splat2.png" alt="1">
+	<img id="splat3" src="img/page_07_splat3.png" alt="1">
+	<img id="splat4" src="img/page_07_splat4.png" alt="1">
+	
+	
+	<div id="vid-wrap">
+	<div id="videobox" ng-click="doYoutube('esMb6nIlwzE')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 	</div>
 	
-	
-
 </div>
 
 </ng-include>
@@ -601,7 +922,7 @@ function runJQuery(){
 
 
     <footer>
-      <div class="page-number ng-binding">1 of 14</div>
+      <div class="page-number ng-binding">6 of 14</div>
     </footer>
   
   </div>
@@ -625,4 +946,4 @@ function runJQuery(){
 </div>
 
 
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F1&amp;jsref=&amp;rnd=1418230618609" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterFast"><feGaussianBlur stdDeviation="5"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterMedium"><feGaussianBlur stdDeviation="3"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="slotMachineBlurFilterSlow"><feGaussianBlur stdDeviation="1"></feGaussianBlur></filter></svg><svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="0" height="0"><mask id="slotMachineFadeMask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox"><linearGradient id="slotMachineFadeGradient" gradientUnits="objectBoundingBox" x="0" y="0"><stop stop-color="white" stop-opacity="0" offset="0"></stop><stop stop-color="white" stop-opacity="1" offset="0.25"></stop><stop stop-color="white" stop-opacity="1" offset="0.75"></stop><stop stop-color="white" stop-opacity="0" offset="1"></stop><rect x="0" y="-1" width="1" height="1" transform="rotate(90)" fill="url(#slotMachineFadeGradient)"></rect></linearGradient></mask></svg><style>.slotMachineBlurFast{-webkit-filter: blur(5px);-moz-filter: blur(5px);-o-filter: blur(5px);-ms-filter: blur(5px);filter: blur(5px);filter: url(#slotMachineBlurFilterFast);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="5")}.slotMachineBlurMedium{-webkit-filter: blur(3px);-moz-filter: blur(3px);-o-filter: blur(3px);-ms-filter: blur(3px);filter: blur(3px);filter: url(#slotMachineBlurFilterMedium);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="3")}.slotMachineBlurSlow{-webkit-filter: blur(1px);-moz-filter: blur(1px);-o-filter: blur(1px);-ms-filter: blur(1px);filter: blur(1px);filter: url(#slotMachineBlurFilterSlow);filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius="1")}.slotMachineGradient{-webkit-mask-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0,0,0,0)), color-stop(25%, rgba(0,0,0,1)), color-stop(75%, rgba(0,0,0,1)), color-stop(100%, rgba(0,0,0,0)) );mask: url(#slotMachineFadeMask);}</style><div id="stcpDiv" style="position: absolute; top: -1999px; left: -1988px; ">ShareThis Copy and Paste</div><iframe id="stSegmentFrame" name="stSegmentFrame" src="http://seg.sharethis.com/getSegment.php?purl=http%3A%2F%2Flocalhost%3A8888%2Fangular-seed-emag%2Fapp%2F%23!%2Fview%2F6&amp;jsref=&amp;rnd=1418230793729" frameborder="0" scrolling="no" width="0px" height="0px" style="display:none;"></iframe></body></html>
