@@ -1,26 +1,7 @@
 <!--partial-->
 <script type="text/javascript">
 
-function runJQuery(){
-	console.log('RUN 03');
 
-			var tl = new TimelineLite ();			
-			      tl.add (TweenLite.set(".page3 #bluebar", {y:0, x:800, autoAlpha:1}));	
-				  tl.add (TweenLite.set(".page3 #arrow", {x:-80}));	
-				  tl.pause();//crazy sound alert thing
-				  tl.to(".page3 .headline h1", 1, {autoAlpha:1, delay:1})
-				  .to(".page3 p", 1, {autoAlpha:1}, "-=.5")				
-				  .to(".page3 h2", 1, {autoAlpha:1}, "-=.5")
-				  .to(".page3 #bluebar", .7, {x:10, y:0, autoAlpha:1, ease:Back.easeOut}, "-=1.5")
-				  .to(".page3 #arrow", .8, {autoAlpha:1, x:0, ease:Elastic.easeOut}, "-=.7");			
-						
-				// VIDEO BUTTON
-				/*$('.page3 button').on('click', function () {	
-				});*/
-					
-					angular.element('.screenWrapper').scope().soundAlert(tl);
-					angular.element('body').scope().updateTween(tl);
-};
 
 </script>
 
@@ -36,6 +17,9 @@ function runJQuery(){
 	
 	<div id="bluebar">	
 			
+		<!--div id="videobox">
+			<iframe width="283" height="178" src="http://www.youtube.com/embed/-PJkZFvIDFU?rel=0&showinfo=0&playsinline=0&controls=0&fs=1" frameborder="0" allowfullscreen></iframe>
+		</div-->	
 		<div id="videobox" ng-click="doYoutube('-PJkZFvIDFU')"><img id="video-play" src="img/page_03_play.png" alt="play"></div>
 <!-- 		<button><div id="videobox"><img id="video-play" src="img/page_03_play.png" alt="play"></button>
  -->		<h3>Ted Talks</h3>

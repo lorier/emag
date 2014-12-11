@@ -179,20 +179,19 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.addSVG = function(){
     return "partials/circlebutton.svg";
+	//return "partials/clickbutton.html";
   };
   
   $scope.doYoutube = function(linkurl){
-		 console.log("do dialog");
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({
-			 template: '<iframe width="100%" height="100%" src="http://www.youtube.com/embed/'+linkurl+ '?rel=0&autoplay=1" frameborder="0" allowfullscreen></iframe>',
+			 template: '<iframe class="popup-video" width="100%" height="100%" src="http://www.youtube.com/embed/'+linkurl+ '?rel=0&autoplay=1&showinfo=0&controls=1" frameborder="0" allowfullscreen></iframe>',
 			 plain: true,
 		     className: 'ngdialog-theme-plain'
 		 }); 
 	 }
   $scope.doVimeo = function(linkurl){
-		 console.log("do dialog");
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({
@@ -203,6 +202,7 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 	 }
 
   $scope.toggleThumbs = function(event){
+	  console.log('toggle');
 	  //check if open or closed http://mandarindrummond.com/articles/angular-css-toggle-no-controller/index.html
 	  var target = angular.element(event.target)
 	  target.parent().parent().parent().toggleClass( "stash" ); //naughty dom climbing
@@ -233,15 +233,20 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 
   $scope.updateTween = function(theTL){
       $scope.currentTween = theTL;
+	  //console.log($scope.currentTween);
   };
   $scope.stopTween = function(){
+	  
 	  if($scope.currentTween != null){
-	  	$scope.currentTween.stop();
+		  $scope.currentTween.pause('',true);
+		 
 	  }
       
   };
 
   $scope.updateActivePage = function(value){
+	  $scope.stopTween();
+	  //	   console.log("before "+$('.page-container').attr("class"));
       StateService.setActivePage(value);
   };
   
@@ -309,8 +314,8 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
       //in the address bar
       var urlSlice = parseInt($location.path().slice(6) || 1);
       StateService.setActivePage(urlSlice);
-	  
-	  runJQuery($scope.activePage()); // function in partials fires 
+	  console.log($('.page-container').attr("class"));
+	  doPageAnimation($scope.activePage());
 	  
       onContentLoaded($scope.activePage(),$scope.pageCount);
       setThumbstoCurrentSlide($scope.activePage());
@@ -348,14 +353,27 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 */
   $scope.targetState = 'none';
   
+  
   $scope.setTargetState = function(theElement){
+	  console.log('TARGETOFF');
+	  var tweens = TweenMax.getTweensOf(".clickme");
+	  //tweens.pause();
+	  console.log(tweens);
+
+	  
 	  if(theElement == null || $scope.targetState== theElement){
 		  $scope.targetState = 'none';
+		  for(var i=0; i < tweens.length; i++){
+		          tweens[i].resume();
+		      }
 	  }else{
 		  $scope.targetState = theElement;
+		  for(var i=0; i < tweens.length; i++){
+		          tweens[i].pause();
+		      }
  	 }
   }
-  $scope.status='ready';
+
 
 
 

@@ -43,12 +43,12 @@
   background: transparent;
   color: #bbb;
   content: "\00D7";
-  font-size: 26px;
+  font-size: 46px;
   font-weight: 400;
   height: 30px;
   line-height: 26px;
   position: absolute;
-  right: 3px;
+  right: 6px;
   text-align: center;
   top: 3px;
   width: 30px;
@@ -133,4 +133,11 @@
 .ngdialog.ngdialog-theme-plain .ngdialog-button.ngdialog-button-secondary {
   background: #e0e0e0;
   color: #777;
+}
+
+.ngdialog iframe.popup-video{
+	height: 100%;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	display: block;
 }
