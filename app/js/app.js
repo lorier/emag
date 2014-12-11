@@ -183,7 +183,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
   };
   
   $scope.doYoutube = function(linkurl){
-		 console.log("do dialog");
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({
@@ -193,7 +192,6 @@ emagControllers.controller('ThumbnailCtrl', ['$scope', 'StateService', '$http', 
 		 }); 
 	 }
   $scope.doVimeo = function(linkurl){
-		 console.log("do dialog");
 		 $scope.theme = 'ngdialog-theme-plain';
 
 		 ngDialog.open({

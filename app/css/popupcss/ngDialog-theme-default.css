@@ -1,66 +1,66 @@
 @-webkit-keyframes ngdialog-flyin {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-40px);
-    transform: translateY(-40px);
+    /*-webkit-transform: translateY(-40px);
+    transform: translateY(-40px);*/
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    /*-webkit-transform: translateY(0);
+    transform: translateY(0);*/
   }
 }
 
 @keyframes ngdialog-flyin {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-40px);
+    /*-webkit-transform: translateY(-40px);
     -ms-transform: translateY(-40px);
-    transform: translateY(-40px);
+    transform: translateY(-40px);*/
   }
 
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0);
+    /*-webkit-transform: translateY(0);
     -ms-transform: translateY(0);
-    transform: translateY(0);
+    transform: translateY(0);*/
   }
 }
 
 @-webkit-keyframes ngdialog-flyout {
   0% {
     opacity: 1;
-    -webkit-transform: translateY(0);
-    transform: translateY(0);
+    /*-webkit-transform: translateY(0);
+    transform: translateY(0);*/
   }
 
   100% {
     opacity: 0;
-    -webkit-transform: translateY(-40px);
-    transform: translateY(-40px);
+    /*-webkit-transform: translateY(-40px);
+    transform: translateY(-40px);*/
   }
 }
 
 @keyframes ngdialog-flyout {
   0% {
     opacity: 1;
-    -webkit-transform: translateY(0);
+    /*-webkit-transform: translateY(0);
     -ms-transform: translateY(0);
-    transform: translateY(0);
+    transform: translateY(0);*/
   }
 
   100% {
     opacity: 0;
-    -webkit-transform: translateY(-40px);
+    /*-webkit-transform: translateY(-40px);
     -ms-transform: translateY(-40px);
-    transform: translateY(-40px);
+    transform: translateY(-40px);*/
   }
 }
 
 .ngdialog.ngdialog-theme-default {
-  padding-bottom: 160px;
-  padding-top: 160px;
+  
+  padding-top: 10%;
 }
 
 .ngdialog.ngdialog-theme-default.ngdialog-closing .ngdialog-content {
@@ -81,7 +81,7 @@
   max-width: 100%;
   padding: 1em;
   position: relative;
-  width: 450px;
+  width: 80%;
 }
 
 .ngdialog.ngdialog-theme-default .ngdialog-close {
