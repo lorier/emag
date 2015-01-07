@@ -215,7 +215,7 @@ body {
 
 .glyphicon {
   color: #525249;
-  font-size: 16px; }
+  font-size: 20px; }
 
 .button-right .glyphicon, .button-left .glyphicon {
   pointer-events: none; }
@@ -269,13 +269,14 @@ body {
     border-radius: 8px;
     cursor: pointer;
     width: 30px;
-    height: 120px;
+    height: 160px;
     display: inline-block;
     background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     top: 0;
     text-align: center;
-    padding: 0; }
+    padding: 0;
+    box-shadow: 2px 2px 5px #888888; }
   .overlay-buttons .buttoncover {
     display: block;
     width: 100%;
@@ -1039,7 +1040,7 @@ p {
   .page4 #arrow {
     width: 106px;
     position: absolute;
-    left: 27px;
+    left: 37px;
     top: 35px; }
 
 /* --- page5 ------ */

@@ -338,7 +338,7 @@ img {
 
 .glyphicon {
   color: $chevron-gray;
-  font-size:16px;
+  font-size:20px;
  
 }
 .button-right .glyphicon, .button-left .glyphicon  {
@@ -414,13 +414,14 @@ img {
     border-radius: 8px;
     cursor: pointer;
     width: 30px;
-    height: 120px;
+    height: 160px;
     display: inline-block;
     background-color: rgba(255, 255, 255, 0.5);
     position: absolute;
     top:0;
     text-align: center;
     padding: 0;
+	box-shadow: 2px 2px 5px #888888;
   }
   
   .buttoncover{

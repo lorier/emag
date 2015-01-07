@@ -234,12 +234,16 @@ function doPageAnimation(pageNumber){
 		
 	  }else if(pageNumber == 7){
 				
+    		function doGlop(){
+
+    			soundMachine('glop');
+			}
 		      tl.add (TweenLite.set(".page7 #pic1", {y:0, x:-400, autoAlpha:0}));	
 		      tl.add (TweenLite.set(".page7 #pic2", {y:0, x:-800, autoAlpha:0}));	
 			  tl.add (TweenLite.set(".page7 #pic3", {y:0, x:-800, autoAlpha:0}));	
 			  tl.pause();//crazy sound alert thing
  			  
-			  tl.to(".page7 .headline h1", 1, {autoAlpha:1, delay:1})
+			  tl.to(".page7 .headline h1", 1, {autoAlpha:1, delay:1, onComplete:doGlop})
 			  .to(".page7 .headline h2", 1, {autoAlpha:1}, "-=.7")				
 			  .to(".page7 #pic1", .7, {x:-160, y:400, rotation:-4, autoAlpha:1, ease:Power3.easeOut}, "-=.7")
 			  .to(".page7 #splat1", 1, {autoAlpha:1}, "-=.7")	
@@ -248,7 +252,7 @@ function doPageAnimation(pageNumber){
 			  .to(".page7 #pic3", 1, {x:240, y:440, rotation:-2, delay:1, autoAlpha:1, ease:Power3.easeOut}, "-=1.7")		
 			  .to(".page7 #splat3", 1, {autoAlpha:1}, "-=.7")
 			  .to(".page7 #vid-wrap", 1, {autoAlpha:1}, "-=.5")	
-			  .to(".page7 #splat4", 1, {autoAlpha:1}, "-=.7");			 	
+			  .to(".page7 #splat4", 1, {autoAlpha:1}, "-=.7");	
 
 	  }else if (pageNumber == 8){
 	  	  	TweenLite.set(".view-container .clickme", {scale:.01});
@@ -271,14 +275,19 @@ function doPageAnimation(pageNumber){
 
 		
 	  }else if (pageNumber == 9){
+  		function doGliss(){
+
+  			soundMachine('gliss');
+		}
   			tl.add (TweenLite.set(".page9 #bluebar", {y:0, x:450, autoAlpha:1}));
   			tl.add (TweenLite.set(".page9 #roses", {rotation:90}));	
     		 	 tl.pause();//crazy sound alert thing
 			
-  		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1})
+  		  	tl.to(".page9 .headline h1", 1, {autoAlpha:1, delay:1,onComplete:doGliss})
   		     .to(".page9 .headline h2", 1, {autoAlpha:1}, "-=.7")
   		     .to(".page9 #bluebar", .7, {x:0, y:0, autoAlpha:1, ease:Back.easeOut}, "-=.7")
   		     .to(".page9 #roses", 1, {autoAlpha:1,rotation:0}, "-=.5");
+			
 
 	  }else if (pageNumber == 10){
 

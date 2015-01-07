@@ -1,4 +1,4 @@
-var sound_engine, sound_birds, sound_giggle, sound_birds2;
+var sound_engine, sound_birds, sound_giggle, sound_birds2, sound_slots, sound_gliss, sound_glop;
 
 
 $(document).ready(function(){
@@ -59,6 +59,15 @@ function initSounds(){
 	  urls: ['sounds/slots.mp3'],
 	  autoplay: false
 	});
+	sound_glop = new Howl({
+	  urls: ['sounds/1_REV_Page_7_Glop_Music_01.mp3'],
+	  autoplay: false
+	});
+	sound_gliss = new Howl({
+	  urls: ['sounds/1_Page_9_Letter Gliss_up.mp3'],
+	  autoplay: false
+	});
+
 
 }
 function soundMachineClear(){
@@ -68,6 +77,8 @@ function soundMachineClear(){
 		sound_birds2.stop();
 		sound_birds.stop();
 		sound_slots.stop();
+		sound_glop.stop();
+		sound_gliss.stop();
 	}
 	
 }
@@ -82,26 +93,50 @@ function soundMachine(theFileName){
 		    sound_engine.play();
 			sound_birds.stop();
 			sound_birds2.stop();
+			sound_glop.stop();
+			sound_gliss.stop();
 			sound_slots.stop();
 		    break;
 		case 'birds':
 		    sound_engine.stop();
 			sound_birds.play();
 			sound_birds2.stop();
+			sound_glop.stop();
+			sound_gliss.stop();
 			sound_slots.stop();
 		    break;
 		case 'birds2':
 		    sound_engine.stop();
 			sound_birds.stop();			
 			sound_birds2.play();
+			sound_glop.stop();
+			sound_gliss.stop();
 			sound_slots.stop();
 		    break;		
 		case 'slots':
 		    sound_engine.stop();
 			sound_birds2.stop();
 			sound_birds.stop();
+			sound_glop.stop();
+			sound_gliss.stop();
 			sound_slots.play();
 		    break;	
+		case 'glop':
+		    sound_engine.stop();
+			sound_birds2.stop();
+			sound_birds.stop();
+			sound_slots.stop();
+			sound_glop.play();
+			sound_gliss.stop();
+		    break;	
+		case 'gliss':
+		    sound_engine.stop();
+			sound_birds2.stop();
+			sound_birds.stop();
+			sound_slots.stop();
+			sound_glop.stop();
+			sound_gliss.play();
+		    break;			
 		default:
 		    break;
 		}
